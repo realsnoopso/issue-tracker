@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.module.css';
+import { text } from '@components/test';
 
 function App() {
+	alert(text);
 	return (
 		<div className="App">
 			<header className="App-header">
