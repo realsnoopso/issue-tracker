@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.module.css';
-import { Icon } from '@components/Icon/Icon';
+import { Icon, Dropdown } from '@components/index';
 
 function App() {
 	return (
@@ -19,6 +19,7 @@ function App() {
 					Learn React
 				</a>
 				<Icon />
+				<Dropdown text="test" options={['1', '2']}></Dropdown>
 			</header>
 		</div>
 	);
