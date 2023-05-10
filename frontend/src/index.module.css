@@ -1,0 +1,96 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css');
+
+:root {
+	--typo-fontweight-bold: 700;
+	--typo-fontweight-regular: 500;
+	--typo-XXL-fontsize: 32px;
+	--typo-XXL-lineheight: 48px;
+	--typo-XL-fontsize: 24px;
+	--typo-XL-lineheight: 40px;
+	--typo-L-fontsize: 18px;
+	--typo-L-lineheight: 32px;
+	--typo-M-fontsize: 16px;
+	--typo-M-lineheight: 28px;
+	--typo-S-fontsize: 12px;
+	--typo-S-lineheight: 20px;
+
+	--typo-body-fontsize: var(--typo-M-fontsize);
+	--typo-body-lineheight: var(--typo-M-lineheight);
+	--trpo-body-fontweight: var(--typo-fontweight-regular);
+	--typo-body_medium-fontsize: var(--typo-M-fontsize);
+	--typo-body_medium-lineheight: var(--typo-M-lineheight);
+	--trpo-body_medium-fontweight: var(--typo-fontweight-bold);
+	--typo-title-fontsize: var(--typo-L-fontsize);
+	--typo-title-lineheight: var(--typo-L-lineheight);
+	--trpo-title-fontweight: var(--typo-fontweight-bold);
+	--typo-title_medium-fontsize: var(--typo-XL-fontsize);
+	--typo-title_medium-lineheight: var(--typo-XL-lineheight);
+	--trpo-title_medium-fontweight: var(--typo-fontweight-regular);
+	--typo-title_strong-fontsize: var(--typo-XXL-fontsize);
+	--typo-title_strong-lineheight: var(--typo-XXL-lineheight);
+	--trpo-title_strong-fontweight: var(--typo-fontweight-regular);
+	--typo-button-fontsize: var(--typo-M-fontsize);
+	--typo-button-lineheight: var(--typo-M-lineheight);
+	--trpo-button-fontweight: var(--typo-fontweight-bold);
+	--typo-button_weak-fontsize: var(--typo-S-fontsize);
+	--typo-button_weak-lineheight: var(--typo-S-lineheight);
+	--trpo-button_weak-fontweight: var(--typo-fontweight-bold);
+	--typo-button_strong-fontsize: var(--typo-L-fontsize);
+	--typo-button_strong-lineheight: var(--typo-L-lineheight);
+	--trpo-button_strong-fontweight: var(--typo-fontweight-bold);
+	--typo-placeholder-fontsize: var(--typo-M-fontsize);
+	--typo-placeholder-lineheight: var(--typo-M-lineheight);
+	--trpo-placeholder-fontweight: var(--typo-fontweight-bold);
+	--typo-caption-fontsize: var(--typo-S-fontsize);
+	--typo-caption-lineheight: var(--typo-S-lineheight);
+	--trpo-caption-fontweight: var(--typo-fontweight-bold);
+	--typo-label-fontsize: var(--typo-S-fontsize);
+	--typo-label-lineheight: var(--typo-S-lineheight);
+	--trpo-label-fontweight: var(--typo-fontweight-bold);
+
+	--color-gray50: #fefefe;
+	--color-gray100: #f7f7fc;
+	--color-gray200: #eff0f6;
+	--color-gray300: #d9dbe9;
+	--color-gray400: #bec1d5;
+	--color-gray500: #a0a3bd;
+	--color-gray600: #6e7191;
+	--color-gray700: #4e4b66;
+	--color-gray800: #2a2a44;
+	--color-gray900: #14142b;
+	--color-blue: #007aff;
+	--color-navy: #0025e6;
+	--color-red: #ff3b30;
+
+	--color-light-neutral-text: var(--color-gray700);
+	--color-light-neutral-text-weak: var(--color-gray600);
+	--color-light-neutral-text-strong: var(--color-gray900);
+	--color-light-neutral-background: var(--color-gray100);
+	--color-light-neutral-background-bold: var(--color-gray200);
+	--color-light-neutral-background-strong: var(--color-gray50);
+	--color-light-neutral-border: var(--color-gray300);
+	--color-light-neutral-border-active: var(--color-gray900);
+	--color-light-accent-text: var(--color-gray50);
+	--color-light-accent-text-weak: var(--color-blue);
+	--color-light-accent-background: var(--color-blue);
+	--color-light-accent-background-weak: var(--color-gray50);
+	--color-light-accent-background-strong: var(--color-gray900);
+	--color-light-accent-border-weak: var(--color-blue);
+	--color-light-danger-text: var(--color-red);
+	--color-light-danger-border: var(--color-red);
+}
+
+body {
+	margin: 0;
+	font-family: 'Pretendard Variable', Pretendard, -apple-system,
+		BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+		'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+		'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
