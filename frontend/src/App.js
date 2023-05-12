@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.module.css';
 import Dropdown from '@components/Dropdown/Dropdown';
 import { useRef, useState } from 'react';
+import { Button } from './components/Button/Button';
 
 function App() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,7 @@ function App() {
 					selectedId={selectedId}
 				></Dropdown>
 			</header>
+			<Button text="BUTTON" btnSize="l" color="blue"></Button>
 		</div>
 	);
 }
