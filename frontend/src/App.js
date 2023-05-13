@@ -1,17 +1,14 @@
-import './App.module.css';
 import Dropdown from '@components/Dropdown/Dropdown';
 import { useRef, useState } from 'react';
 import { Button } from './components/Button/Button';
 import { IssuePage } from '@containers/IssuePage/IssuePage';
 
-
 function App() {
-  
-  if (process.env.NODE_ENV === 'development') {
+	if (process.env.NODE_ENV === 'development') {
 		const { worker } = require('./mocks/browser');
 		worker.start();
 	}
-  
+
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedId, setSelectedId] = useState(false);
 	return (
