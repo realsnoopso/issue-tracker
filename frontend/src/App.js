@@ -4,20 +4,17 @@ import { useRef, useState } from 'react';
 import { Button } from './components/Button/Button';
 import { IssuePage } from '@containers/IssuePage/IssuePage';
 
-
 function App() {
-  
-  if (process.env.NODE_ENV === 'development') {
+	if (process.env.NODE_ENV === 'development') {
 		const { worker } = require('./mocks/browser');
 		worker.start();
 	}
-  
+
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedId, setSelectedId] = useState(false);
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>
