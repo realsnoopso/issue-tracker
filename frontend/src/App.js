@@ -12,9 +12,8 @@ function App() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedId, setSelectedId] = useState(false);
 	return (
-		<div className="App">
+		<div>
 			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>
