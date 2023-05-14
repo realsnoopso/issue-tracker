@@ -1,0 +1,56 @@
+.TextInput {
+	display: flex;
+	padding: 0px 24px;
+	align-items: center;
+}
+
+.one {
+	flex-direction: row;
+	gap: 8px;
+	border-radius: 11px;
+}
+
+.two {
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: column;
+	border-radius: 14px;
+}
+
+.label {
+	width: 72px;
+	height: 20px;
+	color: var(--color-light-neutral-text);
+}
+
+.input {
+	width: 100%;
+	height: 28px;
+	border: none;
+	background-color: inherit;
+}
+
+.input::placeholder {
+	font-size: var(--typo-M-fontsize);
+	line-height: var(--typo-M-lineheight);
+	font-weight: var(--typo-fontweight-regular);
+}
+
+.initial {
+	background-color: var(--color-light-neutral-background-bold);
+}
+
+.active {
+	background-color: var(--color-light-neutral-background-strong);
+	border: 1px solid #14142b;
+}
+
+.typing {
+	background-color: var(--color-light-neutral-background-strong);
+	border: 1px solid #14142b;
+}
+
+.disabled {
+	background-color: var(--color-light-neutral-background-bold);
+	opacity: 0.32;
+}

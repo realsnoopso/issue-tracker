@@ -2,6 +2,7 @@ import Dropdown from '@components/Dropdown/Dropdown';
 import { useRef, useState } from 'react';
 import { Button } from './components/Button/Button';
 import { IssuePage } from '@containers/IssuePage/IssuePage';
+import { TextInput } from './components/TextInput/TextInput';
 
 function App() {
 	if (process.env.NODE_ENV === 'development') {
@@ -44,6 +45,33 @@ function App() {
 			</header>
 			<IssuePage></IssuePage>
 			<Button text="BUTTON" btnSize="l" color="blue"></Button>
+			<br />
+			<TextInput
+				mode="two"
+				states="initial"
+				label="Label"
+				id="textInput"
+				width="288px"
+				height="56px"
+			></TextInput>
+			<br />
+			<TextInput
+				mode="one"
+				states="typing"
+				label="Label"
+				id="textInput"
+				width="288px"
+				height="40px"
+			></TextInput>
+			<br />
+			<TextInput
+				mode="two"
+				states="disabled"
+				label="Label"
+				id="textInput"
+				width="288px"
+				height="56px"
+			></TextInput>
 		</div>
 	);
 }
