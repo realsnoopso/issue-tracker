@@ -6,11 +6,10 @@ export const Tab = ({ buttonDatas, active, _onClick }) => {
 	const cx = classNames.bind(styles);
 	const tabClassNames = `${cx('tab')}`;
 
-	const isActive = (id, active) => active === id;
-	const getBtnBgColor = (id, active) =>
-		isActive(id, active)
-			? 'var(--color-light-neutral-background-bold)'
-			: 'inherit';
+	const getBtnBgColor = (id, active) => {
+		const isActive = id === active;
+		return isActive ? 'var(--color-light-neutral-background-bold)' : 'inherit';
+	};
 	const btnWidth = '160px';
 
 	return (
