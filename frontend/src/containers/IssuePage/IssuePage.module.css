@@ -1,0 +1,16 @@
+.issue-page {
+  max-width: var(--contents-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .right {
+  display: flex;
+  gap: 16px;
+}
