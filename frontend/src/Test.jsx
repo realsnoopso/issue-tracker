@@ -1,4 +1,4 @@
-import { Dropdown } from '@components/index';
+import { Dropdown, Tab } from '@components/index';
 import { useState } from 'react';
 
 export function Test() {
@@ -7,9 +7,10 @@ export function Test() {
 	const handleDropdown = (isOpen) => {
 		return () => setDropdownOpen(isOpen);
 	};
+	const [active, setActive] = useState(null);
 
 	return (
-		<div style={{ marginLeft: '300px' }}>
+		<div>
 			<Dropdown
 				isOpen={isDropdownOpen}
 				btnText={selected}
@@ -34,6 +35,15 @@ export function Test() {
 					setSelected(currentTarget.innerText)
 				}
 			></Dropdown>
+
+			<Tab
+				buttonDatas={[
+					{ text: 'LEFT', icon: 'plus' },
+					{ text: 'RIGHT', icon: 'plus' },
+				]}
+				active={active}
+				_onClick={({ currentTarget }) => setActive(currentTarget.innerText)}
+			></Tab>
 		</div>
 	);
 }

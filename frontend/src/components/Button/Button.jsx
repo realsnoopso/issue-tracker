@@ -1,5 +1,6 @@
 import styles from './Button.module.css';
 import classNames from 'classnames/bind';
+import { Icon } from '@components/index';
 
 export const Button = ({
 	icon,
@@ -7,48 +8,50 @@ export const Button = ({
 	type,
 	status,
 	color,
+	width,
 	btnSize,
 	_onClick,
+	style,
 }) => {
 	const cx = classNames.bind(styles);
 
-	const btnSizeKind =
-		btnSize === 'l'
-			? cx('size-l')
-			: btnSize === 'm'
-			? cx('size-m')
-			: cx('size-s');
-
-	const btnStatus =
-		status === 'hover'
-			? cx('status-hover')
-			: status === 'press'
-			? cx('status-press')
-			: status === 'disabled'
-			? cx('status-disabled')
-			: status === 'active'
-			? cx('status-active')
-			: cx('status-default');
-
+	const btnSizeKind = cx(`size-${btnSize}`);
+	const textSizeClass = `typo-${btnSize}`;
+	const btnStatus = cx(`status-${status ?? 'default'}`);
 	const btnType = type === 'ghost' ? cx('type-ghost') : cx('type-contained');
-
 	const btnColor =
-		color === 'blue'
-			? type === 'outline'
-				? cx('outline-color-blue')
-				: cx('color-blue')
-			: type === 'outline'
-			? cx('outline-color-black')
+		type === 'outline'
+			? cx(`outline-color-${color ?? 'black'}`)
 			: cx('color-blue');
+
+	const getTextColor = () => {
+		if (type === 'ghost') {
+			return 'var(--color-light-neutral-text)';
+		}
+		if (type === 'outline') {
+			if (color === 'blue') {
+				return 'var(--color-light-accent-text-weak)';
+			}
+			return 'var(--color-light-neutral-text)';
+		}
+		return 'var(--color-light-accent-text)';
+	};
+	const textColor = getTextColor(type);
 
 	const buttonClassNames = `${cx(
 		'btn'
 	)} ${btnColor} ${btnSizeKind} ${btnStatus} ${btnType}`;
 
 	return (
-		<button className={buttonClassNames} onClick={_onClick}>
-			{icon}
-			{text}
+		<button
+			className={buttonClassNames}
+			onClick={_onClick}
+			style={{ ...style, width }}
+		>
+			<Icon name={icon} fill={textColor}></Icon>
+			<span style={{ color: textColor }} className={textSizeClass}>
+				{text}
+			</span>
 		</button>
 	);
 };
