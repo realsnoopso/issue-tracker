@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import styles from './DropdownPanel.module.css';
 import classNames from 'classnames/bind';
 import { TYPE } from '@src/constants/dropdown';
-import { useRef } from 'react';
 import { PANEL_POSITION, CONTAINER_WIDTH } from '@src/constants/dropdown';
 
 export const DropdownPanel = ({
@@ -43,7 +42,7 @@ export const DropdownPanel = ({
         {options.map((option, i) => (
           <DropdownElement
             type={TYPE.OPTION}
-            key={i}
+            key={option.id}
             id={option.id}
             profile={option.profile}
             contents={option.contents}

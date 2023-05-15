@@ -2,7 +2,14 @@ import { useState } from 'react';
 import styles from './TextInput.module.css';
 import classNames from 'classnames/bind';
 
-export const TextInput = ({ size, states, label, id, width, placeholder }) => {
+export const TextInput = ({
+  size,
+  states = 'initial',
+  label,
+  id,
+  width,
+  placeholder = 'placehoder',
+}) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event) => {
