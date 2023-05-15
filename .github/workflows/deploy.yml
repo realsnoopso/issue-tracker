@@ -24,25 +24,25 @@ jobs:
           distribution: 'adopt'
           java-version: 11
 
-      - name: Set executable permissions on gradlew
-        run: chmod +x ./gradlew
-
       - name: Build JAR
-        run: ./gradlew build
+        run: |
+          cd backend
+          chmod +x gradlew
+          ./gradlew build
 
       - name: Upload JAR to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
-          src: build/libs/*.jar
+          src: backend/build/libs/*.jar
         env:
           AWS_S3_BUCKET: issuetrackerbucket
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy to CodeDeploy
-        run: aws deploy create-deployment --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=jar,key=build/libs/*.jar
+        run: aws deploy create-deployment --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=jar,key=backend/build/libs/*.jar
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
