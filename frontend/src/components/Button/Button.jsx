@@ -1,8 +1,9 @@
 import styles from './Button.module.css';
 import classNames from 'classnames/bind';
+import { Icon } from '@components/index';
 
 export const Button = ({
-	icon,
+	iconName,
 	text,
 	type,
 	status,
@@ -47,7 +48,9 @@ export const Button = ({
 
 	return (
 		<button className={buttonClassNames} onClick={_onClick}>
-			{icon}
+			{iconName && (
+				<Icon name={iconName} fill="var(--color-light-accent-text)"></Icon>
+			)}
 			{text}
 		</button>
 	);
