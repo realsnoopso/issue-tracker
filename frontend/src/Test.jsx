@@ -1,4 +1,10 @@
-import { Dropdown, Tab } from '@components/index';
+import {
+	Dropdown,
+	Tab,
+	Button,
+	InformationTag,
+	IssuePage,
+} from '@components/index';
 import { useState } from 'react';
 
 export function Test() {
@@ -44,6 +50,23 @@ export function Test() {
 				active={active}
 				_onClick={({ currentTarget }) => setActive(currentTarget.innerText)}
 			></Tab>
+			<Button iconName="plus" text="BUTTON" btnSize="l" color="blue"></Button>
+			<Button text="BUTTON" btnSize="m" color="black"></Button>
+			<Button text="BUTTON" btnSize="s" color="black"></Button>
+			<InformationTag
+				iconName="alertCircle"
+				text="Label"
+				bgColor="#007AFF"
+				mode="light"
+			></InformationTag>
+			<InformationTag
+				iconName="archive"
+				text="Label"
+				bgColor="red"
+				mode="light"
+			></InformationTag>
+			<InformationTag text="Label" mode="neutral"></InformationTag>
+			<IssuePage></IssuePage>
 		</div>
 	);
 }

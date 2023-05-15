@@ -1,4 +1,3 @@
-import { IssuePage } from '@containers/IssuePage/IssuePage';
 import { Test } from './Test';
 
 function App() {
@@ -10,7 +9,6 @@ function App() {
 	return (
 		<div className="App">
 			<Test></Test>
-			<IssuePage></IssuePage>
 		</div>
 	);
 }

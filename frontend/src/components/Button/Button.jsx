@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { Icon } from '@components/index';
 
 export const Button = ({
-	icon,
+	iconName,
 	text,
 	type,
 	status,
@@ -48,7 +48,9 @@ export const Button = ({
 			onClick={_onClick}
 			style={{ ...style, width }}
 		>
-			<Icon name={icon} fill={textColor}></Icon>
+			{iconName && (
+				<Icon name={iconName} fill="var(--color-light-accent-text)"></Icon>
+			)}
 			<span style={{ color: textColor }} className={textSizeClass}>
 				{text}
 			</span>
