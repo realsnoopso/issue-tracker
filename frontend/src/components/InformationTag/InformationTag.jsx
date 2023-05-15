@@ -10,7 +10,7 @@ export const InformationTag = ({ iconName, text, bgColor, mode }) => {
 
 	return (
 		<label className={InfoTagClassName} style={{ backgroundColor: tagBgColor }}>
-			<Icon name={iconName} fill="white"></Icon>
+			<Icon name={iconName} fill="var(--color-light-accent-text)"></Icon>
 			{text}
 		</label>
 	);
