@@ -1,4 +1,4 @@
-name: Deploy to Amazon ECS
+name: Deploy to AWS CodeDeploy
 
 on:
   push:
@@ -21,6 +21,7 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: 11
 
       - name: Build JAR
