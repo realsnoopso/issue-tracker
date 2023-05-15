@@ -1,4 +1,4 @@
-import { Dropdown, Button, InformationTag, Icon } from '@components/index';
+import { Dropdown, Button, InformationTag, IssuePage } from '@components/index';
 import { useState } from 'react';
 
 export function Test() {
@@ -34,12 +34,7 @@ export function Test() {
 					setSelected(currentTarget.innerText)
 				}
 			></Dropdown>
-			<Button
-				icon={<Icon name="plus"></Icon>}
-				text="BUTTON"
-				btnSize="l"
-				color="blue"
-			></Button>
+			<Button iconName="plus" text="BUTTON" btnSize="l" color="blue"></Button>
 			<Button text="BUTTON" btnSize="m" color="black"></Button>
 			<Button text="BUTTON" btnSize="s" color="black"></Button>
 			<InformationTag
@@ -55,6 +50,7 @@ export function Test() {
 				mode="light"
 			></InformationTag>
 			<InformationTag text="Label" mode="neutral"></InformationTag>
+			<IssuePage></IssuePage>
 		</div>
 	);
 }
