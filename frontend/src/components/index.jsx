@@ -5,5 +5,15 @@ import { Button } from './Button/Button';
 import { InformationTag } from './InformationTag/InformationTag';
 import { IssuePage } from '@src/containers/IssuePage/IssuePage';
 import { Navbar } from '@components/Navbar/Navbar';
+import { Tab } from './Tab/Tab';
 
-export { Dropdown, Icon, Profile, Button, InformationTag, IssuePage, Navbar };
+export {
+	Dropdown,
+	Icon,
+	Profile,
+	Button,
+	InformationTag,
+	IssuePage,
+	Navbar,
+	Tab,
+};
