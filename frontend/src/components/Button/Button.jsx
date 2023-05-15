@@ -22,7 +22,7 @@ export const Button = ({
 	const btnColor =
 		type === 'outline'
 			? cx(`outline-color-${color ?? 'black'}`)
-			: cx('color-blue');
+			: cx(`color-${color ?? 'black'}`);
 
 	const getTextColor = () => {
 		if (type === 'ghost') {
