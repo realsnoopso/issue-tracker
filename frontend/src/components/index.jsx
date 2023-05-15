@@ -8,12 +8,12 @@ import { Navbar } from '@components/Navbar/Navbar';
 import { Tab } from './Tab/Tab';
 
 export {
-	Dropdown,
-	Icon,
-	Profile,
-	Button,
-	InformationTag,
-	IssuePage,
-	Navbar,
-	Tab,
+  Dropdown,
+  Icon,
+  Profile,
+  Button,
+  InformationTag,
+  IssuePage,
+  Navbar,
+  Tab,
 };

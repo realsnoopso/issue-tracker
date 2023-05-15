@@ -3,7 +3,7 @@ import { ReactComponent as logoTypeDarkMode } from './LogotypeDarkMode.svg';
 import { ReactComponent as userImage } from './userImage.svg';
 
 export default {
-	logoType,
-	logoTypeDarkMode,
-	userImage,
+  logoType,
+  logoTypeDarkMode,
+  userImage,
 };

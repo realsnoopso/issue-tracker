@@ -3,5 +3,5 @@
 @import './typography.css';
 
 body {
-	background-color: var(--color-light-neutral-background);
+  background-color: var(--color-light-neutral-background);
 }
