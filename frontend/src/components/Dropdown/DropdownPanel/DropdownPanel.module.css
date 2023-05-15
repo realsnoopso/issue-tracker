@@ -1,16 +1,16 @@
 .dropdown-panel {
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-	top: 0;
-	left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
 }
 
 .container {
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	background-color: var(--color-light-neutral-background-strong);
-	border: 1px solid var(--color-light-neutral-border);
-	border-radius: 16px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-light-neutral-background-strong);
+  border: 1px solid var(--color-light-neutral-border);
+  border-radius: 16px;
 }
