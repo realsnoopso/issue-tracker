@@ -2,7 +2,7 @@ name: Deploy to AWS CodeDeploy
 
 on:
   push:
-    branches: [ release ]
+    branches: [release]
 
 env:
   PROJECT_NAME: issueTracker
@@ -28,21 +28,31 @@ jobs:
         run: |
           cd backend
           chmod +x gradlew
-          ./gradlew build --exclude-task test
+          ./gradlew clean build --exclude-task test
+          
+      - name: Make Directory for deliver
+        run: mkdir deploy
 
-      - name: Upload JAR to S3
+      - name: Copy Jar
+        run: cp ./build/libs/*.jar ./deploy/
+
+      - name: Make zip file
+        run: zip -r -qq -j ./issueTracker-build.zip ./deploy
+
+      - name: Upload ZIP to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
-          src: backend/build/libs/*.jar
+          src: ./issueTracker-build.zip
+          dest: s3://${{ env.BUCKET_NAME }}/issueTracker-build.zip
         env:
-          AWS_S3_BUCKET: issuetrackerbucket
+          AWS_S3_BUCKET: ${{ env.BUCKET_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy to CodeDeploy
-        run: aws deploy create-deployment --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=jar,key=backend/build/libs/*.jar
+        run: aws deploy create-deployment --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=issueTracker-build.zip
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
