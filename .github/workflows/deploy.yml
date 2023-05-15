@@ -32,12 +32,9 @@ jobs:
           
       - name: Make Directory for deliver
         run: mkdir deploy
-        
-      - name: Check jar
-        run: ls -la ./build/libs
 
       - name: Copy Jar
-        run: cp ./build/libs/*.jar ./deploy/
+        run: cp ./backend/build/libs/*.jar ./deploy/
 
       - name: Make zip file
         run: zip -r -qq -j ./issueTracker-build.zip ./deploy
