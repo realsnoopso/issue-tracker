@@ -1,10 +1,5 @@
-import {
-  Dropdown,
-  Tab,
-  Button,
-  InformationTag,
-  IssuePage,
-} from '@components/index';
+import { Dropdown, Tab, Button, InformationTag } from '@components/index';
+import { IssuePage } from '@containers/index';
 import { useState } from 'react';
 
 export function Test() {
