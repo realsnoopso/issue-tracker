@@ -1,0 +1,39 @@
+.issue-element {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1280px;
+  height: 100px;
+  background-color: var(--color-light-neutral-background-strong);
+}
+
+.issue-contents {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.issue-contents_column {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.issue-contents_column:nth-child(2) {
+  font-size: var(--typo-M-fontsize);
+  line-height: var(--typo-M-lineheight);
+  font-weight: var(--typo-fontweight-regular);
+  color: var(--color-light-neutral-text-weak);
+}
+
+.check-box,
+.profile {
+  margin: 32px;
+}
+
+.mile-stone {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
