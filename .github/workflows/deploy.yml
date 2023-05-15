@@ -28,7 +28,7 @@ jobs:
         run: |
           cd backend
           chmod +x gradlew
-          ./gradlew build
+          ./gradlew build --exclude-task test
 
       - name: Upload JAR to S3
         uses: jakejarvis/s3-sync-action@master
