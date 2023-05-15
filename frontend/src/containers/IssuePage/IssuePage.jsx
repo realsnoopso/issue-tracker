@@ -16,8 +16,8 @@ export const IssuePage = (props) => {
 	return (
 		<div>
 			<ul>
-				{data.map((issue) => (
-					<li key={issue.id}>{issue.title}</li>
+				{data.map((issue, index) => (
+					<li key={index}>{issue.title}</li>
 				))}
 			</ul>
 		</div>

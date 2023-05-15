@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './TextInput.module.css';
 import classNames from 'classnames/bind';
 
-export const TextInput = ({ mode, states, label, id, width, height }) => {
+export const TextInput = ({ size, states, label, id, width, placeholder }) => {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleInputChange = (event) => {
@@ -11,15 +11,8 @@ export const TextInput = ({ mode, states, label, id, width, height }) => {
 
 	const cx = classNames.bind(styles);
 
-	const textInputMode = mode === 'one' ? cx('one') : cx('two');
-	const textInputState =
-		states === 'initial'
-			? cx('initial')
-			: states === 'active'
-			? cx('active')
-			: states === 'typing'
-			? cx('typing')
-			: cx('disabled');
+	const textInputMode = size === 'l' ? cx('size-l') : cx('size-s');
+	const textInputState = states === 'initial' ? cx('initial') : cx('error');
 
 	const textInputClassName = `${cx(
 		'TextInput'
@@ -30,7 +23,7 @@ export const TextInput = ({ mode, states, label, id, width, height }) => {
 	const InputCLassName = `${cx('typo-body')} ${cx('input')}`;
 
 	return (
-		<div style={{ width, height }} className={textInputClassName}>
+		<div style={{ width }} className={textInputClassName}>
 			<label className={LabelClassName} htmlFor={id}>
 				{label}
 			</label>
@@ -40,7 +33,7 @@ export const TextInput = ({ mode, states, label, id, width, height }) => {
 				id={id}
 				value={inputValue}
 				onChange={handleInputChange}
-				placeholder="입력하세요."
+				placeholder={placeholder}
 			/>
 		</div>
 	);

@@ -1,8 +1,8 @@
 import Dropdown from '@components/Dropdown/Dropdown';
 import { useRef, useState } from 'react';
-import { Button } from './components/Button/Button';
+import { Button } from '@components/Button/Button';
 import { IssuePage } from '@containers/IssuePage/IssuePage';
-import { TextInput } from './components/TextInput/TextInput';
+import { TextInput } from '@components/TextInput/TextInput';
 
 function App() {
 	if (process.env.NODE_ENV === 'development') {
@@ -47,30 +47,30 @@ function App() {
 			<Button text="BUTTON" btnSize="l" color="blue"></Button>
 			<br />
 			<TextInput
-				mode="two"
+				size="l"
 				states="initial"
 				label="Label"
 				id="textInput"
 				width="288px"
-				height="56px"
+				placeholder="입력하세요."
 			></TextInput>
 			<br />
 			<TextInput
-				mode="one"
-				states="typing"
+				size="l"
+				states="error"
 				label="Label"
 				id="textInput"
 				width="288px"
-				height="40px"
+				placeholder="다시 입력하세요."
 			></TextInput>
 			<br />
 			<TextInput
-				mode="two"
-				states="disabled"
+				size="s"
+				states="initial"
 				label="Label"
 				id="textInput"
 				width="288px"
-				height="56px"
+				placeholder="메롱"
 			></TextInput>
 		</div>
 	);
