@@ -25,7 +25,8 @@ jobs:
           java-version: 11
 
       - name: Build JAR
-        run: ./gradlew clean build
+#         run: ./gradlew clean build
+        run: gradle wrapper build
 
       - name: Upload JAR to S3
         uses: jakejarvis/s3-sync-action@master
