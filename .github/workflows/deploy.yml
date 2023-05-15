@@ -34,7 +34,7 @@ jobs:
         run: mkdir deploy
         
       - name: Check jar
-        run: ls -la ./build/libs
+        run: ls
 
       - name: Copy Jar
         run: cp ./build/libs/*.jar ./deploy/
