@@ -1,12 +1,12 @@
-.TextInput {
+.textinput {
   display: flex;
   padding: 0px 24px;
   align-items: center;
 }
 
-.TextInput:focus-within {
+.textinput:focus-within {
   background-color: var(--color-light-neutral-background-strong);
-  border: 1px solid #14142b;
+  outline: 1px solid #14142b;
 }
 
 .size-s {
@@ -35,12 +35,14 @@
   height: 28px;
   border: none;
   background-color: inherit;
+  text-align: left;
 }
 
 .input::placeholder {
   font-size: var(--typo-M-fontsize);
   line-height: var(--typo-M-lineheight);
   font-weight: var(--typo-fontweight-regular);
+  color: var(--color-light-neutral-text-weak);
 }
 
 .initial {
