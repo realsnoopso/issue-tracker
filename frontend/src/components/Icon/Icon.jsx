@@ -9,7 +9,9 @@ export const Icon = ({
 }) => {
 	const IconComponent = iconfiles[name];
 	return (
-		<IconComponent width={width} height={height} fill={fill}></IconComponent>
+		<div style={{ minWidth: `${width}px`, minHeight: `${height}px` }}>
+			<IconComponent width={width} height={height} fill={fill}></IconComponent>
+		</div>
 	);
 };
 

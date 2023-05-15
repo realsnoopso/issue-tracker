@@ -1,44 +1,57 @@
-import Icon from '@components/Icon/Icon';
-import { DropdownElement } from './DropdownElement/DropdownElement';
+import { Icon } from '@components/index';
+import { DropdownPanel } from './DropdownPanel/DropdownPanel';
+import styles from './Dropdown.module.css';
+import classNames from 'classnames/bind';
+import { useRef, useState } from 'react';
 
 export const Dropdown = ({
-	isOpen,
-	btnOnClick,
 	optionOnClick,
 	btnText,
 	hasRadioBtn,
 	options,
 	header,
-	selectedId,
+	selected,
+	isOpen,
+	toggleOpen,
+	panelPosition,
 }) => {
+	const cx = classNames.bind(styles);
+	const buttonClassNames = `${cx('button')} typo-m typo-bold`;
+	const btnElement = useRef(null);
+	const [btnCoordinate, setBtnCoordinate] = useState();
+
+	const handleBtnClick = () => {
+		const { top, left, height, right } =
+			btnElement.current.getBoundingClientRect();
+		setBtnCoordinate({ top, left, height, right });
+		toggleOpen();
+	};
+
 	return (
 		<>
-			<button onClick={btnOnClick}>
+			<button
+				onClick={handleBtnClick}
+				className={buttonClassNames}
+				ref={btnElement}
+			>
 				{btnText}
-				<Icon name="chevronDown"></Icon>
+				<Icon
+					name="chevronDown"
+					fill="var(--color-light-neutral-text-weak)"
+				></Icon>
 			</button>
 			{isOpen && (
-				<div>
-					<DropdownElement type="header" contents={header}></DropdownElement>
-					{options.map((option, i) => {
-						const isSelected = selectedId === option.id;
-						return (
-							<DropdownElement
-								id={option.id}
-								type="option"
-								key={i}
-								profile={option.profile ?? null}
-								contents={option.contents}
-								isSelected={isSelected}
-								hasRadioBtn={hasRadioBtn}
-								_onClick={optionOnClick}
-							></DropdownElement>
-						);
-					})}
-				</div>
+				<DropdownPanel
+					header={header}
+					options={options}
+					selected={selected}
+					hasRadioBtn={hasRadioBtn}
+					optionOnClick={optionOnClick}
+					toggleOpen={toggleOpen}
+					btnCoordinate={btnCoordinate}
+					panelPosition={panelPosition}
+				></DropdownPanel>
 			)}
 		</>
 	);
 };
-
-export default Dropdown;
