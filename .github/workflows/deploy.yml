@@ -1,0 +1,44 @@
+name: Deploy to Amazon ECS
+
+on:
+  push:
+    branches: [ release ]
+
+env:
+  PROJECT_NAME: issueTracker
+  BUCKET_NAME: issuetrackerbucket
+  CODE_DEPLOY_APP_NAME: issueTracker-app
+  DEPLOYMENT_GROUP_NAME: issueTrackerGroup
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+
+      - name: Build JAR
+        run: ./gradlew clean build
+
+      - name: Upload JAR to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+          src: build/libs/*.jar
+        env:
+          AWS_S3_BUCKET: issuetrackerbucket
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Deploy to CodeDeploy
+        run: aws deploy create-deployment --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=jar,key=build/libs/*.jar
+        env:
+          AWS_REGION: ap-northeast-2
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
