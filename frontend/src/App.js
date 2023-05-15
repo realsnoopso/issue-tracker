@@ -1,4 +1,5 @@
 import { Test } from './Test';
+import { Navbar } from './components';
 
 function App() {
 	if (process.env.NODE_ENV === 'development') {
@@ -8,6 +9,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<Navbar></Navbar>
 			<Test></Test>
 		</div>
 	);
