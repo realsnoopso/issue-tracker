@@ -28,9 +28,9 @@ jobs:
           java-version: '11'
 
       - run: |
-          touch ./appspec.yml
-          echo "${{ secrets.APPLICATION }}" > ./appspec.yml
-          cat ./appspec.yml
+          touch ./backend/src/main/resources/application.yml
+          echo "${{ secrets.APPLICATION }}" > ./backend/src/main/resources/application.yml
+          cat ./backend/src/main/resources/application.yml
 
       - name: Build JAR
         run: |
