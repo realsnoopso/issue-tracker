@@ -38,8 +38,8 @@ jobs:
           chmod +x gradlew
           ./gradlew clean build
           
-#       - name: Make Directory for deliver
-#         run: mkdir deploy
+      - name: Make Directory for deliver
+        run: mkdir deploy
 
       - name: Copy Jar
         run: cp ./backend/build/libs/*.jar ./deploy/
