@@ -75,7 +75,7 @@ jobs:
           --application-name ${{ env.CODE_DEPLOY_APP_NAME }}
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }}
-          --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=/deploy/issueTracker-build.zip
+          --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=/issueTracker-build.zip
         
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
