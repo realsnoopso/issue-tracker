@@ -26,6 +26,11 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '11'
+          
+      - uses: actions/setup-java@v2
+      - run: touch ./backend/src/main/resources/application.properties
+      - run: echo "${{ secrets.APPLICATION }}" > ./backend/src/main/resources/application.properties
+      - run: cat ./backend/src/main/resources/application.properties
 
       - name: Build JAR
         run: |
