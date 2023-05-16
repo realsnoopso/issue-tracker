@@ -14,6 +14,7 @@ export const Dropdown = ({
   isOpen,
   toggleOpen,
   panelPosition,
+  width,
 }) => {
   const cx = classNames.bind(styles);
   const buttonClassNames = `${cx('button')} typo-m typo-bold`;
@@ -33,6 +34,7 @@ export const Dropdown = ({
         onClick={handleBtnClick}
         className={buttonClassNames}
         ref={btnElement}
+        style={{ width }}
       >
         {btnText}
         <Icon

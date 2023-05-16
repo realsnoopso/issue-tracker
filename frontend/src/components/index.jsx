@@ -6,6 +6,7 @@ import { InformationTag } from './InformationTag/InformationTag';
 import { IssuePage } from '@src/containers/IssuePage/IssuePage';
 import { Navbar } from '@components/Navbar/Navbar';
 import { Tab } from './Tab/Tab';
+import { Filterbar } from './Filterbar/Filterbar';
 
 export {
   Dropdown,
@@ -16,4 +17,5 @@ export {
   IssuePage,
   Navbar,
   Tab,
+  Filterbar,
 };

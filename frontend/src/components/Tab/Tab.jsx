@@ -14,18 +14,22 @@ export const Tab = ({ buttonDatas, active, _onClick }) => {
 
   return (
     <div className={tabClassNames}>
-      {buttonDatas.map((data) => (
-        <Button
-          style={{ backgroundColor: getBtnBgColor(data.text, active) }}
-          key={data.text}
-          text={data.text}
-          width={btnWidth}
-          icon={data.icon ?? false}
-          _onClick={_onClick}
-          btnSize="m"
-          type="ghost"
-        ></Button>
-      ))}
+      {buttonDatas.map((data) => {
+        const text = `${data.text}(${data.count ?? ''})`;
+        return (
+          <Button
+            style={{ backgroundColor: getBtnBgColor(data.text, active) }}
+            key={data.text}
+            text={text}
+            width={btnWidth}
+            iconName={data.icon ?? false}
+            _onClick={_onClick}
+            btnSize="m"
+            type="ghost"
+            id={data.text}
+          ></Button>
+        );
+      })}
     </div>
   );
 };
