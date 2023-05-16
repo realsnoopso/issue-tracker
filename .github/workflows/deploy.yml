@@ -14,9 +14,9 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env : 
+    env:
       APPLICATION: ${{ secrets.APPLICATION }}
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -26,17 +26,18 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '11'
-          
-      - run: touch ./backend/src/main/resources/application.yml
-      - run: echo "${{ secrets.APPLICATION }}" > ./backend/src/main/resources/application.yml
-      - run: cat ./backend/src/main/resources/application.yml
+
+      - run: |
+          touch ./backend/src/main/resources/application.yml
+          echo "${{ secrets.APPLICATION }}" > ./backend/src/main/resources/application.yml
+          cat ./backend/src/main/resources/application.yml
 
       - name: Build JAR
         run: |
           cd backend
           chmod +x gradlew
           ./gradlew clean build
-          
+
       - name: Make Directory for deliver
         run: mkdir deploy
 
@@ -44,21 +45,19 @@ jobs:
         run: cp ./backend/build/libs/*.jar ./deploy/
 
       - name: Make zip file
-        run: zip -r -qq -j ./issueTracker-build.zip ./deploy
+        run: zip -r -qq -j issueTracker-build.zip ./deploy
 
       - name: Config S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
-          src: /backend/issueTracker-build.zip
+          src: ./issueTracker-build.zip
           dest: s3://${{ env.BUCKET_NAME }}/deploy/
         env:
           AWS_S3_BUCKET: ${{ env.BUCKET_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
-      - name: Make zip file
-        run: zip -r -qq -j ./issueTracker-build.zip ./deploy
+
       - name: Upload ZIP to S3
         uses: jakejarvis/s3-sync-action@master
         with:
@@ -71,12 +70,12 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy to CodeDeploy
-        run: aws deploy create-deployment
-          --application-name ${{ env.CODE_DEPLOY_APP_NAME }}
-          --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }}
-          --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=issueTracker-build.zip
-        
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APP_NAME }} \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=issueTracker-build.zip
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
