@@ -13,6 +13,8 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env : 
+      APPLICATION: ${{ secrete.APPLICATION }}
     
     steps:
       - name: Checkout Repository
