@@ -27,7 +27,6 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
           
- #     - uses: actions/setup-java@v2
       - run: touch ./backend/src/main/resources/application.yml
       - run: echo "${{ secrets.APPLICATION }}" > ./backend/src/main/resources/application.yml
       - run: cat ./backend/src/main/resources/application.yml
@@ -44,8 +43,8 @@ jobs:
       - name: Copy Jar
         run: cp ./backend/build/libs/*.jar ./deploy/
 
-      - name: Make zip file
-        run: zip -r -qq -j ./issueTracker-build.zip ./deploy
+#       - name: Make zip file
+#         run: zip -r -qq -j ./issueTracker-build.zip ./deploy
 
       - name: Config S3
         uses: jakejarvis/s3-sync-action@master
@@ -58,8 +57,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           
-      - name: Upload ZIP to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://${{ env.BUCKET_NAME }}/backend/$GITHUB_SHA.zip
+#       - name: Upload ZIP to S3
+#         run: aws s3 cp --region ap-northeast-2 ./backend/$GITHUB_SHA.zip s3://${{ env.BUCKET_NAME }}/backend/$GITHUB_SHA.zip
 
       - name: Deploy to CodeDeploy
         run: aws deploy create-deployment --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=issueTracker-build.zip
