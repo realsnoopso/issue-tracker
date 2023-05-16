@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { options } from '@constants/filterbar';
+import { options } from '@constants/issue';
 import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
 import classNames from 'classnames/bind';

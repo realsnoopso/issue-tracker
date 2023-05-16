@@ -1,10 +1,5 @@
-import {
-  Dropdown,
-  Tab,
-  Button,
-  InformationTag,
-  IssuePage,
-} from '@components/index';
+import { Dropdown, Tab, Button, InformationTag } from '@components/index';
+import { IssuePage, IssueElement } from '@containers/index';
 import { useState } from 'react';
 
 export function Test() {
@@ -67,6 +62,16 @@ export function Test() {
       ></InformationTag>
       <InformationTag text="Label" mode="neutral"></InformationTag>
       <IssuePage></IssuePage>
+      <IssueElement
+        iconName="alertCircle"
+        title="이슈제목"
+        label="레이블 이름"
+        issueNumber="#3"
+        timeStamp="2023-05-15"
+        writer="sarang_daddy"
+        mileStone="마일스톤"
+        profile="https://assets.themiilk.com/test/test-profile1.png"
+      ></IssueElement>
     </div>
   );
 }

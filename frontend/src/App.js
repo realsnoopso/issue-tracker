@@ -1,5 +1,6 @@
+import { Navbar } from './components';
 import { Test } from './Test';
-import { IssuePage, Navbar } from './components';
+import { IssuePage } from '@containers/index';
 import styles from './App.module.css';
 import classNames from 'classnames/bind';
 
@@ -17,6 +18,7 @@ function App() {
       <Navbar></Navbar>
       <div className={contentsClassNames}>
         <IssuePage></IssuePage>
+        <Test></Test>
       </div>
     </div>
   );
