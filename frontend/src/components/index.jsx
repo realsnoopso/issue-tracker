@@ -6,6 +6,7 @@ import { InformationTag } from './InformationTag/InformationTag';
 import { Navbar } from '@components/Navbar/Navbar';
 import { Tab } from './Tab/Tab';
 import { Filterbar } from './Filterbar/Filterbar';
+import { ElapsedTime } from '@components/Utils/ElapsedTime';
 
 export {
   Dropdown,
@@ -16,4 +17,5 @@ export {
   Navbar,
   Tab,
   Filterbar,
+  ElapsedTime,
 };

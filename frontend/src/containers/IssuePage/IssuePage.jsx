@@ -4,6 +4,7 @@ import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
 import classNames from 'classnames/bind';
 import { tabDatas } from '@src/constants/issue';
+import { IssueElement } from '@containers/index';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -14,7 +15,7 @@ export const IssuePage = () => {
 
   const CTAbtn = '이슈 작성';
 
-  const [data, setData] = useState([]);
+  const [issueData, setIssueData] = useState([]);
 
   const labelAndMileStoneCounts = { label: 3, milestone: 2 }; // 임시 데이터
 
@@ -31,7 +32,7 @@ export const IssuePage = () => {
     const fetchData = async () => {
       const response = await fetch('https://api.example.com/presslist');
       const data = await response.json();
-      setData(data);
+      setIssueData(data);
     };
 
     fetchData();
@@ -53,11 +54,22 @@ export const IssuePage = () => {
           ></Button>
         </div>
       </div>
-      <ul>
+      {/* <ul>
         {data.map((issue, index) => (
           <li key={index}>{issue.title}</li>
         ))}
-      </ul>
+      </ul> */}
+      {/* <IssueElement
+        iconName="alertCircle"
+        title="이슈제목"
+        label="레이블 이름"
+        issueNumber="#3"
+        timeStamp="2023-05-15"
+        writer="sarang_daddy"
+        mileStone="마일스톤"
+        profile="https://assets.themiilk.com/test/test-profile1.png"
+      ></IssueElement> */}
+      <IssueElement iconName="alertCircle" issueData={issueData}></IssueElement>
     </div>
   );
 };
