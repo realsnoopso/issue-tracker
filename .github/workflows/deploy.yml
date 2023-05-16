@@ -30,7 +30,7 @@ jobs:
         run: |
           cd backend
           chmod +x gradlew
-          ./gradlew clean build
+          ./gradlew clean build -Paws.s3.bucket=${{ secrets.AWS_S3_BUCKET }}
           
       - name: Make Directory for deliver
         run: mkdir deploy
