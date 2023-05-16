@@ -14,7 +14,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env : 
-      APPLICATION: ${{ secrete.APPLICATION }}
+      APPLICATION: ${{ secrets.APPLICATION }}
     
     steps:
       - name: Checkout Repository
