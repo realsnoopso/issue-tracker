@@ -18,7 +18,7 @@ function App() {
       <Navbar></Navbar>
       <div className={contentsClassNames}>
         <IssuePage></IssuePage>
-        <Test></Test>
+        {/* <Test></Test> */}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
 import classNames from 'classnames/bind';
 import { tabDatas } from '@src/constants/issue';
+import { getIssueList } from '@services/issue';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -15,7 +16,15 @@ export const IssuePage = () => {
   const CTAbtn = '이슈 작성';
 
   const [data, setData] = useState([]);
-
+  const [filters, setFilters] = useState({
+    status: 'open',
+    page: 0,
+    assignee: null,
+    label: null,
+    milestone: null,
+    writer: null,
+    commentBy: null,
+  });
   const labelAndMileStoneCounts = { label: 3, milestone: 2 }; // 임시 데이터
 
   useEffect(() => {
@@ -28,20 +37,20 @@ export const IssuePage = () => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('https://api.example.com/presslist');
-      const data = await response.json();
-      setData(data);
-    };
-
-    fetchData();
+    (async () => {
+      const queries = {
+        ...filters,
+      };
+      const response = await getIssueList(queries);
+      setData(response);
+    })();
   }, []);
 
   return (
     <div className={issuePageClassNames}>
       <div className={headerClassNames}>
         <div className={headerLeftClassNames}>
-          <Filterbar options={options}></Filterbar>
+          <Filterbar options={options} setFilters={setFilters}></Filterbar>
         </div>
         <div className={headerRightClassNames}>
           <Tab buttonDatas={tabDatas}></Tab>

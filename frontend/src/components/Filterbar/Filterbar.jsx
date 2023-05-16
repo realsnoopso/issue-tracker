@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { TextInput } from '../TextInput/TextInput';
 
-export const Filterbar = ({ options }) => {
+export const Filterbar = ({ options, setFilters }) => {
   const cx = classNames.bind(styles);
   const filterbarClassNames = cx('filterbar');
   const dropdownWidth = '128px';
@@ -36,9 +36,10 @@ export const Filterbar = ({ options }) => {
         options={options}
         header={dropdownHeader}
         selected={selected}
-        optionOnClick={({ currentTarget }) =>
-          setSelected(currentTarget.innerText)
-        }
+        optionOnClick={({ currentTarget }) => {
+          setFilters(currentTarget.innerText);
+          setSelected(currentTarget.innerText);
+        }}
       ></Dropdown>
       <TextInput
         placeholder={placeholder}

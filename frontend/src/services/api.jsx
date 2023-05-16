@@ -1,4 +1,5 @@
 import { URL } from '@constants/api';
+import { removeEmptyKeyValues } from '@utils/index';
 
 export const customFetch = async ({
   path,
@@ -14,6 +15,9 @@ export const customFetch = async ({
   };
 
   if (hasAuth) headers.Authorization = `apikeys`;
+
+  removeEmptyKeyValues(queries);
+
   const queryString =
     '?' + new URLSearchParams(Object.entries(queries)).toString();
 
