@@ -6,23 +6,22 @@ export const Button = ({
   iconName,
   text,
   type,
-  status,
-  color,
+  status = 'default',
+  color = 'black',
   width,
-  btnSize,
+  btnSize = 'l',
   _onClick,
   style,
+  id = '',
 }) => {
   const cx = classNames.bind(styles);
 
   const btnSizeKind = cx(`size-${btnSize}`);
   const textSizeClass = `typo-${btnSize}`;
-  const btnStatus = cx(`status-${status ?? 'default'}`);
+  const btnStatus = cx(`status-${status}`);
   const btnType = type === 'ghost' ? cx('type-ghost') : cx('type-contained');
   const btnColor =
-    type === 'outline'
-      ? cx(`outline-color-${color ?? 'black'}`)
-      : cx(`color-${color ?? 'black'}`);
+    type === 'outline' ? cx(`outline-color-${color}`) : cx(`color-${color}`);
 
   const getTextColor = () => {
     if (type === 'ghost') {
@@ -47,10 +46,9 @@ export const Button = ({
       className={buttonClassNames}
       onClick={_onClick}
       style={{ ...style, width }}
+      id={id}
     >
-      {iconName && (
-        <Icon name={iconName} fill="var(--color-light-accent-text)"></Icon>
-      )}
+      {iconName && <Icon name={iconName} fill={textColor}></Icon>}
       <span style={{ color: textColor }} className={textSizeClass}>
         {text}
       </span>

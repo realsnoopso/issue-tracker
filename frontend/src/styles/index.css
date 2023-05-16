@@ -5,3 +5,7 @@
 body {
   background-color: var(--color-light-neutral-background);
 }
+
+:root {
+  --contents-width: 1280px;
+}
