@@ -1,36 +1,6 @@
+import { MY_USER_DATA } from '@constants/user';
+
 export const issueList = [
-  {
-    title: '새 기능 추가',
-    comment: [
-      {
-        writer: {
-          id: '1',
-          profile: 'https://example.com/profile.png',
-          name: 'John Doe',
-        },
-        contents: '새 기능 추가에 대한 의견입니다.',
-      },
-      {
-        writer: {
-          id: '2',
-          profile: 'https://example.com/profile.png',
-          name: 'Jane Doe',
-        },
-        contents: '새 기능 추가에 대한 또 다른 의견입니다.',
-      },
-    ],
-    writer: {
-      id: '1',
-      profile: 'https://example.com/profile.png',
-      name: 'John Doe',
-    },
-    assignee: null,
-    label: null,
-    milestone: null,
-    status: 'close',
-    editedTime: new Date(),
-    index: 0,
-  },
   {
     title: '버그 수정',
     comment: [
@@ -44,14 +14,14 @@ export const issueList = [
       },
     ],
     writer: {
-      id: '2',
+      id: '3',
       profile: 'https://example.com/profile.png',
-      name: 'Jane Doe',
+      name: 'Peter Smith',
     },
     assignee: {
-      id: '1',
-      profile: 'https://example.com/profile.png',
-      name: 'John Doe',
+      id: MY_USER_DATA.id,
+      profile: MY_USER_DATA.profile,
+      name: MY_USER_DATA.name,
     },
     label: {
       title: '버그',
@@ -61,7 +31,7 @@ export const issueList = [
       id: '2',
     },
     milestone: null,
-    status: 'open',
+    status: 'close',
     editedTime: new Date(),
     index: 1,
   },
@@ -70,9 +40,9 @@ export const issueList = [
     comment: [
       {
         writer: {
-          id: '4',
-          profile: 'https://example.com/profile.png',
-          name: 'Mary Jones',
+          id: MY_USER_DATA.id,
+          profile: MY_USER_DATA.profile,
+          name: MY_USER_DATA.name,
         },
         contents: 'UI 개선에 대한 의견입니다.',
       },

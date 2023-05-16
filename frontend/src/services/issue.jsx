@@ -1,4 +1,7 @@
 import { customFetch } from '@services/api';
+import { createContext } from 'react';
+
+export const filterContext = createContext();
 
 export const getIssueList = async ({
   status = 'open',
@@ -24,6 +27,7 @@ export const getIssueList = async ({
         commentBy,
       },
     });
+
     return response;
   } catch (error) {
     console.error(error);
