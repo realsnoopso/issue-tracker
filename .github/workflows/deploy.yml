@@ -41,31 +41,20 @@ jobs:
       - name: Make Directory for deliver
         run: mkdir deploy
 
-      - name: Copy Jar
-        run: cp ./backend/build/libs/*.jar ./deploy/
+      - name: Copy Jar, appspec.yml and deploy.sh
+        run: |
+          cp ./backend/build/libs/*.jar ./deploy/
+          cp ./appspec.yml ./deploy/
+          cp ./deploy.sh ./deploy/
 
       - name: Make zip file
-        run: zip -r -qq -j issueTracker-build.zip ./deploy
-
-      - name: Config S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read --follow-symlinks --delete
-          src: ./issueTracker-build.zip
-          dest: s3://${{ env.BUCKET_NAME }}/deploy/
-        env:
-          AWS_S3_BUCKET: ${{ env.BUCKET_NAME }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: zip -r ./issueTracker-build.zip ./deploy
 
       - name: Upload ZIP to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read --follow-symlinks --delete
-          src: ./issueTracker-build.zip
-          dest: s3://${{ env.BUCKET_NAME }}/issueTracker-build.zip
+        run: |
+          aws s3 cp ./issueTracker-build.zip s3://${{ env.BUCKET_NAME }}/issueTracker-build.zip
         env:
-          AWS_S3_BUCKET: ${{ env.BUCKET_NAME }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
