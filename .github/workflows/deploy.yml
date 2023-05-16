@@ -9,6 +9,7 @@ env:
   BUCKET_NAME: issuetrackerbucket
   CODE_DEPLOY_APP_NAME: issueTracker-app
   DEPLOYMENT_GROUP_NAME: issueTrackerGroup
+  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
 jobs:
   build-and-deploy:
@@ -30,7 +31,7 @@ jobs:
         run: |
           cd backend
           chmod +x gradlew
-          ./gradlew clean build -Paws.s3.bucket=${{ secrets.AWS_S3_BUCKET }}
+          ./gradlew clean build
           
       - name: Make Directory for deliver
         run: mkdir deploy
