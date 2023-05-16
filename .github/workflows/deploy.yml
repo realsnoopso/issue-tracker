@@ -65,6 +65,10 @@ jobs:
           args: --acl public-read --follow-symlinks --delete
           src: ./issueTracker-build.zip
           dest: s3://${{ env.BUCKET_NAME }}/deploy/issueTracker-build.zip
+        env:
+          AWS_S3_BUCKET: ${{ env.BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           
 #       - name: Upload ZIP to S3
 #         run: aws s3 cp --region ap-northeast-2 ./backend/$GITHUB_SHA.zip s3://${{ env.BUCKET_NAME }}/backend/$GITHUB_SHA.zip
