@@ -45,6 +45,7 @@ export const DropdownPanel = ({
             key={option.id}
             id={option.id}
             profile={option.profile}
+            name={option.name}
             contents={option.contents}
             isSelected={isSelected(selected, option.contents)}
             hasRadioBtn={hasRadioBtn}

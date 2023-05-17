@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import { tabDatas, initialFilter } from '@src/constants/issue';
 import { getIssueList } from '@services/issue';
 import { filterContext } from '@services/issue';
-import { IssueElement } from '@containers/index';
+import { IssueElement, IssueListHeader } from '@containers/index';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -57,6 +57,9 @@ export const IssuePage = () => {
               iconName="plus"
             ></Button>
           </div>
+        </div>
+        <div>
+          <IssueListHeader issueData={issueData}></IssueListHeader>
         </div>
         <IssueElement
           iconName="alertCircle"
