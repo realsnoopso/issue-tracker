@@ -9,15 +9,15 @@
   width: fit-content;
 }
 
-.LightColor {
+.solidColor {
   color: var(--color-light-accent-text);
 }
 
-.NeutralColor {
+.outlineColor {
   color: var(--color-light-neutral-text-weak);
 }
 
-.NeutralBgColor {
+.outlineBgColor {
   background-color: var(--color-light-neutral-background);
   border: 1px solid var(--color-light-neutral-border);
 }

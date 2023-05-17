@@ -21,5 +21,3 @@ export const Profile = ({ url, size = '32', _onClick }) => {
     </button>
   );
 };
-
-export default Profile;
