@@ -7,11 +7,13 @@ import lombok.Setter;
 @Setter
 public class Member {
     private Long idx;
+    private String profile;
     private String memberId;
     private boolean gitSync;
 
-    public Member(Long idx, String memberId, boolean gitSync) {
+    public Member(Long idx, String profile, String memberId, boolean gitSync) {
         this.idx = idx;
+        this.profile = profile;
         this.memberId = memberId;
         this.gitSync = gitSync;
     }
