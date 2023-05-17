@@ -43,9 +43,7 @@ export const handlers = [
         label: {
           title: 'UI',
           description: '이것은 UI 레이블입니다.',
-          backgroundColor: 'black',
-          textColor: 'white',
-          mode: 'light',
+          style: 'outline',
         },
         milestone: {
           id: '1',
@@ -87,8 +85,7 @@ export const handlers = [
           title: 'UI',
           description: '이것은 UI 레이블입니다.',
           backgroundColor: '#8bf6c4',
-          textColor: 'white',
-          mode: 'light',
+          style: 'solid',
         },
         milestone: {
           id: '1',
@@ -126,8 +123,7 @@ export const handlers = [
           title: 'UI',
           description: '이것은 UI 레이블입니다.',
           backgroundColor: 'skyblue',
-          textColor: 'white',
-          mode: 'light',
+          style: 'solid',
         },
         milestone: {
           id: '1',
@@ -166,7 +162,7 @@ export const handlers = [
           description: '이것은 UI 레이블입니다.',
           backgroundColor: 'blue',
           textColor: 'white',
-          mode: 'neutral',
+          style: 'solid',
         },
         milestone: {
           id: '1',
@@ -205,7 +201,7 @@ export const handlers = [
           description: '이것은 UI 레이블입니다.',
           backgroundColor: 'green',
           textColor: 'white',
-          mode: 'light',
+          style: 'solid',
         },
         milestone: {
           id: '1',
@@ -244,7 +240,7 @@ export const handlers = [
           description: '이것은 UI 레이블입니다.',
           backgroundColor: 'pink',
           textColor: 'white',
-          mode: 'light',
+          style: 'solid',
         },
         milestone: {
           id: '1',
@@ -283,7 +279,7 @@ export const handlers = [
           description: '이것은 UI 레이블입니다.',
           backgroundColor: 'blue',
           textColor: 'white',
-          mode: 'neutral',
+          style: 'solid',
         },
         milestone: {
           id: '1',
@@ -322,7 +318,7 @@ export const handlers = [
           description: '이것은 UI 레이블입니다.',
           backgroundColor: 'tomato',
           textColor: 'white',
-          mode: 'light',
+          style: 'outline',
         },
         milestone: {
           id: '1',
@@ -361,7 +357,7 @@ export const handlers = [
           description: '이것은 UI 레이블입니다.',
           backgroundColor: 'blue',
           textColor: 'white',
-          mode: 'light',
+          style: 'outline',
         },
         milestone: {
           id: '1',

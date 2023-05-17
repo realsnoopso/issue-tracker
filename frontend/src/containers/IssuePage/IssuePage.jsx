@@ -54,21 +54,6 @@ export const IssuePage = () => {
           ></Button>
         </div>
       </div>
-      {/* <ul>
-        {data.map((issue, index) => (
-          <li key={index}>{issue.title}</li>
-        ))}
-      </ul> */}
-      {/* <IssueElement
-        iconName="alertCircle"
-        title="이슈제목"
-        label="레이블 이름"
-        issueNumber="#3"
-        timeStamp="2023-05-15"
-        writer="sarang_daddy"
-        mileStone="마일스톤"
-        profile="https://assets.themiilk.com/test/test-profile1.png"
-      ></IssueElement> */}
       <IssueElement iconName="alertCircle" issueData={issueData}></IssueElement>
     </div>
   );

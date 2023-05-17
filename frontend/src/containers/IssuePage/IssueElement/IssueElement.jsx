@@ -38,7 +38,7 @@ export const IssueElement = ({ iconName, issueData }) => {
                     <InformationTag
                       text={label.description}
                       backgroundColor={label.backgroundColor}
-                      mode={label.mode}
+                      style={label.style}
                     ></InformationTag>
                   )}
                 </div>

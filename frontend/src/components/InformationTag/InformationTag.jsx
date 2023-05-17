@@ -5,11 +5,11 @@ export const InformationTag = ({
   iconName,
   text,
   backgroundColor,
-  mode = 'neutral',
+  style = 'outline',
 }) => {
-  const { TagStyle, LightColor, NeutralColor, NeutralBgColor } = styles;
-  const tagBgColor = mode === 'light' ? backgroundColor : NeutralBgColor;
-  const textColor = mode === 'light' ? LightColor : NeutralColor;
+  const { TagStyle, solidColor, outlineColor, outlineBgColor } = styles;
+  const tagBgColor = style === 'solid' ? backgroundColor : outlineBgColor;
+  const textColor = style === 'solid' ? solidColor : outlineColor;
 
   const InfoTagClassName = `${TagStyle} typo-caption ${tagBgColor} ${textColor}`;
 
