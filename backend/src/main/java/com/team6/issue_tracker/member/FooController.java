@@ -18,36 +18,36 @@ public class FooController {
         return "hello!";
     }
 
-    @GetMapping("/list")
-    public List<String> list() {
-        List<String> returnList = List.of("test", "test1","test2");
-        return returnList;
-    }
-
-    @RequestMapping("/object")
-    public List<Member> object() {
-        List<Member> returnList = new ArrayList<>();
-        returnList.add(new Member(1L, "member1", false));
-        returnList.add(new Member(2L, "member2", false));
-        returnList.add(new Member(3L, "member3", false));
-        returnList.add(new Member(4L, "member5", true));
-        return returnList;
-    }
-
-    @RequestMapping("/dto")
-    public MemberTestResponse dto() {
-        List<Member> returnList = new ArrayList<>();
-        returnList.add(new Member(1L, "member1", false));
-        returnList.add(new Member(2L, "member2", false));
-        return MemberTestResponse.fromEntity("testList", true, returnList);
-    }
-
-    @GetMapping("/getParameter")
-    @ResponseStatus(value = HttpStatus.OK)
-    public Member getRequestParam(Member member) {
-        if (member.getMemberId().equals("test")) {
-            return member;
-        }
-        return member;
-    }
+//    @GetMapping("/list")
+//    public List<String> list() {
+//        List<String> returnList = List.of("test", "test1","test2");
+//        return returnList;
+//    }
+//
+//    @RequestMapping("/object")
+//    public List<Member> object() {
+//        List<Member> returnList = new ArrayList<>();
+//        returnList.add(new Member(1L, "member1", false));
+//        returnList.add(new Member(2L, "member2", false));
+//        returnList.add(new Member(3L, "member3", false));
+//        returnList.add(new Member(4L, "member5", true));
+//        return returnList;
+//    }
+//
+//    @RequestMapping("/dto")
+//    public MemberTestResponse dto() {
+//        List<Member> returnList = new ArrayList<>();
+//        returnList.add(new Member(1L, "member1", false));
+//        returnList.add(new Member(2L, "member2", false));
+//        return MemberTestResponse.fromEntity("testList", true, returnList);
+//    }
+//
+//    @GetMapping("/getParameter")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public Member getRequestParam(Member member) {
+//        if (member.getMemberId().equals("test")) {
+//            return member;
+//        }
+//        return member;
+//    }
 }
