@@ -3,7 +3,9 @@ import { options } from '@constants/issue';
 import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
 import classNames from 'classnames/bind';
-import { tabDatas } from '@src/constants/issue';
+import { tabDatas, initialFilter } from '@src/constants/issue';
+import { getIssueList } from '@services/issue';
+import { filterContext } from '@services/issue';
 import { IssueElement } from '@containers/index';
 
 export const IssuePage = () => {
@@ -15,6 +17,7 @@ export const IssuePage = () => {
 
   const CTAbtn = '이슈 작성';
 
+  const [filters, setFilters] = useState(initialFilter);
   const [issueData, setIssueData] = useState([]);
 
   const labelAndMileStoneCounts = { label: 3, milestone: 2 }; // 임시 데이터
@@ -29,32 +32,37 @@ export const IssuePage = () => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('https://api.example.com/presslist');
-      const data = await response.json();
-      setIssueData(data);
-    };
-
-    fetchData();
-  }, []);
+    (async () => {
+      const queries = {
+        ...filters,
+      };
+      const response = await getIssueList(queries);
+      setIssueData(response);
+    })();
+  }, [filters]);
 
   return (
-    <div className={issuePageClassNames}>
-      <div className={headerClassNames}>
-        <div className={headerLeftClassNames}>
-          <Filterbar options={options}></Filterbar>
+    <filterContext.Provider value={[filters, setFilters]}>
+      <div className={issuePageClassNames}>
+        <div className={headerClassNames}>
+          <div className={headerLeftClassNames}>
+            <Filterbar options={options}></Filterbar>
+          </div>
+          <div className={headerRightClassNames}>
+            <Tab buttonDatas={tabDatas}></Tab>
+            <Button
+              text={CTAbtn}
+              btnSize="s"
+              color="blue"
+              iconName="plus"
+            ></Button>
+          </div>
         </div>
-        <div className={headerRightClassNames}>
-          <Tab buttonDatas={tabDatas}></Tab>
-          <Button
-            text={CTAbtn}
-            btnSize="s"
-            color="blue"
-            iconName="plus"
-          ></Button>
-        </div>
+        <IssueElement
+          iconName="alertCircle"
+          issueData={issueData}
+        ></IssueElement>
       </div>
-      <IssueElement iconName="alertCircle" issueData={issueData}></IssueElement>
-    </div>
+    </filterContext.Provider>
   );
 };
