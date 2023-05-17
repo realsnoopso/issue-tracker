@@ -20,4 +20,4 @@ else
 fi
 
 echo "> Deploy $JAR_PATH"
-nohup java -jar /home/ec2-user/app/build/libs/issue_tracker-0.0.1.jar --spring.config.location=/home/ec2-user/application.yml > $LOG_PATH/app.log 2> $LOG_PATH/error.log < /dev/null & 
+nohup java -jar $JAR_PATH > $LOG_PATH/app.log 2> $LOG_PATH/error.log < /dev/null &
