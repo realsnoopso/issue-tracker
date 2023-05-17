@@ -40,5 +40,3 @@ export const customFetch = async ({
     throw error;
   }
 };
-
-export default customFetch;

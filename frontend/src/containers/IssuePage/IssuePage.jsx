@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 import { options } from '@constants/issue';
 import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import { tabDatas, initialFilter } from '@src/constants/issue';
 import { getIssueList } from '@services/issue';
 import { filterContext } from '@services/issue';
+import { IssueElement } from '@containers/index';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -16,8 +17,8 @@ export const IssuePage = () => {
 
   const CTAbtn = '이슈 작성';
 
-  const [data, setData] = useState([]);
   const [filters, setFilters] = useState(initialFilter);
+  const [issueData, setIssueData] = useState([]);
 
   const labelAndMileStoneCounts = { label: 3, milestone: 2 }; // 임시 데이터
 
@@ -36,11 +37,9 @@ export const IssuePage = () => {
         ...filters,
       };
       const response = await getIssueList(queries);
-      setData(response);
+      setIssueData(response);
     })();
   }, [filters]);
-
-  console.log(data);
 
   return (
     <filterContext.Provider value={[filters, setFilters]}>
@@ -59,11 +58,10 @@ export const IssuePage = () => {
             ></Button>
           </div>
         </div>
-        <ul>
-          {data.map((issue, index) => (
-            <li key={index}>{issue.title}</li>
-          ))}
-        </ul>
+        <IssueElement
+          iconName="alertCircle"
+          issueData={issueData}
+        ></IssueElement>
       </div>
     </filterContext.Provider>
   );
