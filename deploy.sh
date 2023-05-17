@@ -19,4 +19,4 @@ else
 fi
 
 echo "> $JAR_PATH 배포" #3
-nohup java -jar issue_tracker-0.0.1-SNAPSHOT.jar &
+nohup java -jar /home/ec2-user/app/build/libs/issue_tracker-0.0.1.jar --spring.config.location=/home/ec2-user/application.yml > /dev/null 2> /dev/null < /dev/null &
