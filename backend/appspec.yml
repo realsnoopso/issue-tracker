@@ -7,5 +7,5 @@ files:
 hooks:
   AfterInstall:
     - location: /home/ubuntu/ec2-user/app/deploy.sh
-      timeout: 60
+      timeout: 180
       runas: root
