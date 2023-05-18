@@ -64,7 +64,6 @@ export const issueList = [
       },
     ],
     writer: user1,
-
     assignee: user1,
 
     label: {
@@ -306,6 +305,12 @@ export const issueList = [
 
 export const members = [
   {
+    id: 'realsnoopso',
+    profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
+    name: '스눕소',
+    index: 1,
+  },
+  {
     id: 'sarang_daddy',
     profile: 'https://avatars.githubusercontent.com/u/109648042?v=4',
     name: '사랑대디',
@@ -322,11 +327,5 @@ export const members = [
     profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
     name: '이린',
     index: 4,
-  },
-  {
-    id: 'realsnoopso',
-    profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
-    name: '스눕소',
-    index: 1,
   },
 ];

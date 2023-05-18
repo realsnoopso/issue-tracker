@@ -21,7 +21,7 @@ export const IssueList = ({ issueData, assigneeData }) => {
             issueData.map((issue) => {
               const title = issue.title;
               const label = issue.label;
-              const issueNumber = issue.issueId;
+              const issueNumber = issue.index;
               const timeStamp = issue.editedTime;
               const writer = issue.writer.name;
               const milesStone = issue.milestone;
