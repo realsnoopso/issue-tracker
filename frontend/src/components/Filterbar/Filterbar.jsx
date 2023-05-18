@@ -4,10 +4,8 @@ import styles from './Filterbar.module.css';
 import classNames from 'classnames/bind';
 import { useState, useContext } from 'react';
 import { TextInput } from '../TextInput/TextInput';
-import { filterContext } from '@services/issue';
-import { options } from '@constants/issue';
-import { tabDatas, initialFilter } from '@src/constants/issue';
-import { issueList } from '@src/mocks/data';
+import { filterContext, convertFilterToString } from '@services/issue';
+import { initialFilter } from '@src/constants/issue';
 
 export const Filterbar = ({ options }) => {
   const cx = classNames.bind(styles);
@@ -22,14 +20,28 @@ export const Filterbar = ({ options }) => {
   });
 
   const [filters, setFilters] = useContext(filterContext);
-  const [selectdFilter, setSelectedFilter] = useState({});
-
+  const [inputValue, setInputValue] = useState('status:open');
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [selected, setSelected] = useState('필터');
+  const [selected, setSelected] = useState(String(0));
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleDropdownOptionOnClick = ({ currentTarget }) => {
+    const selectedIndex = String(currentTarget.id);
+    const selectedFilter = options.find(
+      (option) => String(option.index) === selectedIndex
+    ).filter;
+    const newFilters = { ...initialFilter, ...selectedFilter };
+    setFilters(newFilters);
+    setInputValue(convertFilterToString(newFilters));
+    setSelected(selectedIndex);
+  };
+
   const handleDropdown = (isOpen) => {
     return () => setDropdownOpen(isOpen);
   };
-  const placeholder = 'is:issue is:open';
 
   return (
     <div className={filterbarClassNames}>
@@ -43,19 +55,13 @@ export const Filterbar = ({ options }) => {
         options={options}
         header={dropdownHeader}
         selected={selected}
-        optionOnClick={({ currentTarget }) => {
-          const newFilter = options.find(
-            (option) => option.id === currentTarget.id
-          ).filter;
-
-          setFilters({ ...initialFilter, ...newFilter });
-          setSelected(currentTarget.innerText);
-        }}
+        optionOnClick={handleDropdownOptionOnClick}
       ></Dropdown>
       <TextInput
-        placeholder={placeholder}
         icon="search"
         style={textinputStyle}
+        value={inputValue}
+        _onChange={handleInputChange}
       ></TextInput>
     </div>
   );

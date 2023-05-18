@@ -12,6 +12,8 @@ export const TextInput = ({
   placeholder = 'placehoder',
   style,
   icon,
+  value,
+  _onChange,
 }) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -43,8 +45,8 @@ export const TextInput = ({
         className={InputCLassName}
         type="text"
         id={id}
-        value={inputValue}
-        onChange={handleInputChange}
+        value={value}
+        onChange={_onChange}
         placeholder={placeholder}
       />
     </div>
