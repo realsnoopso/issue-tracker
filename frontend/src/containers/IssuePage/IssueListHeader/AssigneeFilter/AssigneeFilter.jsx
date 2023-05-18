@@ -13,21 +13,6 @@ export const AssigneeFilter = ({ userList }) => {
   const assigneeHandleDropdown = (isOpen) => {
     return () => setAssigneeDropdownOpen(isOpen);
   };
-  useEffect(() => {
-    console.log('assigneeFilter', userList);
-  }, [userList]);
-
-  // const [assigneeData, setAssigneeData] = useState();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const assigneeData = await customFetch({
-  //       path: '/members',
-  //       method: 'GET',
-  //     });
-  //     setAssigneeData(assigneeData);
-  //   })();
-  // }, []);
 
   const [filters, setFilters] = useContext(filterContext);
 

@@ -10,8 +10,6 @@ import { AssigneeFilter } from '@containers/index';
 export const IssueListHeader = ({ issueData, userList }) => {
   const cx = classNames.bind(styles);
 
-  console.log(userList);
-
   const openIconName = 'alertCircle';
   const closeIconName = 'archive';
   const dropdownWidth = '100px';
