@@ -1,22 +1,20 @@
-import { Icon } from '@components/index';
+import { Icon, Tab } from '@components/index';
 import styles from './IssueListHeader.module.css';
 import classNames from 'classnames/bind';
 import { FilterElement } from './FilterElement/FilterElement';
-import { FILTER_KEYS } from '@constants/issue';
+import { FILTER_KEYS, initialFilter } from '@constants/issue';
+import { useContext } from 'react';
+import { filterContext } from '@src/services/issue';
 
 export const IssueListHeader = ({
   userList,
   milestoneList,
   issueCount,
   labelList,
-  filters,
 }) => {
   const cx = classNames.bind(styles);
 
-  const openIconName = 'alertCircle';
-  const closeIconName = 'archive';
-  const openIssueNumber = issueCount.open;
-  const closeIssueNumber = issueCount.closed;
+  const [filters, setFilters] = useContext(filterContext);
 
   const convertListToOptions = (list, contentsKey) => {
     return list.map((element) => {
@@ -61,6 +59,21 @@ export const IssueListHeader = ({
     },
   ];
 
+  const statusTabDatas = [
+    {
+      text: '열린 이슈',
+      filterValue: 'open',
+      icon: 'alertCircle',
+      count: issueCount.open,
+    },
+    {
+      text: '닫힌 이슈',
+      filterValue: 'close',
+      icon: 'archive',
+      count: issueCount.closed,
+    },
+  ];
+
   return (
     <>
       <div className={cx(`header`)}>
@@ -68,22 +81,18 @@ export const IssueListHeader = ({
           <input type="checkbox"></input>
         </div>
         <div className={cx(`header-contents`)}>
-          <div className={cx(`issue-contents_column`)}>
-            {openIconName && (
-              <Icon
-                name={openIconName}
-                fill="var(--color-light-neutral-text)"
-              ></Icon>
-            )}
-            <div className={cx(`issue-tap`)}>열린 이슈({openIssueNumber})</div>
-            {closeIconName && (
-              <Icon
-                name={closeIconName}
-                fill="var(--color-light-neutral-text)"
-              ></Icon>
-            )}
-            <div className={cx(`issue-tap`)}>닫힌 이슈({closeIssueNumber})</div>
-          </div>
+          <Tab
+            buttonDatas={statusTabDatas}
+            type="ghost"
+            width="fit-content"
+            _onClick={({ currentTarget }) => {
+              const filterValue = statusTabDatas.find(
+                (data) => currentTarget.id === data.text
+              ).filterValue;
+              console.log(filterValue);
+              setFilters({ ...initialFilter, status: filterValue });
+            }}
+          ></Tab>
           <div className={cx(`issue-contents_column`)}>
             {filterInfos.map((info) => (
               <FilterElement
