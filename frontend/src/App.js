@@ -10,16 +10,10 @@ function App() {
   const cx = classNames.bind(styles);
   const contentsClassNames = cx('contents');
 
-  // if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
-  worker.start();
-  // }
-
-  const test = async () => {
-    const data = await customFetch({ path: '/members', method: 'GET' });
-    // console.log(data);
-  };
-  test();
+  if (process.env.NODE_ENV === 'development') {
+    const { worker } = require('./mocks/browser');
+    worker.start();
+  }
 
   return (
     <div className="App">

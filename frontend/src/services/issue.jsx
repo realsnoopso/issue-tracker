@@ -14,7 +14,7 @@ export const getIssueList = async ({
 }) => {
   try {
     const response = await customFetch({
-      path: '/issues',
+      path: '/testApi', // TODO: issues 로 다시 변경
       method: 'GET',
       queries: {
         status,
@@ -33,4 +33,8 @@ export const getIssueList = async ({
     console.error(error);
     throw error;
   }
+};
+
+export const convertFilterToString = (filter) => {
+  return JSON.stringify(filter);
 };

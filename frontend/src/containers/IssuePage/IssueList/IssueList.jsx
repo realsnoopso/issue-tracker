@@ -4,6 +4,7 @@ import { IssueElement, IssueListHeader } from '@containers/index';
 
 export const IssueList = ({ issueData }) => {
   const cx = classNames.bind(styles);
+  console.log(issueData);
 
   return (
     <>
@@ -18,9 +19,9 @@ export const IssueList = ({ issueData }) => {
               const label = issue.label;
               const issueNumber = issue.issueId;
               const timeStamp = issue.editedTime;
-              const writer = issue.writer.name;
+              const writer = issue.writer?.name;
               const milesStone = issue.milestone;
-              const profile = issue.writer.profile;
+              const profile = issue.writer?.profile;
 
               return (
                 <li key={issueNumber}>
