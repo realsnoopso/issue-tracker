@@ -23,6 +23,8 @@ export const IssuePage = () => {
   const [userList, setUserList] = useState([]);
   const [milestoneList, setMilestoneList] = useState([]);
 
+  const [issueCount, setIssueCounts] = useState({ open: 0, closed: 0 });
+
   const labelAndMileStoneCounts = { label: 3, milestone: 2 }; // 임시 데이터
 
   useEffect(() => {
@@ -44,6 +46,10 @@ export const IssuePage = () => {
       setLabelList(response.labelList);
       setUserList(response.userList);
       setMilestoneList(response.milestoneList);
+      setIssueCounts({
+        open: response.openIssueCount,
+        closed: response.closedIssueCount,
+      });
     })();
   }, [filters]);
 
@@ -65,7 +71,11 @@ export const IssuePage = () => {
           </div>
         </div>
         <div>
-          <IssueList issueData={issueData} userList={userList}></IssueList>
+          <IssueList
+            issueData={issueData}
+            userList={userList}
+            issueCount={issueCount}
+          ></IssueList>
         </div>
       </div>
     </filterContext.Provider>

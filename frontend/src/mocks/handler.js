@@ -74,6 +74,12 @@ export const handlers = [
       return filteredResult.filter((issue) => issue[key] === value);
     }, issueList);
 
+    const filteredByStatus = (list, status) =>
+      list.filter((issue) => issue.status === status);
+
+    const openIssueCount = filteredByStatus(issueList, 'open').length;
+    const closedIssueCount = filteredByStatus(issueList, 'close').length;
+
     const startCount = Number(page) * Number(maxPageNum);
     const endCount = (Number(page) + 1) * Number(maxPageNum);
 
@@ -81,8 +87,8 @@ export const handlers = [
 
     const responseData = {
       issueList: pagenationedIssueList,
-      openIssueCount: 4,
-      closedIssueCount: 5,
+      openIssueCount,
+      closedIssueCount,
       userList: members,
       labelList: labels,
       milestoneList: milestones,

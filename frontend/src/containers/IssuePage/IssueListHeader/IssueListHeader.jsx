@@ -7,15 +7,15 @@ import { PANEL_POSITION } from '@src/constants/dropdown';
 import { countIssueStatus } from '@src/utils/countIssueStatus';
 import { AssigneeFilter } from '@containers/index';
 
-export const IssueListHeader = ({ issueData, userList }) => {
+export const IssueListHeader = ({ issueData, userList, issueCount }) => {
   const cx = classNames.bind(styles);
 
   const openIconName = 'alertCircle';
   const closeIconName = 'archive';
   const dropdownWidth = '100px';
 
-  const openIssueNumber = countIssueStatus(issueData).open;
-  const closeIssueNumber = countIssueStatus(issueData).close;
+  const openIssueNumber = issueCount.open;
+  const closeIssueNumber = issueCount.closed;
 
   const [isLabelDropdownOpen, setLabelDropdownOpen] = useState(false);
   const labelHandleDropdown = (isOpen) => {
