@@ -7,7 +7,6 @@ import { tabDatas, initialFilter } from '@src/constants/issue';
 import { getIssueList } from '@services/issue';
 import { filterContext } from '@services/issue';
 import { IssueList } from '@containers/index';
-import { customFetch } from '@src/services/api';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -38,20 +37,9 @@ export const IssuePage = () => {
         ...filters,
       };
       const response = await getIssueList(queries);
-      console.log(response);
       setIssueData(response);
     })();
   }, [filters]);
-
-  // 담당자 리스트 받아오기 테스트
-  // const [assigneeData, setAssigneeData] = useState();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const data = await customFetch({ path: '/members', method: 'GET' });
-  //     setAssigneeData(data);
-  //   })();
-  // }, []);
 
   return (
     <filterContext.Provider value={[filters, setFilters]}>
