@@ -32,7 +32,7 @@ export const IssueElement = ({
           <div className="typo-title-medium">{title}</div>
           {label && (
             <InformationTag
-              text={label.description}
+              text={label.title}
               backgroundColor={label.backgroundColor}
               style={label.style}
             ></InformationTag>

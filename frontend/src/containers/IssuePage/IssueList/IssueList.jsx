@@ -2,7 +2,13 @@ import styles from './IssueList.module.css';
 import classNames from 'classnames/bind';
 import { IssueElement, IssueListHeader } from '@containers/index';
 
-export const IssueList = ({ issueData, userList, issueCount }) => {
+export const IssueList = ({
+  issueData,
+  userList,
+  milestoneList,
+  labelList,
+  issueCount,
+}) => {
   const cx = classNames.bind(styles);
 
   return (
@@ -12,7 +18,9 @@ export const IssueList = ({ issueData, userList, issueCount }) => {
           <IssueListHeader
             issueData={issueData}
             userList={userList}
+            milestoneList={milestoneList}
             issueCount={issueCount}
+            labelList={labelList}
           ></IssueListHeader>
         )}
       </div>
