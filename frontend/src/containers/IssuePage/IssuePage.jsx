@@ -44,14 +44,14 @@ export const IssuePage = () => {
   }, [filters]);
 
   // 담당자 리스트 받아오기 테스트
-  const [assigneeData, setAssigneeData] = useState();
+  // const [assigneeData, setAssigneeData] = useState();
 
-  useEffect(() => {
-    (async () => {
-      const data = await customFetch({ path: '/members', method: 'GET' });
-      setAssigneeData(data);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const data = await customFetch({ path: '/members', method: 'GET' });
+  //     setAssigneeData(data);
+  //   })();
+  // }, []);
 
   return (
     <filterContext.Provider value={[filters, setFilters]}>
@@ -71,10 +71,7 @@ export const IssuePage = () => {
           </div>
         </div>
         <div>
-          <IssueList
-            issueData={issueData}
-            assigneeData={assigneeData}
-          ></IssueList>
+          <IssueList issueData={issueData}></IssueList>
         </div>
       </div>
     </filterContext.Provider>

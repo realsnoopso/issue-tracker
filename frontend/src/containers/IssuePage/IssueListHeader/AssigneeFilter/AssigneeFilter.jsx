@@ -3,19 +3,28 @@ import { useEffect, useState, useContext } from 'react';
 import { PANEL_POSITION } from '@src/constants/dropdown';
 import { initialFilter } from '@src/constants/issue';
 import { filterContext } from '@src/services/issue';
+import { customFetch } from '@src/services/api';
 
-export const AssigneeFilter = ({ assigneeData }) => {
+export const AssigneeFilter = () => {
   const dropdownWidth = '100px';
   const [selected, setSelected] = useState('');
-
-  useEffect(() => {
-    console.log(selected);
-  }, [selected]);
 
   const [isAssigneeDropdownOpen, setAssigneeDropdownOpen] = useState(false);
   const assigneeHandleDropdown = (isOpen) => {
     return () => setAssigneeDropdownOpen(isOpen);
   };
+
+  const [assigneeData, setAssigneeData] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const assigneeData = await customFetch({
+        path: '/members',
+        method: 'GET',
+      });
+      setAssigneeData(assigneeData);
+    })();
+  }, []);
 
   const [filters, setFilters] = useContext(filterContext);
 
