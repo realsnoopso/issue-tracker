@@ -12,13 +12,9 @@ export const TextInput = ({
   placeholder = 'placehoder',
   style,
   icon,
+  value,
+  onChange,
 }) => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
   const cx = classNames.bind(styles);
 
   const textInputMode = size === 'l' ? cx('size-l') : cx('size-s');
@@ -43,8 +39,8 @@ export const TextInput = ({
         className={InputCLassName}
         type="text"
         id={id}
-        value={inputValue}
-        onChange={handleInputChange}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
       />
     </div>

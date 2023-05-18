@@ -12,6 +12,8 @@ export const tabDatas = Object.freeze([
 
 export const STATUS = { OPEN: 'open', CLOSE: 'close' };
 
+export const FILTER_DEFAULT_TEXT = 'is:issue is:open';
+
 export const initialFilter = Object.seal({
   status: 'open',
   page: 0,
