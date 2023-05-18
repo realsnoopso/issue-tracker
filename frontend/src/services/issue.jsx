@@ -1,6 +1,6 @@
 import { customFetch } from '@services/api';
 import { createContext } from 'react';
-import { removeEmptyKeyValues } from '@utils/index';
+import { removeEmptyKeyValues, deepCopy } from '@utils/index';
 
 export const filterContext = createContext();
 
@@ -46,4 +46,21 @@ export const convertFilterToString = (filters) => {
     })
     .join(', ');
   return stringfiedFilters;
+};
+
+export const updateCountsToTabInfo = (
+  labelAndMilestoneInfo,
+  labelLength,
+  milestoneLength
+) => {
+  const counts = {
+    label: labelLength,
+    milestone: milestoneLength,
+  };
+
+  const copiedInfo = deepCopy(labelAndMilestoneInfo);
+  copiedInfo.forEach((_, i) => {
+    copiedInfo[i].count = counts[copiedInfo[i].id];
+  });
+  return copiedInfo;
 };

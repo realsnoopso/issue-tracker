@@ -5,3 +5,7 @@ export const removeEmptyKeyValues = (object) => {
   });
   return object;
 };
+
+export const deepCopy = (value) => {
+  return JSON.parse(JSON.stringify(value));
+};

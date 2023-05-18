@@ -4,8 +4,11 @@ import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
 import classNames from 'classnames/bind';
 import { tabDatas, initialFilter } from '@src/constants/issue';
-import { getIssueList } from '@services/issue';
-import { filterContext } from '@services/issue';
+import {
+  getIssueList,
+  updateCountsToTabInfo,
+  filterContext,
+} from '@services/issue';
 import { IssueList } from '@containers/index';
 
 export const IssuePage = () => {
@@ -14,7 +17,6 @@ export const IssuePage = () => {
   const headerClassNames = `${cx('header')}`;
   const headerLeftClassNames = `${cx('left')}`;
   const headerRightClassNames = `${cx('right')}`;
-
   const CTAbtn = '이슈 작성';
 
   const [filters, setFilters] = useState(initialFilter);
@@ -22,19 +24,8 @@ export const IssuePage = () => {
   const [labelList, setLabelList] = useState([]);
   const [userList, setUserList] = useState([]);
   const [milestoneList, setMilestoneList] = useState([]);
-
+  const [labelAndMilestoneInfo, setLabelAndMilestoneInfo] = useState(tabDatas);
   const [issueCount, setIssueCounts] = useState({ open: 0, closed: 0 });
-
-  const labelAndMileStoneCounts = { label: 3, milestone: 2 }; // 임시 데이터
-
-  useEffect(() => {
-    const setTabCounts = () => {
-      tabDatas.forEach((_, i) => {
-        tabDatas[i].count = labelAndMileStoneCounts[tabDatas[i].id];
-      });
-    };
-    setTabCounts();
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -42,14 +33,30 @@ export const IssuePage = () => {
         ...filters,
       };
       const response = await getIssueList(queries);
-      setIssueData(response.issueList);
-      setLabelList(response.labelList);
-      setUserList(response.userList);
-      setMilestoneList(response.milestoneList);
+      const {
+        issueList,
+        labelList,
+        userList,
+        milestoneList,
+        openIssueCount,
+        closedIssueCount,
+      } = response;
+
+      setIssueData(issueList);
+      setLabelList(labelList);
+      setUserList(userList);
+      setMilestoneList(milestoneList);
       setIssueCounts({
-        open: response.openIssueCount,
-        closed: response.closedIssueCount,
+        open: openIssueCount,
+        closed: closedIssueCount,
       });
+      setLabelAndMilestoneInfo(
+        updateCountsToTabInfo(
+          labelAndMilestoneInfo,
+          labelList.length,
+          milestoneList.length
+        )
+      );
     })();
   }, [filters]);
 
@@ -61,7 +68,7 @@ export const IssuePage = () => {
             <Filterbar options={options}></Filterbar>
           </div>
           <div className={headerRightClassNames}>
-            <Tab buttonDatas={tabDatas}></Tab>
+            <Tab buttonDatas={labelAndMilestoneInfo}></Tab>
             <Button
               text={CTAbtn}
               btnSize="s"
