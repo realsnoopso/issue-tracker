@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { URL } from '@constants/api';
-import { issueList } from './data';
+import { issueList, members } from './data';
 import { removeEmptyKeyValues } from '@utils/index';
 
 export const handlers = [
@@ -78,5 +78,9 @@ export const handlers = [
     const pagenationedIssueList = filteredIssueList.slice(startCount, endCount);
 
     return res(ctx.status(200), ctx.json(pagenationedIssueList));
+  }),
+
+  rest.get(`http://dev.com/members`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(members));
   }),
 ];

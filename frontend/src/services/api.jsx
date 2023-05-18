@@ -16,13 +16,16 @@ export const customFetch = async ({
 
   if (hasAuth) headers.Authorization = `apikeys`;
 
-  removeEmptyKeyValues(queries);
-
-  const queryString =
-    '?' + new URLSearchParams(Object.entries(queries)).toString();
+  let url = URL + path;
+  if (queries) {
+    removeEmptyKeyValues(queries);
+    const queryString =
+      '?' + new URLSearchParams(Object.entries(queries)).toString();
+    url += queryString ?? '';
+  }
 
   try {
-    const data = await fetch(URL + path + queryString, {
+    const data = await fetch(url, {
       method,
       headers,
       body,

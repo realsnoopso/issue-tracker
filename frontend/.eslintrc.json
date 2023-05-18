@@ -11,8 +11,8 @@
   },
   "plugins": ["react"],
   "rules": {
-    "no-console": "warn",
+    "no-console": "off",
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "warn"
+    "react/prop-types": "off"
   }
 }
