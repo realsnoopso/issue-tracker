@@ -9,7 +9,7 @@ export const Profile = ({ url, size = '32', _onClick }) => {
   const width = size + 'px';
   const height = size + 'px';
   return (
-    <button onClick={_onClick} className={profileClassNames}>
+    <div onClick={_onClick} className={profileClassNames}>
       {url ? (
         <img src={url} width={width} height={height}></img>
       ) : (
@@ -18,6 +18,6 @@ export const Profile = ({ url, size = '32', _onClick }) => {
           height={height}
         ></UserDefaultImageComponent>
       )}
-    </button>
+    </div>
   );
 };
