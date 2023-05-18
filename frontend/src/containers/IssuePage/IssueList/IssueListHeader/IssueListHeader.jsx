@@ -3,7 +3,7 @@ import styles from './IssueListHeader.module.css';
 import classNames from 'classnames/bind';
 import { FilterElement } from './FilterElement/FilterElement';
 import { FILTER_KEYS, initialFilter } from '@constants/issue';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { filterContext } from '@src/services/issue';
 
 export const IssueListHeader = ({
@@ -74,6 +74,8 @@ export const IssueListHeader = ({
     },
   ];
 
+  const [activeTab, setActiveTab] = useState(statusTabDatas[0].text);
+
   return (
     <>
       <div className={cx(`header`)}>
@@ -85,12 +87,15 @@ export const IssueListHeader = ({
             buttonDatas={statusTabDatas}
             type="ghost"
             width="fit-content"
+            active={activeTab}
             _onClick={({ currentTarget }) => {
-              const filterValue = statusTabDatas.find(
+              const targetData = statusTabDatas.find(
                 (data) => currentTarget.id === data.text
-              ).filterValue;
-              console.log(filterValue);
+              );
+              const filterValue = targetData.filterValue;
+              const text = targetData.text;
               setFilters({ ...initialFilter, status: filterValue });
+              setActiveTab(text);
             }}
           ></Tab>
           <div className={cx(`issue-contents_column`)}>

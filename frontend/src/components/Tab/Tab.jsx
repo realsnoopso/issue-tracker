@@ -11,11 +11,26 @@ export const Tab = ({
 }) => {
   const cx = classNames.bind(styles);
   const tabClassNames = `${cx('tab')} ${type && cx(type)}`;
+  const isGhostType = type === 'ghost';
 
   const getBtnBgColor = (id, active) => {
     const isActive = id === active;
-    return isActive ? 'var(--color-light-neutral-background-bold)' : 'inherit';
+
+    if (isActive && !isGhostType) {
+      return 'var(--color-light-neutral-background-bold)';
+    }
+    return 'inherit';
   };
+
+  const getTextColor = (id, active) => {
+    const isActive = id === active;
+
+    if (isActive && isGhostType) {
+      return 'var(--color-light-neutral-text-strong)';
+    }
+    return null;
+  };
+
   const btnWidth = width;
 
   return (
@@ -24,7 +39,10 @@ export const Tab = ({
         const text = `${data.text}(${data.count ?? ''})`;
         return (
           <Button
-            style={{ backgroundColor: getBtnBgColor(data.text, active) }}
+            style={{
+              backgroundColor: getBtnBgColor(data.text, active),
+            }}
+            textColor={getTextColor(data.text, active)}
             key={data.text}
             text={text}
             width={btnWidth}
