@@ -12,14 +12,24 @@ export const tabDatas = Object.freeze([
 
 export const STATUS = { OPEN: 'open', CLOSE: 'close' };
 
+export const FILTER_KEYS = {
+  STATUS: 'status',
+  PAGE: 'page',
+  ASSIGNEE: 'assignee',
+  LABEL: 'label',
+  MILESTONE: 'milestone',
+  WRITER: 'writer',
+  COMMENT_BY: 'commentBy',
+};
+
 export const initialFilter = Object.seal({
-  status: 'open',
-  page: 0,
-  assignee: null,
-  label: null,
-  milestone: null,
-  writer: null,
-  commentBy: null,
+  [FILTER_KEYS.STATUS]: 'open',
+  [FILTER_KEYS.PAGE]: 0,
+  [FILTER_KEYS.ASSIGNEE]: null,
+  [FILTER_KEYS.LABEL]: null,
+  [FILTER_KEYS.MILESTONE]: null,
+  [FILTER_KEYS.WRITER]: null,
+  [FILTER_KEYS.COMMENT_BY]: null,
 });
 
 export const options = Object.freeze([
@@ -49,29 +59,6 @@ export const options = Object.freeze([
     filter: Object.freeze({ status: STATUS.CLOSE }),
   }),
 ]);
-
-export const assignees = [
-  {
-    id: 'sarang_daddy',
-    profile: 'https://avatars.githubusercontent.com/u/109648042?v=4',
-    name: '사랑대디',
-  },
-  {
-    id: 'lvalentine6',
-    profile: 'https://avatars.githubusercontent.com/u/77956808?v=4',
-    name: '로이',
-  },
-  {
-    id: 'new-pow',
-    profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
-    name: '이린',
-  },
-  {
-    id: 'realsnoopso',
-    profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
-    name: '스눕소',
-  },
-];
 
 export const labels = Object.freeze([
   Object.freeze({

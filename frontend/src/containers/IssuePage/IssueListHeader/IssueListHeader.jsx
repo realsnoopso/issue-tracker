@@ -1,38 +1,44 @@
-import { Filterbar, Tab, Icon, Dropdown } from '@components/index';
-import { assignees, labels, milestones, writers } from '@src/constants/issue';
+import { Icon } from '@components/index';
 import styles from './IssueListHeader.module.css';
 import classNames from 'classnames/bind';
-import { useState, useContext } from 'react';
-import { PANEL_POSITION } from '@src/constants/dropdown';
-import { countIssueStatus } from '@src/utils/countIssueStatus';
-import { AssigneeFilter } from '@containers/index';
+import { FilterElement } from './FilterElement/FilterElement';
+import { FILTER_KEYS } from '@constants/issue';
 
-export const IssueListHeader = ({ issueData, userList, issueCount }) => {
+export const IssueListHeader = ({
+  userList,
+  milestoneList,
+  issueCount,
+  labelList,
+}) => {
   const cx = classNames.bind(styles);
 
   const openIconName = 'alertCircle';
   const closeIconName = 'archive';
-  const dropdownWidth = '100px';
-
   const openIssueNumber = issueCount.open;
   const closeIssueNumber = issueCount.closed;
 
-  const [isLabelDropdownOpen, setLabelDropdownOpen] = useState(false);
-  const labelHandleDropdown = (isOpen) => {
-    return () => setLabelDropdownOpen(isOpen);
+  const convertListToOptions = (list, contentsKey) => {
+    return list.map((element) => {
+      const option = {};
+      if (element.profile) {
+        option.profile = element.profile;
+      }
+      option.contents = element[contentsKey];
+      option.index = element.index;
+      return option;
+    });
   };
 
-  const [isMilestoneDropdownOpen, setMilestoneDropdownOpen] = useState(false);
-  const mailstoneHandleDropdown = (isOpen) => {
-    return () => setMilestoneDropdownOpen(isOpen);
-  };
+  const userOptions = convertListToOptions(userList, 'name');
+  const labelOptions = convertListToOptions(labelList, 'title');
+  const milestoneOptions = convertListToOptions(milestoneList, 'title');
 
-  const [isWriterDropdownOpen, setWriterDropdownOpen] = useState(false);
-  const writerHandleDropdown = (isOpen) => {
-    return () => setWriterDropdownOpen(isOpen);
-  };
-
-  const [selected, setSelected] = useState('필터');
+  const filterInfos = [
+    { name: '담당자', key: FILTER_KEYS.ASSIGNEE, data: userOptions },
+    { name: '레이블', key: FILTER_KEYS.LABEL, data: labelOptions },
+    { name: '마일스톤', key: FILTER_KEYS.MILESTONE, data: milestoneOptions },
+    { name: '작성자', key: FILTER_KEYS.WRITER, data: userOptions },
+  ];
 
   return (
     <>
@@ -58,64 +64,14 @@ export const IssueListHeader = ({ issueData, userList, issueCount }) => {
             <div className={cx(`issue-tap`)}>닫힌 이슈({closeIssueNumber})</div>
           </div>
           <div className={cx(`issue-contents_column`)}>
-            <AssigneeFilter userList={userList}></AssigneeFilter>
-            <Dropdown
-              width={dropdownWidth}
-              isOpen={isLabelDropdownOpen}
-              btnText={'레이블'}
-              hasRadioBtn={true}
-              panelPosition={PANEL_POSITION.LEFT}
-              toggleOpen={labelHandleDropdown(!isLabelDropdownOpen)}
-              options={labels}
-              header={'레이블 필터'}
-              selected={selected}
-              optionOnClick={({ currentTarget }) => {
-                const newFilter = options.find(
-                  (option) => option.id === currentTarget.id
-                ).filter;
-
-                setFilters({ ...initialFilter, ...newFilter });
-                setSelected(currentTarget.innerText);
-              }}
-            ></Dropdown>
-            <Dropdown
-              width={dropdownWidth}
-              isOpen={isMilestoneDropdownOpen}
-              btnText={'마일스톤'}
-              hasRadioBtn={true}
-              panelPosition={PANEL_POSITION.LEFT}
-              toggleOpen={mailstoneHandleDropdown(!isMilestoneDropdownOpen)}
-              options={milestones}
-              header={'마일스톤 필터'}
-              selected={selected}
-              optionOnClick={({ currentTarget }) => {
-                const newFilter = options.find(
-                  (option) => option.id === currentTarget.id
-                ).filter;
-
-                setFilters({ ...initialFilter, ...newFilter });
-                setSelected(currentTarget.innerText);
-              }}
-            ></Dropdown>
-            <Dropdown
-              width={dropdownWidth}
-              isOpen={isWriterDropdownOpen}
-              btnText={'작성자'}
-              hasRadioBtn={true}
-              panelPosition={PANEL_POSITION.LEFT}
-              toggleOpen={writerHandleDropdown(!isWriterDropdownOpen)}
-              options={writers}
-              header={'작성자 필터'}
-              selected={selected}
-              optionOnClick={({ currentTarget }) => {
-                const newFilter = options.find(
-                  (option) => option.id === currentTarget.id
-                ).filter;
-
-                setFilters({ ...initialFilter, ...newFilter });
-                setSelected(currentTarget.innerText);
-              }}
-            ></Dropdown>
+            {filterInfos.map((info) => (
+              <FilterElement
+                key={info.name}
+                filterName={info.name}
+                filterKey={info.key}
+                options={info.data}
+              ></FilterElement>
+            ))}
           </div>
         </div>
       </div>

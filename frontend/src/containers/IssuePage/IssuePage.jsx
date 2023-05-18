@@ -81,6 +81,8 @@ export const IssuePage = () => {
           <IssueList
             issueData={issueData}
             userList={userList}
+            milestoneList={milestoneList}
+            labelList={labelList}
             issueCount={issueCount}
           ></IssueList>
         </div>

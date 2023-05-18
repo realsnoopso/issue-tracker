@@ -2,6 +2,7 @@ import { rest } from 'msw';
 import { URL } from '@constants/api';
 import { issueList, members, labels, milestones } from './data';
 import { removeEmptyKeyValues } from '@utils/index';
+import { FILTER_KEYS } from '@constants/issue';
 
 export const handlers = [
   rest.post('https://api.example.com/users', (req, res, ctx) => {
@@ -47,7 +48,7 @@ export const handlers = [
 
     const filteredIssueList = filterQueries.reduce((filteredResult, query) => {
       const [key, value] = query;
-      if (key === 'commentBy') {
+      if (key === FILTER_KEYS.COMMENT_BY) {
         return filteredResult
           .map((issue) => {
             const filteredComments = issue['comment'].filter(
@@ -62,10 +63,10 @@ export const handlers = [
       }
 
       if (
-        key === 'writer' ||
-        key === 'assignee' ||
-        key === 'label' ||
-        key === 'milestone'
+        key === FILTER_KEYS.WRITER ||
+        key === FILTER_KEYS.ASSIGNEE ||
+        key === FILTER_KEYS.LABEL ||
+        key === FILTER_KEYS.MILESTONE
       ) {
         return filteredResult.filter(
           (issue) => String(issue[key]?.index) === String(value)
