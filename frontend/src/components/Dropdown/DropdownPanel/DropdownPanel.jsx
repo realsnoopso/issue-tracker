@@ -44,7 +44,7 @@ export const DropdownPanel = ({
         {options.map((option, i) => (
           <DropdownElement
             type={TYPE.OPTION}
-            key={option.id}
+            key={option.index}
             id={option.index}
             profile={option.profile}
             name={option.name}

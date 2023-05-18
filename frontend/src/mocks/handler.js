@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { URL } from '@constants/api';
-import { issueList, members } from './data';
+import { issueList, members, labels, milestones } from './data';
 import { removeEmptyKeyValues } from '@utils/index';
 
 export const handlers = [
@@ -51,7 +51,7 @@ export const handlers = [
         return filteredResult
           .map((issue) => {
             const filteredComments = issue['comment'].filter(
-              (comment) => comment.writer.id === value
+              (comment) => comment.writer.index === value
             );
             if (filteredComments.length > 0) {
               return { ...issue, comment: filteredComments };
@@ -79,7 +79,16 @@ export const handlers = [
 
     const pagenationedIssueList = filteredIssueList.slice(startCount, endCount);
 
-    return res(ctx.status(200), ctx.json(pagenationedIssueList));
+    const responseData = {
+      issueList: pagenationedIssueList,
+      openIssueCount: 4,
+      closedIssueCount: 5,
+      userList: members,
+      labelList: labels,
+      milestoneList: milestones,
+    };
+
+    return res(ctx.status(200), ctx.json(responseData));
   }),
 
   rest.get(`http://dev.com/members`, (req, res, ctx) => {

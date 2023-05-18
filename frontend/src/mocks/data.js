@@ -90,7 +90,7 @@ export const issueList = [
     title: 'UI 개선',
     comment: [
       {
-        user4,
+        writer: user4,
         contents: 'UI 개선에 대한 의견입니다.',
       },
     ],
@@ -213,7 +213,7 @@ export const issueList = [
     title: '새로운 보고서 템플릿 추가',
     comment: [
       {
-        user4,
+        writer: user4,
         contents: '새로운 보고서 템플릿 추가에 대한 의견입니다.',
       },
     ],
@@ -327,5 +327,59 @@ export const members = [
     profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
     name: '이린',
     index: 4,
+  },
+];
+
+export const labels = [
+  {
+    index: 1,
+    title: '레이블',
+    backgroundColor: '#e74c3c',
+    style: 'solid',
+  },
+  {
+    index: 2,
+    title: '레이블입니다.',
+    backgroundColor: '#2ecc71',
+    style: 'outline',
+  },
+  {
+    index: 3,
+    title: '작소 화이팅',
+    backgroundColor: '#3498db',
+    style: 'solid',
+  },
+  {
+    index: 4,
+    title: '로눅스를 아십니까?',
+    backgroundColor: '#f39c12',
+    style: 'solid',
+  },
+];
+
+export const milestones = [
+  {
+    index: 1,
+    title: 'Sample Title 1',
+    endDate: '2023-06-20',
+    contents: 'Sample contents 1',
+    totalIssueNum: 10,
+    closedIssueNum: 5,
+  },
+  {
+    index: 2,
+    title: 'Sample Title 2',
+    endDate: '2023-07-22',
+    contents: 'Sample contents 2',
+    totalIssueNum: 8,
+    closedIssueNum: 3,
+  },
+  {
+    index: 3,
+    title: 'Sample Title 3',
+    endDate: '2023-09-25',
+    contents: 'Sample contents 3',
+    totalIssueNum: 15,
+    closedIssueNum: 12,
   },
 ];

@@ -5,7 +5,7 @@ import { initialFilter } from '@src/constants/issue';
 import { filterContext } from '@src/services/issue';
 import { customFetch } from '@src/services/api';
 
-export const AssigneeFilter = () => {
+export const AssigneeFilter = ({ userList }) => {
   const dropdownWidth = '100px';
   const [selected, setSelected] = useState('');
 
@@ -13,18 +13,21 @@ export const AssigneeFilter = () => {
   const assigneeHandleDropdown = (isOpen) => {
     return () => setAssigneeDropdownOpen(isOpen);
   };
-
-  const [assigneeData, setAssigneeData] = useState();
-
   useEffect(() => {
-    (async () => {
-      const assigneeData = await customFetch({
-        path: '/members',
-        method: 'GET',
-      });
-      setAssigneeData(assigneeData);
-    })();
-  }, []);
+    console.log('assigneeFilter', userList);
+  }, [userList]);
+
+  // const [assigneeData, setAssigneeData] = useState();
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const assigneeData = await customFetch({
+  //       path: '/members',
+  //       method: 'GET',
+  //     });
+  //     setAssigneeData(assigneeData);
+  //   })();
+  // }, []);
 
   const [filters, setFilters] = useContext(filterContext);
 
@@ -37,7 +40,7 @@ export const AssigneeFilter = () => {
         hasRadioBtn={true}
         panelPosition={PANEL_POSITION.LEFT}
         toggleOpen={assigneeHandleDropdown(!isAssigneeDropdownOpen)}
-        options={assigneeData}
+        options={userList}
         header={'담당자 필터'}
         selected={selected}
         optionOnClick={({ currentTarget }) => {

@@ -19,6 +19,9 @@ export const IssuePage = () => {
 
   const [filters, setFilters] = useState(initialFilter);
   const [issueData, setIssueData] = useState([]);
+  const [labelList, setLabelList] = useState([]);
+  const [userList, setUserList] = useState([]);
+  const [milestoneList, setMilestoneList] = useState([]);
 
   const labelAndMileStoneCounts = { label: 3, milestone: 2 }; // 임시 데이터
 
@@ -37,7 +40,10 @@ export const IssuePage = () => {
         ...filters,
       };
       const response = await getIssueList(queries);
-      setIssueData(response);
+      setIssueData(response.issueList);
+      setLabelList(response.labelList);
+      setUserList(response.userList);
+      setMilestoneList(response.milestoneList);
     })();
   }, [filters]);
 
@@ -59,7 +65,7 @@ export const IssuePage = () => {
           </div>
         </div>
         <div>
-          <IssueList issueData={issueData}></IssueList>
+          <IssueList issueData={issueData} userList={userList}></IssueList>
         </div>
       </div>
     </filterContext.Provider>
