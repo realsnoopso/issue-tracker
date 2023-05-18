@@ -353,3 +353,26 @@ export const issueList = [
     index: 7,
   },
 ];
+
+export const members = [
+  {
+    id: 'sarang_daddy',
+    profile: 'https://avatars.githubusercontent.com/u/109648042?v=4',
+    name: '사랑대디',
+  },
+  {
+    id: 'lvalentine6',
+    profile: 'https://avatars.githubusercontent.com/u/77956808?v=4',
+    name: '로이',
+  },
+  {
+    id: 'new-pow',
+    profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
+    name: '이린',
+  },
+  {
+    id: 'realsnoopso',
+    profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
+    name: '스눕소',
+  },
+];

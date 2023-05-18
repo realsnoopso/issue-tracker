@@ -77,7 +77,6 @@ export const labels = Object.freeze([
   Object.freeze({
     id: '1',
     contents: 'documentation',
-    filter: Object.freeze({ status: STATUS.OPEN }),
   }),
   Object.freeze({
     id: '2',
