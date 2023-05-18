@@ -22,7 +22,11 @@ export const Filterbar = ({ options }) => {
   });
 
   const [filters, setFilters] = useContext(filterContext);
-  const [selectdFilter, setSelectedFilter] = useState({});
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = useState('필터');
@@ -47,7 +51,6 @@ export const Filterbar = ({ options }) => {
           const newFilter = options.find(
             (option) => option.id === currentTarget.id
           ).filter;
-
           setFilters({ ...initialFilter, ...newFilter });
           setSelected(currentTarget.innerText);
         }}
@@ -56,6 +59,8 @@ export const Filterbar = ({ options }) => {
         placeholder={placeholder}
         icon="search"
         style={textinputStyle}
+        value={inputValue}
+        _onChange={handleInputChange}
       ></TextInput>
     </div>
   );
