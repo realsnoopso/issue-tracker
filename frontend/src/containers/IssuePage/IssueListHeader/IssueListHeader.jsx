@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { useState, useContext } from 'react';
 import { PANEL_POSITION } from '@src/constants/dropdown';
 import { countIssueStatus } from '@src/utils/countIssueStatus';
+import { AssigneeFilter } from '@containers/index';
 
 export const IssueListHeader = ({ issueData }) => {
   const cx = classNames.bind(styles);
@@ -15,11 +16,6 @@ export const IssueListHeader = ({ issueData }) => {
 
   const openIssueNumber = countIssueStatus(issueData).open;
   const closeIssueNumber = countIssueStatus(issueData).close;
-
-  const [isAssigneeDropdownOpen, setAssigneeDropdownOpen] = useState(false);
-  const assigneeHandleDropdown = (isOpen) => {
-    return () => setAssigneeDropdownOpen(isOpen);
-  };
 
   const [isLabelDropdownOpen, setLabelDropdownOpen] = useState(false);
   const labelHandleDropdown = (isOpen) => {
@@ -62,25 +58,7 @@ export const IssueListHeader = ({ issueData }) => {
             <div className={cx(`issue-tap`)}>닫힌 이슈({closeIssueNumber})</div>
           </div>
           <div className={cx(`issue-contents_column`)}>
-            <Dropdown
-              width={dropdownWidth}
-              isOpen={isAssigneeDropdownOpen}
-              btnText={'담당자'}
-              hasRadioBtn={true}
-              panelPosition={PANEL_POSITION.LEFT}
-              toggleOpen={assigneeHandleDropdown(!isAssigneeDropdownOpen)}
-              options={assignees}
-              header={'담당자 필터'}
-              selected={selected}
-              optionOnClick={({ currentTarget }) => {
-                const newFilter = options.find(
-                  (option) => option.id === currentTarget.id
-                ).filter;
-
-                setFilters({ ...initialFilter, ...newFilter });
-                setSelected(currentTarget.innerText);
-              }}
-            ></Dropdown>
+            <AssigneeFilter></AssigneeFilter>
             <Dropdown
               width={dropdownWidth}
               isOpen={isLabelDropdownOpen}
