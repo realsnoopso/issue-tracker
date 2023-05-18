@@ -14,9 +14,9 @@ const user3 = {
   index: 3,
 };
 const user4 = {
-  id: 'realsnoopso',
-  profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
-  name: '스눕소',
+  id: 'new-pow',
+  profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
+  name: '이린',
   index: 4,
 };
 
@@ -26,25 +26,16 @@ export const issueList = [
     title: '새 기능 추가',
     comment: [
       {
-        writer: {
-          ...MY_USER_DATA,
-        },
+        writer: user1,
         contents: '새 기능 추가에 대한 의견입니다.',
       },
       {
-        writer: {
-          index: 2,
-          id: 'jane',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'Jane Doe',
-        },
+        writer: user2,
         contents: '새 기능 추가에 대한 또 다른 의견입니다.',
       },
     ],
-    writer: {
-      ...MY_USER_DATA,
-    },
-    assignee: null,
+    writer: user1,
+    assignee: user1,
     label: {
       index: 1,
       title: 'UI',
@@ -68,21 +59,14 @@ export const issueList = [
     title: '버그 수정',
     comment: [
       {
-        writer: {
-          index: 3,
-          id: '3',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'Peter Smith',
-        },
+        writer: user3,
         contents: '버그 수정에 대한 의견입니다.',
       },
     ],
-    writer: {
-      ...MY_USER_DATA,
-    },
-    assignee: {
-      ...MY_USER_DATA,
-    },
+    writer: user1,
+
+    assignee: user1,
+
     label: {
       index: 2,
       title: 'UI',
@@ -107,22 +91,12 @@ export const issueList = [
     title: 'UI 개선',
     comment: [
       {
-        writer: {
-          index: 4,
-          id: '4',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'Mary Jones',
-        },
+        user4,
         contents: 'UI 개선에 대한 의견입니다.',
       },
     ],
-    writer: {
-      index: 3,
-      id: '3',
-      profile: 'https://assets.themiilk.com/test/test-profile1.png',
-      name: 'Peter Smith',
-    },
-    assignee: null,
+    writer: user3,
+    assignee: user3,
     label: {
       index: 3,
       title: 'UI',
@@ -147,22 +121,12 @@ export const issueList = [
     title: '새로운 사용자 지정 필드 추가',
     comment: [
       {
-        writer: {
-          index: 5,
-          id: '5',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'David Jones',
-        },
+        writer: user4,
         contents: '새로운 사용자 지정 필드 추가에 대한 의견입니다.',
       },
     ],
-    writer: {
-      index: 4,
-      id: '4',
-      profile: 'https://assets.themiilk.com/test/test-profile1.png',
-      name: 'Mary Jones',
-    },
-    assignee: null,
+    writer: user4,
+    assignee: user4,
     label: {
       index: 4,
       title: 'UI',
@@ -188,22 +152,12 @@ export const issueList = [
     title: '새로운 사용자 지정 필드 추가',
     comment: [
       {
-        writer: {
-          index: 5,
-          id: '5',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'David Jones',
-        },
+        writer: user2,
         contents: '새로운 사용자 지정 필드 추가에 대한 의견입니다.',
       },
     ],
-    writer: {
-      index: 5,
-      id: '4',
-      profile: 'https://assets.themiilk.com/test/test-profile1.png',
-      name: 'Mary Jones',
-    },
-    assignee: null,
+    writer: user3,
+    assignee: user3,
     label: {
       index: 5,
       title: 'UI',
@@ -229,22 +183,12 @@ export const issueList = [
     title: '검색 기능 개선',
     comment: [
       {
-        writer: {
-          index: 6,
-          id: '6',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'Sarah Smith',
-        },
+        writer: user2,
         contents: '검색 기능 개선에 대한 의견입니다.',
       },
     ],
-    writer: {
-      index: 5,
-      id: '5',
-      profile: 'https://assets.themiilk.com/test/test-profile1.png',
-      name: 'David Jones',
-    },
-    assignee: null,
+    writer: user3,
+    assignee: user3,
     label: {
       index: 5,
       title: 'UI',
@@ -270,22 +214,12 @@ export const issueList = [
     title: '새로운 보고서 템플릿 추가',
     comment: [
       {
-        writer: {
-          index: 7,
-          id: '7',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'Michael Anderson',
-        },
+        user4,
         contents: '새로운 보고서 템플릿 추가에 대한 의견입니다.',
       },
     ],
-    writer: {
-      index: 6,
-      id: '6',
-      profile: 'https://assets.themiilk.com/test/test-profile1.png',
-      name: 'Sarah Smith',
-    },
-    assignee: null,
+    writer: user2,
+    assignee: user2,
     label: {
       index: 6,
       title: 'UI',
@@ -311,22 +245,12 @@ export const issueList = [
     title: '새로운 기능에 대한 사용자 테스트 추가',
     comment: [
       {
-        writer: {
-          index: 8,
-          id: '8',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'John Doe',
-        },
+        writer: user3,
         contents: '새로운 기능에 대한 사용자 테스트에 대한 의견입니다.',
       },
     ],
-    writer: {
-      index: 7,
-      id: '7',
-      profile: 'https://assets.themiilk.com/test/test-profile1.png',
-      name: 'Michael Anderson',
-    },
-    assignee: null,
+    writer: user1,
+    assignee: user1,
     label: {
       index: 7,
       title: 'UI',
@@ -352,21 +276,12 @@ export const issueList = [
     title: '새로운 기능에 대한 성능 테스트 추가',
     comment: [
       {
-        writer: {
-          index: 9,
-          id: '9',
-          profile: 'https://assets.themiilk.com/test/test-profile1.png',
-          name: 'Jane Doe',
-        },
+        writer: user1,
         contents: '새로운 기능에 대한 성능 테스트에 대한 의견입니다.',
       },
     ],
-    writer: {
-      index: 8,
-      profile: 'https://assets.themiilk.com/test/test-profile1.png',
-      name: 'John Doe',
-    },
-    assignee: null,
+    writer: user4,
+    assignee: user4,
     label: {
       index: 9,
       title: 'UI',
@@ -394,24 +309,24 @@ export const members = [
     id: 'sarang_daddy',
     profile: 'https://avatars.githubusercontent.com/u/109648042?v=4',
     name: '사랑대디',
-    index: 1,
+    index: 2,
   },
   {
     id: 'lvalentine6',
     profile: 'https://avatars.githubusercontent.com/u/77956808?v=4',
     name: '로이',
-    index: 2,
+    index: 3,
   },
   {
     id: 'new-pow',
     profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
     name: '이린',
-    index: 3,
+    index: 4,
   },
   {
     id: 'realsnoopso',
     profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
     name: '스눕소',
-    index: 4,
+    index: 1,
   },
 ];
