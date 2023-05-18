@@ -24,27 +24,27 @@ export const initialFilter = Object.seal({
 
 export const options = Object.freeze([
   Object.freeze({
-    id: 'open',
+    index: 0,
     contents: '열린 이슈',
     filter: Object.freeze({ status: STATUS.OPEN }),
   }),
   Object.freeze({
-    id: 'mine',
+    index: 1,
     contents: '내가 작성한 이슈',
     filter: Object.freeze({ writer: MY_USER_DATA.id }),
   }),
   Object.freeze({
-    id: 'assigned',
+    index: 2,
     contents: '나에게 할당된 이슈',
     filter: Object.freeze({ assignee: MY_USER_DATA.id }),
   }),
   Object.freeze({
-    id: 'commentBy',
+    index: 3,
     contents: '내가 댓글을 남긴 이슈',
     filter: Object.freeze({ commentBy: MY_USER_DATA.id }),
   }),
   Object.freeze({
-    id: 'close',
+    index: 4,
     contents: '닫힌 이슈',
     filter: Object.freeze({ status: STATUS.CLOSE }),
   }),

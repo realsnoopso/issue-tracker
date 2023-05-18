@@ -1,5 +1,6 @@
 import { customFetch } from '@services/api';
 import { createContext } from 'react';
+import { removeEmptyKeyValues } from '@utils/index';
 
 export const filterContext = createContext();
 
@@ -33,4 +34,16 @@ export const getIssueList = async ({
     console.error(error);
     throw error;
   }
+};
+
+export const convertFilterToString = (filters) => {
+  const copiedFilters = { ...filters };
+  removeEmptyKeyValues(copiedFilters);
+  const stringfiedFilters = Object.entries(copiedFilters)
+    .map((filter) => {
+      const [key, value] = filter;
+      return `${key}:${value}`;
+    })
+    .join(', ');
+  return stringfiedFilters;
 };
