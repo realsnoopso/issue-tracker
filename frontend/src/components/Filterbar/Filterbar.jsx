@@ -2,7 +2,7 @@ import { PANEL_POSITION } from '@src/constants/dropdown';
 import { Dropdown } from '../Dropdown/Dropdown';
 import styles from './Filterbar.module.css';
 import classNames from 'classnames/bind';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { TextInput } from '../TextInput/TextInput';
 import { filterContext, convertFilterToString } from '@services/issue';
 import { initialFilter } from '@src/constants/issue';
@@ -24,6 +24,11 @@ export const Filterbar = ({ options }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = useState(String(0));
 
+  useEffect(() => {
+    const stringfiedFilter = convertFilterToString(filters);
+    setInputValue(stringfiedFilter);
+  }, [filters]);
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -35,7 +40,6 @@ export const Filterbar = ({ options }) => {
     ).filter;
     const newFilters = { ...initialFilter, ...selectedFilter };
     setFilters(newFilters);
-    setInputValue(convertFilterToString(newFilters));
     setSelected(selectedIndex);
   };
 
