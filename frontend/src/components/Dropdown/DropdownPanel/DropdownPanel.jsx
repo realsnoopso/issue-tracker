@@ -20,7 +20,7 @@ export const DropdownPanel = ({
   const containerClassNames = `${cx('container')}`;
   const containerInlineStyle = {
     width: `${CONTAINER_WIDTH}px`,
-    top: `${btnCoordinate.top + btnCoordinate.height}px`,
+    top: `${btnCoordinate.top + btnCoordinate.height + 4}px`,
     left: `${
       panelPosition === PANEL_POSITION.RIGHT
         ? btnCoordinate.right - CONTAINER_WIDTH
