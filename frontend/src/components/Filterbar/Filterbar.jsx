@@ -26,7 +26,8 @@ export const Filterbar = ({ options }) => {
   const initaialSelectedIndex = String(0);
   const [selected, setSelected] = useState(initaialSelectedIndex);
   const [filters, setFilters] = useContext(filterContext);
-  const [inputValue, setInputValue] = useState('status:open');
+  const initialInputValue = 'status:open';
+  const [inputValue, setInputValue] = useState(initialInputValue);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -50,6 +51,15 @@ export const Filterbar = ({ options }) => {
     setSelected(selectedIndex);
   };
 
+  const handleInputOnKeyDown = ({ key, currentTarget }) => {
+    if (key === 'Enter') {
+      const isInputEmpty = currentTarget.value === '';
+      if (isInputEmpty) {
+        setFilters({ ...initialFilter });
+      }
+    }
+  };
+
   const handleDropdown = (isOpen) => {
     return () => setDropdownOpen(isOpen);
   };
@@ -70,8 +80,10 @@ export const Filterbar = ({ options }) => {
       ></Dropdown>
       <TextInput
         icon="search"
+        placeholder={initialInputValue}
         style={textinputStyle}
         value={inputValue}
+        _onKeyDown={handleInputOnKeyDown}
         _onChange={handleInputChange}
       ></TextInput>
     </div>

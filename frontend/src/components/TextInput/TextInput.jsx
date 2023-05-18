@@ -14,13 +14,8 @@ export const TextInput = ({
   icon,
   value,
   _onChange,
+  _onKeyDown,
 }) => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
   const cx = classNames.bind(styles);
 
   const textInputMode = size === 'l' ? cx('size-l') : cx('size-s');
@@ -47,6 +42,7 @@ export const TextInput = ({
         id={id}
         value={value}
         onChange={_onChange}
+        onKeyDown={_onKeyDown}
         placeholder={placeholder}
       />
     </div>
