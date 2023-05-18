@@ -60,12 +60,38 @@ export const IssuePage = () => {
     })();
   }, [filters]);
 
+  const isFilterApplied =
+    JSON.stringify(filters) !== JSON.stringify(initialFilter);
+
+  const handleFilterClearBtnClick = () => setFilters(initialFilter);
+
+  const filterClearButtonInfo = {
+    iconName: 'xSquare',
+    type: 'ghost',
+    text: '현재의 검색 필터 및 정렬 지우기',
+    width: 'fit-content',
+    btnSize: 's',
+    style: { padding: 0, marginTop: '24px', height: '32px' },
+    _onClick: handleFilterClearBtnClick,
+  };
+
   return (
     <filterContext.Provider value={[filters, setFilters]}>
       <div className={issuePageClassNames}>
         <div className={headerClassNames}>
           <div className={headerLeftClassNames}>
             <Filterbar options={options}></Filterbar>
+            {isFilterApplied && (
+              <Button
+                iconName={filterClearButtonInfo.iconName}
+                type={filterClearButtonInfo.type}
+                text={filterClearButtonInfo.text}
+                width={filterClearButtonInfo.width}
+                btnSize={filterClearButtonInfo.btnSize}
+                style={filterClearButtonInfo.style}
+                _onClick={filterClearButtonInfo._onClick}
+              />
+            )}
           </div>
           <div className={headerRightClassNames}>
             <Tab buttonDatas={labelAndMilestoneInfo}></Tab>
