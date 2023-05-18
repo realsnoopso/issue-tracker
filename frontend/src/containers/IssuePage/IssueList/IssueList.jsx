@@ -2,13 +2,18 @@ import styles from './IssueList.module.css';
 import classNames from 'classnames/bind';
 import { IssueElement, IssueListHeader } from '@containers/index';
 
-export const IssueList = ({ issueData }) => {
+export const IssueList = ({ issueData, userList }) => {
   const cx = classNames.bind(styles);
 
   return (
     <>
       <div>
-        {issueData && <IssueListHeader issueData={issueData}></IssueListHeader>}
+        {issueData && (
+          <IssueListHeader
+            issueData={issueData}
+            userList={userList}
+          ></IssueListHeader>
+        )}
       </div>
       <div>
         <ul>

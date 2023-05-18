@@ -7,7 +7,7 @@ import { PANEL_POSITION } from '@src/constants/dropdown';
 import { countIssueStatus } from '@src/utils/countIssueStatus';
 import { AssigneeFilter } from '@containers/index';
 
-export const IssueListHeader = ({ issueData }) => {
+export const IssueListHeader = ({ issueData, userList }) => {
   const cx = classNames.bind(styles);
 
   const openIconName = 'alertCircle';
@@ -58,7 +58,7 @@ export const IssueListHeader = ({ issueData }) => {
             <div className={cx(`issue-tap`)}>닫힌 이슈({closeIssueNumber})</div>
           </div>
           <div className={cx(`issue-contents_column`)}>
-            <AssigneeFilter></AssigneeFilter>
+            <AssigneeFilter userList={userList}></AssigneeFilter>
             <Dropdown
               width={dropdownWidth}
               isOpen={isLabelDropdownOpen}
