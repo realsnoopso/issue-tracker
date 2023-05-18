@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { options } from '@constants/issue';
 import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
 import classNames from 'classnames/bind';
-import { tabDatas, initialFilter } from '@src/constants/issue';
+import { tabDatas, initialFilter, options } from '@constants/issue';
 import {
   getIssueList,
   updateCountsToTabInfo,
   filterContext,
 } from '@services/issue';
 import { IssueList } from '@containers/index';
+import { isFilterApplied } from '@services/issue';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -60,9 +60,6 @@ export const IssuePage = () => {
     })();
   }, [filters]);
 
-  const isFilterApplied =
-    JSON.stringify(filters) !== JSON.stringify(initialFilter);
-
   const handleFilterClearBtnClick = () => setFilters(initialFilter);
 
   const filterClearButtonInfo = {
@@ -81,7 +78,7 @@ export const IssuePage = () => {
         <div className={headerClassNames}>
           <div className={headerLeftClassNames}>
             <Filterbar options={options}></Filterbar>
-            {isFilterApplied && (
+            {isFilterApplied(filters, initialFilter) && (
               <Button
                 iconName={filterClearButtonInfo.iconName}
                 type={filterClearButtonInfo.type}
@@ -110,6 +107,7 @@ export const IssuePage = () => {
             milestoneList={milestoneList}
             labelList={labelList}
             issueCount={issueCount}
+            filters={filters}
           ></IssueList>
         </div>
       </div>

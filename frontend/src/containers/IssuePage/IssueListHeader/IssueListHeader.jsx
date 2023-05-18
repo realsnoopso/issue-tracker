@@ -9,6 +9,7 @@ export const IssueListHeader = ({
   milestoneList,
   issueCount,
   labelList,
+  filters,
 }) => {
   const cx = classNames.bind(styles);
 
@@ -34,10 +35,30 @@ export const IssueListHeader = ({
   const milestoneOptions = convertListToOptions(milestoneList, 'title');
 
   const filterInfos = [
-    { name: '담당자', key: FILTER_KEYS.ASSIGNEE, data: userOptions },
-    { name: '레이블', key: FILTER_KEYS.LABEL, data: labelOptions },
-    { name: '마일스톤', key: FILTER_KEYS.MILESTONE, data: milestoneOptions },
-    { name: '작성자', key: FILTER_KEYS.WRITER, data: userOptions },
+    {
+      name: '담당자',
+      key: FILTER_KEYS.ASSIGNEE,
+      data: userOptions,
+      selectedOption: filters[FILTER_KEYS.ASSIGNEE],
+    },
+    {
+      name: '레이블',
+      key: FILTER_KEYS.LABEL,
+      data: labelOptions,
+      selectedOption: filters[FILTER_KEYS.LABEL],
+    },
+    {
+      name: '마일스톤',
+      key: FILTER_KEYS.MILESTONE,
+      data: milestoneOptions,
+      selectedOption: filters[FILTER_KEYS.MILESTONE],
+    },
+    {
+      name: '작성자',
+      key: FILTER_KEYS.WRITER,
+      data: userOptions,
+      selectedOption: filters[FILTER_KEYS.WRITER],
+    },
   ];
 
   return (
@@ -70,6 +91,7 @@ export const IssueListHeader = ({
                 filterName={info.name}
                 filterKey={info.key}
                 options={info.data}
+                selectedOption={info.selectedOption}
               ></FilterElement>
             ))}
           </div>

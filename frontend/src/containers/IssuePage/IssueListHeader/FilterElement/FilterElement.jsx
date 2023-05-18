@@ -1,9 +1,14 @@
 import { Dropdown } from '@components/index';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { PANEL_POSITION } from '@src/constants/dropdown';
 import { filterContext } from '@src/services/issue';
 
-export const FilterElement = ({ filterName, filterKey, options }) => {
+export const FilterElement = ({
+  filterName,
+  filterKey,
+  options,
+  selectedOption,
+}) => {
   const dropdownWidth = '100px';
   const [selected, setSelected] = useState('');
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -12,6 +17,10 @@ export const FilterElement = ({ filterName, filterKey, options }) => {
   };
   const header = `${filterName} 필터`;
   const [filters, setFilters] = useContext(filterContext);
+
+  useEffect(() => {
+    setSelected(selectedOption);
+  }, [selectedOption]);
 
   const optionOnClick = ({ currentTarget }) => {
     const index = currentTarget.id;
