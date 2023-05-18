@@ -28,7 +28,9 @@ export const DropdownPanel = ({
     }px`,
   };
 
-  const isSelected = (selected, contents) => selected === contents;
+  const isSelected = (selected, contents) => {
+    return Number(selected) === Number(contents);
+  };
 
   const handleOption = (e) => {
     optionOnClick(e);
@@ -43,11 +45,11 @@ export const DropdownPanel = ({
           <DropdownElement
             type={TYPE.OPTION}
             key={option.id}
-            id={option.id}
+            id={option.index}
             profile={option.profile}
             name={option.name}
             contents={option.contents}
-            isSelected={isSelected(selected, option.contents)}
+            isSelected={isSelected(selected, option.index)}
             hasRadioBtn={hasRadioBtn}
             _onClick={handleOption}
             toggleOpen={toggleOpen}

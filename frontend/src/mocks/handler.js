@@ -67,7 +67,9 @@ export const handlers = [
         key === 'label' ||
         key === 'milestone'
       ) {
-        return filteredResult.filter((issue) => issue[key]?.id === value);
+        return filteredResult.filter(
+          (issue) => String(issue[key]?.index) === String(value)
+        );
       }
       return filteredResult.filter((issue) => issue[key] === value);
     }, issueList);
