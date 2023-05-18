@@ -1,5 +1,5 @@
 .dropdown-panel {
-  position: fixed;
+  position: absolute;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -7,7 +7,7 @@
 }
 
 .container {
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   background-color: var(--color-light-neutral-background-strong);
