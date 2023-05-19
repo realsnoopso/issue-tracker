@@ -1,7 +1,7 @@
 import { Icon, Tab } from '@components/index';
 import styles from './IssueListHeader.module.css';
 import classNames from 'classnames/bind';
-import { FilterElement } from './FilterElement/FilterElement';
+import { FilterElement } from './IssueElement/FilterElement/FilterElement';
 import { FILTER_KEYS, initialFilter } from '@constants/issue';
 import { useContext, useEffect, useState } from 'react';
 import { filterContext } from '@src/services/issue';
