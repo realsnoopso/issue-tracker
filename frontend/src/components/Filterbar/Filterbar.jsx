@@ -1,11 +1,15 @@
-import { PANEL_POSITION } from '@src/constants/dropdown';
+import { PANEL_POSITION } from '@constants/dropdown';
 import { Dropdown } from '../Dropdown/Dropdown';
 import styles from './Filterbar.module.css';
 import classNames from 'classnames/bind';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { TextInput } from '../TextInput/TextInput';
-import { filterContext, convertFilterToString } from '@services/issue';
-import { initialFilter } from '@src/constants/issue';
+import {
+  filterContext,
+  convertFilterToString,
+  isFilterApplied,
+} from '@services/issue';
+import { initialFilter } from '@constants/issue';
 
 export const Filterbar = ({ options }) => {
   const cx = classNames.bind(styles);
@@ -19,10 +23,18 @@ export const Filterbar = ({ options }) => {
     width: '472px',
   });
 
+  const initaialSelectedIndex = String(0);
+  const [selected, setSelected] = useState(initaialSelectedIndex);
   const [filters, setFilters] = useContext(filterContext);
   const [inputValue, setInputValue] = useState('status:open');
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [selected, setSelected] = useState(String(0));
+
+  useEffect(() => {
+    const stringfiedFilter = convertFilterToString(filters);
+    setInputValue(stringfiedFilter);
+    isFilterApplied(filters, initialFilter) &&
+      setSelected(initaialSelectedIndex);
+  }, [filters]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -35,7 +47,6 @@ export const Filterbar = ({ options }) => {
     ).filter;
     const newFilters = { ...initialFilter, ...selectedFilter };
     setFilters(newFilters);
-    setInputValue(convertFilterToString(newFilters));
     setSelected(selectedIndex);
   };
 

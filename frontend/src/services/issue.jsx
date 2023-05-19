@@ -64,3 +64,6 @@ export const updateCountsToTabInfo = (
   });
   return copiedInfo;
 };
+
+export const isFilterApplied = (filters, initialFilter) =>
+  JSON.stringify(filters) !== JSON.stringify(initialFilter);

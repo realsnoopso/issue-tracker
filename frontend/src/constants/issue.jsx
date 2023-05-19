@@ -41,17 +41,17 @@ export const options = Object.freeze([
   Object.freeze({
     index: 1,
     contents: '내가 작성한 이슈',
-    filter: Object.freeze({ writer: MY_USER_DATA.id }),
+    filter: Object.freeze({ writer: MY_USER_DATA.index }),
   }),
   Object.freeze({
     index: 2,
     contents: '나에게 할당된 이슈',
-    filter: Object.freeze({ assignee: MY_USER_DATA.id }),
+    filter: Object.freeze({ assignee: MY_USER_DATA.index }),
   }),
   Object.freeze({
     index: 3,
     contents: '내가 댓글을 남긴 이슈',
-    filter: Object.freeze({ commentBy: MY_USER_DATA.id }),
+    filter: Object.freeze({ commentBy: MY_USER_DATA.index }),
   }),
   Object.freeze({
     index: 4,
@@ -89,9 +89,7 @@ export const writers = Object.freeze([
     name: '이린',
   },
   {
-    id: 'realsnoopso',
-    profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
-    name: '스눕소',
+    ...MY_USER_DATA,
   },
 ]);
 

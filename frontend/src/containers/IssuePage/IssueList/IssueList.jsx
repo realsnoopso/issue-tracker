@@ -8,6 +8,7 @@ export const IssueList = ({
   milestoneList,
   labelList,
   issueCount,
+  filters,
 }) => {
   const cx = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ export const IssueList = ({
             milestoneList={milestoneList}
             issueCount={issueCount}
             labelList={labelList}
+            filters={filters}
           ></IssueListHeader>
         )}
       </div>

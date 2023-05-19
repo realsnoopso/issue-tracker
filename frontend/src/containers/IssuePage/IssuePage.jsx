@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { options } from '@constants/issue';
 import { Button, Filterbar, Tab } from '@src/components';
 import styles from './IssuePage.module.css';
 import classNames from 'classnames/bind';
-import { tabDatas, initialFilter } from '@src/constants/issue';
+import { tabDatas, initialFilter, options } from '@constants/issue';
 import {
   getIssueList,
   updateCountsToTabInfo,
   filterContext,
 } from '@services/issue';
 import { IssueList } from '@containers/index';
+import { isFilterApplied } from '@services/issue';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -60,12 +60,35 @@ export const IssuePage = () => {
     })();
   }, [filters]);
 
+  const handleFilterClearBtnClick = () => setFilters(initialFilter);
+
+  const filterClearButtonInfo = {
+    iconName: 'xSquare',
+    type: 'ghost',
+    text: '현재의 검색 필터 및 정렬 지우기',
+    width: 'fit-content',
+    btnSize: 's',
+    style: { padding: 0, marginTop: '24px', height: '32px' },
+    _onClick: handleFilterClearBtnClick,
+  };
+
   return (
     <filterContext.Provider value={[filters, setFilters]}>
       <div className={issuePageClassNames}>
         <div className={headerClassNames}>
           <div className={headerLeftClassNames}>
             <Filterbar options={options}></Filterbar>
+            {isFilterApplied(filters, initialFilter) && (
+              <Button
+                iconName={filterClearButtonInfo.iconName}
+                type={filterClearButtonInfo.type}
+                text={filterClearButtonInfo.text}
+                width={filterClearButtonInfo.width}
+                btnSize={filterClearButtonInfo.btnSize}
+                style={filterClearButtonInfo.style}
+                _onClick={filterClearButtonInfo._onClick}
+              />
+            )}
           </div>
           <div className={headerRightClassNames}>
             <Tab buttonDatas={labelAndMilestoneInfo}></Tab>
@@ -84,6 +107,7 @@ export const IssuePage = () => {
             milestoneList={milestoneList}
             labelList={labelList}
             issueCount={issueCount}
+            filters={filters}
           ></IssueList>
         </div>
       </div>
