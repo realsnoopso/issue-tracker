@@ -4,7 +4,10 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
@@ -14,18 +17,24 @@ public class Member {
 
     @Id
     private Long memberIdx;
+
+    @NotNull
     private String id;
+
+    @NotNull
     private String password;
+
     private String profileImageUrl;
+
     @Column("github_join")
-    private boolean gitSync;
+    private Boolean githubState;
 
     @PersistenceCreator
-    private Member(String id, String password, String profileImageUrl, boolean gitSync) {
+    private Member(String id, String password, String profileImageUrl, Boolean githubState) {
         this.id = id;
         this.password = password;
         this.profileImageUrl = profileImageUrl;
-        this.gitSync = gitSync;
+        this.githubState = githubState;
     }
 
     public static Member newMember(String id, String password, String profileImageUrl) {
