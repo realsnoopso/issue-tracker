@@ -33,7 +33,8 @@ export const Filterbar = ({ options }) => {
   useEffect(() => {
     const stringfiedFilter = convertFilterToString(filters);
     setInputValue(stringfiedFilter);
-    isFilterApplied(filters, initialFilter) &&
+
+    !isFilterApplied(filters, initialFilter) &&
       setSelected(initaialSelectedIndex);
   }, [filters]);
 

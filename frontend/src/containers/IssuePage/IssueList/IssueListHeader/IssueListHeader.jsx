@@ -3,8 +3,9 @@ import styles from './IssueListHeader.module.css';
 import classNames from 'classnames/bind';
 import { FilterElement } from './FilterElement/FilterElement';
 import { FILTER_KEYS, initialFilter } from '@constants/issue';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { filterContext } from '@src/services/issue';
+import { isFilterApplied } from '@services/issue';
 
 export const IssueListHeader = ({
   userList,
@@ -74,7 +75,14 @@ export const IssueListHeader = ({
     },
   ];
 
-  const [activeTab, setActiveTab] = useState(statusTabDatas[0].text);
+  const initialActiveTab = statusTabDatas[0].text;
+  const [activeTab, setActiveTab] = useState(initialActiveTab);
+
+  useEffect(() => {
+    if (!isFilterApplied(filters, initialFilter)) {
+      setActiveTab(initialActiveTab);
+    }
+  }, [filters]);
 
   return (
     <>
