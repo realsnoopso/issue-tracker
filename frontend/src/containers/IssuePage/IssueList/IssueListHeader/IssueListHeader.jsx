@@ -84,6 +84,16 @@ export const IssueListHeader = ({
     }
   }, [filters]);
 
+  const handleTabOnClick = ({ currentTarget }) => {
+    const targetData = statusTabDatas.find(
+      (data) => currentTarget.id === data.text
+    );
+    const filterValue = targetData.filterValue;
+    const text = targetData.text;
+    setFilters({ ...filters, status: filterValue });
+    setActiveTab(text);
+  };
+
   return (
     <>
       <div className={cx(`header`)}>
@@ -96,15 +106,7 @@ export const IssueListHeader = ({
             type="ghost"
             width="fit-content"
             active={activeTab}
-            _onClick={({ currentTarget }) => {
-              const targetData = statusTabDatas.find(
-                (data) => currentTarget.id === data.text
-              );
-              const filterValue = targetData.filterValue;
-              const text = targetData.text;
-              setFilters({ ...initialFilter, status: filterValue });
-              setActiveTab(text);
-            }}
+            _onClick={handleTabOnClick}
           ></Tab>
           <div className={cx(`issue-contents_column`)}>
             {filterInfos.map((info) => (
