@@ -107,7 +107,6 @@ export const IssuePage = () => {
             milestoneList={milestoneList}
             labelList={labelList}
             issueCount={issueCount}
-            filters={filters}
           ></IssueList>
         </div>
       </div>

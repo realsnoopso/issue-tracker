@@ -13,6 +13,7 @@ export const Button = ({
   _onClick,
   style,
   id = '',
+  textColor,
 }) => {
   const cx = classNames.bind(styles);
 
@@ -35,7 +36,7 @@ export const Button = ({
     }
     return 'var(--color-light-accent-text)';
   };
-  const textColor = getTextColor(type);
+  const typoColor = textColor ?? getTextColor(type);
 
   const buttonClassNames = `${cx(
     'btn'
@@ -48,8 +49,8 @@ export const Button = ({
       style={{ ...style, width }}
       id={id}
     >
-      {iconName && <Icon name={iconName} fill={textColor}></Icon>}
-      <span style={{ color: textColor }} className={textSizeClass}>
+      {iconName && <Icon name={iconName} fill={typoColor}></Icon>}
+      <span style={{ color: typoColor }} className={textSizeClass}>
         {text}
       </span>
     </button>

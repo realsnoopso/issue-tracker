@@ -18,3 +18,12 @@
 .tab button:hover {
   cursor: pointer;
 }
+
+.ghost {
+  border: 0;
+}
+
+.ghost button:first-child {
+  border: 0;
+  padding: 0;
+}
