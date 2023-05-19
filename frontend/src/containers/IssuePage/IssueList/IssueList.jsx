@@ -10,49 +10,53 @@ export const IssueList = ({
   issueCount,
 }) => {
   const cx = classNames.bind(styles);
+  const containerClassNames = cx('container');
+  const contentsClassNames = cx('contents');
+  const emptyClassNames = cx('empty');
 
   return (
-    <>
-      <div>
-        {issueData && (
-          <IssueListHeader
-            issueData={issueData}
-            userList={userList}
-            milestoneList={milestoneList}
-            issueCount={issueCount}
-            labelList={labelList}
-          ></IssueListHeader>
-        )}
-      </div>
-      <div>
-        <ul>
-          {issueData &&
-            issueData.map((issue) => {
-              const title = issue.title;
-              const label = issue.label;
-              const issueNumber = issue.index;
-              const timeStamp = issue.editedTime;
-              const writer = issue.writer.name;
-              const milesStone = issue.milestone;
-              const profile = issue.writer.profile;
+    <div className={containerClassNames}>
+      {issueData && (
+        <IssueListHeader
+          issueData={issueData}
+          userList={userList}
+          milestoneList={milestoneList}
+          issueCount={issueCount}
+          labelList={labelList}
+        ></IssueListHeader>
+      )}
+      <ul className={contentsClassNames}>
+        {issueData.length !== 0 ? (
+          issueData.map((issue) => {
+            const title = issue.title;
+            const label = issue.label;
+            const issueNumber = issue.index;
+            const timeStamp = issue.editedTime;
+            const writer = issue.writer.name;
+            const milesStone = issue.milestone;
+            const profile = issue.writer.profile;
 
-              return (
-                <li key={issueNumber}>
-                  <IssueElement
-                    iconName="alertCircle"
-                    title={title}
-                    label={label}
-                    issueNumber={issueNumber}
-                    timeStamp={timeStamp}
-                    writer={writer}
-                    milesStone={milesStone}
-                    profile={profile}
-                  ></IssueElement>
-                </li>
-              );
-            })}
-        </ul>
-      </div>
-    </>
+            return (
+              <li key={issueNumber}>
+                <IssueElement
+                  iconName="alertCircle"
+                  title={title}
+                  label={label}
+                  issueNumber={issueNumber}
+                  timeStamp={timeStamp}
+                  writer={writer}
+                  milesStone={milesStone}
+                  profile={profile}
+                ></IssueElement>
+              </li>
+            );
+          })
+        ) : (
+          <div className={emptyClassNames}>
+            검색과 일치하는 결과가 없습니다.
+          </div>
+        )}
+      </ul>
+    </div>
   );
 };
