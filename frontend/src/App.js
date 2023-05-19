@@ -2,9 +2,7 @@ import { Navbar } from './components';
 import { IssuePage } from '@containers/index';
 import styles from './App.module.css';
 import classNames from 'classnames/bind';
-import { customFetch } from './services/api';
-import { useEffect } from 'react';
-import { URL } from '@constants/api';
+import { MY_USER_DATA } from '@src/constants/user';
 
 function App() {
   const cx = classNames.bind(styles);
@@ -17,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar></Navbar>
+      <Navbar user={MY_USER_DATA}></Navbar>
       <div className={contentsClassNames}>
         <IssuePage></IssuePage>
       </div>
