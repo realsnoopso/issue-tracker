@@ -116,3 +116,7 @@ jobs:
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} \
             --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=deploy/web/react-build.zip
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
