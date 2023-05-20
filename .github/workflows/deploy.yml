@@ -1,0 +1,71 @@
+name: Deploy to AWS CodeDeploy
+
+on:
+  push:
+    branches: [release]
+
+env:
+  PROJECT_NAME: issueTracker
+  BUCKET_NAME: issuetrackerbucket
+  CODE_DEPLOY_APP_NAME: issueTracker-app
+  DEPLOYMENT_GROUP_NAME: issueTrackerGroup
+  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      APPLICATION: ${{ secrets.APPLICATION }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - run: |
+          touch ./backend/src/main/resources/application.yml
+          echo "${{ secrets.APPLICATION }}" > ./backend/src/main/resources/application.yml
+          cat ./backend/src/main/resources/application.yml
+
+      - name: Build JAR
+        run: |
+          cd backend
+          chmod +x gradlew
+          ./gradlew clean build
+
+      - name: Make Directory for deliver
+        run: mkdir deploy
+
+      - name: Copy Jar, appspec.yml and deploy.sh
+        run: |
+          cp ./backend/build/libs/*.jar ./deploy/
+          cp ./appspec.yml ./deploy/
+          cp ./deploy.sh ./deploy/
+
+      - name: Make zip file
+        run: zip -r ./issueTracker-build.zip ./deploy
+
+      - name: Upload ZIP to S3
+        run: |
+          aws s3 cp ./issueTracker-build.zip s3://${{ env.BUCKET_NAME }}/issueTracker-build.zip
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Deploy to CodeDeploy
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APP_NAME }} \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=issueTracker-build.zip
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.member.domain.dto;
+package com.team6.issue_tracker.member.dto;
 
 import com.team6.issue_tracker.member.domain.Member;
 import lombok.Getter;
