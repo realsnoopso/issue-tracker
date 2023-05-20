@@ -47,7 +47,7 @@ jobs:
           cp ./deploy-was.sh ./deploy/
 
       - name: Make zip file
-        run: zip -r ./issueTracker-build.zip ./deploy/was
+        run: zip -r ./issueTracker-build.zip ./deploy/
 
       - name: Upload ZIP to S3
         run: |
@@ -110,7 +110,7 @@ jobs:
           cp ./deploy-web.sh ./deploy/
 
       - name: Make zip file
-        run: zip -r ./react-build.zip ./deploy/web
+        run: zip -r ./react-build.zip ./deploy/
 
       - name: Upload ZIP to S3
         run: |
