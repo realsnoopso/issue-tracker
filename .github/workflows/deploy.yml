@@ -42,9 +42,9 @@ jobs:
 
       - name: Copy Jar, appspec.yml and deploy.sh
         run: |
-          cp ./backend/build/libs/*.jar ./deploy/was/
-          cp ./appspec-was.yml ./deploy/was/appspec.yml
-          cp ./deploy-was.sh ./deploy/was/
+          cp ./backend/build/libs/*.jar ./deploy/
+          cp ./appspec-was.yml ./deploy/appspec.yml
+          cp ./deploy-was.sh ./deploy/
 
       - name: Make zip file
         run: zip -r ./issueTracker-build.zip ./deploy/was
@@ -105,9 +105,9 @@ jobs:
 
       - name: Copy build, appspec.yml and deploy.sh
         run: |
-          cp -r ./frontend/build/ ./deploy/web/
-          cp ./appspec-web.yml ./deploy/web/appspec.yml
-          cp ./deploy-web.sh ./deploy/web/
+          cp -r ./frontend/build/ ./deploy/
+          cp ./appspec-web.yml ./deploy/appspec.yml
+          cp ./deploy-web.sh ./deploy/
 
       - name: Make zip file
         run: zip -r ./react-build.zip ./deploy/web
