@@ -13,7 +13,7 @@ USE `issue_tracker_schema` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `issue_tracker_schema`.`member` (
-`member_idx` BIGINT NOT NULL,
+`member_idx` BIGINT NOT NULL AUTO_INCREMENT,
 `id` VARCHAR(32) NOT NULL,
 `password` VARCHAR(24) NOT NULL,
 `profile_image_url` VARCHAR(200) NULL DEFAULT NULL,
@@ -27,7 +27,7 @@ ENGINE = InnoDB;    # 데이터베이스 테이블이 저장될 때 사용되는
 -- Table `issue_tracker_schema`.`label`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `issue_tracker_schema`.`label` (
-`label_idx` BIGINT NOT NULL,
+`label_idx` BIGINT NOT NULL AUTO_INCREMENT,
 `label_title` VARCHAR(1000) NOT NULL,
 `label_discription` VARCHAR(1000) NULL DEFAULT NULL,
 `label_background_color` VARCHAR(40) NOT NULL,
@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `milestone`;
 CREATE TABLE `issue_tracker_schema`.`milestone` (
-      `milestone_idx` BIGINT NOT NULL,
+      `milestone_idx` BIGINT NOT NULL AUTO_INCREMENT,
       `milestone_title` VARCHAR(1000) NOT NULL,
       `milestone_status` boolean NOT NULL,
       `milestone_ended_at` DATETIME NULL DEFAULT NULL,
@@ -57,7 +57,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `issue`;
 CREATE TABLE `issue_tracker_schema`.`issue` (
-  `issue_idx` BIGINT NOT NULL,
+  `issue_idx` BIGINT NOT NULL AUTO_INCREMENT,
   `issue_title` VARCHAR(100) NOT NULL,
   `issue_contents` TEXT(30000) NOT NULL,
   `issue_status` boolean NOT NULL,
@@ -89,7 +89,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `issue_tracker_schema`.`comment` (
-    `comment_idx` BIGINT NOT NULL,
+    `comment_idx` BIGINT NOT NULL AUTO_INCREMENT,
     `contents` TEXT(10000) NOT NULL,
     `created_at` DATETIME NOT NULL,
     edited_at DATETIME,
@@ -113,7 +113,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `labeling`;
 CREATE TABLE `issue_tracker_schema`.`labeling` (
-     `labeling_idx` BIGINT NOT NULL,
+     `labeling_idx` BIGINT NOT NULL AUTO_INCREMENT,
      `issue_idx` BIGINT NOT NULL,
      `label_idx` BIGINT NOT NULL,
      PRIMARY KEY (`labeling_idx`),
