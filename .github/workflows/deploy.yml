@@ -38,7 +38,7 @@ jobs:
           ./gradlew clean build
 
       - name: Make Directory for deliver
-        run: mkdir deploy/was
+        run: mkdir -p deploy/was
 
       - name: Copy Jar, appspec.yml and deploy.sh
         run: |
@@ -90,7 +90,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Make Directory for deliver
-        run: mkdir deploy/web
+        run: mkdir -p deploy/web
 
       - name: Copy build, appspec.yml and deploy.sh
         run: |
