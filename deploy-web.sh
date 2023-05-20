@@ -5,4 +5,4 @@
 #mv /path/to/your/react/build/* /usr/share/nginx/html
 
 # Restart Nginx
-service nginx restart
+sudo service nginx restart
