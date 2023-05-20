@@ -11,7 +11,8 @@ USE `issue_tracker_schema` ;
 -- -----------------------------------------------------
 -- Table `issue_tracker_schema`.`member`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `issue_tracker_schema`.`member` (
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `issue_tracker_schema`.`member` (
 `member_idx` BIGINT NOT NULL,
 `id` VARCHAR(32) NOT NULL,
 `password` VARCHAR(24) NOT NULL,
@@ -110,7 +111,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `issue_tracker_schema`.`labeling`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `issue_tracker_schema`.`labeling` (
+DROP TABLE IF EXISTS `labeling`;
+CREATE TABLE `issue_tracker_schema`.`labeling` (
      `labeling_idx` BIGINT NOT NULL,
      `issue_idx` BIGINT NOT NULL,
      `label_idx` BIGINT NOT NULL,
