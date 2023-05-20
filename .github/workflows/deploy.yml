@@ -43,7 +43,7 @@ jobs:
       - name: Copy Jar, appspec.yml and deploy.sh
         run: |
           cp ./backend/build/libs/*.jar ./deploy/was/
-          cp ./appspec-was.yml ./deploy/was/
+          cp ./appspec-was.yml ./deploy/was/appspec.yml
           cp ./deploy-was.sh ./deploy/was/
 
       - name: Make zip file
@@ -106,7 +106,7 @@ jobs:
       - name: Copy build, appspec.yml and deploy.sh
         run: |
           cp -r ./frontend/build/ ./deploy/web/
-          cp ./appspec-web.yml ./deploy/web/
+          cp ./appspec-web.yml ./deploy/web/appspec.yml
           cp ./deploy-web.sh ./deploy/web/
 
       - name: Make zip file
