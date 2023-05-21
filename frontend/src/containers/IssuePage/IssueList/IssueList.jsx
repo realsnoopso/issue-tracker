@@ -18,7 +18,7 @@ export const IssueList = ({
     <div className={containerClassNames}>
       {issueData && (
         <IssueListHeader
-          issueData={issueData}
+          // issueData={issueData}
           userList={userList}
           milestoneList={milestoneList}
           issueCount={issueCount}

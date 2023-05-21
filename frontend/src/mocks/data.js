@@ -2,6 +2,11 @@ import { MY_USER_DATA } from '@constants/user';
 
 export const members = [
   {
+    profile: '',
+    name: '담당자가 없는 이슈',
+    index: 0,
+  },
+  {
     ...MY_USER_DATA,
   },
   {
@@ -26,6 +31,13 @@ export const members = [
 
 export const labels = [
   {
+    index: 0,
+    title: '레이블이 없는 이슈입니다.',
+    description: null,
+    backgroundColor: null,
+    style: null,
+  },
+  {
     index: 1,
     title: 'UI',
     description: '이것은 레이블1입니다.',
@@ -37,7 +49,7 @@ export const labels = [
     title: '레이블입니다.',
     description: '이것은 레이블2입니다.',
     backgroundColor: '#2ecc71',
-    style: 'outline',
+    style: 'solid',
   },
   {
     index: 3,
@@ -56,6 +68,15 @@ export const labels = [
 ];
 
 export const milestones = [
+  {
+    index: 0,
+    title: '마일스톤이 없는 이슈',
+    endDate: null,
+    contents: null,
+    totalIssueNum: null,
+    closedIssueNum: null,
+    isClosed: null,
+  },
   {
     index: 1,
     title: 'Sample Title 1',
@@ -85,6 +106,7 @@ export const milestones = [
   },
 ];
 
+// 테스트용 mock issueList 데이터
 export const issueList = [
   {
     index: 1,
@@ -99,10 +121,10 @@ export const issueList = [
         contents: '새 기능 추가에 대한 또 다른 의견입니다.',
       },
     ],
-    writer: members[0],
+    writer: members[1],
     assignee: members[0],
     label: labels[0],
-    milestone: milestones[0],
+    milestone: milestones[1],
     status: 'open',
     editedTime: '2023-05-16T15:02:07.759Z',
   },
@@ -115,8 +137,8 @@ export const issueList = [
         contents: '버그 수정에 대한 의견입니다.',
       },
     ],
-    writer: members[0],
-    assignee: members[0],
+    writer: members[2],
+    assignee: members[1],
     label: labels[1],
     milestone: milestones[1],
     status: 'open',
@@ -132,9 +154,9 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: members[2],
+    assignee: members[4],
     label: labels[2],
-    milestone: milestones[0],
+    milestone: milestones[2],
     status: 'open',
     editedTime: '2023-05-16T12:02:07.759Z',
   },
@@ -166,7 +188,7 @@ export const issueList = [
     writer: members[1],
     assignee: members[2],
     label: labels[1],
-    milestone: milestones[0],
+    milestone: milestones[1],
     status: 'open',
     editedTime: '2022-03-11T21:16:39.612Z',
   },
@@ -175,14 +197,14 @@ export const issueList = [
     title: '검색 기능 개선',
     comment: [
       {
-        writer: members[0],
+        writer: members[1],
         contents: '검색 기능 개선에 대한 의견입니다.',
       },
     ],
     writer: members[2],
-    assignee: members[2],
-    label: labels[1],
-    milestone: milestones[0],
+    assignee: members[1],
+    label: labels[0],
+    milestone: milestones[3],
     status: 'open',
     editedTime: '2023-05-12T15:02:07.759Z',
   },
@@ -191,14 +213,14 @@ export const issueList = [
     title: '새로운 보고서 템플릿 추가',
     comment: [
       {
-        writer: members[0],
+        writer: members[3],
         contents: '새로운 보고서 템플릿 추가에 대한 의견입니다.',
       },
     ],
     writer: members[1],
-    assignee: members[0],
+    assignee: members[2],
     label: labels[2],
-    milestone: milestones[0],
+    milestone: milestones[2],
     status: 'open',
     editedTime: '2022-02-01T04:33:06.209Z',
   },
@@ -212,10 +234,10 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: members[2],
+    assignee: members[0],
     label: labels[3],
     milestone: milestones[0],
-    status: 'open',
+    status: 'close',
     editedTime: '2023-03-19T09:21:34.126Z',
   },
   {
@@ -223,13 +245,13 @@ export const issueList = [
     title: '새로운 기능에 대한 성능 테스트 추가',
     comment: [
       {
-        writer: members[0],
+        writer: members[2],
         contents: '새로운 기능에 대한 성능 테스트에 대한 의견입니다.',
       },
     ],
-    writer: members[0],
+    writer: members[1],
     assignee: members[1],
-    label: labels[2],
+    label: labels[0],
     milestone: milestones[1],
     status: 'close',
     editedTime: '2021-10-25T12:08:49.904Z',
