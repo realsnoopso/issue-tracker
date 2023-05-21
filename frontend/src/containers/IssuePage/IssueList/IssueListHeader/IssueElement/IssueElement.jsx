@@ -45,11 +45,15 @@ export const IssueElement = ({
           </div>
           <div className={cx(`writer`)}>{writer}님에 의해 작성되었습니다.</div>
           <div className={cx(`mile-stone`)}>
-            <Icon
-              name="milestone"
-              fill="var(--color-light-neutral-text-weak)"
-            ></Icon>
-            {milesStone?.title}
+            {milesStone.index !== 0 && (
+              <>
+                <Icon
+                  name="milestone"
+                  fill="var(--color-light-neutral-text-weak)"
+                ></Icon>
+                {milesStone?.title}
+              </>
+            )}
           </div>
         </div>
       </div>
