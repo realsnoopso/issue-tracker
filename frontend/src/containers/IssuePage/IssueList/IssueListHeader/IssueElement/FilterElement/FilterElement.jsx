@@ -24,6 +24,7 @@ export const FilterElement = ({
 
   const optionOnClick = ({ currentTarget }) => {
     const index = currentTarget.id;
+
     setFilters({ ...filters, [filterKey]: index });
     setSelected(index);
   };

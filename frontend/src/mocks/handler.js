@@ -1,6 +1,13 @@
 import { rest } from 'msw';
 import { URL } from '@constants/api';
-import { issueList, members, labels, milestones, loginToken } from './data';
+import {
+  issueList,
+  members,
+  assignees,
+  labels,
+  milestones,
+  loginToken,
+} from './data';
 import { removeEmptyKeyValues } from '@utils/index';
 import { FILTER_KEYS } from '@constants/issue';
 
@@ -68,10 +75,15 @@ export const handlers = [
         key === FILTER_KEYS.LABEL ||
         key === FILTER_KEYS.MILESTONE
       ) {
-        return filteredResult.filter(
-          (issue) => String(issue[key]?.index) === String(value)
-        );
+        if (value === '-1') {
+          return filteredResult.filter((issue) => issue[key] === -1);
+        } else {
+          return filteredResult.filter(
+            (issue) => String(issue[key]?.index) === String(value)
+          );
+        }
       }
+
       return filteredResult.filter((issue) => issue[key] === value);
     }, issueList);
 
@@ -91,6 +103,7 @@ export const handlers = [
       openIssueCount,
       closedIssueCount,
       userList: members,
+      assigneeList: assignees,
       labelList: labels,
       milestoneList: milestones,
     };

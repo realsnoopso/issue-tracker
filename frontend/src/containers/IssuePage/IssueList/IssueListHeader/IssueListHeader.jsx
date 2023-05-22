@@ -10,6 +10,7 @@ import { isFilterApplied } from '@services/issue';
 export const IssueListHeader = ({
   userList,
   milestoneList,
+  assigneeList,
   issueCount,
   labelList,
 }) => {
@@ -26,42 +27,19 @@ export const IssueListHeader = ({
 
       option.contents = element[contentsKey];
 
+      if (element.index === -1) {
+        option.index = element.index;
+      }
+
       option.index = element.index;
       return option;
     });
   };
 
   const userOptions = convertListToOptions(userList, 'name');
-
-  const assigneeOptions = [
-    // {
-    //   profile: '',
-    //   contents: '담당자가 없는 이슈',
-    //   index: 0,
-    // },
-    ...userOptions,
-  ];
-
-  const labelOptions = [
-    // {
-    //   contents: '레이블이 없는 이슈',
-    //   index: 0,
-    // },
-    ...convertListToOptions(labelList, 'title'),
-  ];
-
-  const milestoneOptions = [
-    // {
-    //   contents: '마일스톤이 없는 이슈',
-    //   index: 0,
-    // },
-    ...convertListToOptions(milestoneList, 'title'),
-  ];
-
-  // console.log(assigneeOptions);
-  // console.log(labelOptions);
-  // console.log(milestoneOptions);
-  // console.log(filters);
+  const assigneeOptions = convertListToOptions(assigneeList, 'name');
+  const labelOptions = convertListToOptions(labelList, 'title');
+  const milestoneOptions = convertListToOptions(milestoneList, 'title');
 
   const filterInfos = [
     {

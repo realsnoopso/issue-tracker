@@ -2,11 +2,6 @@ import { MY_USER_DATA } from '@constants/user';
 
 export const members = [
   {
-    profile: '',
-    name: '담당자가 없는 이슈',
-    index: 0,
-  },
-  {
     ...MY_USER_DATA,
   },
   {
@@ -29,14 +24,34 @@ export const members = [
   },
 ];
 
-export const labels = [
+export const assignees = [
   {
-    index: 0,
-    title: '레이블이 없는 이슈입니다.',
-    description: null,
-    backgroundColor: null,
-    style: null,
+    index: 1,
+    id: 'realsnoopso',
+    profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
+    name: '스눕소',
   },
+  {
+    id: 'sarang_daddy',
+    profile: 'https://avatars.githubusercontent.com/u/109648042?v=4',
+    name: '사랑대디',
+    index: 2,
+  },
+  {
+    id: 'lvalentine6',
+    profile: 'https://avatars.githubusercontent.com/u/77956808?v=4',
+    name: '로이',
+    index: 3,
+  },
+  {
+    id: 'new-pow',
+    profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
+    name: '이린',
+    index: 4,
+  },
+];
+
+export const labels = [
   {
     index: 1,
     title: 'UI',
@@ -68,15 +83,6 @@ export const labels = [
 ];
 
 export const milestones = [
-  {
-    index: 0,
-    title: '마일스톤이 없는 이슈',
-    endDate: null,
-    contents: null,
-    totalIssueNum: null,
-    closedIssueNum: null,
-    isClosed: null,
-  },
   {
     index: 1,
     title: 'Sample Title 1',
@@ -122,7 +128,7 @@ export const issueList = [
       },
     ],
     writer: members[1],
-    assignee: members[0],
+    assignee: -1,
     label: labels[0],
     milestone: milestones[1],
     status: 'open',
@@ -138,9 +144,9 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: members[1],
+    assignee: assignees[1],
     label: labels[1],
-    milestone: milestones[1],
+    milestone: -1,
     status: 'open',
     editedTime: '2021-12-30T09:45:55.773Z',
   },
@@ -154,7 +160,7 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: members[4],
+    assignee: assignees[3],
     label: labels[2],
     milestone: milestones[2],
     status: 'open',
@@ -170,7 +176,7 @@ export const issueList = [
       },
     ],
     writer: members[3],
-    assignee: members[3],
+    assignee: assignees[2],
     label: labels[3],
     milestone: milestones[0],
     status: 'open',
@@ -186,8 +192,8 @@ export const issueList = [
       },
     ],
     writer: members[1],
-    assignee: members[2],
-    label: labels[1],
+    assignee: assignees[2],
+    label: -1,
     milestone: milestones[1],
     status: 'open',
     editedTime: '2022-03-11T21:16:39.612Z',
@@ -202,7 +208,7 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: members[1],
+    assignee: -1,
     label: labels[0],
     milestone: milestones[3],
     status: 'open',
@@ -218,7 +224,7 @@ export const issueList = [
       },
     ],
     writer: members[1],
-    assignee: members[2],
+    assignee: assignees[2],
     label: labels[2],
     milestone: milestones[2],
     status: 'open',
@@ -234,9 +240,9 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: members[0],
-    label: labels[3],
-    milestone: milestones[0],
+    assignee: assignees[0],
+    label: -1,
+    milestone: -1,
     status: 'close',
     editedTime: '2023-03-19T09:21:34.126Z',
   },
@@ -250,7 +256,7 @@ export const issueList = [
       },
     ],
     writer: members[1],
-    assignee: members[1],
+    assignee: -1,
     label: labels[0],
     milestone: milestones[1],
     status: 'close',

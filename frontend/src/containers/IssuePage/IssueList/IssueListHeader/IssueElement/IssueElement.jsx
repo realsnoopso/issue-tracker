@@ -30,7 +30,7 @@ export const IssueElement = ({
             )}
           </div>
           <div className="typo-title-medium">{title}</div>
-          {label && (
+          {label !== -1 && (
             <InformationTag
               text={label.title}
               backgroundColor={label.backgroundColor}
@@ -45,7 +45,7 @@ export const IssueElement = ({
           </div>
           <div className={cx(`writer`)}>{writer}님에 의해 작성되었습니다.</div>
           <div className={cx(`mile-stone`)}>
-            {milesStone.index !== 0 && (
+            {milesStone !== -1 && milesStone !== undefined && (
               <>
                 <Icon
                   name="milestone"

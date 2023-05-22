@@ -7,10 +7,6 @@ export const InformationTag = ({
   backgroundColor,
   style = 'outline',
 }) => {
-  if (style === null) {
-    return null;
-  }
-
   const { TagStyle, solidColor, outlineColor, outlineBgColor } = styles;
   const tagBgColor = style === 'solid' ? backgroundColor : outlineBgColor;
   const textColor = style === 'solid' ? solidColor : outlineColor;
