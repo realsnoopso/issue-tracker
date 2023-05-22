@@ -58,22 +58,20 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `issue`;
 CREATE TABLE `issue_tracker_schema`.`issue` (
-  `issue_idx` BIGINT NOT NULL AUTO_INCREMENT,
-  `issue_title` VARCHAR(100) NOT NULL,
-  `issue_contents` TEXT(30000) NOT NULL,
-  `issue_status` boolean NOT NULL,
-  `issue_created_at` DATETIME NOT NULL,
-  `issue_edited_at` DATETIME NULL DEFAULT NULL,
-  `issue_label_idx` BIGINT NULL DEFAULT NULL,
-  `issue_deleted` boolean NOT NULL,
+  `issue_idx` BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `contents` TEXT(30000) NOT NULL,
+  `status` boolean NOT NULL,
+  `created_at` DATETIME NOT NULL,
+  `edited_at` DATETIME NULL DEFAULT NULL,
   `milestone_idx` BIGINT NULL,
-  `member_idx_writer` BIGINT NOT NULL,
-  `member_idx_assignee` BIGINT NOT NULL,
-  PRIMARY KEY (`issue_idx`, `member_idx_writer`, `member_idx_assignee`),
+  writer BIGINT NOT NULL,
+  assignee BIGINT NOT NULL,
+  `is_deleted` boolean NOT NULL,
   INDEX `fk_issue_milestone1_idx` (`milestone_idx` ASC) VISIBLE,
-  INDEX `fk_issue_member2_idx` (`member_idx_writer` ASC) VISIBLE,
-  INDEX `fk_issue_member3_idx` (`member_idx_assignee` ASC) VISIBLE,
-  CONSTRAINT `fk_issue_milestone1`
+  INDEX `fk_issue_writer_idx` (writer ASC) VISIBLE,
+  INDEX `fk_issue_assignee_idx` (assignee ASC) VISIBLE,
+  CONSTRAINT `fk_issue_milestone`
       FOREIGN KEY (`milestone_idx`)
           REFERENCES `issue_tracker_schema`.`milestone` (`milestone_idx`),
   CONSTRAINT `fk_issue_member2`
