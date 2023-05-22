@@ -32,7 +32,7 @@ CREATE TABLE `issue_tracker_schema`.`label` (
 `title` VARCHAR(1000) NOT NULL,
 `description` VARCHAR(1000) NULL DEFAULT NULL,
 `background_color` VARCHAR(40) NOT NULL,
-`text_color` boolean NOT NULL,
+`text_color` VARCHAR(40) NOT NULL,
 `deleted` boolean NOT NULL,
 PRIMARY KEY (`label_idx`))
 ENGINE = InnoDB;
