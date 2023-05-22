@@ -3,6 +3,17 @@ import { IssuePage } from '@containers/index';
 import styles from './App.module.css';
 import classNames from 'classnames/bind';
 import { MY_USER_DATA } from '@src/constants/user';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <IssuePage></IssuePage>,
+  },
+  {
+    path: '/test',
+    element: <div>메롱</div>,
+  },
+]);
 
 function App() {
   const cx = classNames.bind(styles);
@@ -17,7 +28,7 @@ function App() {
     <div className="App">
       <Navbar user={MY_USER_DATA}></Navbar>
       <div className={contentsClassNames}>
-        <IssuePage></IssuePage>
+        <RouterProvider router={router} />
       </div>
     </div>
   );
