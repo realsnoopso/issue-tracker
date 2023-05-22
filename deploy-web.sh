@@ -1,8 +1,11 @@
-# Remove the default Nginx file
-#rm -rf /usr/share/nginx/html/*
+S3_BUCKET="s3://issuetracker-bucket-web"
+BUILD_FILE="deploy/web/react-build.zip"
+DEST_DIR="/home/ubuntu/issueTrackerWas"
 
-# Move the build files to the Nginx directory
-#mv /path/to/your/react/build/* /usr/share/nginx/html
+mkdir -p ${DEST_DIR}
+aws s3 cp ${S3_BUCKET}/${BUILD_FILE} .
+unzip react-build.zip -d ${DEST_DIR}
+rm react-build.zip
 
- Restart Nginx
+# Restart Nginx
 sudo service nginx restart
