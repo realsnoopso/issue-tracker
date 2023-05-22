@@ -9,8 +9,9 @@ env:
   BUCKET_NAME: issuetrackerbucket
   CODE_DEPLOY_APP_NAME: issueTracker-app
   DEPLOYMENT_GROUP_NAME: issueTrackerGroup
+
   BUCKET_NAME_WEB: issuetracker-bucket-web
-  CODE_DEPLOY_APP_NAME_WEB: issuetracker-websever
+  CODE_DEPLOY_APP_NAME_WEB: issuetracker-webserver
   DEPLOYMENT_GROUP_NAME_WEB: issuetracker-app
 
 jobs:
