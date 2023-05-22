@@ -79,15 +79,7 @@ export const IssuePage = () => {
           <div className={headerLeftClassNames}>
             <Filterbar options={options}></Filterbar>
             {isFilterApplied(filters, initialFilter) && (
-              <Button
-                iconName={filterClearButtonInfo.iconName}
-                type={filterClearButtonInfo.type}
-                text={filterClearButtonInfo.text}
-                width={filterClearButtonInfo.width}
-                btnSize={filterClearButtonInfo.btnSize}
-                style={filterClearButtonInfo.style}
-                _onClick={filterClearButtonInfo._onClick}
-              />
+              <Button {...filterClearButtonInfo} />
             )}
           </div>
           <div className={headerRightClassNames}>
