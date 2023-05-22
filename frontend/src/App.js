@@ -4,14 +4,19 @@ import styles from './App.module.css';
 import classNames from 'classnames/bind';
 import { MY_USER_DATA } from '@src/constants/user';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { LoginPage, AuthPage } from '@containers/index';
 const router = createBrowserRouter([
   {
     path: '/',
     element: <IssuePage></IssuePage>,
   },
   {
-    path: '/test',
-    element: <div>메롱</div>,
+    path: '/login',
+    element: <LoginPage></LoginPage>,
+  },
+  {
+    path: '/auth',
+    element: <AuthPage></AuthPage>,
   },
 ]);
 

@@ -235,3 +235,9 @@ export const issueList = [
     editedTime: '2021-10-25T12:08:49.904Z',
   },
 ];
+
+export const loginToken = {
+  message: 'login success',
+  token:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTYzODEyMjEsImdpdGh1YmlkIjoicmVhbHNub29wc28iLCJkaXNwbGF5TmFtZSI6IlNub29wIFNvIiwiZW1haWwiOiJyZWFsQHNub29wLnNvIiwicHJvZmlsZVBob3RvIjoiaHR0cHM6Ly9hdmF0YXJzLmdpdGh1YnVzZXJjb250ZW50LmNvbS91Lzk2MzgxMjIxP3Y9NCIsIm5hbWUiOiLshozrr7zqsr0iLCJwaG9uZU51bWJlciI6bnVsbCwiY2VydGlmaWNhdGlvbiI6dHJ1ZSwiY2VydGlmaWNhdGlvbkNvZGUiOm51bGwsImNvZGVFeHBpcmF0aW9uVGltZSI6bnVsbCwicm9sZSI6bnVsbCwiaWF0IjoxNjg0NzM1NTg1LCJleHAiOjE2ODczMjc1ODUsImlzcyI6ImNvZGVzcXVhZC5rciIsInN1YiI6IlVzZXJJbmZvIn0._YPBGJddRV9PFp9S7MlNWECzn9t4hoidu1huEZCIKwk',
+};
