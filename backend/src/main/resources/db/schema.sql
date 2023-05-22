@@ -74,11 +74,11 @@ CREATE TABLE `issue_tracker_schema`.`issue` (
   CONSTRAINT `fk_issue_milestone`
       FOREIGN KEY (`milestone_idx`)
           REFERENCES `issue_tracker_schema`.`milestone` (`milestone_idx`),
-  CONSTRAINT `fk_issue_member2`
-      FOREIGN KEY (`member_idx_writer`)
+  CONSTRAINT `fk_issue_member_writer`
+      FOREIGN KEY (writer)
           REFERENCES `issue_tracker_schema`.`member` (`member_idx`),
-  CONSTRAINT `fk_issue_member3`
-      FOREIGN KEY (`member_idx_assignee`)
+  CONSTRAINT `fk_issue_member_assignee`
+      FOREIGN KEY (assignee)
           REFERENCES `issue_tracker_schema`.`member` (`member_idx`))
 ENGINE = InnoDB;
 
