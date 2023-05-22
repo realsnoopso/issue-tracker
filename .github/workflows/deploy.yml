@@ -9,7 +9,6 @@ env:
   BUCKET_NAME: issuetrackerbucket
   CODE_DEPLOY_APP_NAME: issueTracker-app
   DEPLOYMENT_GROUP_NAME: issueTrackerGroup
-
   BUCKET_NAME_WEB: issuetracker-bucket-web
   CODE_DEPLOY_APP_NAME_WEB: issuetracker-websever
   DEPLOYMENT_GROUP_NAME_WEB: issuetracker-app
@@ -61,17 +60,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Wait for previous deployment to finish
-        run: |
-          while [[ "$(aws deploy list-deployments --include-only-statuses InProgress --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} | jq '.deployments | length')" -ne 0 ]]; do
-            echo "Deployment in progress, waiting..."
-            sleep 60
-          done
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
       - name: Deploy to CodeDeploy
         run: |
           aws deploy create-deployment \
@@ -85,7 +73,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   web-build-and-deploy:
-    needs: was-build-and-deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -115,6 +102,14 @@ jobs:
 
       - name: Make zip file
         run: zip -r ./react-build.zip ./deploy/
+
+      - name: Upload ZIP to S3
+        run: |
+          aws s3 cp ./react-build.zip s3://${{ env.BUCKET_NAME_WEB }}/deploy/web/react-build.zip
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID_WEB }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY_WEB }}
 
       - name: Deploy to CodeDeploy
         run: |
