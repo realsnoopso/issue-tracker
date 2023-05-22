@@ -42,8 +42,8 @@ export const handlers = [
 
     const filterQueries = Object.entries(queries).filter((query) => {
       const [key, _] = query;
-      const isPageQuery = key === 'page' || key === 'maxPageNum';
-      return !isPageQuery;
+      const isPaginationQuery = key === 'page' || key === 'maxPageNum';
+      return !isPaginationQuery;
     });
 
     const filteredIssueList = filterQueries.reduce((filteredResult, query) => {
