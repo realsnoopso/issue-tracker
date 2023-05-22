@@ -14,14 +14,15 @@ export const customFetch = async ({
     'Cache-Control': cache,
   };
 
-  if (hasAuth) headers.Authorization = `apikeys`;
+  if (hasAuth) headers.Authorization = `apikeys`; // Todo
 
   let url = URL + path;
   if (queries) {
-    removeEmptyKeyValues(queries);
-    const queryString =
-      '?' + new URLSearchParams(Object.entries(queries)).toString();
-    url += queryString ?? '';
+    const copiedQuries = removeEmptyKeyValues(queries);
+    const queryString = copiedQuries
+      ? '?' + new URLSearchParams(Object.entries(copiedQuries)).toString()
+      : '';
+    url += queryString;
   }
 
   try {
