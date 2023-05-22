@@ -10,6 +10,10 @@ env:
   CODE_DEPLOY_APP_NAME: issueTracker-app
   DEPLOYMENT_GROUP_NAME: issueTrackerGroup
 
+  BUCKET_NAME_WEB: issuetracker-bucket-web
+  CODE_DEPLOY_APP_NAME_WEB: issuetracker-websever
+  DEPLOYMENT_GROUP_NAME_WEB: issuetracker-app
+
 jobs:
   was-build-and-deploy:
     runs-on: ubuntu-latest
@@ -90,7 +94,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18'
 
       - name: Install Dependencies
         run: npm install
@@ -112,51 +116,14 @@ jobs:
       - name: Make zip file
         run: zip -r ./react-build.zip ./deploy/
 
-      - name: Install jq
-        run: sudo apt-get install jq
-
-      - name: Assume Role
-        run: |
-          ROLE_ARN=arn:aws:iam::263514117796:role/was_root
-          TEMP_ROLE=$(aws sts assume-role --role-arn $ROLE_ARN --role-session-name GitHubActions --debug)
-          export AWS_ACCESS_KEY_ID=$(echo $TEMP_ROLE | jq .Credentials.AccessKeyId | xargs)
-          export AWS_SECRET_ACCESS_KEY=$(echo $TEMP_ROLE | jq .Credentials.SecretAccessKey | xargs)
-          export AWS_SESSION_TOKEN=$(echo $TEMP_ROLE | jq .Credentials.SessionToken | xargs)
-          echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
-          echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
-          echo "AWS_SESSION_TOKEN: $AWS_SESSION_TOKEN"
-      
-
-      - name: Upload ZIP to S3
-        run: |
-          aws s3 cp ./react-build.zip s3://${{ env.BUCKET_NAME }}/deploy/web/react-build.zip
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ env.AWS_SESSION_TOKEN }}
-
-      - name: Wait for previous deployment to finish
-        run: |
-          while [[ "$(aws deploy list-deployments --include-only-statuses InProgress --application-name ${{ env.CODE_DEPLOY_APP_NAME }} --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} | jq '.deployments | length')" -ne 0 ]]; do
-            echo "Deployment in progress, waiting..."
-            sleep 60
-          done
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ env.AWS_SESSION_TOKEN }}
-
       - name: Deploy to CodeDeploy
         run: |
           aws deploy create-deployment \
-            --application-name ${{ env.CODE_DEPLOY_APP_NAME }} \
+            --application-name ${{ env.CODE_DEPLOY_APP_NAME_WEB }} \
             --deployment-config-name CodeDeployDefault.OneAtATime \
-            --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} \
-            --s3-location bucket=${{ env.BUCKET_NAME }},bundleType=zip,key=deploy/web/react-build.zip
+            --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME_WEB }} \
+            --s3-location bucket=${{ env.BUCKET_NAME_WEB }},bundleType=zip,key=deploy/web/react-build.zip
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ env.AWS_SESSION_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID_WEB }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY_WEB }}

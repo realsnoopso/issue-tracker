@@ -4,5 +4,5 @@
 # Move the build files to the Nginx directory
 #mv /path/to/your/react/build/* /usr/share/nginx/html
 
-# Restart Nginx
-#sudo service nginx restart
+ Restart Nginx
+sudo service nginx restart
