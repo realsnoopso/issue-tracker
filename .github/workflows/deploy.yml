@@ -109,8 +109,8 @@ jobs:
           aws s3 cp ./react-build.zip s3://${{ env.BUCKET_NAME_WEB }}/deploy/web/react-build.zip
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID_WEB }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY_WEB }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_WEB }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_WEB }}
 
       - name: Deploy to CodeDeploy
         run: |
@@ -121,5 +121,5 @@ jobs:
             --s3-location bucket=${{ env.BUCKET_NAME_WEB }},bundleType=zip,key=deploy/web/react-build.zip
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID_WEB }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY_WEB }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_WEB }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_WEB }}
