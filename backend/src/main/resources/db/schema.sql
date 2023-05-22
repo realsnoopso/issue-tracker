@@ -28,11 +28,11 @@ ENGINE = InnoDB;    # 데이터베이스 테이블이 저장될 때 사용되는
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `issue_tracker_schema`.`label` (
 `label_idx` BIGINT NOT NULL AUTO_INCREMENT,
-`label_title` VARCHAR(1000) NOT NULL,
-`label_discription` VARCHAR(1000) NULL DEFAULT NULL,
-`label_background_color` VARCHAR(40) NOT NULL,
-`label_text_color` boolean NOT NULL,
-`label_deleted` boolean NOT NULL,
+`title` VARCHAR(1000) NOT NULL,
+`discription` VARCHAR(1000) NULL DEFAULT NULL,
+`background_color` VARCHAR(40) NOT NULL,
+`text_color` boolean NOT NULL,
+`deleted` boolean NOT NULL,
 PRIMARY KEY (`label_idx`))
 ENGINE = InnoDB;
 

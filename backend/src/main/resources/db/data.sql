@@ -12,3 +12,7 @@ VALUES (1, 'test issue', '테스트 이슈입니다.', 1, now(), 0, 1, 2);
 # comment init
 INSERT comment (comment_idx, contents, created_at, edited_at, state, issue_idx, created_by)
 VALUES (1, 'test comment', now(), null, 1, 1, 2);
+
+# labbel init
+INSERT label (label_idx, label_title, label_discription, label_background_color, label_text_color, label_deleted)
+VALUES (1, 'test label', '테스트 라벨입니다.', '#000000', '#ffffff', 0)
