@@ -26,7 +26,8 @@ ENGINE = InnoDB;    # 데이터베이스 테이블이 저장될 때 사용되는
 -- -----------------------------------------------------
 -- Table `issue_tracker_schema`.`label`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `issue_tracker_schema`.`label` (
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE `issue_tracker_schema`.`label` (
 `label_idx` BIGINT NOT NULL AUTO_INCREMENT,
 `title` VARCHAR(1000) NOT NULL,
 `discription` VARCHAR(1000) NULL DEFAULT NULL,
