@@ -3,6 +3,24 @@ import { IssuePage } from '@containers/index';
 import styles from './App.module.css';
 import classNames from 'classnames/bind';
 import { MY_USER_DATA } from '@src/constants/user';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { LoginPage, AuthPage } from '@containers/index';
+
+// Todo : 로그인 조건 추가
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <IssuePage></IssuePage>,
+  },
+  {
+    path: '/login',
+    element: <LoginPage></LoginPage>,
+  },
+  {
+    path: '/auth',
+    element: <AuthPage></AuthPage>,
+  },
+]);
 
 function App() {
   const cx = classNames.bind(styles);
@@ -17,7 +35,7 @@ function App() {
     <div className="App">
       <Navbar user={MY_USER_DATA}></Navbar>
       <div className={contentsClassNames}>
-        <IssuePage></IssuePage>
+        <RouterProvider router={router} />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { URL } from '@constants/api';
-import { issueList, members, labels, milestones } from './data';
+import { issueList, members, labels, milestones, loginToken } from './data';
 import { removeEmptyKeyValues } from '@utils/index';
 import { FILTER_KEYS } from '@constants/issue';
 
@@ -42,8 +42,8 @@ export const handlers = [
 
     const filterQueries = Object.entries(queries).filter((query) => {
       const [key, _] = query;
-      const isPageQuery = key === 'page' || key === 'maxPageNum';
-      return !isPageQuery;
+      const isPaginationQuery = key === 'page' || key === 'maxPageNum';
+      return !isPaginationQuery;
     });
 
     const filteredIssueList = filterQueries.reduce((filteredResult, query) => {
@@ -98,7 +98,11 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(responseData));
   }),
 
-  rest.get(`http://dev.com/members`, (req, res, ctx) => {
+  rest.get(`${URL}/members`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(members));
+  }),
+
+  rest.get(`${URL}/login/github`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(loginToken));
   }),
 ];

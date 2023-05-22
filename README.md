@@ -2,6 +2,10 @@
 
 그룹 프로젝트 #1
 
+## 그룹 소개
+
+### team-6 : "작고소중한조"
+
 ## 멤버 소개
 
 | ![로이](https://avatars.githubusercontent.com/u/77956808?v=4) | ![이린](https://avatars.githubusercontent.com/u/103120173?v=4) | ![사랑대디](https://avatars.githubusercontent.com/u/109648042?v=4) | ![스눕](https://avatars.githubusercontent.com/u/96381221?v=4) |
@@ -61,7 +65,9 @@ Feat : 커밋 제목
 - Linear 사용
 - `story` 팀에 story를 이슈로 등록한다.
 - 해당 스토리의 sub task로 각자의 팀 `task`를 등록한다.
+- [team-6 "작고소중한조" Linear 링크](https://linear.app/codesquad-issue-tracker-2023/team/STO/active)
 
-### 위키
+### 문서 정리
 
-- 회의록 및 설계 등 문서는 위키를 확인해주세요.
+- 회의록 및 설계 등 문서는 Notion을 확인해주세요.
+- [team-6 "작고소중한조" Notion 링크](https://codesquad-team6.notion.site/Issue-Tracker-819bd80bb4674413b59412c680a98ae7)
