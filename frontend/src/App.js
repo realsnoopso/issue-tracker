@@ -5,6 +5,8 @@ import classNames from 'classnames/bind';
 import { MY_USER_DATA } from '@src/constants/user';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { LoginPage, AuthPage } from '@containers/index';
+
+// Todo : 로그인 조건 추가
 const router = createBrowserRouter([
   {
     path: '/',
