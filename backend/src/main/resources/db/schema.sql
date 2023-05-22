@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `label`;
 CREATE TABLE `issue_tracker_schema`.`label` (
 `label_idx` BIGINT NOT NULL AUTO_INCREMENT,
 `title` VARCHAR(1000) NOT NULL,
-`discription` VARCHAR(1000) NULL DEFAULT NULL,
+`description` VARCHAR(1000) NULL DEFAULT NULL,
 `background_color` VARCHAR(40) NOT NULL,
 `text_color` boolean NOT NULL,
 `deleted` boolean NOT NULL,
