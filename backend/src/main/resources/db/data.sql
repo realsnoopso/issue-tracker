@@ -14,5 +14,5 @@ INSERT comment (comment_idx, contents, created_at, edited_at, state, issue_idx, 
 VALUES (1, 'test comment', now(), null, 1, 1, 2);
 
 # labbel init
-INSERT label (label_idx, title, description, background_color, text_color, deleted)
+INSERT label (label_idx, title, description, background_color, text_color, is_deleted)
 VALUES (1, 'test label', '테스트 라벨입니다.', '#000000', '#ffffff', 0)
