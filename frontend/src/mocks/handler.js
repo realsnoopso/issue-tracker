@@ -53,39 +53,43 @@ export const handlers = [
       return !isPaginationQuery;
     });
 
-    const filteredIssueList = filterQueries.reduce((filteredResult, query) => {
-      const [key, value] = query;
-      if (key === FILTER_KEYS.COMMENT_BY) {
-        return filteredResult
-          .map((issue) => {
-            const filteredComments = issue['comment'].filter(
-              (comment) => comment.writer.index === value
-            );
-            if (filteredComments.length > 0) {
-              return { ...issue, comment: filteredComments };
-            }
-            return null;
-          })
-          .filter((issue) => issue !== null);
-      }
-
-      if (
-        key === FILTER_KEYS.WRITER ||
-        key === FILTER_KEYS.ASSIGNEE ||
-        key === FILTER_KEYS.LABEL ||
-        key === FILTER_KEYS.MILESTONE
-      ) {
-        if (value === '-1') {
-          return filteredResult.filter((issue) => issue[key] === -1);
-        } else {
-          return filteredResult.filter(
-            (issue) => String(issue[key]?.index) === String(value)
-          );
+    const filteredIssueList = filterQueries.reduce(
+      (filteredResult, query) => {
+        const [queryKey, queryValue] = query;
+        if (queryKey === FILTER_KEYS.COMMENT_BY) {
+          return filteredResult
+            .map((issue) => {
+              const filteredComments = issue['comment'].filter(
+                (comment) => comment.writer.index === queryValue
+              );
+              if (filteredComments.length > 0) {
+                return { ...issue, comment: filteredComments };
+              }
+              return null;
+            })
+            .filter((issue) => issue !== null);
         }
-      }
 
-      return filteredResult.filter((issue) => issue[key] === value);
-    }, issueList);
+        if (
+          queryKey === FILTER_KEYS.WRITER ||
+          queryKey === FILTER_KEYS.ASSIGNEE ||
+          queryKey === FILTER_KEYS.LABEL ||
+          queryKey === FILTER_KEYS.MILESTONE
+        ) {
+          if (queryValue === '-1') {
+            return filteredResult.filter((issue) => issue[queryKey] === null);
+          } else {
+            return filteredResult.filter(
+              (issue) =>
+                parseInt(issue[queryKey]?.index) === parseInt(queryValue)
+            );
+          }
+        }
+
+        return filteredResult.filter((issue) => issue[queryKey] === queryValue);
+      },
+      issueList.sort((a, b) => b.index - a.index)
+    );
 
     const filteredByStatus = (list, status) =>
       list.filter((issue) => issue.status === status);

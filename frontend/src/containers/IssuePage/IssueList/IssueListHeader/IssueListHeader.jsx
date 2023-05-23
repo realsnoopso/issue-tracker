@@ -27,7 +27,7 @@ export const IssueListHeader = ({
 
       option.contents = element[contentsKey];
 
-      if (element.index === -1) {
+      if (element.index === parseInt(-1)) {
         option.index = element.index;
       }
 
@@ -85,6 +85,8 @@ export const IssueListHeader = ({
 
   const initialActiveTab = statusTabDatas[0].text;
   const [activeTab, setActiveTab] = useState(initialActiveTab);
+
+  console.log(filters);
 
   useEffect(() => {
     if (!isFilterApplied(filters, initialFilter)) {

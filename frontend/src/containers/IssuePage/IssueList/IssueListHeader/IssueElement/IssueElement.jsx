@@ -30,7 +30,7 @@ export const IssueElement = ({
             )}
           </div>
           <div className="typo-title-medium">{title}</div>
-          {label !== -1 && (
+          {label && (
             <InformationTag
               text={label.title}
               backgroundColor={label.backgroundColor}
@@ -41,11 +41,11 @@ export const IssueElement = ({
         <div className={cx(`issue-contents_column`)}>
           <div className={cx(`issue-number`)}>#{issueNumber} 이 이슈가</div>
           <div className={cx(`time-Stamp`)}>
-            <ElapsedTime editedTime={timeStamp}></ElapsedTime>
+            <ElapsedTime createdTime={timeStamp}></ElapsedTime>
           </div>
           <div className={cx(`writer`)}>{writer}님에 의해 작성되었습니다.</div>
           <div className={cx(`mile-stone`)}>
-            {milesStone !== -1 && milesStone !== undefined && (
+            {milesStone && (
               <>
                 <Icon
                   name="milestone"
