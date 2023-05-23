@@ -41,15 +41,19 @@ export const IssueElement = ({
         <div className={cx(`issue-contents_column`)}>
           <div className={cx(`issue-number`)}>#{issueNumber} 이 이슈가</div>
           <div className={cx(`time-Stamp`)}>
-            <ElapsedTime editedTime={timeStamp}></ElapsedTime>
+            <ElapsedTime createdTime={timeStamp}></ElapsedTime>
           </div>
           <div className={cx(`writer`)}>{writer}님에 의해 작성되었습니다.</div>
           <div className={cx(`mile-stone`)}>
-            <Icon
-              name="milestone"
-              fill="var(--color-light-neutral-text-weak)"
-            ></Icon>
-            {milesStone?.title}
+            {milesStone && (
+              <>
+                <Icon
+                  name="milestone"
+                  fill="var(--color-light-neutral-text-weak)"
+                ></Icon>
+                {milesStone?.title}
+              </>
+            )}
           </div>
         </div>
       </div>

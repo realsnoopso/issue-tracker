@@ -22,9 +22,7 @@ export const AuthPage = () => {
   useEffect(() => {
     (async () => {
       const data = await runGetAPI();
-
       const token = data.token;
-
       window.localStorage.setItem('loginToken', token);
     })();
   }, []);

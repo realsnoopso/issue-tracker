@@ -10,6 +10,7 @@ import { isFilterApplied } from '@services/issue';
 export const IssueListHeader = ({
   userList,
   milestoneList,
+  assigneeList,
   issueCount,
   labelList,
 }) => {
@@ -23,13 +24,20 @@ export const IssueListHeader = ({
       if (element.profile) {
         option.profile = element.profile;
       }
+
       option.contents = element[contentsKey];
+
+      if (element.index === parseInt(-1)) {
+        option.index = element.index;
+      }
+
       option.index = element.index;
       return option;
     });
   };
 
   const userOptions = convertListToOptions(userList, 'name');
+  const assigneeOptions = convertListToOptions(assigneeList, 'name');
   const labelOptions = convertListToOptions(labelList, 'title');
   const milestoneOptions = convertListToOptions(milestoneList, 'title');
 
@@ -37,7 +45,7 @@ export const IssueListHeader = ({
     {
       name: '담당자',
       key: FILTER_KEYS.ASSIGNEE,
-      data: userOptions,
+      data: assigneeOptions,
       selectedOption: filters[FILTER_KEYS.ASSIGNEE],
     },
     {
@@ -77,6 +85,8 @@ export const IssueListHeader = ({
 
   const initialActiveTab = statusTabDatas[0].text;
   const [activeTab, setActiveTab] = useState(initialActiveTab);
+
+  console.log(filters);
 
   useEffect(() => {
     if (!isFilterApplied(filters, initialFilter)) {

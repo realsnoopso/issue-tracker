@@ -5,6 +5,7 @@ import { IssueElement, IssueListHeader } from '@containers/index';
 export const IssueList = ({
   issueData,
   userList,
+  assigneeList,
   milestoneList,
   labelList,
   issueCount,
@@ -18,8 +19,8 @@ export const IssueList = ({
     <div className={containerClassNames}>
       {issueData && (
         <IssueListHeader
-          issueData={issueData}
           userList={userList}
+          assigneeList={assigneeList}
           milestoneList={milestoneList}
           issueCount={issueCount}
           labelList={labelList}
