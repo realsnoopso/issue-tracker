@@ -86,8 +86,6 @@ export const IssueListHeader = ({
   const initialActiveTab = statusTabDatas[0].text;
   const [activeTab, setActiveTab] = useState(initialActiveTab);
 
-  console.log(filters);
-
   useEffect(() => {
     if (!isFilterApplied(filters, initialFilter)) {
       setActiveTab(initialActiveTab);

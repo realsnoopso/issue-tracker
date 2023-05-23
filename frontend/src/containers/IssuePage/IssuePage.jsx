@@ -54,7 +54,6 @@ export const IssuePage = () => {
         issueList,
         labelList,
         userList,
-        assigneeList,
         milestoneList,
         openIssueCount,
         closedIssueCount,
@@ -64,7 +63,7 @@ export const IssuePage = () => {
       setLabelList([noneLabel, ...labelList]);
       setUserList(userList);
       setMilestoneList([noneMilestone, ...milestoneList]);
-      setAssigneeList([noneAssignee, ...assigneeList]);
+      setAssigneeList([noneAssignee, ...userList]);
 
       setIssueCounts({
         open: openIssueCount,
