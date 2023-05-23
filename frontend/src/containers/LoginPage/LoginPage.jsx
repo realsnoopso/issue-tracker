@@ -3,6 +3,7 @@ import imagefiles from '@assets/images/index';
 import { TextInput } from '@src/components/TextInput/TextInput';
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.css';
+import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 export const LoginPage = () => {
@@ -23,14 +24,26 @@ export const LoginPage = () => {
     text: 'GitHub 계정으로 로그인',
   };
 
+  const [idValue, setIdValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+
+  const handleIdInputChange = (event) => {
+    setIdValue(event.target.value);
+  };
+
+  const handlePasswordInputChange = (event) => {
+    setPasswordValue(event.target.value);
+  };
+
   const idTextInputProps = {
-    placeholder: '아이디',
+    label: '아이디',
     size: 'l',
   };
 
   const passwordTextInputProps = {
-    placeholder: '패스워드',
+    label: '패스워드',
     size: 'l',
+    type: 'password',
   };
 
   const idLoginBtnProps = {
@@ -53,8 +66,17 @@ export const LoginPage = () => {
       <div className={containerClassNames}>
         <Button {...githubLoginProps} _onClick={handleClick}></Button>
         <p>or</p>
-        <TextInput {...idTextInputProps}></TextInput>
-        <TextInput {...passwordTextInputProps}></TextInput>
+        <TextInput
+          {...idTextInputProps}
+          value={idValue}
+          _onKeydown={() => setIdValue(idValue)}
+          _onChange={handleIdInputChange}
+        ></TextInput>
+        <TextInput
+          {...passwordTextInputProps}
+          value={passwordValue}
+          _onChange={handlePasswordInputChange}
+        ></TextInput>
         <Button {...idLoginBtnProps}></Button>
         <Button {...registerBtnProps}></Button>
       </div>
