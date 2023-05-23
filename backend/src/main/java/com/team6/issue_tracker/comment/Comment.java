@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.comment.domain;
+package com.team6.issue_tracker.comment;
 
 import com.team6.issue_tracker.issue.domain.Issue;
 import com.team6.issue_tracker.member.domain.Member;

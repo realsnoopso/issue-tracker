@@ -31,4 +31,16 @@ public class Label {
         this.textColor = textColor;
         this.isDeleted = isDeleted;
     }
+
+    private Label(String title, String description, String backgroundColor, String textColor, Boolean isDeleted) {
+        this.title = title;
+        this.description = description;
+        this.backgroundColor = backgroundColor;
+        this.textColor = textColor;
+        this.isDeleted = isDeleted;
+    }
+
+    public static Label newLabel(String title, String description, String backgroundColor, String textColor) {
+        return new Label(title, description, backgroundColor, textColor, false);
+    }
 }
