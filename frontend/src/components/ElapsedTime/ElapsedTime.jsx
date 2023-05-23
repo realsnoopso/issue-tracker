@@ -1,11 +1,11 @@
-export const ElapsedTime = ({ createdTime }) => {
+export const ElapsedTime = ({ createdAt }) => {
   const minute = 60 * 1000; // 1분
   const hour = 60 * minute; // 1시간
   const day = 24 * hour; // 1일
   const week = 7 * day; // 1주일
 
   const currentDate = new Date();
-  const createdDate = new Date(createdTime);
+  const createdDate = new Date(createdAt);
   const elapsedTime = currentDate - createdDate;
   let result = '';
 
