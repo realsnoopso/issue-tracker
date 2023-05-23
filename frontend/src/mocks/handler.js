@@ -1,13 +1,6 @@
 import { rest } from 'msw';
 import { URL } from '@constants/api';
-import {
-  issueList,
-  members,
-  assignees,
-  labels,
-  milestones,
-  loginToken,
-} from './data';
+import { issueList, members, labels, milestones, loginToken } from './data';
 import { removeEmptyKeyValues } from '@utils/index';
 import { FILTER_KEYS } from '@constants/issue';
 
@@ -107,7 +100,6 @@ export const handlers = [
       openIssueCount,
       closedIssueCount,
       userList: members,
-      assigneeList: assignees,
       labelList: labels,
       milestoneList: milestones,
     };

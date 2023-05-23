@@ -24,33 +24,6 @@ export const members = [
   },
 ];
 
-export const assignees = [
-  {
-    index: 1,
-    id: 'realsnoopso',
-    profile: 'https://ca.slack-edge.com/T74H5245A-U04FHDY4DFV-1a828514d33d-512',
-    name: '스눕소',
-  },
-  {
-    id: 'sarang_daddy',
-    profile: 'https://avatars.githubusercontent.com/u/109648042?v=4',
-    name: '사랑대디',
-    index: 2,
-  },
-  {
-    id: 'lvalentine6',
-    profile: 'https://avatars.githubusercontent.com/u/77956808?v=4',
-    name: '로이',
-    index: 3,
-  },
-  {
-    id: 'new-pow',
-    profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
-    name: '이린',
-    index: 4,
-  },
-];
-
 export const labels = [
   {
     index: 1,
@@ -144,7 +117,7 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: assignees[0],
+    assignee: members[0],
     label: labels[1],
     milestone: null,
     status: 'open',
@@ -160,7 +133,7 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: assignees[3],
+    assignee: members[3],
     label: labels[2],
     milestone: milestones[2],
     status: 'open',
@@ -176,7 +149,7 @@ export const issueList = [
       },
     ],
     writer: members[0],
-    assignee: assignees[0],
+    assignee: members[0],
     label: labels[3],
     milestone: milestones[0],
     status: 'open',
@@ -192,7 +165,7 @@ export const issueList = [
       },
     ],
     writer: members[0],
-    assignee: assignees[2],
+    assignee: members[2],
     label: null,
     milestone: milestones[1],
     status: 'open',
@@ -224,7 +197,7 @@ export const issueList = [
       },
     ],
     writer: members[1],
-    assignee: assignees[2],
+    assignee: members[2],
     label: labels[2],
     milestone: milestones[2],
     status: 'open',
@@ -240,7 +213,7 @@ export const issueList = [
       },
     ],
     writer: members[2],
-    assignee: assignees[0],
+    assignee: members[0],
     label: null,
     milestone: null,
     status: 'close',
