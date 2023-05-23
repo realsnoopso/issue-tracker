@@ -21,13 +21,7 @@ class LabelRepositoryTest {
     @DisplayName("Label 저장이 된다.")
     public void labelSave() throws Exception{
         //given
-        long beforeCount = labelRepository.count();
-        Label testLabel = Label.builder()
-                .backgroundColor("#111111")
-                .textColor("#ffffff")
-                .title("테스트 라벨2")
-                .description("테스트 라벨입니다. 2")
-                .build();
+        Label testLabel = Label.newLabel("테스트 라벨2", "테스트 라벨입니다.", "#ffffff", "#000000");
 
         //when
         Label save = labelRepository.save(testLabel);
@@ -41,12 +35,7 @@ class LabelRepositoryTest {
     public void labelSaveIntoDB() throws Exception{
         //given
         long beforeCount = labelRepository.count();
-        Label testLabel = Label.builder()
-                .backgroundColor("#111111")
-                .textColor("#ffffff")
-                .title("테스트 라벨2")
-                .description("테스트 라벨입니다. 2")
-                .build();
+        Label testLabel = Label.newLabel("테스트 라벨2", "테스트 라벨입니다.", "#ffffff", "#000000");
 
         //when
         labelRepository.save(testLabel);
@@ -76,7 +65,7 @@ class LabelRepositoryTest {
         log.debug("labels = {}", all);
 
         //then
-        assertThat(all).hasSize(2);
+        assertThat(all).hasSize(1);
     }
 
     @Test
