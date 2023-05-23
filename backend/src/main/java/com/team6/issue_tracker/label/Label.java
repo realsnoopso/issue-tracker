@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter @Builder
@@ -21,11 +20,10 @@ public class Label {
 
     private String textColor;
 
-    @Column("deleted")
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     @PersistenceCreator
-    public Label(Long labelIdx, String title, String description, String backgroundColor, String textColor, boolean isDeleted) {
+    public Label(Long labelIdx, String title, String description, String backgroundColor, String textColor, Boolean isDeleted) {
         this.labelIdx = labelIdx;
         this.title = title;
         this.description = description;
