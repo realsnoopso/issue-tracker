@@ -1,13 +1,9 @@
 package com.team6.issue_tracker.issue.domain;
 
-import com.team6.issue_tracker.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
-import org.springframework.data.jdbc.core.mapping.AggregateReference;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -30,7 +26,7 @@ public class Issue {
 
     private String contents;
 
-    private Status status;
+    private Boolean status;
 
     private Writer writer;
 
