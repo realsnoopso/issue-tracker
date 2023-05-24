@@ -19,3 +19,7 @@ export const checkPasswordValidation = () => {
   const MAX = 12;
   return checkIsLengthValid(id, MIN, MAX);
 };
+
+export const getToken = () => {
+  return window.localStorage.getItem('loginToken');
+};

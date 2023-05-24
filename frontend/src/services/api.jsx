@@ -1,5 +1,6 @@
 import { URL } from '@constants/api';
 import { removeEmptyKeyValues } from '@utils/index';
+import { getToken } from '@services/login';
 
 export const customFetch = async ({
   path,
@@ -14,7 +15,11 @@ export const customFetch = async ({
     'Cache-Control': cache,
   };
 
-  if (hasAuth) headers.Authorization = `apikeys`; // Todo
+  if (hasAuth) {
+    const token = getToken();
+    if (!token) throw Error('No Token');
+    headers.Authorization = `Bearer ${token}`;
+  }
 
   let url = URL + path;
   if (queries) {
