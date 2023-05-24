@@ -1,6 +1,6 @@
 .login-page {
   display: grid;
-  justify-content: center;
+  justify-items: center;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);

@@ -77,7 +77,7 @@ export const LoginPage = () => {
           value={passwordValue}
           _onChange={handlePasswordInputChange}
         ></TextInput>
-        <Button {...idLoginBtnProps}></Button>
+        <Button {...idLoginBtnProps} status="disabled"></Button>
         <Button {...registerBtnProps}></Button>
       </div>
     </div>

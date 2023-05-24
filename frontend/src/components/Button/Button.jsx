@@ -48,6 +48,7 @@ export const Button = ({
       onClick={_onClick}
       style={{ ...style, width }}
       id={id}
+      disabled={status === 'disabled'}
     >
       {iconName && <Icon name={iconName} fill={typoColor}></Icon>}
       <span style={{ color: typoColor }} className={textSizeClass}>
