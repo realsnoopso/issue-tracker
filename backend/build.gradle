@@ -21,17 +21,20 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.projectlombok:lombok:1.18.26'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
     implementation 'com.amazonaws:aws-java-sdk-core:1.12.429'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.429'
-    // jwt
-    implementation 'io.jsonwebtoken:jjwt-api'
-    implementation 'io.jsonwebtoken:jjwt-impl'
-    implementation 'io.jsonwebtoken:jjwt-jackson'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
 
 tasks.named('test') {
