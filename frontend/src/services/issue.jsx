@@ -1,8 +1,27 @@
+import { URL } from '@constants/api';
 import { customFetch } from '@services/api';
 import { createContext } from 'react';
 import { removeEmptyKeyValues, deepCopy } from '@utils/index';
 
 export const filterContext = createContext();
+
+export const getIssueDetail = async ({ issueId }) => {
+  try {
+    const response = await fetch(`${URL}/issue/${issueId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'appilcation/json',
+      },
+    });
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    const issueData = await response.json();
+    return issueData;
+  } catch (error) {
+    console.error('Error fetching issue:', error);
+  }
+};
 
 export const getIssueList = async ({
   status = 'open',

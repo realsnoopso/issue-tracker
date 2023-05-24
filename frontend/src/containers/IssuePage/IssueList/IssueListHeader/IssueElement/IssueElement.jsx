@@ -31,7 +31,6 @@ export const IssueElement = ({
             )}
           </div>
           <div className="typo-title-medium">
-            {' '}
             <Link to={`/detail/${issueNumber}`}>{title}</Link>
           </div>
           {label && (
