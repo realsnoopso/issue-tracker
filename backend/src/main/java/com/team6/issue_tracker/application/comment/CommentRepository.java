@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.comment;
+package com.team6.issue_tracker.application.comment;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

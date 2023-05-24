@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.member;
+package com.team6.issue_tracker.application.member;
 
-import com.team6.issue_tracker.member.domain.Member;
+import com.team6.issue_tracker.application.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.issue.domain;
+package com.team6.issue_tracker.application.issue.domain;
 
 public class LabelOnIssue {
 }

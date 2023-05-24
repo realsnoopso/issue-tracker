@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.adapter.configuration;
+package com.team6.issue_tracker.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

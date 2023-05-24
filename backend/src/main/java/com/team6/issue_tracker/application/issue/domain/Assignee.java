@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.issue.domain;
+package com.team6.issue_tracker.application.issue.domain;
 
-import com.team6.issue_tracker.member.domain.Member;
+import com.team6.issue_tracker.application.member.domain.Member;
 import lombok.Builder;
 import lombok.Value;
 import org.springframework.data.annotation.Id;

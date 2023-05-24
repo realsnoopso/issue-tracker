@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.adapter.configuration;
+package com.team6.issue_tracker.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

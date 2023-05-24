@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.issue.domain;
+package com.team6.issue_tracker.application.issue.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Getter @Builder
 @AllArgsConstructor

@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.issue;
+package com.team6.issue_tracker.application.issue;
 
-import com.team6.issue_tracker.issue.domain.Issue;
+import com.team6.issue_tracker.application.issue.domain.Issue;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

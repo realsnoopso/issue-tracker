@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.label;
+package com.team6.issue_tracker.application.label;
 
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
