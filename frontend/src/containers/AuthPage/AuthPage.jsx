@@ -1,9 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { customFetch } from '@src/services/api';
 import { useEffect } from 'react';
 
 export const AuthPage = () => {
-  let location = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate();
   const queryCode = new URLSearchParams(location.search).get('code');
 
   const runGetAPI = async () => {
@@ -24,8 +25,9 @@ export const AuthPage = () => {
       const data = await runGetAPI();
       const token = data.token;
       window.localStorage.setItem('loginToken', token);
+      navigate('/');
     })();
   }, []);
 
-  return <div>Auth</div>;
+  return <></>;
 };
