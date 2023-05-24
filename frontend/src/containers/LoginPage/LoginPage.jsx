@@ -4,6 +4,7 @@ import { TextInput } from '@src/components/TextInput/TextInput';
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.css';
 import { useEffect, useState } from 'react';
+import { checkIdValidation, checkPasswordValidation } from '@services/login';
 const cx = classNames.bind(styles);
 
 export const LoginPage = () => {
@@ -27,6 +28,7 @@ export const LoginPage = () => {
   const [idValue, setIdValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isCTADisabled, setIsCTADisabled] = useState(true);
+  const [validation, setValidation] = useState({ id: null, password: null });
 
   const handleIdInputChange = (event) => {
     setIdValue(event.target.value);
