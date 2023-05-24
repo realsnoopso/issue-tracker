@@ -1,7 +1,6 @@
 package com.team6.issue_tracker.oauth;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -12,9 +11,9 @@ public class OAuthController {
     // Redirect
     // http://localhost:8080/oauth/result?code=e2b73a0322cc4b86a685
 
-    @GetMapping("/oauth/result")
-    public String oauthTestStep2(String code) {
-        return code;
-    }
+//    @GetMapping("/oauth/result")
+//    public String oauthTestStep2(String code) {
+//        return code;
+//    }
 
 }
