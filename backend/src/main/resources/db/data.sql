@@ -1,9 +1,9 @@
 # member init
 INSERT `issue_tracker_schema`.member (member_idx, id, password, profile_image_url, github_join)
-    VALUES (1, 'iirin', '1234', '', true),
-            (2, 'roy', '1234', '', false),
-            (3, 'snoop', '1234', '', true),
-            (4, 'sarangDaddy', '1234', '', false);
+VALUES (1, 'iirin', '1234', '', true),
+       (2, 'roy', '1234', '', false),
+       (3, 'snoop', '1234', '', true),
+       (4, 'sarangDaddy', '1234', '', false);
 
 # issue init
 INSERT `issue` (issue_idx, title, contents, is_open, created_at, is_deleted, writer, assignee)
@@ -16,4 +16,4 @@ VALUES (1, 'test comment', now(), null, 1, 1, 2);
 # labbel init
 INSERT label (label_idx, title, description, background_color, text_color, is_deleted)
 VALUES (1, 'test label', '테스트 라벨입니다.', '#000000', '#ffffff', false),
-        (2, 'deleted label', '삭제된 라벨입니다.', '#000000', '#Fffffff', true);
+       (2, 'deleted label', '삭제된 라벨입니다.', '#000000', '#Fffffff', true);
