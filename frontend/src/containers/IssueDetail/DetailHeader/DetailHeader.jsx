@@ -1,6 +1,7 @@
 import styles from './DetailHeader.module.css';
 import classNames from 'classnames/bind';
 import { InformationTag, ElapsedTime, Button } from '@components/index';
+import { useEffect, useState } from 'react';
 
 export const DetailHeader = ({ issueObject }) => {
   const cx = classNames.bind(styles);
@@ -19,15 +20,28 @@ export const DetailHeader = ({ issueObject }) => {
   const commentLegnth = issueObject.comment?.length;
 
   // Tag
-  const iconName = issueObject.status === 'open' ? 'alertCircle' : 'archive';
-  const text = issueObject.status === 'open' ? '열린 이슈' : '닫힌 이슈';
+  useEffect(() => {
+    setStatus(issueObject.status);
+  }, [issueObject]);
+
+  const [status, setStatus] = useState(null);
+
+  const open = '이슈 열기';
+  const close = '이슈 닫기';
+  const opened = '열린 이슈';
+  const closed = '닫힌 이슈';
+
+  const iconName = status === 'open' ? 'alertCircle' : 'archive';
+  const iconStyle = status === 'open' ? 'solid' : 'outline';
+  const tagText = status === 'open' ? opened : closed;
+  const btnText = status === 'open' ? close : open;
 
   const amendTitle = () => {
     alert('제목을 편집하고 싶어요');
   };
 
-  const deleteIssue = () => {
-    alert('이슈를 닫고 싶어요');
+  const issueTogle = () => {
+    setStatus((prevStatus) => (prevStatus === 'open' ? 'close' : 'open'));
   };
 
   return (
@@ -41,9 +55,9 @@ export const DetailHeader = ({ issueObject }) => {
           <div className="tag">
             <InformationTag
               iconName={iconName}
-              text={text}
+              text={tagText}
               backgroundColor={'#007AFF'}
-              style="solid"
+              style={iconStyle}
             ></InformationTag>
           </div>
           <div className={infoClassNames}>
@@ -71,12 +85,12 @@ export const DetailHeader = ({ issueObject }) => {
         <div>
           <Button
             iconName={'edit'}
-            text={'이슈 닫기'}
+            text={btnText}
             type={'outline'}
             color={'blue'}
             width={'120px'}
             btnSize={'m'}
-            _onClick={deleteIssue}
+            _onClick={issueTogle}
           ></Button>
         </div>
       </div>
