@@ -28,7 +28,7 @@ export const LoginPage = () => {
   const [idValue, setIdValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isCTADisabled, setIsCTADisabled] = useState(true);
-  const [validation, setValidation] = useState({ id: null, password: null });
+  const [error, setError] = useState({ id: false, password: false });
 
   const handleIdInputChange = (event) => {
     setIdValue(event.target.value);
@@ -47,6 +47,21 @@ export const LoginPage = () => {
     }
   };
 
+  const handleTextInputError = (target) => {
+    const targetValue = target === 'id' ? idValue : passwordValue;
+    if (Boolean(targetValue) && !checkIdValidation(targetValue))
+      setError({ ...error, [target]: true });
+    else setError({ ...error, [target]: false });
+  };
+
+  useEffect(() => {
+    handleTextInputError('id');
+  }, [idValue]);
+
+  useEffect(() => {
+    handleTextInputError('password');
+  }, [passwordValue]);
+
   useEffect(() => {
     enableCTAIfTextFiledFilled();
   }, [idValue, passwordValue]);
@@ -63,7 +78,11 @@ export const LoginPage = () => {
           value={idValue}
           _onKeydown={() => setIdValue(idValue)}
           _onChange={handleIdInputChange}
-          errorMessage="아이디는 최소 6자리에서 최대 16자리까지 입력할 수 있습니다."
+          errorMessage={
+            error.id
+              ? '아이디는 최소 6자리에서 최대 16자리까지 입력할 수 있습니다.'
+              : false
+          }
         ></TextInput>
         <TextInput
           label="패스워드"
@@ -71,7 +90,11 @@ export const LoginPage = () => {
           type="password"
           value={passwordValue}
           _onChange={handlePasswordInputChange}
-          errorMessage="비밀번호는 최소 6자리에서 12자리까지 입력할 수 있다."
+          errorMessage={
+            error.password
+              ? '비밀번호는 최소 6자리에서 12자리까지 입력할 수 있다.'
+              : false
+          }
         ></TextInput>
         <Button
           width="100%"
