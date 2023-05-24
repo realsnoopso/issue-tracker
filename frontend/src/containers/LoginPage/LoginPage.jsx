@@ -63,6 +63,7 @@ export const LoginPage = () => {
           value={idValue}
           _onKeydown={() => setIdValue(idValue)}
           _onChange={handleIdInputChange}
+          errorMessage="아이디는 최소 6자리에서 최대 16자리까지 입력할 수 있습니다."
         ></TextInput>
         <TextInput
           label="패스워드"
@@ -70,6 +71,7 @@ export const LoginPage = () => {
           type="password"
           value={passwordValue}
           _onChange={handlePasswordInputChange}
+          errorMessage="비밀번호는 최소 6자리에서 12자리까지 입력할 수 있다."
         ></TextInput>
         <Button
           width="100%"
