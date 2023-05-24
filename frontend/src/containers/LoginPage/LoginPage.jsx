@@ -3,7 +3,7 @@ import imagefiles from '@assets/images/index';
 import { TextInput } from '@src/components/TextInput/TextInput';
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const cx = classNames.bind(styles);
 
 export const LoginPage = () => {
@@ -26,6 +26,7 @@ export const LoginPage = () => {
 
   const [idValue, setIdValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [isCTADisabled, setIsCTADisabled] = useState(true);
 
   const handleIdInputChange = (event) => {
     setIdValue(event.target.value);
@@ -35,30 +36,18 @@ export const LoginPage = () => {
     setPasswordValue(event.target.value);
   };
 
-  const idTextInputProps = {
-    label: '아이디',
-    size: 'l',
+  const enableCTAIfTextFiledFilled = () => {
+    const isAllFilled = Boolean(idValue) && Boolean(passwordValue);
+    if (isAllFilled) {
+      setIsCTADisabled(false);
+    } else {
+      setIsCTADisabled(true);
+    }
   };
 
-  const passwordTextInputProps = {
-    label: '패스워드',
-    size: 'l',
-    type: 'password',
-  };
-
-  const idLoginBtnProps = {
-    width: '100%',
-    color: 'blue',
-    text: '아이디로 로그인',
-  };
-
-  const registerBtnProps = {
-    width: '100%',
-    text: '회원가입',
-    type: 'ghost',
-    btnSize: 's',
-    iconName: 'plus',
-  };
+  useEffect(() => {
+    enableCTAIfTextFiledFilled();
+  }, [idValue, passwordValue]);
 
   return (
     <div className={loginPageClassNames}>
@@ -67,18 +56,32 @@ export const LoginPage = () => {
         <Button {...githubLoginProps} _onClick={handleClick}></Button>
         <p>or</p>
         <TextInput
-          {...idTextInputProps}
+          label="아이디"
+          size="l"
           value={idValue}
           _onKeydown={() => setIdValue(idValue)}
           _onChange={handleIdInputChange}
         ></TextInput>
         <TextInput
-          {...passwordTextInputProps}
+          label="패스워드"
+          size="l"
+          type="password"
           value={passwordValue}
           _onChange={handlePasswordInputChange}
         ></TextInput>
-        <Button {...idLoginBtnProps} status="disabled"></Button>
-        <Button {...registerBtnProps}></Button>
+        <Button
+          width="100%"
+          color="blue"
+          text="아이디로 로그인"
+          status={isCTADisabled ? 'disabled' : 'default'}
+        ></Button>
+        <Button
+          width="100%"
+          text="회원가입"
+          type="ghost"
+          btnSize="s"
+          iconName="plus"
+        ></Button>
       </div>
     </div>
   );
