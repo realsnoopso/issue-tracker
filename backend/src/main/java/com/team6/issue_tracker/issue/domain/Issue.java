@@ -30,7 +30,7 @@ public class Issue {
 
     private String contents;
 
-    private Status status;
+    private boolean status;
 
     private Writer writer;
 
