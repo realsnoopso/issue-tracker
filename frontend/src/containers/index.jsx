@@ -6,6 +6,8 @@ import { LoginPage } from './LoginPage/LoginPage';
 import { AuthPage } from './AuthPage/AuthPage';
 import { IssueDetail } from './IssueDetail/IssueDetail';
 import { DetailHeader } from './IssueDetail/DetailHeader/DetailHeader';
+import { DetailBody } from './IssueDetail/DetailBody/DetailBody';
+import { CommentElement } from './IssueDetail/DetailBody/CommentElement/CommentElement';
 
 export {
   IssuePage,
@@ -16,4 +18,6 @@ export {
   AuthPage,
   IssueDetail,
   DetailHeader,
+  DetailBody,
+  CommentElement,
 };

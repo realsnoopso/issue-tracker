@@ -92,12 +92,14 @@ export const issueList = [
     title: '새 기능 추가',
     comment: [
       {
-        writer: members[0],
+        writer: members[1],
         contents: '새 기능 추가에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:00.759Z',
       },
       {
-        writer: members[1],
+        writer: members[0],
         contents: '새 기능 추가에 대한 또 다른 의견입니다.',
+        createdAt: '2023-05-24T15:10:00.759Z',
       },
     ],
     writer: members[1],
@@ -114,6 +116,7 @@ export const issueList = [
       {
         writer: members[2],
         contents: '버그 수정에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:00.759Z',
       },
     ],
     writer: members[2],
@@ -130,6 +133,7 @@ export const issueList = [
       {
         writer: members[3],
         contents: 'UI 개선에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:00.759Z',
       },
     ],
     writer: members[2],
@@ -146,6 +150,7 @@ export const issueList = [
       {
         writer: members[3],
         contents: '새로운 사용자 지정 필드 추가에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:07.759Z',
       },
     ],
     writer: members[0],
@@ -162,6 +167,12 @@ export const issueList = [
       {
         writer: members[1],
         contents: '새로운 사용자 지정 필드 추가에 대한 의견입니다.',
+        createdAt: '2023-05-23T15:02:07.759Z',
+      },
+      {
+        writer: members[3],
+        contents: '새로운 의견입니다.',
+        createdAt: '2023-05-23T15:02:07.759Z',
       },
     ],
     writer: members[0],
@@ -178,6 +189,12 @@ export const issueList = [
       {
         writer: members[1],
         contents: '검색 기능 개선에 대한 의견입니다.',
+        createdAt: '2023-05-22T15:02:07.759Z',
+      },
+      {
+        writer: members[2],
+        contents: '코드스쿼드 짱.',
+        createdAt: '2023-05-24T15:02:07.759Z',
       },
     ],
     writer: members[2],
@@ -194,6 +211,7 @@ export const issueList = [
       {
         writer: members[3],
         contents: '새로운 보고서 템플릿 추가에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:02:07.759Z',
       },
     ],
     writer: members[1],
@@ -210,6 +228,7 @@ export const issueList = [
       {
         writer: members[2],
         contents: '새로운 기능에 대한 사용자 테스트에 대한 의견입니다.',
+        createdAt: '2023-05-20T15:02:07.759Z',
       },
     ],
     writer: members[2],
@@ -224,8 +243,9 @@ export const issueList = [
     title: '새로운 기능에 대한 성능 테스트 추가',
     comment: [
       {
-        writer: members[2],
+        writer: members[0],
         contents: '새로운 기능에 대한 성능 테스트에 대한 의견입니다.',
+        createdAt: '2023-05-16T15:02:07.759Z',
       },
     ],
     writer: members[1],
