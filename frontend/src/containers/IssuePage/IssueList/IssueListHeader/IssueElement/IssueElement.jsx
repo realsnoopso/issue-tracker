@@ -1,5 +1,6 @@
 import styles from './IssueElement.module.css';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import { Icon, InformationTag, Profile, ElapsedTime } from '@components/index';
 
 export const IssueElement = ({
@@ -29,7 +30,10 @@ export const IssueElement = ({
               ></Icon>
             )}
           </div>
-          <div className="typo-title-medium">{title}</div>
+          <div className="typo-title-medium">
+            {' '}
+            <Link to={`/detail/${issueNumber}`}>{title}</Link>
+          </div>
           {label && (
             <InformationTag
               text={label.title}

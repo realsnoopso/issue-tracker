@@ -4,6 +4,8 @@ import { IssueElement } from './IssuePage/IssueList/IssueListHeader/IssueElement
 import { IssueListHeader } from './IssuePage/IssueList/IssueListHeader/IssueListHeader';
 import { LoginPage } from './LoginPage/LoginPage';
 import { AuthPage } from './AuthPage/AuthPage';
+import { IssueDetail } from './IssueDetail/IssueDetail';
+import { DetailHeader } from './IssueDetail/DetailHeader/DetailHeader';
 
 export {
   IssuePage,
@@ -12,4 +14,6 @@ export {
   IssueList,
   LoginPage,
   AuthPage,
+  IssueDetail,
+  DetailHeader,
 };

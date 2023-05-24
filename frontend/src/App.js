@@ -4,14 +4,17 @@ import styles from './App.module.css';
 import classNames from 'classnames/bind';
 import { MY_USER_DATA } from '@src/constants/user';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { LoginPage, AuthPage } from '@containers/index';
+import { LoginPage, AuthPage, IssueDetail } from '@containers/index';
+import { ErrorPage } from './services/errorPage';
 
 // Todo : 로그인 조건 추가
 const router = createBrowserRouter([
   {
     path: '/',
     element: <IssuePage></IssuePage>,
+    errorElement: <ErrorPage />,
   },
+
   {
     path: '/login',
     element: <LoginPage></LoginPage>,
@@ -20,16 +23,18 @@ const router = createBrowserRouter([
     path: '/auth',
     element: <AuthPage></AuthPage>,
   },
+  {
+    path: '/detail/:issueId',
+    element: <IssueDetail />,
+  },
 ]);
 
 function App() {
   const cx = classNames.bind(styles);
   const contentsClassNames = cx('contents');
 
-  // if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser');
   worker.start();
-  // }
 
   return (
     <div className="App">

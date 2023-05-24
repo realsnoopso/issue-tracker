@@ -1,0 +1,6 @@
+.issue-detail-page {
+  max-width: var(--contents-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
