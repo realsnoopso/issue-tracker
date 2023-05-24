@@ -2,6 +2,7 @@
   display: flex;
   padding: 0px 24px;
   align-items: center;
+  position: relative;
 }
 
 .textinput:focus-within {
@@ -25,8 +26,21 @@
 }
 
 .label {
-  width: 72px;
+  font-size: var(--typo-M-fontsize);
   height: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 24px;
+  color: var(--color-light-neutral-text-weak);
+  transition: all 0.1s ease-in;
+}
+
+.label.filled,
+.textinput:focus-within .label {
+  font-size: var(--typo-S-fontsize);
+  top: 4px;
+  transform: translateY(0%);
   color: var(--color-light-neutral-text);
 }
 
@@ -36,6 +50,10 @@
   border: none;
   background-color: inherit;
   text-align: left;
+}
+
+.input.with-label {
+  margin-top: 16px;
 }
 
 .input::placeholder {

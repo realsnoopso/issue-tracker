@@ -1,27 +1,19 @@
-import { Navbar } from './components';
+import { Layout } from '@components/index';
 import { IssuePage } from '@containers/index';
-import styles from './App.module.css';
-import classNames from 'classnames/bind';
-import { MY_USER_DATA } from '@src/constants/user';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { LoginPage, AuthPage, IssueDetail } from '@containers/index';
 import { ErrorPage } from './services/errorPage';
 
-// Todo : 로그인 조건 추가
+const routerBeforeLogin = createBrowserRouter([
+  { path: '/auth', element: <AuthPage></AuthPage> },
+  { path: '*', element: <LoginPage></LoginPage> },
+]);
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <IssuePage></IssuePage>,
     errorElement: <ErrorPage />,
-  },
-
-  {
-    path: '/login',
-    element: <LoginPage></LoginPage>,
-  },
-  {
-    path: '/auth',
-    element: <AuthPage></AuthPage>,
   },
   {
     path: '/detail/:issueId',
@@ -30,18 +22,18 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const cx = classNames.bind(styles);
-  const contentsClassNames = cx('contents');
-
+  // if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser');
   worker.start();
+  //}
+
+  const isLogin = !!window.localStorage.getItem('loginToken');
 
   return (
     <div className="App">
-      <Navbar user={MY_USER_DATA}></Navbar>
-      <div className={contentsClassNames}>
-        <RouterProvider router={router} />
-      </div>
+      <Layout isLogin={isLogin}>
+        <RouterProvider router={isLogin ? router : routerBeforeLogin} />
+      </Layout>
     </div>
   );
 }
