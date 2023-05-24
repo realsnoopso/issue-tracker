@@ -1,9 +1,7 @@
-package com.team6.issue_tracker.config;
+package com.team6.issue_tracker.adapter.configuration;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import lombok.RequiredArgsConstructor;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
