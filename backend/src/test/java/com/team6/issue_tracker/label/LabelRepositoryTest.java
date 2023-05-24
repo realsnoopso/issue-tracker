@@ -65,7 +65,7 @@ class LabelRepositoryTest {
         log.debug("labels = {}", all);
 
         //then
-        assertThat(all).hasSize(1);
+        assertThat(all).hasSize(2);
     }
 
     @Test
