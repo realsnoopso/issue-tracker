@@ -1,20 +1,43 @@
 package com.team6.issue_tracker.member.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Embedded;
+import org.springframework.data.relational.core.mapping.Table;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
-@Setter
+@Builder
+@AllArgsConstructor
+@Table("member")
 public class Member {
-    private Long idx;
-    private String profile;
-    private String memberId;
-    private boolean gitSync;
 
-    public Member(Long idx, String profile, String memberId, boolean gitSync) {
-        this.idx = idx;
-        this.profile = profile;
-        this.memberId = memberId;
-        this.gitSync = gitSync;
+    @Id
+    private Long memberIdx;
+
+    @NotNull
+    private String id;
+
+    @NotNull
+    private String password;
+
+    private String profileImageUrl;
+
+    @Column("github_join")
+    private Boolean githubState;
+
+    @PersistenceCreator
+    private Member(String id, String password, String profileImageUrl, Boolean githubState) {
+        this.id = id;
+        this.password = password;
+        this.profileImageUrl = profileImageUrl;
+        this.githubState = githubState;
+    }
+
+    public static Member newMember(String id, String password, String profileImageUrl) {
+        return new Member(id, password, profileImageUrl, false);
     }
 }

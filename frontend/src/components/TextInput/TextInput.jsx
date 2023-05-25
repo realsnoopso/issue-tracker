@@ -9,42 +9,54 @@ export const TextInput = ({
   label,
   id,
   width,
-  placeholder = 'placehoder',
+  placeholder = '',
   style,
   icon,
   value,
   _onChange,
   _onKeyDown,
+  type = 'text',
+  errorMessage,
 }) => {
   const cx = classNames.bind(styles);
 
+  const container = cx('container');
   const textInputMode = size === 'l' ? cx('size-l') : cx('size-s');
   const textInputState = states === 'initial' ? cx('initial') : cx('error');
+  const isValueFilledWithLabel = label && Boolean(value);
 
   const textInputClassName = `${cx(
     'textinput'
   )} ${textInputMode} ${textInputState}`;
-  const LabelClassName = `${cx('typo-dropdown-header')} ${cx('label')}`;
-  const InputCLassName = `${cx('typo-body')} ${cx('input')}`;
+  const LabelClassName = `${cx('typo-dropdown-header')} ${cx('label')} ${
+    isValueFilledWithLabel ? cx('filled') : ''
+  }`;
+  const InputClassName = `${cx('typo-body')} ${cx('input')} ${
+    label ? cx('with-label') : ''
+  }`;
+  const InputErrorClassName = `typo-label ${errorMessage ? cx('error') : ''}`;
   const placeholderColor = `var(--color-light-neutral-text-weak)`;
 
   return (
-    <div style={{ width, ...style }} className={textInputClassName}>
-      {label && (
-        <label className={LabelClassName} htmlFor={id}>
-          {label}
-        </label>
-      )}
-      {icon && <Icon name={icon} fill={placeholderColor}></Icon>}
-      <input
-        className={InputCLassName}
-        type="text"
-        id={id}
-        value={value}
-        onChange={_onChange}
-        onKeyDown={_onKeyDown}
-        placeholder={placeholder}
-      />
+    <div className={container}>
+      <div style={{ width, ...style }} className={textInputClassName}>
+        {label && (
+          <label className={LabelClassName} htmlFor={id}>
+            {label}
+          </label>
+        )}
+        {icon && <Icon name={icon} fill={placeholderColor}></Icon>}
+        <input
+          className={InputClassName}
+          type={type}
+          id={id}
+          value={value}
+          onChange={_onChange}
+          onKeyDown={_onKeyDown}
+          placeholder={placeholder}
+        />
+      </div>
+      {errorMessage && <p className={InputErrorClassName}>{errorMessage}</p>}
     </div>
   );
 };

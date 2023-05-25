@@ -2,7 +2,7 @@ name: Deploy to AWS CodeDeploy
 
 on:
   push:
-    branches: [ test ]
+    branches: [ release ]
 
 env:
   PROJECT_NAME: issueTracker

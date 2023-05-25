@@ -1,5 +1,6 @@
 import { URL } from '@constants/api';
 import { removeEmptyKeyValues } from '@utils/index';
+import { getToken, logout } from '@services/login';
 
 export const customFetch = async ({
   path,
@@ -14,21 +15,29 @@ export const customFetch = async ({
     'Cache-Control': cache,
   };
 
-  if (hasAuth) headers.Authorization = `apikeys`;
+  if (hasAuth) {
+    const token = getToken();
+    if (!token) {
+      throw Error('No Token');
+      // TODO 로그아웃
+    }
+    headers.Authorization = `Bearer ${token}`;
+  }
 
   let url = URL + path;
   if (queries) {
-    removeEmptyKeyValues(queries);
-    const queryString =
-      '?' + new URLSearchParams(Object.entries(queries)).toString();
-    url += queryString ?? '';
+    const copiedQuries = removeEmptyKeyValues(queries);
+    const queryString = copiedQuries
+      ? '?' + new URLSearchParams(Object.entries(copiedQuries)).toString()
+      : '';
+    url += queryString;
   }
 
   try {
     const data = await fetch(url, {
       method,
       headers,
-      body,
+      body: JSON.stringify(body),
     });
     if (!data.ok) {
       throw Error(data.statusText);

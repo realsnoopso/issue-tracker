@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { URL } from '@constants/api';
-import { issueList, members, labels, milestones } from './data';
+import { issueList, members, labels, milestones, loginToken } from './data';
 import { removeEmptyKeyValues } from '@utils/index';
 import { FILTER_KEYS } from '@constants/issue';
 
@@ -42,38 +42,47 @@ export const handlers = [
 
     const filterQueries = Object.entries(queries).filter((query) => {
       const [key, _] = query;
-      const isPageQuery = key === 'page' || key === 'maxPageNum';
-      return !isPageQuery;
+      const isPaginationQuery = key === 'page' || key === 'maxPageNum';
+      return !isPaginationQuery;
     });
 
-    const filteredIssueList = filterQueries.reduce((filteredResult, query) => {
-      const [key, value] = query;
-      if (key === FILTER_KEYS.COMMENT_BY) {
-        return filteredResult
-          .map((issue) => {
-            const filteredComments = issue['comment'].filter(
-              (comment) => comment.writer.index === value
-            );
-            if (filteredComments.length > 0) {
-              return { ...issue, comment: filteredComments };
-            }
-            return null;
-          })
-          .filter((issue) => issue !== null);
-      }
+    const filteredIssueList = filterQueries.reduce(
+      (filteredResult, query) => {
+        const [queryKey, queryValue] = query;
+        if (queryKey === FILTER_KEYS.COMMENT_BY) {
+          return filteredResult
+            .map((issue) => {
+              const filteredComments = issue['comment'].filter(
+                (comment) => comment.writer.index === queryValue
+              );
+              if (filteredComments.length > 0) {
+                return { ...issue, comment: filteredComments };
+              }
+              return null;
+            })
+            .filter((issue) => issue !== null);
+        }
 
-      if (
-        key === FILTER_KEYS.WRITER ||
-        key === FILTER_KEYS.ASSIGNEE ||
-        key === FILTER_KEYS.LABEL ||
-        key === FILTER_KEYS.MILESTONE
-      ) {
-        return filteredResult.filter(
-          (issue) => String(issue[key]?.index) === String(value)
-        );
-      }
-      return filteredResult.filter((issue) => issue[key] === value);
-    }, issueList);
+        if (
+          queryKey === FILTER_KEYS.WRITER ||
+          queryKey === FILTER_KEYS.ASSIGNEE ||
+          queryKey === FILTER_KEYS.LABEL ||
+          queryKey === FILTER_KEYS.MILESTONE
+        ) {
+          if (queryValue === '-1') {
+            return filteredResult.filter((issue) => issue[queryKey] === null);
+          } else {
+            return filteredResult.filter(
+              (issue) =>
+                parseInt(issue[queryKey]?.index) === parseInt(queryValue)
+            );
+          }
+        }
+
+        return filteredResult.filter((issue) => issue[queryKey] === queryValue);
+      },
+      issueList.sort((a, b) => b.index - a.index)
+    );
 
     const filteredByStatus = (list, status) =>
       list.filter((issue) => issue.status === status);
@@ -98,7 +107,45 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(responseData));
   }),
 
-  rest.get(`http://dev.com/members`, (req, res, ctx) => {
+  rest.get(`${URL}/issue/:issueId`, (req, res, ctx) => {
+    const { issueId } = req.params;
+
+    const list = issueList.find(
+      (list) => parseInt(issueId) === parseInt(list.index)
+    );
+
+    return res(ctx.status(200), ctx.json(list));
+  }),
+
+  rest.get(`${URL}/members`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(members));
+  }),
+
+  rest.get(`${URL}/login/github`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(loginToken));
+  }),
+
+  rest.patch(`${URL}/issue/:issueId/status`, (req, res, ctx) => {
+    const { issueId } = req.params;
+    const { status } = req.body;
+
+    const foundIssue = issueList.find(
+      (list) => parseInt(issueId) === parseInt(list.index)
+    );
+
+    if (foundIssue) {
+      foundIssue.status = status;
+      return res(ctx.status(200), ctx.json(status));
+    } else {
+      return res(ctx.status(404));
+    }
+  }),
+
+  rest.get(`${URL}/test-auth`, (req, res, ctx) => {
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res(ctx.status(401), ctx.json({ message: 'Unauthorized' }));
+    }
+    return res(ctx.status(200), ctx.json({ message: 'Success' }));
   }),
 ];

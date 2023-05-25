@@ -5,6 +5,7 @@ import { IssueElement, IssueListHeader } from '@containers/index';
 export const IssueList = ({
   issueData,
   userList,
+  assigneeList,
   milestoneList,
   labelList,
   issueCount,
@@ -18,8 +19,8 @@ export const IssueList = ({
     <div className={containerClassNames}>
       {issueData && (
         <IssueListHeader
-          issueData={issueData}
           userList={userList}
+          assigneeList={assigneeList}
           milestoneList={milestoneList}
           issueCount={issueCount}
           labelList={labelList}
@@ -31,15 +32,17 @@ export const IssueList = ({
             const title = issue.title;
             const label = issue.label;
             const issueNumber = issue.index;
-            const timeStamp = issue.editedTime;
+            const timeStamp = issue.createdAt;
             const writer = issue.writer.name;
             const milesStone = issue.milestone;
             const profile = issue.writer.profile;
+            const iconName =
+              issue.status === 'open' ? 'alertCircle' : 'archive';
 
             return (
               <li key={issueNumber}>
                 <IssueElement
-                  iconName="alertCircle"
+                  iconName={iconName}
                   title={title}
                   label={label}
                   issueNumber={issueNumber}
