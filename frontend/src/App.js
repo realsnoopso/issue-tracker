@@ -1,19 +1,14 @@
 import { Layout } from '@components/index';
-import { IssuePage } from '@containers/index';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { LoginPage, AuthPage } from '@containers/index';
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
+import { routes } from '@constants/routes';
 
-const routerBeforeLogin = createBrowserRouter([
-  { path: '/auth', element: <AuthPage></AuthPage> },
-  { path: '*', element: <LoginPage></LoginPage> },
-]);
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <IssuePage></IssuePage>,
-  },
-]);
+const RequireAuth = ({ children }) => {
+  const isLogin = !!window.localStorage.getItem('loginToken');
+  if (!isLogin) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
 
 function App() {
   // if (process.env.NODE_ENV === 'development') {
@@ -21,13 +16,26 @@ function App() {
   worker.start();
   // }
 
-  const isLogin = !!window.localStorage.getItem('loginToken');
-
   return (
     <div className="App">
-      <Layout isLogin={isLogin}>
-        <RouterProvider router={isLogin ? router : routerBeforeLogin} />
-      </Layout>
+      <BrowserRouter>
+        <Routes>
+          {routes.map((route) => {
+            const { path, element, auth, hideNavbar } = route;
+            return (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  <Layout hideNavbar={hideNavbar}>
+                    {auth ? <RequireAuth>{element}</RequireAuth> : element}
+                  </Layout>
+                }
+              />
+            );
+          })}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
