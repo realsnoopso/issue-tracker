@@ -92,12 +92,14 @@ export const issueList = [
     title: '새 기능 추가',
     comment: [
       {
-        writer: members[0],
+        writer: members[1],
         contents: '새 기능 추가에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:00.759Z',
       },
       {
-        writer: members[1],
+        writer: members[0],
         contents: '새 기능 추가에 대한 또 다른 의견입니다.',
+        createdAt: '2023-05-24T15:10:00.759Z',
       },
     ],
     writer: members[1],
@@ -105,7 +107,7 @@ export const issueList = [
     label: labels[0],
     milestone: milestones[1],
     status: 'open',
-    createdTime: '2023-05-16T15:02:07.759Z',
+    createdAt: '2023-05-16T15:02:07.759Z',
   },
   {
     index: 2,
@@ -114,6 +116,7 @@ export const issueList = [
       {
         writer: members[2],
         contents: '버그 수정에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:00.759Z',
       },
     ],
     writer: members[2],
@@ -121,7 +124,7 @@ export const issueList = [
     label: labels[1],
     milestone: null,
     status: 'open',
-    createdTime: '2021-12-30T09:45:55.773Z',
+    createdAt: '2021-12-30T09:45:55.773Z',
   },
   {
     index: 3,
@@ -130,6 +133,7 @@ export const issueList = [
       {
         writer: members[3],
         contents: 'UI 개선에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:00.759Z',
       },
     ],
     writer: members[2],
@@ -137,7 +141,7 @@ export const issueList = [
     label: labels[2],
     milestone: milestones[2],
     status: 'open',
-    createdTime: '2023-05-16T12:02:07.759Z',
+    createdAt: '2023-05-16T12:02:07.759Z',
   },
   {
     index: 4,
@@ -146,6 +150,7 @@ export const issueList = [
       {
         writer: members[3],
         contents: '새로운 사용자 지정 필드 추가에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:00:07.759Z',
       },
     ],
     writer: members[0],
@@ -153,7 +158,7 @@ export const issueList = [
     label: labels[3],
     milestone: milestones[0],
     status: 'open',
-    createdTime: '2022-08-03T07:52:11.306Z',
+    createdAt: '2022-08-03T07:52:11.306Z',
   },
   {
     index: 5,
@@ -162,6 +167,12 @@ export const issueList = [
       {
         writer: members[1],
         contents: '새로운 사용자 지정 필드 추가에 대한 의견입니다.',
+        createdAt: '2023-05-23T15:02:07.759Z',
+      },
+      {
+        writer: members[3],
+        contents: '새로운 의견입니다.',
+        createdAt: '2023-05-23T15:02:07.759Z',
       },
     ],
     writer: members[0],
@@ -169,7 +180,7 @@ export const issueList = [
     label: null,
     milestone: milestones[1],
     status: 'open',
-    createdTime: '2022-03-11T21:16:39.612Z',
+    createdAt: '2022-03-11T21:16:39.612Z',
   },
   {
     index: 6,
@@ -178,6 +189,12 @@ export const issueList = [
       {
         writer: members[1],
         contents: '검색 기능 개선에 대한 의견입니다.',
+        createdAt: '2023-05-22T15:02:07.759Z',
+      },
+      {
+        writer: members[2],
+        contents: '코드스쿼드 짱.',
+        createdAt: '2023-05-24T15:02:07.759Z',
       },
     ],
     writer: members[2],
@@ -185,7 +202,7 @@ export const issueList = [
     label: labels[0],
     milestone: milestones[3],
     status: 'open',
-    createdTime: '2023-05-12T15:02:07.759Z',
+    createdAt: '2023-05-12T15:02:07.759Z',
   },
   {
     index: 7,
@@ -194,6 +211,7 @@ export const issueList = [
       {
         writer: members[3],
         contents: '새로운 보고서 템플릿 추가에 대한 의견입니다.',
+        createdAt: '2023-05-24T15:02:07.759Z',
       },
     ],
     writer: members[1],
@@ -201,7 +219,7 @@ export const issueList = [
     label: labels[2],
     milestone: milestones[2],
     status: 'open',
-    createdTime: '2022-02-01T04:33:06.209Z',
+    createdAt: '2022-02-01T04:33:06.209Z',
   },
   {
     index: 8,
@@ -210,6 +228,7 @@ export const issueList = [
       {
         writer: members[2],
         contents: '새로운 기능에 대한 사용자 테스트에 대한 의견입니다.',
+        createdAt: '2023-05-20T15:02:07.759Z',
       },
     ],
     writer: members[2],
@@ -217,15 +236,16 @@ export const issueList = [
     label: null,
     milestone: null,
     status: 'close',
-    createdTime: '2023-03-19T09:21:34.126Z',
+    createdAt: '2023-03-19T09:21:34.126Z',
   },
   {
     index: 9,
     title: '새로운 기능에 대한 성능 테스트 추가',
     comment: [
       {
-        writer: members[2],
+        writer: members[0],
         contents: '새로운 기능에 대한 성능 테스트에 대한 의견입니다.',
+        createdAt: '2023-05-16T15:02:07.759Z',
       },
     ],
     writer: members[1],
@@ -233,7 +253,7 @@ export const issueList = [
     label: labels[0],
     milestone: milestones[1],
     status: 'close',
-    createdTime: '2021-10-25T12:08:49.904Z',
+    createdAt: '2021-10-25T12:08:49.904Z',
   },
 ];
 

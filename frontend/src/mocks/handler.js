@@ -107,6 +107,16 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(responseData));
   }),
 
+  rest.get(`${URL}/issue/:issueId`, (req, res, ctx) => {
+    const { issueId } = req.params;
+
+    const list = issueList.find(
+      (list) => parseInt(issueId) === parseInt(list.index)
+    );
+
+    return res(ctx.status(200), ctx.json(list));
+  }),
+
   rest.get(`${URL}/members`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(members));
   }),

@@ -1,5 +1,6 @@
 import styles from './IssueElement.module.css';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import { Icon, InformationTag, Profile, ElapsedTime } from '@components/index';
 
 export const IssueElement = ({
@@ -29,7 +30,9 @@ export const IssueElement = ({
               ></Icon>
             )}
           </div>
-          <div className="typo-title-medium">{title}</div>
+          <div className="typo-title-medium">
+            <Link to={`/detail/${issueNumber}`}>{title}</Link>
+          </div>
           {label && (
             <InformationTag
               text={label.title}
@@ -41,7 +44,7 @@ export const IssueElement = ({
         <div className={cx(`issue-contents_column`)}>
           <div className={cx(`issue-number`)}>#{issueNumber} 이 이슈가</div>
           <div className={cx(`time-Stamp`)}>
-            <ElapsedTime createdTime={timeStamp}></ElapsedTime>
+            <ElapsedTime createdAt={timeStamp}></ElapsedTime>
           </div>
           <div className={cx(`writer`)}>{writer}님에 의해 작성되었습니다.</div>
           <div className={cx(`mile-stone`)}>

@@ -32,15 +32,17 @@ export const IssueList = ({
             const title = issue.title;
             const label = issue.label;
             const issueNumber = issue.index;
-            const timeStamp = issue.createdTime;
+            const timeStamp = issue.createdAt;
             const writer = issue.writer.name;
             const milesStone = issue.milestone;
             const profile = issue.writer.profile;
+            const iconName =
+              issue.status === 'open' ? 'alertCircle' : 'archive';
 
             return (
               <li key={issueNumber}>
                 <IssueElement
-                  iconName="alertCircle"
+                  iconName={iconName}
                   title={title}
                   label={label}
                   issueNumber={issueNumber}

@@ -7,17 +7,21 @@ export const InformationTag = ({
   backgroundColor,
   style = 'outline',
 }) => {
-  const { TagStyle, solidColor, outlineColor, outlineBgColor } = styles;
+  const { TagStyle, solidColor, outlineColor, outlineBorder } = styles;
+
+  const solidIconColor = 'var(--color-light-accent-text)';
+  const outlineIconColor = 'var(--color-light-neutral-text)';
+  const outlineBgColor = 'var(--color-light-neutral-background)';
+
   const tagBgColor = style === 'solid' ? backgroundColor : outlineBgColor;
   const textColor = style === 'solid' ? solidColor : outlineColor;
+  const iconColor = style === 'solid' ? solidIconColor : outlineIconColor;
 
-  const InfoTagClassName = `${TagStyle} typo-caption ${tagBgColor} ${textColor}`;
+  const InfoTagClassName = `${TagStyle} ${solidColor} typo-caption ${textColor} ${outlineBorder}`;
 
   return (
     <label className={InfoTagClassName} style={{ backgroundColor: tagBgColor }}>
-      {iconName && (
-        <Icon name={iconName} fill="var(--color-light-accent-text)"></Icon>
-      )}
+      {iconName && <Icon name={iconName} fill={iconColor}></Icon>}
       {text}
     </label>
   );
