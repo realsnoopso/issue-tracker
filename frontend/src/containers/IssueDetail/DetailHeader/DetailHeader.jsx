@@ -2,7 +2,7 @@ import styles from './DetailHeader.module.css';
 import classNames from 'classnames/bind';
 import { InformationTag, ElapsedTime, Button } from '@components/index';
 import { useEffect, useState } from 'react';
-import { patchIssueStatus } from '@src/services/issue';
+import { patchIssueStatus, patchIssueTitle } from '@src/services/issue';
 import { DetailUpdateTitle } from './DetailUpdateTitle/DetailUpdateTitle';
 
 export const DetailHeader = ({ issueObject }) => {
@@ -15,44 +15,48 @@ export const DetailHeader = ({ issueObject }) => {
   const issueAmendClassNames = `${cx('issue-amend')}`;
   const infoClassNames = `${cx('info')}`;
 
-  const issueTitle = issueObject.title;
   const issueId = issueObject.index;
   const timeStamp = issueObject.createdAt;
   const writer = issueObject.writer?.name;
   const commentLegnth = issueObject.comment?.length;
 
-  // Tag
   useEffect(() => {
     setStatus(issueObject.status);
+    setIssueTitle(issueObject.title);
   }, [issueObject]);
 
   const [status, setStatus] = useState(null);
   const [onUpdate, setOnUpdate] = useState(false);
+  const [issueTitle, setIssueTitle] = useState(null);
 
-  const open = '이슈 열기';
-  const close = '이슈 닫기';
-  const opened = '열린 이슈';
-  const closed = '닫힌 이슈';
+  const ISSUE_OPEN = '이슈 열기';
+  const ISSUE_CLOSE = '이슈 닫기';
+  const OPENED_ISSUE = '열린 이슈';
+  const CLOSED_ISSUE = '닫힌 이슈';
 
   const iconName = status === 'open' ? 'alertCircle' : 'archive';
   const iconStyle = status === 'open' ? 'solid' : 'outline';
-  const tagText = status === 'open' ? opened : closed;
-  const btnText = status === 'open' ? close : open;
-
-  const amendTitle = () => {
-    setOnUpdate(true);
-  };
+  const tagText = status === 'open' ? OPENED_ISSUE : CLOSED_ISSUE;
+  const btnText = status === 'open' ? ISSUE_CLOSE : ISSUE_OPEN;
 
   const issueTogle = () => {
     setStatus((prevStatus) => (prevStatus === 'open' ? 'close' : 'open'));
     patchIssueStatus(issueId, status);
   };
 
+  const amendTitle = () => {
+    setOnUpdate(true);
+  };
+
   const amendCancel = () => {
     setOnUpdate(false);
   };
 
-  const amendComplete = () => {};
+  const amendComplete = () => {
+    // setIssueTitle(inputValue);
+    patchIssueTitle(issueId, issueTitle);
+    setOnUpdate(false);
+  };
 
   return (
     <div className={headerClassNames}>
@@ -62,6 +66,7 @@ export const DetailHeader = ({ issueObject }) => {
           titleClassNames={titleClassNames}
           idClassNames={idClassNames}
           issueTitle={issueTitle}
+          setIssueTitle={setIssueTitle}
           issueId={issueId}
           issueAmendClassNames={issueAmendClassNames}
           amendComplete={amendComplete}

@@ -1,11 +1,11 @@
 import { Button, TextInputNormal } from '@components/index';
+import { useState } from 'react';
 
 export const DetailUpdateTitle = ({
   issueElClassNames,
   titleClassNames,
-  idClassNames,
   issueTitle,
-  issueId,
+  setIssueTitle,
   issueAmendClassNames,
   amendComplete,
   amendCancel,
@@ -13,12 +13,18 @@ export const DetailUpdateTitle = ({
   return (
     <>
       <div className={issueElClassNames}>
-        <div className={titleClassNames} style={{ flexGrow: 1 }}>
+        <div
+          className={titleClassNames}
+          style={{ flexGrow: 1, height: '48px' }}
+        >
           <TextInputNormal
             size="s"
             label="제목"
             states="initial"
             placeholder={issueTitle}
+            type="text"
+            value={issueTitle}
+            // onChange={handleInputChange}
           ></TextInputNormal>
         </div>
         <div className={issueAmendClassNames}>
