@@ -125,6 +125,22 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(loginToken));
   }),
 
+  rest.patch(`${URL}/issue/:issueId/status`, (req, res, ctx) => {
+    const { issueId } = req.params;
+    const { status } = req.body;
+
+    const foundIssue = issueList.find(
+      (list) => parseInt(issueId) === parseInt(list.index)
+    );
+
+    if (foundIssue) {
+      foundIssue.status = status;
+      return res(ctx.status(200), ctx.json(status));
+    } else {
+      return res(ctx.status(404));
+    }
+  }),
+
   rest.get(`${URL}/test-auth`, (req, res, ctx) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
