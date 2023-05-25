@@ -9,6 +9,7 @@ import { Filterbar } from './Filterbar/Filterbar';
 import { ElapsedTime } from './ElapsedTime/ElapsedTime';
 import { Layout } from './Layout/Layout';
 import { WriteBox } from './WriteBox/WriteBox';
+import { Sidebox } from './Sidebox/Sidebox';
 
 export {
   Dropdown,
@@ -22,4 +23,5 @@ export {
   ElapsedTime,
   Layout,
   WriteBox,
+  Sidebox,
 };

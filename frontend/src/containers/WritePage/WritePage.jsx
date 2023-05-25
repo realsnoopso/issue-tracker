@@ -3,7 +3,7 @@ import { Profile, Button } from '@components/index';
 import { MY_USER_DATA } from '@src/constants/user';
 import classNames from 'classnames/bind';
 import styles from './WritePage.module.css';
-import { WriteBox } from '@components/index';
+import { WriteBox, Sidebox } from '@components/index';
 import { postIssue } from '@services/issue';
 import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
@@ -61,7 +61,9 @@ export const WritePage = () => {
           contentsState={[contentsValue, setContentsValue]}
           setIsCTADisabled={setIsCTADisabled}
         />
-        <div className={sidebarClassNames}>옆에 있는거~~</div>
+        <div className={sidebarClassNames}>
+          <Sidebox />
+        </div>
       </div>
       <div className={footerClassNames}>
         <Button
