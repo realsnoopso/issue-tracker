@@ -16,28 +16,26 @@ export const WritePage = () => {
   const [inputValue, setInputValue] = useState('');
   const [textareaValue, setTextareaValue] = useState('');
   const [showCaption, setShowCaption] = useState(false);
-  const maxLength = 1800;
+  const maxLength = 1000;
 
-  const handleTextAreaOnChange = (event) => {
-    const value = event.target.value;
+  const handleTextAreaOnKeyDown = () => {
+    debounce(() => {
+      setShowCaption(true);
+    }, 0)();
+  };
+
+  const handleTextAreaOnKeyup = () => {
     const labelShowTime = 2000;
-
-    setShowCaption(true);
-
-    let timeoutId;
-
-    if (timeoutId) {
-      clearTimeout(timeoutId); // 이전 setTimeout을 취소합니다.
-    }
-
-    timeoutId = setTimeout(() => {
+    debounce(() => {
       setShowCaption(false);
-    }, labelShowTime);
+    }, labelShowTime)();
+  };
 
+  const handleTextAreaOnChange = ({ target }) => {
+    const value = target.value;
     if (value.length >= maxLength) {
       return setTextareaValue(value.slice(0, maxLength));
     }
-
     setTextareaValue(value);
   };
 
@@ -59,6 +57,8 @@ export const WritePage = () => {
             _onChange={handleTextAreaOnChange}
             value={textareaValue}
             showCaption={showCaption}
+            _onKeyDown={handleTextAreaOnKeyDown}
+            _onKeyUp={handleTextAreaOnKeyup}
           ></TextInput>
         </div>
         <div className={sidebarClassNames}>옆에 있는거~~</div>
