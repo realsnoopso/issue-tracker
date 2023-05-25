@@ -21,6 +21,23 @@ export const getIssueDetail = async ({ issueId }) => {
   return response;
 };
 
+export const patchIssueStatus = async (issueId, status) => {
+  try {
+    const response = await customFetch({
+      path: `/issue/${issueId}/status`,
+      method: 'PATCH',
+      body: {
+        status,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const getIssueList = async ({
   status = 'open',
   page = 0,

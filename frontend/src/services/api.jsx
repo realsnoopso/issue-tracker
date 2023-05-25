@@ -37,7 +37,7 @@ export const customFetch = async ({
     const data = await fetch(url, {
       method,
       headers,
-      body,
+      body: JSON.stringify(body),
     });
     if (!data.ok) {
       throw Error(data.statusText);

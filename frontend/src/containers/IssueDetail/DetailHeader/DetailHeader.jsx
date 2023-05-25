@@ -2,6 +2,7 @@ import styles from './DetailHeader.module.css';
 import classNames from 'classnames/bind';
 import { InformationTag, ElapsedTime, Button } from '@components/index';
 import { useEffect, useState } from 'react';
+import { patchIssueStatus } from '@src/services/issue';
 
 export const DetailHeader = ({ issueObject }) => {
   const cx = classNames.bind(styles);
@@ -42,6 +43,7 @@ export const DetailHeader = ({ issueObject }) => {
 
   const issueTogle = () => {
     setStatus((prevStatus) => (prevStatus === 'open' ? 'close' : 'open'));
+    patchIssueStatus(issueId, status);
   };
 
   return (
