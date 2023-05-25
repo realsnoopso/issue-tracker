@@ -10,6 +10,7 @@ import {
 } from '@services/issue';
 import { IssueList } from '@containers/index';
 import { isFilterApplied } from '@services/issue';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -27,6 +28,8 @@ export const IssuePage = () => {
   const [milestoneList, setMilestoneList] = useState([]);
   const [labelAndMilestoneInfo, setLabelAndMilestoneInfo] = useState(tabDatas);
   const [issueCount, setIssueCounts] = useState({ open: 0, closed: 0 });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const noneLabel = {
@@ -81,6 +84,10 @@ export const IssuePage = () => {
 
   const handleFilterClearBtnClick = () => setFilters(initialFilter);
 
+  const handleWriteBtnClick = () => {
+    navigate('/write');
+  };
+
   const filterClearButtonInfo = {
     iconName: 'xSquare',
     type: 'ghost',
@@ -104,6 +111,7 @@ export const IssuePage = () => {
           <div className={headerRightClassNames}>
             <Tab buttonDatas={labelAndMilestoneInfo}></Tab>
             <Button
+              _onClick={handleWriteBtnClick}
               text={CTAbtn}
               btnSize="s"
               color="blue"
