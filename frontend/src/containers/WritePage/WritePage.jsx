@@ -3,8 +3,7 @@ import { Profile, Button } from '@components/index';
 import { MY_USER_DATA } from '@src/constants/user';
 import classNames from 'classnames/bind';
 import styles from './WritePage.module.css';
-import { TextInput, WriteBox } from '@components/index';
-import { debounce } from '@utils/index';
+import { WriteBox } from '@components/index';
 import { postIssue } from '@services/issue';
 import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
@@ -17,8 +16,8 @@ export const WritePage = () => {
 
   const navigate = useNavigate();
 
-  const [titleValue, setTitleValue] = useState('');
-  const [contentsValue, setContentsValue] = useState('');
+  const [titleValue, setTitleValue] = useState(null);
+  const [contentsValue, setContentsValue] = useState(null);
   const [assigneeValue, setAssigneeValue] = useState(null);
   const [milestoneValue, setMilestoneValue] = useState(null);
   const [labelValue, setLabelValue] = useState(null);
@@ -40,7 +39,7 @@ export const WritePage = () => {
   };
 
   const enableCTAIfTextFiledFilled = () => {
-    const isAllFilled = Boolean(titleValue) && Boolean(contentsValue);
+    const isAllFilled = Boolean(titleValue);
     if (isAllFilled) {
       setIsCTADisabled(false);
     } else {
@@ -50,7 +49,7 @@ export const WritePage = () => {
 
   useEffect(() => {
     enableCTAIfTextFiledFilled();
-  }, [titleValue, contentsValue]);
+  }, [titleValue]);
 
   return (
     <>

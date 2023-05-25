@@ -2,9 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './WriteBox.module.css';
 import { TextInput } from '@src/components/TextInput/TextInput';
 import { debounce } from '@utils/index';
-import { postIssue } from '@services/issue';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 export const WriteBox = ({
@@ -49,19 +47,6 @@ export const WriteBox = ({
       setShowCaption(false);
     }, labelShowTime)();
   };
-
-  const enableCTAIfTextFiledFilled = () => {
-    const isAllFilled = Boolean(titleValue) && Boolean(contentsValue);
-    if (isAllFilled) {
-      setIsCTADisabled(false);
-    } else {
-      setIsCTADisabled(true);
-    }
-  };
-
-  useEffect(() => {
-    enableCTAIfTextFiledFilled();
-  }, [titleValue, contentsValue]);
 
   const inputContainerClassNames = `${cx('input-container')}`;
   return (
