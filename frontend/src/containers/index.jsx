@@ -8,6 +8,7 @@ import { IssueDetail } from './IssueDetail/IssueDetail';
 import { DetailHeader } from './IssueDetail/DetailHeader/DetailHeader';
 import { DetailBody } from './IssueDetail/DetailBody/DetailBody';
 import { CommentElement } from './IssueDetail/DetailBody/CommentElement/CommentElement';
+import { ErrorPage } from './ErrorPage/ErrorPage';
 
 export {
   IssuePage,
@@ -20,4 +21,5 @@ export {
   DetailHeader,
   DetailBody,
   CommentElement,
+  ErrorPage,
 };
