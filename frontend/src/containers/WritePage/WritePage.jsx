@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import styles from './WritePage.module.css';
 import { TextInput } from '@src/components/TextInput/TextInput';
 import { debounce } from '@utils/index';
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 export const WritePage = () => {
@@ -17,6 +18,8 @@ export const WritePage = () => {
   const [textareaValue, setTextareaValue] = useState('');
   const [showCaption, setShowCaption] = useState(false);
   const maxLength = 1000;
+
+  const navigate = useNavigate();
 
   const handleTextAreaOnKeyDown = () => {
     debounce(() => {
@@ -70,6 +73,7 @@ export const WritePage = () => {
           iconName="xSquare"
           btnSize="m"
           text="작성 취소"
+          _onClick={() => navigate(-1)}
         ></Button>
         <Button text="완료" color="blue"></Button>
       </div>
