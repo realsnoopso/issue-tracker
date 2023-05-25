@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { InformationTag, ElapsedTime, Button } from '@components/index';
 import { useEffect, useState } from 'react';
 import { patchIssueStatus } from '@src/services/issue';
+import { DetailUpdateTitle } from './DetailUpdateTitle/DetailUpdateTitle';
 
 export const DetailHeader = ({ issueObject }) => {
   const cx = classNames.bind(styles);
@@ -26,6 +27,7 @@ export const DetailHeader = ({ issueObject }) => {
   }, [issueObject]);
 
   const [status, setStatus] = useState(null);
+  const [onUpdate, setOnUpdate] = useState(false);
 
   const open = '이슈 열기';
   const close = '이슈 닫기';
@@ -38,7 +40,7 @@ export const DetailHeader = ({ issueObject }) => {
   const btnText = status === 'open' ? close : open;
 
   const amendTitle = () => {
-    alert('제목을 편집하고 싶어요');
+    setOnUpdate(true);
   };
 
   const issueTogle = () => {
@@ -46,56 +48,103 @@ export const DetailHeader = ({ issueObject }) => {
     patchIssueStatus(issueId, status);
   };
 
+  const amendCancel = () => {
+    setOnUpdate(false);
+  };
+
+  const amendComplete = () => {};
+
   return (
     <div className={headerClassNames}>
+      {onUpdate ? (
+        <DetailUpdateTitle
+          issueElClassNames={issueElClassNames}
+          titleClassNames={titleClassNames}
+          idClassNames={idClassNames}
+          issueTitle={issueTitle}
+          issueId={issueId}
+          issueAmendClassNames={issueAmendClassNames}
+          amendComplete={amendComplete}
+          amendCancel={amendCancel}
+        ></DetailUpdateTitle>
+      ) : (
+        <DetailTitle
+          issueElClassNames={issueElClassNames}
+          titleClassNames={titleClassNames}
+          idClassNames={idClassNames}
+          issueTitle={issueTitle}
+          issueId={issueId}
+          issueAmendClassNames={issueAmendClassNames}
+          amendTitle={amendTitle}
+          btnText={btnText}
+          issueTogle={issueTogle}
+        ></DetailTitle>
+      )}
+      <div className={issueInfoClassNames}>
+        <div className="tag">
+          <InformationTag
+            iconName={iconName}
+            text={tagText}
+            backgroundColor={'#007AFF'}
+            style={iconStyle}
+          ></InformationTag>
+        </div>
+        <div className={infoClassNames}>
+          <div>이 이슈가</div>
+          <div>
+            <ElapsedTime createdAt={timeStamp}></ElapsedTime>
+          </div>
+          <div>{writer}님에 의해 작성되었습니다.</div>
+          <div>• 코멘트 {commentLegnth}개</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DetailTitle = ({
+  issueElClassNames,
+  titleClassNames,
+  idClassNames,
+  issueTitle,
+  issueId,
+  issueAmendClassNames,
+  amendTitle,
+  btnText,
+  issueTogle,
+}) => {
+  return (
+    <>
       <div className={issueElClassNames}>
         <div className={titleClassNames}>
           <span className={titleClassNames}>{issueTitle}</span>
           <span className={idClassNames}>#{issueId}</span>
         </div>
-        <div className={issueInfoClassNames}>
-          <div className="tag">
-            <InformationTag
-              iconName={iconName}
-              text={tagText}
-              backgroundColor={'#007AFF'}
-              style={iconStyle}
-            ></InformationTag>
+        <div className={issueAmendClassNames}>
+          <div>
+            <Button
+              iconName={'edit'}
+              text={'제목 편집'}
+              type={'outline'}
+              color={'blue'}
+              width={'120px'}
+              btnSize={'m'}
+              _onClick={amendTitle}
+            ></Button>
           </div>
-          <div className={infoClassNames}>
-            <div>이 이슈가</div>
-            <div>
-              <ElapsedTime createdAt={timeStamp}></ElapsedTime>
-            </div>
-            <div>{writer}님에 의해 작성되었습니다.</div>
-            <div>• 코멘트 {commentLegnth}개</div>
+          <div>
+            <Button
+              iconName={'edit'}
+              text={btnText}
+              type={'outline'}
+              color={'blue'}
+              width={'120px'}
+              btnSize={'m'}
+              _onClick={issueTogle}
+            ></Button>
           </div>
         </div>
       </div>
-      <div className={issueAmendClassNames}>
-        <div>
-          <Button
-            iconName={'edit'}
-            text={'제목 편집'}
-            type={'outline'}
-            color={'blue'}
-            width={'120px'}
-            btnSize={'m'}
-            _onClick={amendTitle}
-          ></Button>
-        </div>
-        <div>
-          <Button
-            iconName={'edit'}
-            text={btnText}
-            type={'outline'}
-            color={'blue'}
-            width={'120px'}
-            btnSize={'m'}
-            _onClick={issueTogle}
-          ></Button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };

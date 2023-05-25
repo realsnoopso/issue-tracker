@@ -10,6 +10,8 @@ import { ElapsedTime } from './ElapsedTime/ElapsedTime';
 import { Layout } from './Layout/Layout';
 import { WriteBox } from './WriteBox/WriteBox';
 import { Sidebox } from './Sidebox/Sidebox';
+import { TextInput } from './TextInput/TextInput';
+import { TextInputNormal } from './TextInputNormal/TextInputNormal';
 
 export {
   Dropdown,
@@ -24,4 +26,6 @@ export {
   Layout,
   WriteBox,
   Sidebox,
+  TextInput,
+  TextInputNormal,
 };

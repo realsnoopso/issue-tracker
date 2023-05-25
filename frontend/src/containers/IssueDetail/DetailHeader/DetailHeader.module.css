@@ -1,14 +1,15 @@
 .header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   border-bottom: 1px solid var(--color-light-neutral-text-weak);
   padding: 0px 0px 25px 0px;
 }
 .issue-element {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 0px 16px 0px;
   gap: 16px;
 }
 
