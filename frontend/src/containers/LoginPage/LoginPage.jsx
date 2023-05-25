@@ -5,6 +5,8 @@ import classNames from 'classnames/bind';
 import styles from './LoginPage.module.css';
 import { useEffect, useState } from 'react';
 import { checkValidation } from '@services/login';
+import { DOMAIN } from '@constants/routes';
+import { OAUTH_CLIENT_ID } from '@constants/login';
 const cx = classNames.bind(styles);
 
 export const LoginPage = () => {
@@ -14,9 +16,8 @@ export const LoginPage = () => {
 
   const handleLoginBtnClick = () => {
     const scope = 'user';
-    const domain = window.location.hostname;
-    const redirectUri = `${domain}/auth`;
-    const clientId = process.env.REACT_APP_OAUTH_CLIENT_ID;
+    const redirectUri = `${DOMAIN}/auth`;
+    const clientId = OAUTH_CLIENT_ID;
     window.location.href = `https://github.com/login/oauth/authorize?response_type=code&redirect_uri=${redirectUri}&client_id=${clientId}&scope=${scope}`;
   };
   const logoHeight = 40;
