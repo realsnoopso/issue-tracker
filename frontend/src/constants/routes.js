@@ -7,6 +7,11 @@ import {
   WritePage,
 } from '@containers/index';
 
+export const DOMAIN =
+  process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_PROD_URL
+    : process.env.REACT_APP_DEV_URL;
+
 export const routes = [
   { path: '/login', element: <LoginPage />, hideNavbar: true },
   { path: '/auth', element: <AuthPage />, hideNavbar: true },
