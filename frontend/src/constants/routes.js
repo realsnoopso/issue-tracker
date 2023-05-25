@@ -4,6 +4,7 @@ import {
   IssuePage,
   ErrorPage,
   IssueDetail,
+  WritePage,
 } from '@containers/index';
 
 export const routes = [
@@ -16,4 +17,5 @@ export const routes = [
     element: <IssueDetail />,
     auth: true,
   },
+  { path: '/write', element: <WritePage /> },
 ];
