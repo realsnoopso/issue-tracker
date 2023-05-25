@@ -5,18 +5,14 @@ import { debounce } from '@utils/index';
 import { useState } from 'react';
 const cx = classNames.bind(styles);
 
-export const WriteBox = ({
-  titleState,
-  contentsState,
-  hasTitle,
-  setIsCTADisabled,
-}) => {
+export const WriteBox = ({ titleState, contentsState, hasTitle }) => {
   const [titleValue, setTitleValue] = titleState;
   const [contentsValue, setContentsValue] = contentsState;
   const [showCaption, setShowCaption] = useState(false);
 
   const preventOverflowMaxNum = (value, maxLength) => {
-    if (value?.length >= maxLength) {
+    if (!value) return '';
+    if (value.length >= maxLength) {
       return value.slice(0, maxLength);
     }
     return value;
@@ -25,7 +21,6 @@ export const WriteBox = ({
   const handleTitleOnChange = ({ target }) => {
     const value = target.value;
     const maxLength = 80;
-
     setTitleValue(preventOverflowMaxNum(value, maxLength));
   };
 

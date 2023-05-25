@@ -16,8 +16,8 @@ export const WritePage = () => {
 
   const navigate = useNavigate();
 
-  const [titleValue, setTitleValue] = useState(null);
-  const [contentsValue, setContentsValue] = useState(null);
+  const [titleValue, setTitleValue] = useState('');
+  const [contentsValue, setContentsValue] = useState('');
   const [assigneeValue, setAssigneeValue] = useState(null);
   const [milestoneValue, setMilestoneValue] = useState(null);
   const [labelValue, setLabelValue] = useState(null);
@@ -26,7 +26,7 @@ export const WritePage = () => {
   const handleCTABtnOnClick = async () => {
     const issue = {
       title: titleValue,
-      contents: contentsValue,
+      contents: Boolean(contentsValue) ? contentsValue : null,
       writer: MY_USER_DATA, // TODO
       assignee: assigneeValue,
       label: labelValue,
@@ -62,7 +62,11 @@ export const WritePage = () => {
           setIsCTADisabled={setIsCTADisabled}
         />
         <div className={sidebarClassNames}>
-          <Sidebox />
+          <Sidebox
+            selectedAssigneeState={[assigneeValue, setAssigneeValue]}
+            selectedLabelState={[labelValue, setLabelValue]}
+            selectedMilstoneState={[milestoneValue, setMilestoneValue]}
+          />
         </div>
       </div>
       <div className={footerClassNames}>

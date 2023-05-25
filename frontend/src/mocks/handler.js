@@ -121,6 +121,14 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(members));
   }),
 
+  rest.get(`${URL}/label`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(labels));
+  }),
+
+  rest.get(`${URL}/milestone`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(milestones));
+  }),
+
   rest.get(`${URL}/login/github`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(loginToken));
   }),
