@@ -16,7 +16,7 @@ export const WriteBox = ({
   const [showCaption, setShowCaption] = useState(false);
 
   const preventOverflowMaxNum = (value, maxLength) => {
-    if (value.length >= maxLength) {
+    if (value?.length >= maxLength) {
       return value.slice(0, maxLength);
     }
     return value;
