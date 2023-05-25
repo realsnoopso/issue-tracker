@@ -124,4 +124,12 @@ export const handlers = [
   rest.get(`${URL}/login/github`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(loginToken));
   }),
+
+  rest.get(`${URL}/test-auth`, (req, res, ctx) => {
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res(ctx.status(401), ctx.json({ message: 'Unauthorized' }));
+    }
+    return res(ctx.status(200), ctx.json({ message: 'Success' }));
+  }),
 ];

@@ -4,6 +4,7 @@ import { TextInput } from '@src/components/TextInput/TextInput';
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.css';
 import { useEffect, useState } from 'react';
+import { checkValidation } from '@services/login';
 const cx = classNames.bind(styles);
 
 export const LoginPage = () => {
@@ -11,10 +12,11 @@ export const LoginPage = () => {
   const loginPageClassNames = `${cx('login-page')}`;
   const containerClassNames = `${cx('container')}`;
 
-  const handleClick = () => {
+  const handleLoginBtnClick = () => {
     const scope = 'user';
-    const redirectUri = 'http://localhost:3000/auth';
-    const clientId = '309fa9e4369279656330';
+    const domain = window.location.hostname;
+    const redirectUri = `${domain}/auth`;
+    const clientId = process.env.REACT_APP_OAUTH_CLIENT_ID;
     window.location.href = `https://github.com/login/oauth/authorize?response_type=code&redirect_uri=${redirectUri}&client_id=${clientId}&scope=${scope}`;
   };
   const logoHeight = 40;
@@ -27,6 +29,7 @@ export const LoginPage = () => {
   const [idValue, setIdValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isCTADisabled, setIsCTADisabled] = useState(true);
+  const [error, setError] = useState({ id: false, password: false });
 
   const handleIdInputChange = (event) => {
     setIdValue(event.target.value);
@@ -45,6 +48,21 @@ export const LoginPage = () => {
     }
   };
 
+  const handleTextInputError = (target) => {
+    const targetValue = target === 'id' ? idValue : passwordValue;
+    if (Boolean(targetValue) && !checkValidation(target, targetValue))
+      setError({ ...error, [target]: true });
+    else setError({ ...error, [target]: false });
+  };
+
+  useEffect(() => {
+    handleTextInputError('id');
+  }, [idValue]);
+
+  useEffect(() => {
+    handleTextInputError('password');
+  }, [passwordValue]);
+
   useEffect(() => {
     enableCTAIfTextFiledFilled();
   }, [idValue, passwordValue]);
@@ -53,7 +71,7 @@ export const LoginPage = () => {
     <div className={loginPageClassNames}>
       <LogoComponent height={logoHeight}></LogoComponent>
       <div className={containerClassNames}>
-        <Button {...githubLoginProps} _onClick={handleClick}></Button>
+        <Button {...githubLoginProps} _onClick={handleLoginBtnClick}></Button>
         <p>or</p>
         <TextInput
           label="아이디"
@@ -61,6 +79,11 @@ export const LoginPage = () => {
           value={idValue}
           _onKeydown={() => setIdValue(idValue)}
           _onChange={handleIdInputChange}
+          errorMessage={
+            error.id
+              ? '아이디는 최소 6자리에서 최대 16자리까지 입력할 수 있습니다.'
+              : false
+          }
         ></TextInput>
         <TextInput
           label="패스워드"
@@ -68,6 +91,11 @@ export const LoginPage = () => {
           type="password"
           value={passwordValue}
           _onChange={handlePasswordInputChange}
+          errorMessage={
+            error.password
+              ? '비밀번호는 최소 6자리에서 12자리까지 입력할 수 있습니다.'
+              : false
+          }
         ></TextInput>
         <Button
           width="100%"

@@ -1,9 +1,10 @@
 import { Layout } from '@components/index';
 import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import { routes } from '@constants/routes';
+import { getToken } from '@services/login';
 
 const RequireAuth = ({ children }) => {
-  const isLogin = !!window.localStorage.getItem('loginToken');
+  const isLogin = !!getToken();
   if (!isLogin) {
     return <Navigate to="/login" replace />;
   }
