@@ -8,7 +8,12 @@ const cx = classNames.bind(styles);
 
 export const Layout = ({ children, hideNavbar }) => {
   const contentsClassNames = `${cx('contents')}`;
-  const contentsInlineStyles = { marginTop: hideNavbar ? '0px' : '32px' };
+  const contentsInlineStyles = {
+    marginTop: hideNavbar ? '0px' : '32px',
+    maxWidth: hideNavbar ? '100%' : 'var(--contents-width)',
+    margin: hideNavbar ? '0' : '0 auto 24px',
+    padding: hideNavbar ? '0' : '0 24px',
+  };
 
   return (
     <>
