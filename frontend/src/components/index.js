@@ -8,6 +8,7 @@ import { Tab } from './Tab/Tab';
 import { Filterbar } from './Filterbar/Filterbar';
 import { ElapsedTime } from './ElapsedTime/ElapsedTime';
 import { Layout } from './Layout/Layout';
+import { TextArea } from './TextArea/TextArea';
 
 export {
   Dropdown,
@@ -20,4 +21,5 @@ export {
   Filterbar,
   ElapsedTime,
   Layout,
+  TextArea,
 };
