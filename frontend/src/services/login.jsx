@@ -23,3 +23,16 @@ export const checkPasswordValidation = () => {
 export const getToken = () => {
   return window.localStorage.getItem('loginToken');
 };
+
+export const getLoginToken = async (queryCode) => {
+  try {
+    const data = await customFetch({
+      path: '/login/github',
+      method: 'GET',
+      queries: { code: queryCode },
+    });
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
