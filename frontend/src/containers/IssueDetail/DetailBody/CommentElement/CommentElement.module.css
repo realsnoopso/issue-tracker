@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 958px;
   height: 125px;
-  border: 1px solid #d9dbe9;
+  border: 1px solid var(--color-light-neutral-border);
   border-radius: 16px;
   margin-top: 24px;
 }
@@ -12,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   padding: 16px 24px;
-  background: #f7f7fc;
+  background: var(--color-light-neutral-background);
   border-radius: 16px 16px 0px 0px;
   height: 64px;
 }
@@ -39,13 +39,28 @@
   display: flex;
   align-items: center;
   gap: 2px;
+  cursor: pointer;
 }
 
 .body {
   display: flex;
   align-items: center;
   padding: 16px 24px;
-  background: #fefefe;
+  background: var(--color-light-neutral-background-strong);
   border-radius: 0px 0px 16px 16px;
   height: 60px;
+}
+
+.writerNameText {
+  color: var(--color-light-neutral-text-strong);
+  font-size: var(--typo-M-fontsize);
+  line-height: var(--typo-M-lineheight);
+  font-weight: var(--typo-fontweight-regular);
+}
+
+.elapsedTimeText {
+  font-size: var(--typo-M-fontsize);
+  line-height: var(--typo-M-lineheight);
+  font-weight: var(--typo-fontweight-regular);
+  color: var(--color-light-neutral-text-weak);
 }
