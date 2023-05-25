@@ -1,6 +1,6 @@
 import { URL } from '@constants/api';
 import { removeEmptyKeyValues } from '@utils/index';
-import { getToken } from '@services/login';
+import { getToken, logout } from '@services/login';
 
 export const customFetch = async ({
   path,
@@ -17,7 +17,10 @@ export const customFetch = async ({
 
   if (hasAuth) {
     const token = getToken();
-    if (!token) throw Error('No Token');
+    if (!token) {
+      throw Error('No Token');
+      // TODO 로그아웃
+    }
     headers.Authorization = `Bearer ${token}`;
   }
 

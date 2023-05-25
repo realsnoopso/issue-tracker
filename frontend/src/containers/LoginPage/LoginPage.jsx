@@ -4,7 +4,7 @@ import { TextInput } from '@src/components/TextInput/TextInput';
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.css';
 import { useEffect, useState } from 'react';
-import { checkIdValidation, checkPasswordValidation } from '@services/login';
+import { checkValidation } from '@services/login';
 const cx = classNames.bind(styles);
 
 export const LoginPage = () => {
@@ -12,10 +12,11 @@ export const LoginPage = () => {
   const loginPageClassNames = `${cx('login-page')}`;
   const containerClassNames = `${cx('container')}`;
 
-  const handleClick = () => {
+  const handleLoginBtnClick = () => {
     const scope = 'user';
-    const redirectUri = 'http://localhost:3000/auth';
-    const clientId = '309fa9e4369279656330';
+    const domain = window.location.hostname;
+    const redirectUri = `${domain}/auth`;
+    const clientId = process.env.REACT_APP_OAUTH_CLIENT_ID;
     window.location.href = `https://github.com/login/oauth/authorize?response_type=code&redirect_uri=${redirectUri}&client_id=${clientId}&scope=${scope}`;
   };
   const logoHeight = 40;
@@ -49,7 +50,7 @@ export const LoginPage = () => {
 
   const handleTextInputError = (target) => {
     const targetValue = target === 'id' ? idValue : passwordValue;
-    if (Boolean(targetValue) && !checkIdValidation(targetValue))
+    if (Boolean(targetValue) && !checkValidation(target, targetValue))
       setError({ ...error, [target]: true });
     else setError({ ...error, [target]: false });
   };
@@ -70,7 +71,7 @@ export const LoginPage = () => {
     <div className={loginPageClassNames}>
       <LogoComponent height={logoHeight}></LogoComponent>
       <div className={containerClassNames}>
-        <Button {...githubLoginProps} _onClick={handleClick}></Button>
+        <Button {...githubLoginProps} _onClick={handleLoginBtnClick}></Button>
         <p>or</p>
         <TextInput
           label="아이디"
@@ -92,7 +93,7 @@ export const LoginPage = () => {
           _onChange={handlePasswordInputChange}
           errorMessage={
             error.password
-              ? '비밀번호는 최소 6자리에서 12자리까지 입력할 수 있다.'
+              ? '비밀번호는 최소 6자리에서 12자리까지 입력할 수 있습니다.'
               : false
           }
         ></TextInput>

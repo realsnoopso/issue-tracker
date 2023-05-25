@@ -8,16 +8,10 @@ const checkIsLengthValid = (input, min, max) => {
   return length >= min && length <= max;
 };
 
-export const checkIdValidation = (id) => {
+export const checkValidation = (target, value) => {
   const MIN = 6;
-  const MAX = 16;
-  return checkIsLengthValid(id, MIN, MAX);
-};
-
-export const checkPasswordValidation = () => {
-  const MIN = 6;
-  const MAX = 12;
-  return checkIsLengthValid(id, MIN, MAX);
+  const MAX = target === 'id' ? 16 : 12;
+  return checkIsLengthValid(value, MIN, MAX);
 };
 
 export const getToken = () => {
