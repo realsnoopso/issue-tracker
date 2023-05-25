@@ -1,18 +1,17 @@
 package com.team6.issue_tracker.comment;
 
-import com.team6.issue_tracker.comment.domain.Comment;
+import com.team6.issue_tracker.application.comment.Comment;
+import com.team6.issue_tracker.application.comment.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-@Transactional
 @DataJdbcTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CommentRepositoryTest {
@@ -30,7 +29,7 @@ class CommentRepositoryTest {
         log.debug("comment = {}", comment);
 
         //then
-        assertThat(comment.getContents()).isEqualTo("test comment");
+        assertThat(comment.getContents().getContents()).isEqualTo("test comment");
     }
     
     @Test
@@ -43,7 +42,7 @@ class CommentRepositoryTest {
         Comment save = commentRepository.save(testComment);
 
         //then
-        assertThat(save.getContents()).isEqualTo("testComment");
+        assertThat(save.getContents().getContents()).isEqualTo("testComment");
     }
 
     @Test
