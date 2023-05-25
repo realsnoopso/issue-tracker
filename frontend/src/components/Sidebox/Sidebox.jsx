@@ -14,6 +14,7 @@ export const Sidebox = ({
   selectedLabelState,
   selectedMilstoneState,
 }) => {
+  const sideboxClassNames = `${cx('sidebox')}`;
   const dropdownDatas = [
     {
       name: '담당자',
@@ -32,11 +33,19 @@ export const Sidebox = ({
     },
   ];
 
-  return dropdownDatas.map((data) => (
-    <SideboxElement
-      key={data.name}
-      {...data}
-      selectedState={data.selectedState}
-    ></SideboxElement>
-  ));
+  return (
+    <div className={sideboxClassNames}>
+      {dropdownDatas.map((data, i) => (
+        <SideboxElement
+          style={{
+            borderTop:
+              i !== 0 ? '1px solid var(--color-light-neutral-border)' : 'none',
+          }}
+          key={data.name}
+          {...data}
+          selectedState={data.selectedState}
+        ></SideboxElement>
+      ))}
+    </div>
+  );
 };

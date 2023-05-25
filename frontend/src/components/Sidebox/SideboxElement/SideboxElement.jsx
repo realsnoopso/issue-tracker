@@ -1,6 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './SideboxElement.module.css';
-import { Dropdown, InformationTag, Profile, Progress } from '@components/index';
+import {
+  Dropdown,
+  InformationTag,
+  Profile,
+  Progress,
+  Icon,
+} from '@components/index';
 import { useState, useEffect } from 'react';
 import { getMember } from '@services/member';
 import { getLabel } from '@services/label';
@@ -9,7 +15,9 @@ import { convertListToOptions } from '@services/dropdown';
 
 const cx = classNames.bind(styles);
 
-export const SideboxElement = ({ selectedState, name, id }) => {
+export const SideboxElement = ({ style, selectedState, name, id }) => {
+  const sideboxElementClassNames = `${cx('sidebar-element')}`;
+
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = selectedState;
   const [list, setList] = useState([]);
@@ -59,7 +67,7 @@ export const SideboxElement = ({ selectedState, name, id }) => {
   };
 
   return (
-    <>
+    <div className={sideboxElementClassNames} style={{ ...style }}>
       <Dropdown
         btnText={name}
         panelPosition="left"
@@ -68,20 +76,30 @@ export const SideboxElement = ({ selectedState, name, id }) => {
         options={options}
         selected={selected}
         optionOnClick={optionOnClick}
+        width="100%"
+        btnComponent={
+          <div className={cx('dropdown-btn')}>
+            <div>{name}</div>
+            <Icon
+              name="chevronDown"
+              fill="var(--color-light-neutral-text-weak)"
+            ></Icon>
+          </div>
+        }
       ></Dropdown>
 
       {id === 'assignee' && (
         <RequireSelectedData>
-          <div>
-            <Profile url={selected?.profile} />
-            {selected?.name}
+          <div className={cx('assignee')}>
+            <Profile size={20} url={selected?.profile} />
+            <p className="typo-label">{selected?.name}</p>
           </div>
         </RequireSelectedData>
       )}
 
       {id === 'label' && (
         <RequireSelectedData>
-          <div>
+          <div className={cx('label')}>
             <InformationTag
               {...selected}
               text={selected?.title}
@@ -92,7 +110,7 @@ export const SideboxElement = ({ selectedState, name, id }) => {
 
       {id === 'milestone' && (
         <RequireSelectedData>
-          <div>
+          <div className={cx('milestone')}>
             <Progress
               percent={
                 (selected?.closedIssueNum / selected?.totalIssueNum) * 100
@@ -102,6 +120,6 @@ export const SideboxElement = ({ selectedState, name, id }) => {
           </div>
         </RequireSelectedData>
       )}
-    </>
+    </div>
   );
 };
