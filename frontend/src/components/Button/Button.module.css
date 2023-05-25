@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.btn:disabled {
+  cursor: default;
+}
+
 .color-blue {
   background-color: var(--color-light-accent-background);
   color: var(--color-light-accent-text);

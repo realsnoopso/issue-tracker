@@ -23,7 +23,7 @@ export const Filterbar = ({ options }) => {
     width: '472px',
   });
 
-  const initaialSelectedIndex = String(0);
+  const initaialSelectedIndex = parseInt(0);
   const [selected, setSelected] = useState(initaialSelectedIndex);
   const [filters, setFilters] = useContext(filterContext);
   const initialInputValue = 'status:open';
@@ -43,9 +43,9 @@ export const Filterbar = ({ options }) => {
   };
 
   const handleDropdownOptionOnClick = ({ currentTarget }) => {
-    const selectedIndex = String(currentTarget.id);
+    const selectedIndex = parseInt(currentTarget.id);
     const selectedFilter = options.find(
-      (option) => String(option.index) === selectedIndex
+      (option) => parseInt(option.index) === selectedIndex
     ).filter;
     const newFilters = { ...initialFilter, ...selectedFilter };
     setFilters(newFilters);

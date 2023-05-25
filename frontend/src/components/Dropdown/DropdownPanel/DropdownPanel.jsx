@@ -29,7 +29,7 @@ export const DropdownPanel = ({
   };
 
   const isSelected = (selected, contents) => {
-    return String(selected) === String(contents);
+    return parseInt(selected) === parseInt(contents);
   };
 
   const handleOption = (e) => {

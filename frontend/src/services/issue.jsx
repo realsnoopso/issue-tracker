@@ -1,8 +1,42 @@
+import { URL } from '@constants/api';
 import { customFetch } from '@services/api';
 import { createContext } from 'react';
 import { removeEmptyKeyValues, deepCopy } from '@utils/index';
 
 export const filterContext = createContext();
+
+export const getIssueDetail = async ({ issueId }) => {
+  const response = await customFetch({
+    path: `/issue/${issueId}`,
+    method: 'GET',
+    queries: {
+      issueId,
+    },
+  });
+
+  if (response === null) {
+    throw new Error('Response is null');
+  }
+
+  return response;
+};
+
+export const patchIssueStatus = async (issueId, status) => {
+  try {
+    const response = await customFetch({
+      path: `/issue/${issueId}/status`,
+      method: 'PATCH',
+      body: {
+        status,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 export const getIssueList = async ({
   status = 'open',

@@ -6,6 +6,7 @@ import { useRef, useState } from 'react';
 
 export const Dropdown = ({
   optionOnClick,
+  btnComponent,
   btnText,
   hasRadioBtn,
   options,
@@ -36,11 +37,15 @@ export const Dropdown = ({
         ref={btnElement}
         style={{ width }}
       >
-        {btnText}
-        <Icon
-          name="chevronDown"
-          fill="var(--color-light-neutral-text-weak)"
-        ></Icon>
+        {btnComponent ?? (
+          <>
+            {btnText}
+            <Icon
+              name="chevronDown"
+              fill="var(--color-light-neutral-text-weak)"
+            ></Icon>
+          </>
+        )}
       </button>
       {isOpen && (
         <DropdownPanel
