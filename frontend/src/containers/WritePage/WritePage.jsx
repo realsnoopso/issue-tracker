@@ -72,6 +72,7 @@ export const WritePage = () => {
           iconName="xSquare"
           btnSize="m"
           text="작성 취소"
+          _onClick={() => navigate(-1)}
         ></Button>
         <Button
           text="완료"
