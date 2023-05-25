@@ -21,6 +21,23 @@ export const getIssueDetail = async ({ issueId }) => {
   return response;
 };
 
+export const postIssue = async (issue) => {
+  try {
+    const response = await customFetch({
+      path: `/issue`,
+      method: 'POST',
+      body: {
+        ...issue,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const patchIssueStatus = async (issueId, status) => {
   try {
     const response = await customFetch({

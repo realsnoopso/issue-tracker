@@ -148,4 +148,15 @@ export const handlers = [
     }
     return res(ctx.status(200), ctx.json({ message: 'Success' }));
   }),
+
+  rest.post(`${URL}/issue`, (req, res, ctx) => {
+    const newIssue = req.body;
+    return res(
+      ctx.status(201),
+      ctx.json({
+        message: 'User created successfully',
+        issue: newIssue,
+      })
+    );
+  }),
 ];
