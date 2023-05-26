@@ -1,24 +1,34 @@
 import { Button, TextInputNormal } from '@components/index';
+import { useState } from 'react';
 
 export const DetailUpdateTitle = ({
   issueElClassNames,
   titleClassNames,
-  idClassNames,
   issueTitle,
-  issueId,
+  setIssueTitle,
   issueAmendClassNames,
   amendComplete,
   amendCancel,
 }) => {
+  const [value, setValue] = useState(issueTitle);
+
   return (
     <>
       <div className={issueElClassNames}>
-        <div className={titleClassNames} style={{ flexGrow: 1 }}>
+        <div
+          className={titleClassNames}
+          style={{ flexGrow: 1, height: '48px' }}
+        >
           <TextInputNormal
             size="s"
             label="제목"
             states="initial"
             placeholder={issueTitle}
+            type="text"
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
           ></TextInputNormal>
         </div>
         <div className={issueAmendClassNames}>
@@ -41,7 +51,10 @@ export const DetailUpdateTitle = ({
               color={'blue'}
               width={'120px'}
               btnSize={'m'}
-              _onClick={amendComplete}
+              _onClick={() => {
+                setIssueTitle(value);
+                // amendComplete();
+              }}
             ></Button>
           </div>
         </div>
