@@ -9,13 +9,14 @@ export const TextInputNormal = ({
   id,
   width,
   placeholder,
-  flexGrow,
+  onChange,
+  value,
 }) => {
-  const [inputValue, setInputValue] = useState('');
+  // const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
+  // const handleInputChange = (event) => {
+  //   setInputValue(event.target.value);
+  // };
 
   const cx = classNames.bind(styles);
 
@@ -31,7 +32,7 @@ export const TextInputNormal = ({
   const InputCLassName = `${cx('typo-body')} ${cx('input')}`;
 
   return (
-    <div style={{ width, flexGrow }} className={textInputClassName}>
+    <div style={{ width }} className={textInputClassName}>
       <label className={LabelClassName} htmlFor={id}>
         {label}
       </label>
@@ -39,8 +40,8 @@ export const TextInputNormal = ({
         className={InputCLassName}
         type="text"
         id={id}
-        value={inputValue}
-        onChange={handleInputChange}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
       />
     </div>
