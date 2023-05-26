@@ -1,12 +1,13 @@
-package com.team6.issue_tracker.application.issue.dto;
+package com.team6.issue_tracker.application.page.dto;
 
+import com.team6.issue_tracker.application.issue.dto.Status;
 import com.team6.issue_tracker.application.issue.sql.IssueFilterProvider;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class IssueListRequest {
+public class IssuePageRequest {
 
     private Integer page;
     private Integer maxPageNum;
