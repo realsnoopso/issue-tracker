@@ -52,11 +52,19 @@ export const DetailHeader = ({ issueObject }) => {
     setOnUpdate(false);
   };
 
-  const amendComplete = () => {
-    // setIssueTitle(inputValue);
+  // const amendComplete = () => {
+  //   console.log(issueTitle);
+  //   patchIssueTitle(issueId, issueTitle);
+  //   setOnUpdate(false);
+  // };
+
+  // 주석 코드 정리 후 삭제 예정
+
+  useEffect(() => {
+    console.log(issueTitle);
     patchIssueTitle(issueId, issueTitle);
     setOnUpdate(false);
-  };
+  }, [issueTitle]);
 
   return (
     <div className={headerClassNames}>
@@ -69,7 +77,7 @@ export const DetailHeader = ({ issueObject }) => {
           setIssueTitle={setIssueTitle}
           issueId={issueId}
           issueAmendClassNames={issueAmendClassNames}
-          amendComplete={amendComplete}
+          // amendComplete={amendComplete}
           amendCancel={amendCancel}
         ></DetailUpdateTitle>
       ) : (

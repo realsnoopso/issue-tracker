@@ -10,6 +10,8 @@ export const DetailUpdateTitle = ({
   amendComplete,
   amendCancel,
 }) => {
+  const [value, setValue] = useState(issueTitle);
+
   return (
     <>
       <div className={issueElClassNames}>
@@ -23,8 +25,10 @@ export const DetailUpdateTitle = ({
             states="initial"
             placeholder={issueTitle}
             type="text"
-            value={issueTitle}
-            // onChange={handleInputChange}
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
           ></TextInputNormal>
         </div>
         <div className={issueAmendClassNames}>
@@ -47,7 +51,10 @@ export const DetailUpdateTitle = ({
               color={'blue'}
               width={'120px'}
               btnSize={'m'}
-              _onClick={amendComplete}
+              _onClick={() => {
+                setIssueTitle(value);
+                // amendComplete();
+              }}
             ></Button>
           </div>
         </div>
