@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.application.member.dto;
+package com.team6.issue_tracker.member.dto;
 
-import com.team6.issue_tracker.application.member.domain.Member;
+import com.team6.issue_tracker.member.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 
