@@ -24,7 +24,7 @@ public class GithubAccessToken {
     private int refreshToken;
 
     public String authorizationHeaderValue() {
-        return "Bearer " + accessToken;
+        return String.format("%s %s", tokenType, accessToken);
     }
 
 }
