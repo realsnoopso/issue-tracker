@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Profile, Button } from '@components/index';
 import { MY_USER_DATA } from '@src/constants/user';
 import classNames from 'classnames/bind';
 import styles from './WritePage.module.css';
-import { TextInput } from '@src/components/TextInput/TextInput';
-import { debounce } from '@utils/index';
+import { WriteBox, Sidebox } from '@components/index';
+import { postIssue } from '@services/issue';
 import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
@@ -14,57 +14,60 @@ export const WritePage = () => {
   const sidebarClassNames = `${cx('sidebar')}`;
   const inputContainerClassNames = `${cx('input-container')}`;
 
-  const [inputValue, setInputValue] = useState('');
-  const [textareaValue, setTextareaValue] = useState('');
-  const [showCaption, setShowCaption] = useState(false);
-  const maxLength = 1000;
-
   const navigate = useNavigate();
 
-  const handleTextAreaOnKeyDown = () => {
-    debounce(() => {
-      setShowCaption(true);
-    }, 0)();
+  const [titleValue, setTitleValue] = useState('');
+  const [contentsValue, setContentsValue] = useState('');
+  const [assigneeValue, setAssigneeValue] = useState(null);
+  const [milestoneValue, setMilestoneValue] = useState(null);
+  const [labelValue, setLabelValue] = useState(null);
+  const [isCTADisabled, setIsCTADisabled] = useState(true);
+
+  const handleCTABtnOnClick = async () => {
+    const issue = {
+      title: titleValue,
+      contents: Boolean(contentsValue) ? contentsValue : null,
+      writer: MY_USER_DATA, // TODO
+      assignee: assigneeValue,
+      label: labelValue,
+      milestone: milestoneValue,
+    };
+
+    await postIssue(issue);
+    alert('글쓰기 완료!');
+    navigate('/');
   };
 
-  const handleTextAreaOnKeyup = () => {
-    const labelShowTime = 2000;
-    debounce(() => {
-      setShowCaption(false);
-    }, labelShowTime)();
-  };
-
-  const handleTextAreaOnChange = ({ target }) => {
-    const value = target.value;
-    if (value.length >= maxLength) {
-      return setTextareaValue(value.slice(0, maxLength));
+  const enableCTAIfTextFiledFilled = () => {
+    const isAllFilled = Boolean(titleValue);
+    if (isAllFilled) {
+      setIsCTADisabled(false);
+    } else {
+      setIsCTADisabled(true);
     }
-    setTextareaValue(value);
   };
+
+  useEffect(() => {
+    enableCTAIfTextFiledFilled();
+  }, [titleValue]);
 
   return (
     <>
       <div className={containerClassNames}>
         <Profile url={MY_USER_DATA.profile}></Profile>
-        <div className={inputContainerClassNames}>
-          <TextInput
-            _onChange={(event) => setInputValue(event.target.value)}
-            value={inputValue}
-            placeholder="제목"
-          ></TextInput>
-          <TextInput
-            tagName="textarea"
-            style={{ height: '436px', alignItems: 'start', padding: '16px' }}
-            hasFileUpload={true}
-            label="코멘트를 입력하세요"
-            _onChange={handleTextAreaOnChange}
-            value={textareaValue}
-            showCaption={showCaption}
-            _onKeyDown={handleTextAreaOnKeyDown}
-            _onKeyUp={handleTextAreaOnKeyup}
-          ></TextInput>
+        <WriteBox
+          hasTitle={true}
+          titleState={[titleValue, setTitleValue]}
+          contentsState={[contentsValue, setContentsValue]}
+          setIsCTADisabled={setIsCTADisabled}
+        />
+        <div className={sidebarClassNames}>
+          <Sidebox
+            selectedAssigneeState={[assigneeValue, setAssigneeValue]}
+            selectedLabelState={[labelValue, setLabelValue]}
+            selectedMilstoneState={[milestoneValue, setMilestoneValue]}
+          />
         </div>
-        <div className={sidebarClassNames}>옆에 있는거~~</div>
       </div>
       <div className={footerClassNames}>
         <Button
@@ -75,7 +78,12 @@ export const WritePage = () => {
           text="작성 취소"
           _onClick={() => navigate(-1)}
         ></Button>
-        <Button text="완료" color="blue"></Button>
+        <Button
+          text="완료"
+          color="blue"
+          _onClick={handleCTABtnOnClick}
+          status={isCTADisabled ? 'disabled' : 'default'}
+        ></Button>
       </div>
     </>
   );

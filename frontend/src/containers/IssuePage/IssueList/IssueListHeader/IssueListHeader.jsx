@@ -6,6 +6,7 @@ import { FILTER_KEYS, initialFilter } from '@constants/issue';
 import { useContext, useEffect, useState } from 'react';
 import { filterContext } from '@src/services/issue';
 import { isFilterApplied } from '@services/issue';
+import { convertListToOptions } from '@services/dropdown';
 
 export const IssueListHeader = ({
   userList,
@@ -17,24 +18,6 @@ export const IssueListHeader = ({
   const cx = classNames.bind(styles);
 
   const [filters, setFilters] = useContext(filterContext);
-
-  const convertListToOptions = (list, contentsKey) => {
-    return list.map((element) => {
-      const option = {};
-      if (element.profile) {
-        option.profile = element.profile;
-      }
-
-      option.contents = element[contentsKey];
-
-      if (element.index === parseInt(-1)) {
-        option.index = element.index;
-      }
-
-      option.index = element.index;
-      return option;
-    });
-  };
 
   const userOptions = convertListToOptions(userList, 'name');
   const assigneeOptions = convertListToOptions(assigneeList, 'name');
