@@ -10,5 +10,12 @@ public class IssueService {
         this.issueRepository = issueRepository;
     }
 
+    public Integer getOpenIssueNum() {
+        return issueRepository.countAllByIsDeletedAndIsOpen(false, true);
     }
+
+    public Integer getClosedIssueNum() {
+        return issueRepository.countAllByIsDeletedAndIsOpen(false, false);
+    }
+
 }
