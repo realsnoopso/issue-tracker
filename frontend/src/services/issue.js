@@ -55,13 +55,13 @@ export const patchIssueStatus = async (issueId, status) => {
   }
 };
 
-export const patchIssueTitle = async (issueId, inputValue) => {
+export const patchIssueTitle = async (issueId, issueTitle) => {
   try {
     const response = await customFetch({
       path: `/issue/${issueId}/title`,
       method: 'PATCH',
       body: {
-        title: inputValue,
+        title: issueTitle,
       },
     });
 

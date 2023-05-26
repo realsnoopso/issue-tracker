@@ -21,52 +21,52 @@ export const DetailHeader = ({ issueObject }) => {
   const commentLegnth = issueObject.comment?.length;
 
   useEffect(() => {
-    setStatus(issueObject.status);
+    setIssueStatus(issueObject.status);
     setIssueTitle(issueObject.title);
-    setValue(issueObject.title);
+    setInputValue(issueObject.title);
   }, [issueObject]);
 
-  const [status, setStatus] = useState(null);
-  const [onUpdate, setOnUpdate] = useState(false);
+  const [issueStatus, setIssueStatus] = useState(null);
+  const [onUpdateTitle, setOnUpdateTitle] = useState(false);
   const [issueTitle, setIssueTitle] = useState(null);
-  const [value, setValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const ISSUE_OPEN = '이슈 열기';
   const ISSUE_CLOSE = '이슈 닫기';
   const OPENED_ISSUE = '열린 이슈';
   const CLOSED_ISSUE = '닫힌 이슈';
 
-  const iconName = status === 'open' ? 'alertCircle' : 'archive';
-  const iconStyle = status === 'open' ? 'solid' : 'outline';
-  const tagText = status === 'open' ? OPENED_ISSUE : CLOSED_ISSUE;
-  const btnText = status === 'open' ? ISSUE_CLOSE : ISSUE_OPEN;
+  const iconName = issueStatus === 'open' ? 'alertCircle' : 'archive';
+  const iconStyle = issueStatus === 'open' ? 'solid' : 'outline';
+  const tagText = issueStatus === 'open' ? OPENED_ISSUE : CLOSED_ISSUE;
+  const btnText = issueStatus === 'open' ? ISSUE_CLOSE : ISSUE_OPEN;
 
-  const issueTogle = () => {
-    setStatus((prevStatus) => (prevStatus === 'open' ? 'close' : 'open'));
-    patchIssueStatus(issueId, status);
+  const handleEditStatusBtnOnClick = () => {
+    setIssueStatus((prevStatus) => (prevStatus === 'open' ? 'close' : 'open'));
+    patchIssueStatus(issueId, issueStatus);
   };
 
-  const amendTitle = () => {
-    setOnUpdate(true);
+  const onEditTitleBtn = () => {
+    setOnUpdateTitle(true);
   };
 
-  const amendCancel = () => {
-    setOnUpdate(false);
+  const offEditTitleBtn = () => {
+    setOnUpdateTitle(false);
   };
 
   const updateTitle = () => {
     patchIssueTitle(issueId, issueTitle);
-    setOnUpdate(false);
+    setOnUpdateTitle(false);
   };
 
-  const handleEditBtnOnClick = () => {
-    setIssueTitle(value);
+  const handleEditTitleBtnOnClick = () => {
+    setIssueTitle(inputValue);
     updateTitle();
   };
 
   return (
     <div className={headerClassNames}>
-      {onUpdate ? (
+      {onUpdateTitle ? (
         <DetailUpdateTitle
           issueElClassNames={issueElClassNames}
           titleClassNames={titleClassNames}
@@ -75,9 +75,9 @@ export const DetailHeader = ({ issueObject }) => {
           setIssueTitle={setIssueTitle}
           issueId={issueId}
           issueAmendClassNames={issueAmendClassNames}
-          amendCancel={amendCancel}
-          valueState={[value, setValue]}
-          _onClick={handleEditBtnOnClick}
+          offEditTitleBtn={offEditTitleBtn}
+          valueState={[inputValue, setInputValue]}
+          handleEditTitleBtnOnClick={handleEditTitleBtnOnClick}
         ></DetailUpdateTitle>
       ) : (
         <DetailTitle
@@ -87,9 +87,9 @@ export const DetailHeader = ({ issueObject }) => {
           issueTitle={issueTitle}
           issueId={issueId}
           issueAmendClassNames={issueAmendClassNames}
-          amendTitle={amendTitle}
+          onEditTitleBtn={onEditTitleBtn}
           btnText={btnText}
-          issueTogle={issueTogle}
+          handleEditStatusBtnOnClick={handleEditStatusBtnOnClick}
         ></DetailTitle>
       )}
       <div className={issueInfoClassNames}>
@@ -121,9 +121,9 @@ const DetailTitle = ({
   issueTitle,
   issueId,
   issueAmendClassNames,
-  amendTitle,
+  onEditTitleBtn,
   btnText,
-  issueTogle,
+  handleEditStatusBtnOnClick,
 }) => {
   return (
     <>
@@ -141,7 +141,7 @@ const DetailTitle = ({
               color={'blue'}
               width={'120px'}
               btnSize={'m'}
-              _onClick={amendTitle}
+              _onClick={onEditTitleBtn}
             ></Button>
           </div>
           <div>
@@ -152,7 +152,7 @@ const DetailTitle = ({
               color={'blue'}
               width={'120px'}
               btnSize={'m'}
-              _onClick={issueTogle}
+              _onClick={handleEditStatusBtnOnClick}
             ></Button>
           </div>
         </div>
