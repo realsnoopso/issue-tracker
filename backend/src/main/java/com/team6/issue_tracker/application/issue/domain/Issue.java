@@ -1,14 +1,21 @@
 package com.team6.issue_tracker.application.issue.domain;
 
+import com.team6.issue_tracker.application.member.domain.Member;
+import com.team6.issue_tracker.application.milestone.Milestone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +24,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Table("issue")
 public class Issue {
+
     @Id
     private Long issueIdx;
 
@@ -25,21 +33,29 @@ public class Issue {
 
     private String contents;
 
-    private Boolean status;
+    private Boolean isOpen;
 
-    private Writer writer;
+    private Boolean isDeleted;
 
-    private Assignee assignee;
+    @CreatedBy
+    private AggregateReference<Member, @NotNull Long> writer;   // member idx
 
+    private AggregateReference<Member, @NotNull Long> assignee; // member idx
+
+    private AggregateReference<Milestone, @NotNull Long> milestoneIdx;
 
     @Valid
-    @MappedCollection(idColumn = "ISSUE_ID", keyColumn = "labeling_idx")
+    @MappedCollection(idColumn = "issue_idx", keyColumn = "labeling_idx")
     @Builder.Default
-    private Map<Long, LabelOnIssue> labelsOnIssue = new HashMap<>();
+    private Map<Long, Labeling> labelOnIssue = new HashMap<>();    // labeling idx
 
+    @NotNull
+    @CreatedDate
+    @PastOrPresent
     private Instant createdAt;
 
+    @LastModifiedDate
+    @PastOrPresent
     private Instant editedAt;
-
 
 }
