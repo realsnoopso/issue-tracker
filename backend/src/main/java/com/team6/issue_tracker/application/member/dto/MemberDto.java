@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data
 public class MemberDto {
-    Long memberId;
+    Long memberIdx;
     String name;
     String profileImageUrl;
 
-    public MemberDto(Long memberId, String name, String profileImageUrl) {
-        this.memberId = memberId;
+    public MemberDto(Long memberIdx, String name, String profileImageUrl) {
+        this.memberIdx = memberIdx;
         this.name = name;
         this.profileImageUrl = profileImageUrl;
     }
