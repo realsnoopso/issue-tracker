@@ -5,7 +5,7 @@ import com.team6.issue_tracker.application.issue.domain.Issue;
 import com.team6.issue_tracker.application.issue.domain.Labeling;
 import com.team6.issue_tracker.application.issue.dto.IssueDto;
 import com.team6.issue_tracker.application.issue.dto.IssueMapper;
-import com.team6.issue_tracker.application.issue.sql.IssueFilterProvider;
+import com.team6.issue_tracker.application.issue.IssueFilter;
 import com.team6.issue_tracker.application.label.Label;
 import com.team6.issue_tracker.application.label.LabelRepository;
 import com.team6.issue_tracker.application.label.dto.LabelDto;
@@ -40,11 +40,11 @@ public class PageService {
         this.milestoneRepository = milestoneRepository;
     }
 
-    public List<IssueDto> findAllByfilter(Integer offset, IssueFilterProvider filter) {
+    public List<IssueDto> findAllByfilter(Integer offset, IssueFilter filter) {
 
         List<Issue> issueList = issueRepository.findAllByFilter(
                 filter.getIsOpen(),
-                filter.getMailestoneIdx(),
+                filter.getMailestone(),
                 filter.getWriter(),
                 filter.getAssignee(),
                 filter.getLabel(),
