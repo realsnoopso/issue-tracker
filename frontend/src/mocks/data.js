@@ -58,7 +58,7 @@ export const labels = [
 export const milestones = [
   {
     index: 1,
-    title: 'Sample Title 1',
+    title: '마일스톤 1',
     endDate: '2023-06-20',
     contents: 'Sample contents 1',
     totalIssueNum: 10,
@@ -67,7 +67,7 @@ export const milestones = [
   },
   {
     index: 2,
-    title: 'Sample Title 2',
+    title: '마일스톤 2',
     endDate: '2023-07-22',
     contents: 'Sample contents 2',
     totalIssueNum: 8,
@@ -76,7 +76,7 @@ export const milestones = [
   },
   {
     index: 3,
-    title: 'Sample Title 3',
+    title: '마일스톤 3',
     endDate: '2023-09-25',
     contents: 'Sample contents 3',
     totalIssueNum: 15,

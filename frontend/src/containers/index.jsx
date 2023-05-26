@@ -9,6 +9,7 @@ import { DetailHeader } from './IssueDetail/DetailHeader/DetailHeader';
 import { DetailBody } from './IssueDetail/DetailBody/DetailBody';
 import { CommentElement } from './IssueDetail/DetailBody/CommentElement/CommentElement';
 import { ErrorPage } from './ErrorPage/ErrorPage';
+import { DetailUpdateTitle } from './IssueDetail/DetailHeader/DetailUpdateTitle/DetailUpdateTitle';
 import { WritePage } from './WritePage/WritePage';
 
 export {
@@ -23,5 +24,6 @@ export {
   DetailBody,
   CommentElement,
   ErrorPage,
+  DetailUpdateTitle,
   WritePage,
 };
