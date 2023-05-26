@@ -7,10 +7,12 @@ export const DetailUpdateTitle = ({
   issueTitle,
   setIssueTitle,
   issueAmendClassNames,
-  amendComplete,
+  updateTitle,
   amendCancel,
+  valueState,
+  _onClick,
 }) => {
-  const [value, setValue] = useState(issueTitle);
+  const [value, setValue] = valueState;
 
   return (
     <>
@@ -51,10 +53,7 @@ export const DetailUpdateTitle = ({
               color={'blue'}
               width={'120px'}
               btnSize={'m'}
-              _onClick={() => {
-                setIssueTitle(value);
-                // amendComplete();
-              }}
+              _onClick={_onClick}
             ></Button>
           </div>
         </div>

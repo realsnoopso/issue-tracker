@@ -2,7 +2,7 @@ import styles from './DetailHeader.module.css';
 import classNames from 'classnames/bind';
 import { InformationTag, ElapsedTime, Button } from '@components/index';
 import { useEffect, useState } from 'react';
-import { patchIssueStatus, patchIssueTitle } from '@src/services/issue';
+import { patchIssueTitle, patchIssueStatus } from '@src/services/issue';
 import { DetailUpdateTitle } from './DetailUpdateTitle/DetailUpdateTitle';
 
 export const DetailHeader = ({ issueObject }) => {
@@ -23,11 +23,13 @@ export const DetailHeader = ({ issueObject }) => {
   useEffect(() => {
     setStatus(issueObject.status);
     setIssueTitle(issueObject.title);
+    setValue(issueObject.title);
   }, [issueObject]);
 
   const [status, setStatus] = useState(null);
   const [onUpdate, setOnUpdate] = useState(false);
   const [issueTitle, setIssueTitle] = useState(null);
+  const [value, setValue] = useState('');
 
   const ISSUE_OPEN = '이슈 열기';
   const ISSUE_CLOSE = '이슈 닫기';
@@ -52,19 +54,15 @@ export const DetailHeader = ({ issueObject }) => {
     setOnUpdate(false);
   };
 
-  // const amendComplete = () => {
-  //   console.log(issueTitle);
-  //   patchIssueTitle(issueId, issueTitle);
-  //   setOnUpdate(false);
-  // };
-
-  // 주석 코드 정리 후 삭제 예정
-
-  useEffect(() => {
-    console.log(issueTitle);
+  const updateTitle = () => {
     patchIssueTitle(issueId, issueTitle);
     setOnUpdate(false);
-  }, [issueTitle]);
+  };
+
+  const handleEditBtnOnClick = () => {
+    setIssueTitle(value);
+    updateTitle();
+  };
 
   return (
     <div className={headerClassNames}>
@@ -77,8 +75,9 @@ export const DetailHeader = ({ issueObject }) => {
           setIssueTitle={setIssueTitle}
           issueId={issueId}
           issueAmendClassNames={issueAmendClassNames}
-          // amendComplete={amendComplete}
           amendCancel={amendCancel}
+          valueState={[value, setValue]}
+          _onClick={handleEditBtnOnClick}
         ></DetailUpdateTitle>
       ) : (
         <DetailTitle
