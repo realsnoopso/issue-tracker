@@ -15,6 +15,8 @@ export const TextInput = ({
   value,
   _onChange,
   _onKeyDown,
+  _onInput,
+  _onKeyUp,
   tagName = 'input',
   type = 'text',
   errorMessage,
@@ -60,9 +62,11 @@ export const TextInput = ({
             type={type}
             id={id}
             value={value}
+            placeholder={placeholder}
             onChange={_onChange}
             onKeyDown={_onKeyDown}
-            placeholder={placeholder}
+            onInput={_onInput}
+            onKeyUp={_onKeyUp}
           />
         ) : (
           <input
@@ -70,9 +74,11 @@ export const TextInput = ({
             type={type}
             id={id}
             value={value}
+            placeholder={placeholder}
             onChange={_onChange}
             onKeyDown={_onKeyDown}
-            placeholder={placeholder}
+            onInput={_onInput}
+            onKeyUp={_onKeyUp}
           />
         )}
         {isTextArea && showCaption && (

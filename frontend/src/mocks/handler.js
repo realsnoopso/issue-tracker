@@ -121,6 +121,14 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(members));
   }),
 
+  rest.get(`${URL}/label`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(labels));
+  }),
+
+  rest.get(`${URL}/milestone`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(milestones));
+  }),
+
   rest.get(`${URL}/login/github`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(loginToken));
   }),
@@ -141,11 +149,38 @@ export const handlers = [
     }
   }),
 
+  rest.patch(`${URL}/issue/:issueId/title`, (req, res, ctx) => {
+    const { issueId } = req.params;
+    const { title } = req.body;
+
+    const foundIssue = issueList.find(
+      (list) => parseInt(issueId) === parseInt(list.index)
+    );
+
+    if (foundIssue) {
+      foundIssue.title = title.value;
+      return res(ctx.status(200), ctx.json(title));
+    } else {
+      return res(ctx.status(404));
+    }
+  }),
+
   rest.get(`${URL}/test-auth`, (req, res, ctx) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res(ctx.status(401), ctx.json({ message: 'Unauthorized' }));
     }
     return res(ctx.status(200), ctx.json({ message: 'Success' }));
+  }),
+
+  rest.post(`${URL}/issue`, (req, res, ctx) => {
+    const newIssue = req.body;
+    return res(
+      ctx.status(201),
+      ctx.json({
+        message: 'User created successfully',
+        issue: newIssue,
+      })
+    );
   }),
 ];

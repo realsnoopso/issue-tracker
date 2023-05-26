@@ -21,6 +21,23 @@ export const getIssueDetail = async ({ issueId }) => {
   return response;
 };
 
+export const postIssue = async (issue) => {
+  try {
+    const response = await customFetch({
+      path: `/issue`,
+      method: 'POST',
+      body: {
+        ...issue,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const patchIssueStatus = async (issueId, status) => {
   try {
     const response = await customFetch({
@@ -28,6 +45,23 @@ export const patchIssueStatus = async (issueId, status) => {
       method: 'PATCH',
       body: {
         status,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const patchIssueTitle = async (issueId, inputValue) => {
+  try {
+    const response = await customFetch({
+      path: `/issue/${issueId}/title`,
+      method: 'PATCH',
+      body: {
+        title: inputValue,
       },
     });
 

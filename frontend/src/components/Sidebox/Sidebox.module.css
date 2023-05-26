@@ -1,0 +1,5 @@
+.sidebox {
+  background-color: var(--color-light-neutral-background-strong);
+  border-radius: 16px;
+  border: 1px solid var(--color-light-neutral-border);
+}

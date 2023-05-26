@@ -54,8 +54,14 @@
 .label.filled,
 .textinput:focus-within .label {
   font-size: var(--typo-S-fontsize);
-  transform: translateY(0%);
+  top: 4px;
+  transform: translateY(0);
   color: var(--color-light-neutral-text);
+}
+
+.textarea.label.filled,
+.textarea.textinput:focus-within .label {
+  top: 0;
 }
 
 .textarea .label {
