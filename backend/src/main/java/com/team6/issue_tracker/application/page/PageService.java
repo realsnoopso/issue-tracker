@@ -13,9 +13,14 @@ import com.team6.issue_tracker.application.member.MemberRepository;
 import com.team6.issue_tracker.application.member.domain.Member;
 import com.team6.issue_tracker.application.milestone.Milestone;
 import com.team6.issue_tracker.application.milestone.MilestoneRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,7 +47,7 @@ public class PageService {
 
     public List<IssueDto> findAllByfilter(Integer offset, IssueFilter filter) {
 
-        List<Issue> issueList = issueRepository.findAllByFilter(
+        List<Issue> issueList = issueRepository.findAllBy(
                 filter.getIsOpen(),
                 filter.getMailestone(),
                 filter.getWriter(),
@@ -90,6 +95,11 @@ public class PageService {
     }
 
     public Map<Long, Milestone> getAllMilestone() {
-        return milestoneRepository.findAllByIsDeletedFalse();
+        List<Milestone> milestones = milestoneRepository.findAllByIsDeletedFalse();
+
+        Map<Long, Milestone> milestoneMap = new HashMap<>();
+        milestones.forEach(m -> milestoneMap.put(m.getMilestoneIdx(), m));
+
+        return milestoneMap;
     }
 }
