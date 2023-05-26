@@ -57,13 +57,20 @@ public class PageService {
         for (Issue issue : issueList) {
             Member writer = memberRepository.findById(issue.getWriter().getId())
                                             .orElseThrow();
-            Member assignee = memberRepository.findById(issue.getAssignee().getId())
-                                            .orElseThrow();
+            Member assignee = null;
+            if (issue.getAssignee() != null) {
+                assignee = memberRepository.findById(issue.getAssignee().getId())
+                        .orElseThrow();
+            }
             Iterable<Label> labels = labelRepository.findAllById(issue.getLabelOnIssue().values().stream()
                                                         .map(Labeling::getLabelIdx)
                                                         .collect(Collectors.toSet()));
-            Milestone milestone = milestoneRepository.findById(issue.getMilestoneIdx().getId())
-                                                    .orElseThrow();
+
+            Milestone milestone = null;
+            if (issue.getMilestoneIdx() != null) {
+                milestone = milestoneRepository.findById(issue.getMilestoneIdx().getId())
+                        .orElseThrow();
+            }
 
             List<LabelDto> labelDtoList = new ArrayList<>();
             labels.forEach(e -> labelDtoList.add(LabelDto.of(e)));
