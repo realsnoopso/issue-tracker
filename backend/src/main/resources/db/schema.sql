@@ -44,11 +44,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `milestone`;
 CREATE TABLE `issue_tracker_schema`.`milestone` (
       `milestone_idx` BIGINT NOT NULL AUTO_INCREMENT,
-      `milestone_title` VARCHAR(1000) NOT NULL,
-      `milestone_status` boolean NOT NULL,
-      `milestone_ended_at` DATETIME NULL DEFAULT NULL,
-      `milestone_contents` VARCHAR(1000) NULL DEFAULT NULL,
-      `milestone_deleted` boolean NOT NULL,
+      `title` VARCHAR(1000) NOT NULL,
+      `is_open` boolean NOT NULL,
+      `ended_at` DATETIME NULL DEFAULT NULL,
+      `contents` VARCHAR(1000) NULL DEFAULT NULL,
+      `is_deleted` boolean NOT NULL,
       PRIMARY KEY (`milestone_idx`))
 ENGINE = InnoDB;
 
