@@ -1,12 +1,13 @@
-package com.team6.issue_tracker.application.issue.dto;
+package com.team6.issue_tracker.application.page.dto;
 
-import com.team6.issue_tracker.application.issue.sql.IssueFilterProvider;
+import com.team6.issue_tracker.application.issue.dto.Status;
+import com.team6.issue_tracker.application.issue.IssueFilter;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class IssueListRequest {
+public class IssuePageRequest {
 
     private Integer page;
     private Integer maxPageNum;
@@ -14,15 +15,18 @@ public class IssueListRequest {
     private Long milestone;
     private Long writer;
     private Long assignee;
+    private List<Long> commentBy;
     private List<Long> label;
 
-    public IssueFilterProvider toFilter() {
-        return IssueFilterProvider.builder()
+    public IssueFilter toFilter() {
+        return IssueFilter.builder()
                 .isOpen(status==Status.OPEN)
+                .page(page)
                 .writer(writer)
                 .assignee(assignee)
-                .mailestoneIdx(milestone)
+                .mailestone(milestone)
                 .label(label)
+                .commentBy(commentBy)
                 .build();
     }
 }

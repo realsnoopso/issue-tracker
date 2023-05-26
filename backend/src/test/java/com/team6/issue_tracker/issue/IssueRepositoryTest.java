@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -41,7 +42,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(0,10, Sort.by(Sort.Direction.DESC, "issue_idx"));
 
         //when
-        List<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
+        Page<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
 
         //then
         assertThat(issues).hasSize(1);
@@ -54,7 +55,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(0,3, Sort.Direction.DESC, "issue_idx");
 
         //when
-        List<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
+        Page<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
 
         //then
         assertThat(issues).hasSize(1);
@@ -67,7 +68,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(1,1, Sort.by(Sort.Direction.DESC, "issue_idx"));
 
         //when
-        List<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
+        Page<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
 
         //then
         SoftAssertions.assertSoftly(softly -> {
@@ -79,8 +80,9 @@ class IssueRepositoryTest {
     @Test
     @DisplayName("필터가 있는 경우, 조건에 맞는 issue를 조회할 수 있다.")
     public void findWithFilter() throws Exception{
+        PageRequest page = PageRequest.of(1,1, Sort.by(Sort.Direction.DESC, "issue_idx"));
         //when
-        List<Issue> allByFilter = issueRepository.findAllByFilter(true, null, 2L, null, null);
+        List<Issue> allByFilter = issueRepository.findAllBy(true, null, 2L, null, null, 20, 1);
 
         //then
         assertThat(allByFilter).hasSize(2);
