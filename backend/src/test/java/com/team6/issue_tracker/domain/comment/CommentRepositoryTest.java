@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.comment;
+package com.team6.issue_tracker.domain.comment;
 
 import com.team6.issue_tracker.application.comment.Comment;
 import com.team6.issue_tracker.application.comment.CommentRepository;

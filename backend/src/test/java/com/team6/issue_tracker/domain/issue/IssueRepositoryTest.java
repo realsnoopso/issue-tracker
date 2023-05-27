@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.issue;
+package com.team6.issue_tracker.domain.issue;
 
 import com.team6.issue_tracker.application.issue.IssueRepository;
 import com.team6.issue_tracker.application.issue.domain.Issue;
