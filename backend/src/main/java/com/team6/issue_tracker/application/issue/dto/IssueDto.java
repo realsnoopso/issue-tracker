@@ -1,5 +1,6 @@
 package com.team6.issue_tracker.application.issue.dto;
 
+import com.team6.issue_tracker.application.comment.Comment;
 import com.team6.issue_tracker.application.label.dto.LabelDto;
 import com.team6.issue_tracker.application.member.dto.MemberDto;
 import com.team6.issue_tracker.application.milestone.Milestone;
@@ -23,9 +24,6 @@ public class IssueDto {
     //TODO milestone dto로 바꾸기
     private Milestone milestone;
     private List<LabelDto> labelList;
-
-    public IssueDto() {
-    }
 
     public IssueDto(Long index, String title, MemberDto writer, MemberDto assignee, Status status, Instant createdAt, Instant edditedAt, Milestone milestone, List<LabelDto> labelList) {
         this.index = index;
