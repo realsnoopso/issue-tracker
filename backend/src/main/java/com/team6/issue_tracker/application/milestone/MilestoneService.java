@@ -13,7 +13,12 @@ public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
 
-    public List<Milestone> findAll() {
-        return milestoneRepository.findAllByIsDeletedFalse();
+    public Map<Long, Milestone> getAllMilestones() {
+        List<Milestone> milestones = milestoneRepository.findAllByIsDeletedFalse();
+
+        Map<Long, Milestone> milestoneMap = new HashMap<>();
+        milestones.forEach(m -> milestoneMap.put(m.getMilestoneIdx(), m));
+        return milestoneMap;
+    }
     }
 }

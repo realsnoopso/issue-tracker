@@ -26,10 +26,10 @@ public class MemberService {
         return memberRepository.findById(index);
     }
 
-    public List<MemberDto> findAll() {
-        List<MemberDto> memberDtos = new ArrayList<>();
+    public Map<Long, MemberDto> getAllMembers() {
+        Map<Long, MemberDto> memberDtos = new HashMap<>();
         Iterable<Member> member = memberRepository.findAll();
-        member.forEach(m -> memberDtos.add(MemberDto.from(m)));
+        member.forEach(m -> memberDtos.put(m.getMemberIdx(), MemberDto.from(m)));
         return memberDtos;
     }
 }

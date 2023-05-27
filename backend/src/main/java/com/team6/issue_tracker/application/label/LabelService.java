@@ -1,9 +1,11 @@
 package com.team6.issue_tracker.application.label;
 
+import com.team6.issue_tracker.application.issue.domain.Labeling;
+import com.team6.issue_tracker.application.label.dto.LabelDto;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class LabelService {
@@ -14,9 +16,15 @@ public class LabelService {
         this.labelRepository = labelRepository;
     }
 
-    public List<Label> findAll() {
-        List<Label> labelList = new ArrayList<>();
-        labelRepository.findAllNotDeleted().forEach(labelList::add);
-        return labelList;
+    public Map<Long, LabelDto> getAllLabels() {
+        Map<Long, LabelDto> labels = new HashMap<>();
+        labelRepository.findAllNotDeleted().forEach(l -> labels.put(l.getLabelIdx(), LabelDto.of(l)));
+        return labels;
+    }
+
+    public Iterable<Label> findAllById(Collection<Labeling> values) {
+        return labelRepository.findAllById(values.stream()
+                .map(Labeling::getLabelIdx)
+                .collect(Collectors.toList()));
     }
 }
