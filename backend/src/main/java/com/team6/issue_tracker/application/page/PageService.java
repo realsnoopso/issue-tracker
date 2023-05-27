@@ -1,105 +1,102 @@
 package com.team6.issue_tracker.application.page;
 
-import com.team6.issue_tracker.application.issue.IssueRepository;
+import com.team6.issue_tracker.application.issue.IssueService;
 import com.team6.issue_tracker.application.issue.domain.Issue;
-import com.team6.issue_tracker.application.issue.domain.Labeling;
-import com.team6.issue_tracker.application.issue.dto.IssueDto;
-import com.team6.issue_tracker.application.issue.dto.IssueMapper;
+import com.team6.issue_tracker.application.page.dto.IssueDto;
+import com.team6.issue_tracker.application.issue.IssueMapper;
 import com.team6.issue_tracker.application.issue.IssueFilter;
-import com.team6.issue_tracker.application.label.Label;
-import com.team6.issue_tracker.application.label.LabelRepository;
+import com.team6.issue_tracker.application.label.LabelService;
 import com.team6.issue_tracker.application.label.dto.LabelDto;
-import com.team6.issue_tracker.application.member.MemberRepository;
-import com.team6.issue_tracker.application.member.domain.Member;
+import com.team6.issue_tracker.application.member.MemberService;
+import com.team6.issue_tracker.application.member.dto.MemberDto;
 import com.team6.issue_tracker.application.milestone.Milestone;
-import com.team6.issue_tracker.application.milestone.MilestoneRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import com.team6.issue_tracker.application.milestone.MilestoneService;
+import com.team6.issue_tracker.application.page.dto.IssuePageResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service
+@Service    // application Service
+@RequiredArgsConstructor
 public class PageService {
 
     public static final Integer PAGE_SIZE = 20;
 
-    private final IssueRepository issueRepository;
-    private final MemberRepository memberRepository;
-    private final LabelRepository labelRepository;
-    private final MilestoneRepository milestoneRepository;
+    private final IssueService issueService;
+    private final MemberService memberService;
+    private final LabelService labelService;
+    private final MilestoneService milestoneService;
 
-    public PageService(IssueRepository issueRepository,
-                       MemberRepository memberRepository,
-                       LabelRepository labelRepository,
-                       MilestoneRepository milestoneRepository) {
-        this.issueRepository = issueRepository;
-        this.memberRepository = memberRepository;
-        this.labelRepository = labelRepository;
-        this.milestoneRepository = milestoneRepository;
-    }
+    public IssuePageResponse getAPage(Integer offset, IssueFilter filter) {
 
-    public List<IssueDto> findAllByfilter(Integer offset, IssueFilter filter) {
+        Map<Long, MemberDto> members = memberService.getAllMembers();
+        Map<Long, Milestone> milestones = milestoneService.getAllMilestones();
+        Map<Long, LabelDto> labels = labelService.getAllLabels();
 
-        List<Issue> issueList = issueRepository.findAllBy(
-                filter.getIsOpen(),
-                filter.getMailestone(),
-                filter.getWriter(),
-                filter.getAssignee(),
-                filter.getLabel(),
-                PAGE_SIZE,
-                offset
-        );
+        List<Issue> issueList = issueService.findByfilterWithPage(offset, PAGE_SIZE, filter);
 
         List<IssueDto> issueDtos = new ArrayList<>();
 
         for (Issue issue : issueList) {
-            Member writer = memberRepository.findById(issue.getWriter().getId())
-                                            .orElseThrow();
-            Member assignee = null;
-            if (issue.getAssignee() != null) {
-                assignee = memberRepository.findById(issue.getAssignee().getId())
-                        .orElseThrow();
-            }
-            Iterable<Label> labels = labelRepository.findAllById(issue.getLabelOnIssue().values().stream()
-                                                        .map(Labeling::getLabelIdx)
-                                                        .collect(Collectors.toSet()));
+            MemberDto writer = getWriter(members, issue);
+            MemberDto assignee = getAssignee(members, issue);
+            Milestone milestone = getMilestone(milestones, issue);
+            List<LabelDto> labelList = getLabelList(labels, issue);
 
-            Milestone milestone = null;
-            if (issue.getMilestoneIdx() != null) {
-                milestone = milestoneRepository.findById(issue.getMilestoneIdx().getId())
-                        .orElseThrow();
-            }
-
-            List<LabelDto> labelDtoList = new ArrayList<>();
-            labels.forEach(e -> labelDtoList.add(LabelDto.of(e)));
-            IssueDto issueDto = IssueMapper.toDto(issue, writer, assignee, labelDtoList, milestone);
+            IssueDto issueDto = IssueMapper.toDto(issue, writer, assignee, labelList, milestone);
             issueDtos.add(issueDto);
         }
 
-        return issueDtos;
+        return IssuePageResponse.builder()
+                .issuesList(issueDtos)
+                .openIssueCount(issueService.getOpenIssueNum())
+                .closedIssueCount(issueService.getClosedIssueNum())
+                .page(offset)
+                .openIssueMaxPage(getOpenIssueMaxPage())
+                .closeIssueMaxPage(getCloseIssueMaxPage())
+                .userList(new ArrayList<>(members.values()))
+                .labelList(new ArrayList<>(labels.values()))
+                .milestoneList(new ArrayList<>(milestones.values()))
+                .build();
+    }
+
+    private List<LabelDto> getLabelList(Map<Long, LabelDto> labels, Issue issue) {
+        return issue.getLabelOnIssue().values()
+                        .stream()
+                        .map(e -> labels.get(e.getLabelIdx()))
+                        .collect(Collectors.toList());
+    }
+
+    private MemberDto getWriter(Map<Long, MemberDto> members, Issue issue) {
+        return members.get(issue.getWriter().getId());
+    }
+
+    private Milestone getMilestone(Map<Long, Milestone> milestones, Issue issue) {
+        Milestone milestone = null;
+        if (issue.getMilestoneIdx() != null) {
+            milestone = milestones.get(issue.getMilestoneIdx().getId());
+        }
+        return milestone;
+    }
+
+    private MemberDto getAssignee(Map<Long, MemberDto> members, Issue issue) {
+        MemberDto assignee = null;
+        if (issue.getAssignee() != null) {
+            assignee = members.get(issue.getAssignee().getId());
+        }
+        return assignee;
     }
 
     public Integer getOpenIssueMaxPage() {
-        return issueRepository.countAllByIsDeletedAndIsOpen(false, true)/20;
+        return issueService.getOpenIssueNum()/PAGE_SIZE;
     }
 
     public Integer getCloseIssueMaxPage() {
-        return issueRepository.countAllByIsDeletedAndIsOpen(false, false)/20;
+        return issueService.getClosedIssueNum()/PAGE_SIZE;
     }
 
-    public Map<Long, Milestone> getAllMilestone() {
-        List<Milestone> milestones = milestoneRepository.findAllByIsDeletedFalse();
-
-        Map<Long, Milestone> milestoneMap = new HashMap<>();
-        milestones.forEach(m -> milestoneMap.put(m.getMilestoneIdx(), m));
-
-        return milestoneMap;
-    }
 }
