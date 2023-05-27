@@ -1,8 +1,8 @@
-package com.team6.issue_tracker.application.comment.dto;
+package com.team6.issue_tracker.domain.comment.dto;
 
-import com.team6.issue_tracker.application.comment.Comment;
-import com.team6.issue_tracker.application.member.domain.Member;
-import com.team6.issue_tracker.application.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.comment.Comment;
+import com.team6.issue_tracker.domain.member.domain.Member;
+import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

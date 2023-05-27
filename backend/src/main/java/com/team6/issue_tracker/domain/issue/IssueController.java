@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.application.issue;
+package com.team6.issue_tracker.domain.issue;
 
-import com.team6.issue_tracker.application.issue.dto.IssueDetail;
+import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

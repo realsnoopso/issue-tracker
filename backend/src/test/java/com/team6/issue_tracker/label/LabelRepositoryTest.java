@@ -1,7 +1,7 @@
 package com.team6.issue_tracker.label;
 
-import com.team6.issue_tracker.application.label.Label;
-import com.team6.issue_tracker.application.label.LabelRepository;
+import com.team6.issue_tracker.domain.label.Label;
+import com.team6.issue_tracker.domain.label.LabelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

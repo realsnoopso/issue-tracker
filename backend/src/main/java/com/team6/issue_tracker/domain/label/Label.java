@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.application.label;
+package com.team6.issue_tracker.domain.label;
 
 import lombok.Builder;
 import lombok.Getter;

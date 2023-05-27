@@ -1,7 +1,7 @@
 package com.team6.issue_tracker.member;
 
-import com.team6.issue_tracker.application.member.MemberRepository;
-import com.team6.issue_tracker.application.member.domain.Member;
+import com.team6.issue_tracker.domain.member.MemberRepository;
+import com.team6.issue_tracker.domain.member.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

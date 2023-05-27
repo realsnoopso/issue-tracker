@@ -1,9 +1,9 @@
-package com.team6.issue_tracker.application.issue.dto;
+package com.team6.issue_tracker.domain.issue.dto;
 
-import com.team6.issue_tracker.application.comment.dto.CommentDto;
-import com.team6.issue_tracker.application.label.dto.LabelDto;
-import com.team6.issue_tracker.application.member.dto.MemberDto;
-import com.team6.issue_tracker.application.milestone.Milestone;
+import com.team6.issue_tracker.domain.comment.dto.CommentDto;
+import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.milestone.Milestone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
