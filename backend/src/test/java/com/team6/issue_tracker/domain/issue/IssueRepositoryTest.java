@@ -1,7 +1,5 @@
 package com.team6.issue_tracker.domain.issue;
 
-import com.team6.issue_tracker.application.issue.IssueRepository;
-import com.team6.issue_tracker.application.issue.domain.Issue;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
