@@ -83,7 +83,7 @@ public class IssueService {
             commentDtos.add(dto);
         }
 
-        return IssueMapper.toDetails(issue, MemberDto.from(writer), MemberDto.from(assignee), labelDtoList, milestone, commentDtos);
+        return IssueDetail.toDetails(issue, MemberDto.from(writer), MemberDto.from(assignee), labelDtoList, milestone, commentDtos);
     }
 
     public void saveNewIssue(Issue toIssue) {
