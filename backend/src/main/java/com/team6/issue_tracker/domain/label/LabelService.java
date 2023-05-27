@@ -1,6 +1,6 @@
 package com.team6.issue_tracker.domain.label;
 
-import com.team6.issue_tracker.domain.issue.domain.Labeling;
+import com.team6.issue_tracker.domain.issue.Labeling;
 import com.team6.issue_tracker.domain.label.dto.LabelDto;
 import org.springframework.stereotype.Service;
 

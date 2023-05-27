@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.domain.issue.domain;
+package com.team6.issue_tracker.domain.issue;
 
 import com.team6.issue_tracker.domain.label.Label;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;

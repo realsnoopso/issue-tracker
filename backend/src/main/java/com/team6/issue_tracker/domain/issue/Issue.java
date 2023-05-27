@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.domain.issue.domain;
+package com.team6.issue_tracker.domain.issue;
 
-import com.team6.issue_tracker.domain.member.domain.Member;
+import com.team6.issue_tracker.domain.member.Member;
 import com.team6.issue_tracker.domain.milestone.Milestone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

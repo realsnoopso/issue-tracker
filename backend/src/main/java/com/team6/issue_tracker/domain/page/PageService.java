@@ -1,7 +1,7 @@
 package com.team6.issue_tracker.domain.page;
 
 import com.team6.issue_tracker.domain.issue.IssueService;
-import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.issue.Issue;
 import com.team6.issue_tracker.domain.page.dto.IssueDto;
 import com.team6.issue_tracker.domain.issue.IssueMapper;
 import com.team6.issue_tracker.domain.issue.IssueFilter;

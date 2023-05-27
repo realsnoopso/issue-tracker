@@ -1,6 +1,6 @@
 package com.team6.issue_tracker.domain.comment;
 
-import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.issue.Issue;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;

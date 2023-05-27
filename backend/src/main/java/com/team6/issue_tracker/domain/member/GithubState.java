@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.domain.member.domain;
+package com.team6.issue_tracker.domain.member;
 
 public enum GithubState {
     SYNC(true), NONE(false);
