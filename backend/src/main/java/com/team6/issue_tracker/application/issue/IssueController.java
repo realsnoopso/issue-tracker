@@ -28,8 +28,10 @@ public class IssueController {
             tags = "issue",
             description = "사용자는 새로운 이슈를 작성할 수 있다."
     )
-    @PostMapping("/issue")
+    @PostMapping("")
     public void postNewIssue(NewIssueRequest request) {
+        //TODO 유저 권한 검사
+        //TODO 유효성 검사
         issueService.saveNewIssue(request.toIssue());
     }
 
