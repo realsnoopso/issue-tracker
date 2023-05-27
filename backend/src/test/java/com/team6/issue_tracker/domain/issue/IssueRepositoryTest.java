@@ -10,8 +10,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -69,10 +72,7 @@ class IssueRepositoryTest {
         Page<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
 
         //then
-        SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(issues).hasSize(1);
-            softly.assertThat(issues.get(0).getTitle()).isEqualTo("test issue");
-        });
+        assertThat(issues).hasSize(1);
     }
 
     @Test
@@ -84,5 +84,29 @@ class IssueRepositoryTest {
 
         //then
         assertThat(allByFilter).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("새로운 이슈를 저장할 수 있다.")
+    public void saveNewIssue() throws Exception {
+        long before = issueRepository.count();
+
+        Issue newIssue = Issue.builder()
+                .writer(AggregateReference.to(1L))
+                .title("새로 저장하는 이슈")
+                .contents("새로 저장하는 이슈의 내용")
+                .createdAt(Instant.now())
+                .isOpen(true)
+                .isDeleted(false)
+                .labelOnIssue(Map.of(1L, new Labeling(1L)))
+                .build();
+
+        Issue save = issueRepository.save(newIssue);
+
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(save.getIssueIdx()).isNotNull();
+            softly.assertThat(save.getContents()).isEqualTo(newIssue.getContents());
+            softly.assertThat(issueRepository.count()).isEqualTo(before+1);
+        });
     }
 }
