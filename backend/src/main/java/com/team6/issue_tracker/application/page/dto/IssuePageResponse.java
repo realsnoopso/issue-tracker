@@ -1,7 +1,6 @@
 package com.team6.issue_tracker.application.page.dto;
 
-import com.team6.issue_tracker.application.issue.dto.IssueDto;
-import com.team6.issue_tracker.application.label.Label;
+import com.team6.issue_tracker.application.label.dto.LabelDto;
 import com.team6.issue_tracker.application.member.dto.MemberDto;
 import com.team6.issue_tracker.application.milestone.Milestone;
 import lombok.Builder;
@@ -14,9 +13,10 @@ public class IssuePageResponse {
     private Integer openIssueCount;
     private Integer closedIssueCount;
     private Integer page;
-    private Integer maxPage;
+    private Integer openIssueMaxPage;
+    private Integer closeIssueMaxPage;
     private List<IssueDto> issuesList;
-    private List<Label> labelList;
+    private List<LabelDto> labelList;
     private List<Milestone> milestoneList;
     private List<MemberDto> userList;
 
