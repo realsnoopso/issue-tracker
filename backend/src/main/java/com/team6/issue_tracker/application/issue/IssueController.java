@@ -23,6 +23,16 @@ public class IssueController {
     }
 
     @Operation(
+            summary = "이슈 작성",
+            tags = "issue",
+            description = "사용자는 새로운 이슈를 작성할 수 있다."
+    )
+    @PostMapping("/issue")
+    public IssueDetail postNewIssue(NewIssueRequest request) {
+        return issueService.findById(issueIdx);
+    }
+
+    @Operation(
             summary = "",
             tags = "issue",
             description = "사용자는 원하는 이슈를 다중 선택하여 담당자를 변경할 수 있다."
