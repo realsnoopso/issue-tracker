@@ -26,4 +26,21 @@ public class IssueMapper {
                 .milestone(milestone)
                 .build();
     }
+
+    public static IssueDetail toDetails(Issue issue, MemberDto writer, MemberDto assignee,
+                                        List<LabelDto> labels, Milestone milestone,
+                                        List<CommentDto> coments){
+        return IssueDetail.builder()
+                .index(issue.getIssueIdx())
+                .title(issue.getTitle())
+                .writer(writer)
+                .assignee(assignee)
+                .status(Status.of(issue.getIsOpen()))
+                .createdAt(issue.getCreatedAt())
+                .labelList(labels)
+                .milestone(milestone)
+                .commentList(coments)
+                .build();
+    }
+
 }
