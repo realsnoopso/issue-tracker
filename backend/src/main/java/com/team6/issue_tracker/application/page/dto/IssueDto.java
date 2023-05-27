@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.application.issue.dto;
+package com.team6.issue_tracker.application.page.dto;
 
 import com.team6.issue_tracker.application.label.dto.LabelDto;
 import com.team6.issue_tracker.application.member.dto.MemberDto;
