@@ -109,4 +109,36 @@ class IssueRepositoryTest {
             softly.assertThat(issueRepository.count()).isEqualTo(before+1);
         });
     }
+
+    @Test
+    @DisplayName("이슈 내용을 수정할 수 있다.")
+    public void updateContents() throws Exception{
+        //given
+        Instant beforeWork = Instant.now();
+        Issue issue = issueRepository.findById(1L).orElseThrow();
+        Issue updatedIssue = Issue.builder()
+                .issueIdx(issue.getIssueIdx())
+                .title(issue.getTitle())
+                .contents("수정된 내용입니다")
+                .writer(issue.getWriter())
+                .assignee(issue.getAssignee())
+                .createdAt(issue.getCreatedAt())
+                .milestoneIdx(issue.getMilestoneIdx())
+                .labelOnIssue(issue.getLabelOnIssue())
+                .editedAt(Instant.now())
+                .isOpen(issue.getIsOpen())
+                .isDeleted(issue.getIsDeleted())
+                .build();
+
+        //when
+        Issue save = issueRepository.save(updatedIssue);
+
+        //then
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(save.getContents()).isEqualTo(updatedIssue.getContents());
+            softly.assertThat(save.getIssueIdx()).isEqualTo(issue.getIssueIdx());
+            softly.assertThat(save.getCreatedAt()).isEqualTo(issue.getCreatedAt());
+            softly.assertThat(save.getEditedAt()).isAfter(beforeWork);
+        });
+    }
 }
