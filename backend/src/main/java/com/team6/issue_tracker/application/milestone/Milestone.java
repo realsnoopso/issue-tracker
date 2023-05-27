@@ -3,23 +3,19 @@ package com.team6.issue_tracker.application.milestone;
 import lombok.Builder;
 import lombok.Getter;
 import org.joda.time.LocalDateTime;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 
 import java.time.Instant;
 
 @Getter @Builder
 public class Milestone {
-
+    @Id
     private Long milestoneIdx;
-
     private String title;
-
     private Boolean isOpen;
-
     private Instant endedAt;
-
     private String contents;
-
     private Boolean isDeleted;
 
     public Milestone(String title, Instant endedAt, String contents) {
