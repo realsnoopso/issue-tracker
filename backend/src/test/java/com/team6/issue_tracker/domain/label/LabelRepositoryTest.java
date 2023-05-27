@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.label;
+package com.team6.issue_tracker.domain.label;
 
 import com.team6.issue_tracker.domain.label.Label;
 import com.team6.issue_tracker.domain.label.LabelRepository;

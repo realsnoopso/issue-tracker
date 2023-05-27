@@ -8,6 +8,10 @@ import javax.validation.constraints.NotNull;
 public class Labeling {
     AggregateReference<Label, @NotNull Long> labelIdx;
 
+    public Labeling(Long labelIdx) {
+        this.labelIdx = AggregateReference.to(labelIdx);
+    }
+
     public Long getLabelIdx() {
         return labelIdx.getId();
     }

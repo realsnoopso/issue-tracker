@@ -1,7 +1,5 @@
-package com.team6.issue_tracker.comment;
+package com.team6.issue_tracker.domain.comment;
 
-import com.team6.issue_tracker.domain.comment.entity.Comment;
-import com.team6.issue_tracker.domain.comment.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

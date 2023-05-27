@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.member;
+package com.team6.issue_tracker.domain.member;
 
 import com.team6.issue_tracker.domain.member.MemberRepository;
 import com.team6.issue_tracker.domain.member.Member;

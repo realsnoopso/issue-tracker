@@ -85,4 +85,8 @@ public class IssueService {
 
         return IssueMapper.toDetails(issue, MemberDto.from(writer), MemberDto.from(assignee), labelDtoList, milestone, commentDtos);
     }
+
+    public void saveNewIssue(Issue toIssue) {
+        issueRepository.save(toIssue);
+    }
 }
