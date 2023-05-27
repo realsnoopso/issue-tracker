@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.config.converter;
+package com.team6.issue_tracker.global.config.converter;
 
-import com.team6.issue_tracker.application.issue.dto.Status;
+import com.team6.issue_tracker.domain.issue.dto.Status;
 import org.springframework.core.convert.converter.Converter;
 
 public class StringToStatusConverter implements Converter<String, Status> {
