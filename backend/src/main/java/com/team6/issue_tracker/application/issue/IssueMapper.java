@@ -1,0 +1,80 @@
+package com.team6.issue_tracker.domain.issue;
+
+import com.team6.issue_tracker.domain.comment.dto.CommentDto;
+import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
+import com.team6.issue_tracker.domain.member.Member;
+import com.team6.issue_tracker.domain.model.Status;
+import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.milestone.Milestone;
+import com.team6.issue_tracker.domain.page.dto.IssueDto;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
+
+import javax.validation.constraints.NotNull;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class IssueMapper {
+
+    public static IssueDto toDto(Issue issue, MemberDto writer, MemberDto assignee,
+                                 List<LabelDto> labels, Milestone milestone) {
+        return IssueDto.builder()
+                .index(issue.getIssueIdx())
+                .title(issue.getTitle())
+                .writer(writer)
+                .assignee(assignee)
+                .status(Status.of(issue.getIsOpen()))
+                .createdAt(issue.getCreatedAt())
+                .labelList(labels)
+                .milestone(milestone)
+                .build();
+    }
+
+    public static IssueDetail toDetails(Issue issue, MemberDto writer, MemberDto assignee,
+                                        List<LabelDto> labels, Milestone milestone,
+                                        List<CommentDto> coments){
+        return IssueDetail.builder()
+                .index(issue.getIssueIdx())
+                .title(issue.getTitle())
+                .writer(writer)
+                .assignee(assignee)
+                .status(Status.of(issue.getIsOpen()))
+                .createdAt(issue.getCreatedAt())
+                .labelList(labels)
+                .milestone(milestone)
+                .commentList(coments)
+                .build();
+    }
+
+    public static Issue fromDto(IssueDetail dto) {
+        return Issue.builder()
+                .issueIdx(dto.getIndex())
+                .title(dto.getTitle())
+                .contents(dto.getContents())
+                .writer(AggregateReference.to(dto.getWriter().getMemberIdx()))
+                .assignee(nullableMember(dto.getAssignee()))
+                .isOpen(dto.getStatus()==Status.OPEN)
+                .createdAt(dto.getCreatedAt())
+                .labelOnIssue(getLabelOnIssue(dto.getLabelList()))
+                .milestoneIdx(AggregateReference.to(dto.getMilestone().getMilestoneIdx()))
+                .editedAt(Instant.now())
+                .isDeleted(false)
+                .build();
+    }
+
+    private static Map<Long, Labeling> getLabelOnIssue(List<LabelDto> labelList) {
+        Map<Long, Labeling> labelingMap = new HashMap<>();
+        labelList.forEach(l -> labelingMap.put(l.getLabelIdx(), new Labeling(l.getLabelIdx())));
+        return labelingMap;
+    }
+
+    private static AggregateReference<Member, @NotNull Long> nullableMember(MemberDto m) {
+        if (m!=null) {
+            return AggregateReference.to(m.getMemberIdx());
+        }
+        return null;
+    }
+
+}
