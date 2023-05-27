@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.config;
+package com.team6.issue_tracker.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

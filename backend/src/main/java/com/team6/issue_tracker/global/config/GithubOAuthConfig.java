@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.config;
+package com.team6.issue_tracker.global.config;
 
 import com.team6.issue_tracker.auth.config.GithubOAuthProperties;
 import org.springframework.beans.factory.annotation.Value;

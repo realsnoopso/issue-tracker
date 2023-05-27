@@ -4,7 +4,7 @@ import com.team6.issue_tracker.auth.config.GithubOAuthProperties;
 import com.team6.issue_tracker.auth.domain.GithubUser;
 import com.team6.issue_tracker.auth.dto.GithubAccessToken;
 import com.team6.issue_tracker.auth.dto.GithubAccessTokenRequest;
-import com.team6.issue_tracker.application.member.MemberService;
+import com.team6.issue_tracker.domain.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
