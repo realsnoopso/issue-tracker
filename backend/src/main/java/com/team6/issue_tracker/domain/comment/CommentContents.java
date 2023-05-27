@@ -15,4 +15,5 @@ public class CommentContents {
     public CommentContents(String contents) {
         this.contents = contents;
     }
+
 }
