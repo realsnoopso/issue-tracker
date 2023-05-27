@@ -2,13 +2,9 @@ package com.team6.issue_tracker.application.member;
 
 import com.team6.issue_tracker.application.member.domain.Member;
 import com.team6.issue_tracker.application.member.dto.MemberDto;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MemberService {
@@ -22,8 +18,8 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public Optional<Member> findById(Long index) {
-        return memberRepository.findById(index);
+    public Member findById(Long index) {
+        return memberRepository.findById(index).orElseThrow();
     }
 
     public Map<Long, MemberDto> getAllMembers() {
