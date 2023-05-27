@@ -40,7 +40,7 @@ public class IssueController {
     )
     @PutMapping("/{issueId}")
     public void updateIssueContents(IssueDetail issueDetail) {
-        Issue updatedIssue = IssueMapper.fromDto(issueDetail);
+        Issue updatedIssue = issueDetail.fromDto(issueDetail);
         issueService.updateIssue(updatedIssue);
     }
 }
