@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.application.issue;
+package com.team6.issue_tracker.domain.issue;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

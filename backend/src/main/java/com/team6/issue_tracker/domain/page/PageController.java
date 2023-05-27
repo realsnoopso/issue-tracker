@@ -1,7 +1,7 @@
-package com.team6.issue_tracker.application.page;
+package com.team6.issue_tracker.domain.page;
 
-import com.team6.issue_tracker.application.page.dto.IssuePageRequest;
-import com.team6.issue_tracker.application.page.dto.IssuePageResponse;
+import com.team6.issue_tracker.domain.page.dto.IssuePageRequest;
+import com.team6.issue_tracker.domain.page.dto.IssuePageResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

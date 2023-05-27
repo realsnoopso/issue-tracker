@@ -1,17 +1,17 @@
-package com.team6.issue_tracker.application.issue;
+package com.team6.issue_tracker.domain.issue;
 
-import com.team6.issue_tracker.application.comment.Comment;
-import com.team6.issue_tracker.application.comment.CommentService;
-import com.team6.issue_tracker.application.comment.dto.CommentDto;
-import com.team6.issue_tracker.application.issue.domain.Issue;
-import com.team6.issue_tracker.application.issue.dto.IssueDetail;
-import com.team6.issue_tracker.application.label.LabelService;
-import com.team6.issue_tracker.application.label.dto.LabelDto;
-import com.team6.issue_tracker.application.member.MemberService;
-import com.team6.issue_tracker.application.member.domain.Member;
-import com.team6.issue_tracker.application.member.dto.MemberDto;
-import com.team6.issue_tracker.application.milestone.Milestone;
-import com.team6.issue_tracker.application.milestone.MilestoneService;
+import com.team6.issue_tracker.domain.comment.Comment;
+import com.team6.issue_tracker.domain.comment.CommentService;
+import com.team6.issue_tracker.domain.comment.dto.CommentDto;
+import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
+import com.team6.issue_tracker.domain.label.LabelService;
+import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.member.MemberService;
+import com.team6.issue_tracker.domain.member.domain.Member;
+import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.milestone.Milestone;
+import com.team6.issue_tracker.domain.milestone.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

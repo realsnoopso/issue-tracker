@@ -1,13 +1,13 @@
-package com.team6.issue_tracker.application.issue;
+package com.team6.issue_tracker.domain.issue;
 
-import com.team6.issue_tracker.application.comment.dto.CommentDto;
-import com.team6.issue_tracker.application.issue.domain.Issue;
-import com.team6.issue_tracker.application.issue.dto.IssueDetail;
-import com.team6.issue_tracker.application.issue.dto.IssueDto;
-import com.team6.issue_tracker.application.issue.dto.Status;
-import com.team6.issue_tracker.application.label.dto.LabelDto;
-import com.team6.issue_tracker.application.member.dto.MemberDto;
-import com.team6.issue_tracker.application.milestone.Milestone;
+import com.team6.issue_tracker.domain.comment.dto.CommentDto;
+import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
+import com.team6.issue_tracker.domain.issue.dto.IssueDto;
+import com.team6.issue_tracker.domain.issue.dto.Status;
+import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.milestone.Milestone;
 
 import java.util.List;
 

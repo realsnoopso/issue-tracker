@@ -1,7 +1,7 @@
-package com.team6.issue_tracker.application.page.dto;
+package com.team6.issue_tracker.domain.page.dto;
 
-import com.team6.issue_tracker.application.issue.dto.Status;
-import com.team6.issue_tracker.application.issue.IssueFilter;
+import com.team6.issue_tracker.domain.issue.dto.Status;
+import com.team6.issue_tracker.domain.issue.IssueFilter;
 import lombok.Data;
 
 import java.util.List;

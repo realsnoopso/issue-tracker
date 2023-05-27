@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.application.milestone;
+package com.team6.issue_tracker.domain.milestone;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

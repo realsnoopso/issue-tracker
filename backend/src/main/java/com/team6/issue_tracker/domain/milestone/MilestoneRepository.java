@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.application.milestone;
+package com.team6.issue_tracker.domain.milestone;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

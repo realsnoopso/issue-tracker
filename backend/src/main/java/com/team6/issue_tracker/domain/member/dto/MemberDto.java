@@ -1,6 +1,6 @@
-package com.team6.issue_tracker.application.member.dto;
+package com.team6.issue_tracker.domain.member.dto;
 
-import com.team6.issue_tracker.application.member.domain.Member;
+import com.team6.issue_tracker.domain.member.domain.Member;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.application.comment;
+package com.team6.issue_tracker.domain.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
