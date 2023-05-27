@@ -1,6 +1,7 @@
 package com.team6.issue_tracker.application.issue;
 
-import com.team6.issue_tracker.application.issue.dto.IssueDetail;
+import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
+import com.team6.issue_tracker.domain.issue.dto.NewIssueRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class IssueController {
             description = "사용자는 새로운 이슈를 작성할 수 있다."
     )
     @PostMapping("/issue")
-    public IssueDetail postNewIssue(NewIssueRequest request) {
-        return issueService.findById(issueIdx);
+    public void postNewIssue(NewIssueRequest request) {
+        issueService.saveNewIssue(request.toIssue());
     }
 
     @Operation(
