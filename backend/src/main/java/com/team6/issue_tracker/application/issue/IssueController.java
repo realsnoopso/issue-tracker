@@ -40,6 +40,8 @@ public class IssueController {
     )
     @PutMapping("/{issueId}")
     public void updateIssueContents(IssueDetail issueDetail) {
+        //TODO 유저 권한 검사
+        //TODO 유효성 검사
         Issue updatedIssue = issueDetail.fromDto(issueDetail);
         issueService.updateIssue(updatedIssue);
     }
