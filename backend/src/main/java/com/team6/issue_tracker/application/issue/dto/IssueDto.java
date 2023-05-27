@@ -1,8 +1,10 @@
 package com.team6.issue_tracker.application.issue.dto;
 
-import com.team6.issue_tracker.application.label.dto.LabelDto;
-import com.team6.issue_tracker.application.member.dto.MemberDto;
-import com.team6.issue_tracker.application.milestone.Milestone;
+import com.team6.issue_tracker.domain.issue.Issue;
+import com.team6.issue_tracker.domain.model.Status;
+import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.milestone.Milestone;
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,9 +26,6 @@ public class IssueDto {
     private Milestone milestone;
     private List<LabelDto> labelList;
 
-    public IssueDto() {
-    }
-
     public IssueDto(Long index, String title, MemberDto writer, MemberDto assignee, Status status, Instant createdAt, Instant edditedAt, Milestone milestone, List<LabelDto> labelList) {
         this.index = index;
         this.title = title;
@@ -37,6 +36,20 @@ public class IssueDto {
         this.editedAt = edditedAt;
         this.milestone = milestone;
         this.labelList = labelList;
+    }
+
+    public static IssueDto toDto(Issue issue, MemberDto writer, MemberDto assignee,
+                                 List<LabelDto> labels, Milestone milestone) {
+        return IssueDto.builder()
+                .index(issue.getIssueIdx())
+                .title(issue.getTitle())
+                .writer(writer)
+                .assignee(assignee)
+                .status(Status.of(issue.getIsOpen()))
+                .createdAt(issue.getCreatedAt())
+                .labelList(labels)
+                .milestone(milestone)
+                .build();
     }
 
 }
