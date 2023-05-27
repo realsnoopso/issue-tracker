@@ -1,7 +1,7 @@
 package com.team6.issue_tracker.domain.comment;
 
-import com.team6.issue_tracker.domain.issue.domain.Issue;
-import com.team6.issue_tracker.domain.member.domain.Member;
+import com.team6.issue_tracker.domain.issue.Issue;
+import com.team6.issue_tracker.domain.member.Member;
 import lombok.*;
 import org.springframework.data.annotation.*;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;

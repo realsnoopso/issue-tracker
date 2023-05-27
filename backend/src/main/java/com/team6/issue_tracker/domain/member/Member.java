@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.domain.member.domain;
+package com.team6.issue_tracker.domain.member;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

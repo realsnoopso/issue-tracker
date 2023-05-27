@@ -1,6 +1,5 @@
 package com.team6.issue_tracker.domain.issue;
 
-import com.team6.issue_tracker.domain.issue.domain.Issue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jdbc.repository.query.Query;

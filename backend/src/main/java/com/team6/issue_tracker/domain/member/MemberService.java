@@ -1,6 +1,5 @@
 package com.team6.issue_tracker.domain.member;
 
-import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.domain.issue.dto;
+package com.team6.issue_tracker.domain.model;
 
 public enum Status {
     OPEN, CLOSE;
