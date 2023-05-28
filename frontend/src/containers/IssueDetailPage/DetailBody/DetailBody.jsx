@@ -1,8 +1,24 @@
 import styles from './DetailBody.module.css';
 import classNames from 'classnames/bind';
 import { CommentElement } from '@containers/index';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getIssueDetail } from '@src/services/issue';
 
-export const DetailBody = ({ issueObject }) => {
+export const DetailBody = ({}) => {
+  const params = useParams();
+
+  const [issueObject, setIssueObject] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const issueId = params.issueId;
+      const response = await getIssueDetail({ issueId });
+
+      setIssueObject(response);
+    })();
+  }, []);
+
   const commentList = issueObject.comment;
   const issueWriterId = issueObject.writer?.id;
 

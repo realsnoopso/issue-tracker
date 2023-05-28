@@ -4,13 +4,14 @@ import { IssueElement } from './IssuePage/IssueList/IssueListHeader/IssueElement
 import { IssueListHeader } from './IssuePage/IssueList/IssueListHeader/IssueListHeader';
 import { LoginPage } from './LoginPage/LoginPage';
 import { AuthPage } from './AuthPage/AuthPage';
-import { IssueDetail } from './IssueDetail/IssueDetail';
-import { DetailHeader } from './IssueDetail/DetailHeader/DetailHeader';
-import { DetailBody } from './IssueDetail/DetailBody/DetailBody';
-import { CommentElement } from './IssueDetail/DetailBody/CommentElement/CommentElement';
+import { IssueDetailPage } from './IssueDetailPage/IssueDetailPage';
+import { DetailHeader } from './IssueDetailPage/DetailHeader/DetailHeader';
+import { DetailBody } from './IssueDetailPage/DetailBody/DetailBody';
+import { CommentElement } from './IssueDetailPage/DetailBody/CommentElement/CommentElement';
 import { ErrorPage } from './ErrorPage/ErrorPage';
-import { DetailUpdateTitle } from './IssueDetail/DetailHeader/DetailUpdateTitle/DetailUpdateTitle';
+import { DetailUpdateTitle } from './IssueDetailPage/DetailHeader/DetailUpdateTitle/DetailUpdateTitle';
 import { WritePage } from './WritePage/WritePage';
+import { DetailTitle } from './IssueDetailPage/DetailHeader/DetailTitle/DetailTitle';
 
 export {
   IssuePage,
@@ -19,11 +20,12 @@ export {
   IssueList,
   LoginPage,
   AuthPage,
-  IssueDetail,
+  IssueDetailPage,
   DetailHeader,
   DetailBody,
   CommentElement,
   ErrorPage,
   DetailUpdateTitle,
   WritePage,
+  DetailTitle,
 };
