@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.application.issue;
+package com.team6.issue_tracker.domain.issue;
 
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.dto.NewIssueRequest;
@@ -36,12 +36,15 @@ public class IssueController {
     }
 
     @Operation(
-            summary = "",
+            summary = "이슈 내용 수정",
             tags = "issue",
-            description = "사용자는 원하는 이슈를 다중 선택하여 담당자를 변경할 수 있다."
+            description = "사용자는 이슈 내용을  수정할 수 있다."
     )
-    @PatchMapping("/{issueId}/assignee")
-    public void updateIssueAssignee() {
-
+    @PutMapping("/{issueId}")
+    public void updateIssueContents(IssueDetail issueDetail) {
+        //TODO 유저 권한 검사
+        //TODO 유효성 검사
+        Issue updatedIssue = issueDetail.fromDto(issueDetail);
+        issueService.updateIssue(updatedIssue);
     }
 }

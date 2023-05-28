@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.auth;
+package com.team6.issue_tracker.global.auth;
 
 import com.team6.issue_tracker.auth.config.GithubOAuthProperties;
 import com.team6.issue_tracker.auth.domain.GithubUser;
