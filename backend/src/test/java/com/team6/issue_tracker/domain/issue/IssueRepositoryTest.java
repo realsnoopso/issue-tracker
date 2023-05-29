@@ -1,5 +1,8 @@
 package com.team6.issue_tracker.domain.issue;
 
+import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.issue.domain.Labeling;
+import com.team6.issue_tracker.domain.issue.repository.IssueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -65,7 +68,9 @@ class IssueRepositoryTest {
     @Test
     @DisplayName("필터가 있는 경우, 조건에 맞는 issue를 조회할 수 있다.")
     public void findWithFilter() throws Exception{
+        //given
         PageRequest page = PageRequest.of(1,1, Sort.by(Sort.Direction.DESC, "issue_idx"));
+
         //when
         List<Issue> allByFilter = issueRepository.findAllBy(true, null, 2L, null, null, 20, 1);
 
@@ -124,11 +129,40 @@ class IssueRepositoryTest {
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(save.getContents()).isEqualTo(updatedIssue.getContents());
             softly.assertThat(save.getIssueIdx()).isEqualTo(issue.getIssueIdx());
+        });
+    }
+
+    @Test
+    @DisplayName("이슈 내용을 수정하면, 업데이트 시간이 바뀌어야 한다.")
+    public void updateContentscheckUpdatedAt() throws Exception{
+        //given
+        Instant beforeWork = Instant.now();
+        Issue issue = issueRepository.findById(1L).orElseThrow();
+        Issue updatedIssue = Issue.builder()
+                .issueIdx(issue.getIssueIdx())
+                .title(issue.getTitle())
+                .contents("수정된 내용입니다")
+                .writer(issue.getWriter())
+                .assignee(issue.getAssignee())
+                .createdAt(issue.getCreatedAt())
+                .milestoneIdx(issue.getMilestoneIdx())
+                .labelOnIssue(issue.getLabelOnIssue())
+                .editedAt(Instant.now())
+                .isOpen(issue.getIsOpen())
+                .isDeleted(issue.getIsDeleted())
+                .build();
+
+        //when
+        Issue save = issueRepository.save(updatedIssue);
+
+        //then
+        SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(save.getCreatedAt()).isEqualTo(issue.getCreatedAt());
             softly.assertThat(save.getEditedAt()).isAfter(beforeWork);
         });
     }
-    
+
+
     @Test
     @DisplayName("한 개의 이슈를 오픈 상태로 변경할 수 있다.")
     public void updateIssueStatus() throws Exception{

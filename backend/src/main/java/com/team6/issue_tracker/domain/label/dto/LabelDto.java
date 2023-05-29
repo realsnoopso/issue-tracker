@@ -1,6 +1,6 @@
 package com.team6.issue_tracker.domain.label.dto;
 
-import com.team6.issue_tracker.domain.label.Label;
+import com.team6.issue_tracker.domain.label.domain.Label;
 import lombok.Data;
 
 @Data
