@@ -2,7 +2,6 @@ package com.team6.issue_tracker.domain.issue.repository;
 
 import com.team6.issue_tracker.domain.issue.domain.Issue;
 import com.team6.issue_tracker.domain.issue.domain.Labeling;
-import com.team6.issue_tracker.domain.issue.repository.IssueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +45,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(0,10, Sort.by(Sort.Direction.DESC, "issue_idx"));
 
         //when
-        Page<Issue> issues = issueRepository.findAllByIsOpenIsDeleted(false, true, page);
+        Page<Issue> issues = issueRepository.findAllByIsOpenAndIsDeleted(false, true, page);
 
         //then
         assertThat(issues).hasSize(1);
@@ -60,7 +58,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(0,3, Sort.Direction.DESC, "issue_idx");
 
         //when
-        Page<Issue> issues = issueRepository.findAllByIsOpenIsDeleted(false, true, page);
+        Page<Issue> issues = issueRepository.findAllByIsOpenAndIsDeleted(false, true, page);
 
         //then
         assertThat(issues).hasSize(1);
