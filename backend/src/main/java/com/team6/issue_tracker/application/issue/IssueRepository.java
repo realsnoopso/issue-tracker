@@ -18,14 +18,13 @@ public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndS
 
     Integer countAllByIsDeletedAndIsOpen(Boolean isDeleted, Boolean isOpen);
 
-    @Query(value = "SELECT * " +
+    @Query(value = "SELECT i.issue_idx, i.title, i.contents, i.is_open, i.created_at, i.edited_at," +
+            "i.milestone_idx, i.writer, i.assignee, i.is_deleted " +
             "FROM issue i " +
-            "LEFT JOIN labeling il ON il.issue_idx = i.issue_idx " +
             "WHERE (:isOpen IS NULL OR i.is_open = :isOpen) " +
             "AND (:milestoneIdx IS NULL OR i.milestone_idx = :milestoneIdx) " +
             "AND (:writer IS NULL OR i.writer = :writer) " +
             "AND (:assignee IS NULL OR i.assignee = :assignee) " +
-            "AND (:labelIdx IS NULL OR il.label_idx IN (:labelIdx)) " +
             "ORDER BY i.issue_idx DESC " +
             "LIMIT :pageSize OFFSET :offset")
     List<Issue> findAllBy(@Param("isOpen") Boolean isOpen,
