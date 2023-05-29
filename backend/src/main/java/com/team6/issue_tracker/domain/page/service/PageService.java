@@ -2,6 +2,7 @@ package com.team6.issue_tracker.domain.page.service;
 
 import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.model.Status;
 import com.team6.issue_tracker.domain.page.dto.IssueDto;
 import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.label.service.LabelService;
@@ -37,8 +38,8 @@ public class PageService {
         Map<Long, LabelDto> labels = labelService.getAllLabels();
 
         List<Issue> issueList = issueService.findByfilterWithPage(offset, PAGE_SIZE, filter);
-        long openIssueNum = issueList.stream().filter(issue -> issue.getIsOpen()).count();
-        long closedIssueNum = issueList.stream().filter(issue -> !issue.getIsOpen()).count();
+        long openIssueNum = issueService.getIssueNum(Status.OPEN);
+        long closedIssueNum = issueService.getIssueNum(Status.CLOSE);
 
         List<IssueDto> issueDtos = new ArrayList<>();
 

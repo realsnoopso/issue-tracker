@@ -4,6 +4,7 @@ import com.team6.issue_tracker.domain.comment.domain.Comment;
 import com.team6.issue_tracker.domain.comment.service.CommentService;
 import com.team6.issue_tracker.domain.comment.dto.CommentDto;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.model.Status;
 import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.repository.IssueRepository;
@@ -87,5 +88,12 @@ public class IssueService {
 
     public void saveIssue(Issue toIssue) {
         issueRepository.save(toIssue);
+    }
+
+    public long getIssueNum(Status status) {
+        if (status==Status.OPEN) {
+            return issueRepository.countAllByIsDeletedFalseAndIsOpen(true);
+        }
+        return issueRepository.countAllByIsDeletedFalseAndIsOpen(false);
     }
 }
