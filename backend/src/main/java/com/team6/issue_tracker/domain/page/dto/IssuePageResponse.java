@@ -10,8 +10,9 @@ import java.util.List;
 
 @Data @Builder
 public class IssuePageResponse {
-    private Integer openIssueCount;
-    private Integer closedIssueCount;
+
+    private Long openIssueCount;
+    private Long closedIssueCount;
     private Integer page;
     private Integer openIssueMaxPage;
     private Integer closeIssueMaxPage;

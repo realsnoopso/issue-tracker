@@ -2,7 +2,6 @@ package com.team6.issue_tracker.domain.page.service;
 
 import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
-import com.team6.issue_tracker.domain.model.Status;
 import com.team6.issue_tracker.domain.page.dto.IssueDto;
 import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.label.service.LabelService;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PageService {
 
-    public static final Integer PAGE_SIZE = 20;
+    private static final Integer PAGE_SIZE = 20;
 
     private final IssueService issueService;
     private final MemberService memberService;
@@ -93,11 +92,11 @@ public class PageService {
         return assignee;
     }
 
-    public Integer getIssueMaxPage(int allIssue) {
+    public Integer getIssueMaxPage(long allIssue) {
         if (allIssue/PAGE_SIZE == 0) {
-            return allIssue/PAGE_SIZE;
+            return Math.toIntExact(allIssue / PAGE_SIZE);
         }
-        return allIssue/PAGE_SIZE +1;
+        return Math.toIntExact(allIssue / PAGE_SIZE + 1);
     }
 
 }
