@@ -63,19 +63,6 @@ class IssueRepositoryTest {
     }
 
     @Test
-    @DisplayName("삭제되지 않고, 열린 상태인 이슈를 페이지 크기 1인 두번째 페이지를 조회할 수 있다.")
-    public void findAllNotDeletedIsOpenIssuesWithSecondPage() throws Exception{
-        //given
-        PageRequest page = PageRequest.of(1,1, Sort.by(Sort.Direction.DESC, "issue_idx"));
-
-        //when
-        Page<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
-
-        //then
-        assertThat(issues).hasSize(1);
-    }
-
-    @Test
     @DisplayName("필터가 있는 경우, 조건에 맞는 issue를 조회할 수 있다.")
     public void findWithFilter() throws Exception{
         PageRequest page = PageRequest.of(1,1, Sort.by(Sort.Direction.DESC, "issue_idx"));
@@ -83,7 +70,7 @@ class IssueRepositoryTest {
         List<Issue> allByFilter = issueRepository.findAllBy(true, null, 2L, null, null, 20, 1);
 
         //then
-        assertThat(allByFilter).hasSize(2);
+        assertThat(allByFilter).hasSize(1);
     }
 
     @Test

@@ -89,4 +89,8 @@ public class IssueService {
     public void saveNewIssue(Issue toIssue) {
         issueRepository.save(toIssue);
     }
+
+    public void updateIssue(Issue updatedIssue) {
+        issueRepository.save(updatedIssue);
+    }
 }
