@@ -15,5 +15,8 @@ public class CommentService {
     public List<Comment> getCommentsOnIssue(Long issueIdx) {
         return commentRepository.findAllByIssueIdx(AggregateReference.to(issueIdx));
     }
-    
+
+    public void saveComment(Comment newComment) {
+        commentRepository.save(newComment);
+    }
 }
