@@ -2,6 +2,7 @@ package com.team6.issue_tracker.domain.issue;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -33,5 +34,10 @@ public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndS
                           @Param("labelIdx") List<Long> labelIdx,
                           @Param("pageSize") int pageSize,
                           @Param("offset") int offset);
+
+    @Modifying
+    @Query("UPDATE issue SET is_open = :status WHERE issue_idx IN (:issue_idx)")
+    boolean updateIssuesIsOpen (@Param("status") boolean isOpen, @Param("issue_idx") List<Long> idx);
+
 
 }
