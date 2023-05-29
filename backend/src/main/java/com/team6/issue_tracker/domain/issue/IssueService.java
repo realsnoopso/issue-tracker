@@ -11,6 +11,7 @@ import com.team6.issue_tracker.domain.member.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import com.team6.issue_tracker.domain.milestone.Milestone;
 import com.team6.issue_tracker.domain.milestone.MilestoneService;
+import com.team6.issue_tracker.domain.model.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -92,5 +93,9 @@ public class IssueService {
 
     public void updateIssue(Issue updatedIssue) {
         issueRepository.save(updatedIssue);
+    }
+
+    public void updateIssuesStatus(List<Long> issueIdx, Status status) {
+        issueRepository.updateIssuesIsOpen(status==Status.OPEN, issueIdx);
     }
 }
