@@ -128,4 +128,59 @@ class IssueRepositoryTest {
             softly.assertThat(save.getEditedAt()).isAfter(beforeWork);
         });
     }
+    
+    @Test
+    @DisplayName("한 개의 이슈를 오픈 상태로 변경할 수 있다.")
+    public void updateIssueStatus() throws Exception{
+        //given
+        Long id1 = 2L;
+        List<Long> issueIdxList = List.of(id1);
+
+        //when
+        issueRepository.updateIssuesIsOpen(true, issueIdxList);
+
+        //then
+        Issue issue = issueRepository.findById(id1).orElseThrow();
+        assertThat(issue.getIsOpen()).isTrue();
+    }
+
+    @Test
+    @DisplayName("여러 개의 이슈를 오픈 상태로 변경할 수 있다.")
+    public void updateIssueListStatus() throws Exception{
+        //given
+        Long id1 = 2L;
+        Long id2 = 3L;
+        Long id3 = 4L;
+        List<Long> issueIdxList = List.of(id1, id2, id3);
+
+        //when
+        issueRepository.updateIssuesIsOpen(true, issueIdxList);
+
+        //then
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(issueRepository.findById(id1).orElseThrow().getIsOpen()).isTrue();
+            softly.assertThat(issueRepository.findById(id2).orElseThrow().getIsOpen()).isTrue();
+            softly.assertThat(issueRepository.findById(id3).orElseThrow().getIsOpen()).isTrue();
+        });
+    }
+
+    @Test
+    @DisplayName("여러 개의 이슈를 오픈 상태로 변경할 수 있다.")
+    public void updateIssueListStatusToClose() throws Exception{
+        //given
+        Long id1 = 2L;
+        Long id2 = 3L;
+        Long id3 = 4L;
+        List<Long> issueIdxList = List.of(id1, id2, id3);
+
+        //when
+        issueRepository.updateIssuesIsOpen( false, issueIdxList);
+
+        //then
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(issueRepository.findById(id1).orElseThrow().getIsOpen()).isFalse();
+            softly.assertThat(issueRepository.findById(id2).orElseThrow().getIsOpen()).isFalse();
+            softly.assertThat(issueRepository.findById(id3).orElseThrow().getIsOpen()).isFalse();
+        });
+    }
 }
