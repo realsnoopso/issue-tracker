@@ -5,6 +5,7 @@ import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.dto.UpdateIssuesStatusRequest;
 import com.team6.issue_tracker.domain.issue.dto.CreateIssueRequest;
+import com.team6.issue_tracker.domain.issue.service.IssueUpdateService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class IssueController {
 
     private final IssueService issueService;
+    private final IssueUpdateService issueUpdateService;
 
     @Operation(
             summary = "이슈 상세 보기",
@@ -34,7 +36,7 @@ public class IssueController {
     public void postNewIssue(CreateIssueRequest request) {
         //TODO 유저 권한 검사
         //TODO 유효성 검사
-        issueService.saveNewIssue(request.toIssue());
+        issueService.saveIssue(request.toIssue());
     }
 
     @Operation(
@@ -46,7 +48,7 @@ public class IssueController {
     public void updateIssuesStatus(UpdateIssuesStatusRequest request) {
         //TODO 유저 권한 검사
         //TODO 유효성 검사
-        issueService.updateIssuesStatus(request.getIssueIdx(), request.getStatus());
+        issueUpdateService.updateIssuesStatus(request.getIssueIdx(), request.getStatus());
     }
 
     @Operation(
@@ -59,7 +61,7 @@ public class IssueController {
         //TODO 유저 권한 검사
         //TODO 유효성 검사
         Issue updatedIssue = issueDetail.fromDto(issueDetail);
-        issueService.updateIssue(updatedIssue);
+        issueUpdateService.updateIssue(updatedIssue);
     }
 
 
