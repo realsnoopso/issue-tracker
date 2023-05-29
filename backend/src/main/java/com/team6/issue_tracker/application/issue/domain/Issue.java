@@ -27,27 +27,22 @@ public class Issue {
 
     @Id
     private Long issueIdx;
-
     @NotNull
     private String title;
-
     private String contents;
-
     private Boolean isOpen;
-
     private Boolean isDeleted;
 
     @CreatedBy
-    private AggregateReference<Member, @NotNull Long> writer;   // member idx
-
-    private AggregateReference<Member, @NotNull Long> assignee; // member idx
+    private AggregateReference<Member, @NotNull Long> writer;
+    private AggregateReference<Member, @NotNull Long> assignee;
 
     private AggregateReference<Milestone, @NotNull Long> milestoneIdx;
 
     @Valid
     @MappedCollection(idColumn = "issue_idx", keyColumn = "labeling_idx")
     @Builder.Default
-    private Map<Long, Labeling> labelOnIssue = new HashMap<>();    // labeling idx
+    private Map<Long, Labeling> labelOnIssue = new HashMap<>();
 
     @NotNull
     @CreatedDate

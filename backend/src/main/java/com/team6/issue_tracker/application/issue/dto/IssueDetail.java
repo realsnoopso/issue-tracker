@@ -1,9 +1,10 @@
 package com.team6.issue_tracker.application.issue.dto;
 
-import com.team6.issue_tracker.application.comment.Comment;
+import com.team6.issue_tracker.application.comment.dto.CommentDto;
 import com.team6.issue_tracker.application.label.dto.LabelDto;
 import com.team6.issue_tracker.application.member.dto.MemberDto;
 import com.team6.issue_tracker.application.milestone.Milestone;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,7 +13,8 @@ import java.util.List;
 
 
 @Data @Builder
-public class IssueDto {
+@AllArgsConstructor
+public class IssueDetail {
 
     private Long index;
     private String title;
@@ -24,17 +26,6 @@ public class IssueDto {
     //TODO milestone dto로 바꾸기
     private Milestone milestone;
     private List<LabelDto> labelList;
-
-    public IssueDto(Long index, String title, MemberDto writer, MemberDto assignee, Status status, Instant createdAt, Instant edditedAt, Milestone milestone, List<LabelDto> labelList) {
-        this.index = index;
-        this.title = title;
-        this.writer = writer;
-        this.assignee = assignee;
-        this.status = status;
-        this.createdAt = createdAt;
-        this.editedAt = edditedAt;
-        this.milestone = milestone;
-        this.labelList = labelList;
-    }
+    private List<CommentDto> commentList;
 
 }

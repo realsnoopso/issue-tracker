@@ -13,7 +13,7 @@ VALUES ('test issue1', '테스트 이슈입니다.', 0, now(), 0, 1, 2),
         ('test issue4', '테스트 이슈입니다.', 1, now(), 0, 2, 2);
 
 # comment init
-INSERT comment (comment_idx, contents, created_at, edited_at, is_open, issue_idx, created_by)
+INSERT comment (comment_idx, contents, created_at, edited_at, is_deleted, issue_idx, created_by)
 VALUES (1, 'test comment', now(), null, 1, 1, 2);
 
 # labbel init
