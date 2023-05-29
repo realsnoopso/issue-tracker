@@ -23,7 +23,7 @@ public class IssueController {
             description = "사용자는 이슈 상세 정보를 볼 수 있다."
     )
     @GetMapping("/issue/{issueIdx}")
-    public IssueDetail getIssueDetails(@PathVariable("issueIdx") Long issueIdx) {
+    public IssueDetail getIssueDetails(@PathVariable("issueIdx") long issueIdx) {
         return issueService.findById(issueIdx);
     }
 
