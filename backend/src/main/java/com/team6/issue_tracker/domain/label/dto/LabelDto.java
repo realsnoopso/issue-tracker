@@ -17,7 +17,7 @@ public class LabelDto {
         this.textColor = textColor;
     }
 
-    public static LabelDto of(Label l) {
-        return new LabelDto(l.getLabelIdx(), l.getTitle(), l.getBackgroundColor(), l.getTextColor());
+    public static LabelDto of(Label label) {
+        return new LabelDto(label.getLabelIdx(), label.getTitle(), label.getBackgroundColor(), label.getTextColor());
     }
 }
