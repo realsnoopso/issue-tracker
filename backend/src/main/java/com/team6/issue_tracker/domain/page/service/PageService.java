@@ -37,6 +37,8 @@ public class PageService {
         Map<Long, LabelDto> labels = labelService.getAllLabels();
 
         List<Issue> issueList = issueService.findByfilterWithPage(offset, PAGE_SIZE, filter);
+        long openIssueNum = issueList.stream().filter(issue -> issue.getIsOpen()).count();
+        long closedIssueNum = issueList.stream().filter(issue -> !issue.getIsOpen()).count();
 
         List<IssueDto> issueDtos = new ArrayList<>();
 
@@ -52,11 +54,11 @@ public class PageService {
 
         return IssuePageResponse.builder()
                 .issuesList(issueDtos)
-                .openIssueCount(issueService.getOpenIssueNum())
-                .closedIssueCount(issueService.getClosedIssueNum()) // 쿼리 횟수 줄이기
+                .openIssueCount(openIssueNum)
+                .closedIssueCount(closedIssueNum)
                 .page(offset)
-                .openIssueMaxPage(getOpenIssueMaxPage())
-                .closeIssueMaxPage(getCloseIssueMaxPage())
+                .openIssueMaxPage(getIssueMaxPage(openIssueNum))
+                .closeIssueMaxPage(getIssueMaxPage(closedIssueNum))
                 .userList(new ArrayList<>(members.values()))
                 .labelList(new ArrayList<>(labels.values()))
                 .milestoneList(new ArrayList<>(milestones.values()))
@@ -90,12 +92,11 @@ public class PageService {
         return assignee;
     }
 
-    public Integer getOpenIssueMaxPage() {
-        return issueService.getOpenIssueNum()/PAGE_SIZE;
-    }
-
-    public Integer getCloseIssueMaxPage() {
-        return issueService.getClosedIssueNum()/PAGE_SIZE;
+    public Integer getIssueMaxPage(int allIssue) {
+        if (allIssue/PAGE_SIZE == 0) {
+            return allIssue/PAGE_SIZE;
+        }
+        return allIssue/PAGE_SIZE +1;
     }
 
 }

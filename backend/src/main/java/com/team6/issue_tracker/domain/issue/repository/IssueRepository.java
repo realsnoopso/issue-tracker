@@ -15,9 +15,7 @@ import java.util.List;
 @Repository
 public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndSortingRepository<Issue, Long> {
 
-    Page<Issue> findAllByIsDeletedAndIsOpen(Boolean isDeleted, Boolean isOpen, Pageable pageable);
-
-    Integer countAllByIsDeletedAndIsOpen(Boolean isDeleted, Boolean isOpen);
+    Page<Issue> findAllByIsOpenIsDeleted(Boolean isOpen, Boolean isDeleted, Pageable pageable);
 
     @Query(value = "SELECT i.issue_idx, i.title, i.contents, i.is_open, i.created_at, i.edited_at," +
             "i.milestone_idx, i.writer, i.assignee, i.is_deleted " +

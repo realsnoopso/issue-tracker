@@ -46,7 +46,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(0,10, Sort.by(Sort.Direction.DESC, "issue_idx"));
 
         //when
-        Page<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
+        Page<Issue> issues = issueRepository.findAllByIsOpenIsDeleted(false, true, page);
 
         //then
         assertThat(issues).hasSize(1);
@@ -59,7 +59,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(0,3, Sort.Direction.DESC, "issue_idx");
 
         //when
-        Page<Issue> issues = issueRepository.findAllByIsDeletedAndIsOpen(false, true, page);
+        Page<Issue> issues = issueRepository.findAllByIsOpenIsDeleted(false, true, page);
 
         //then
         assertThat(issues).hasSize(1);

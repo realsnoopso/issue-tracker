@@ -4,7 +4,7 @@ import com.team6.issue_tracker.domain.comment.domain.Comment;
 import com.team6.issue_tracker.domain.comment.service.CommentService;
 import com.team6.issue_tracker.domain.comment.dto.CommentDto;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
-import com.team6.issue_tracker.domain.issue.domain.IssueFilter;
+import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.repository.IssueRepository;
 import com.team6.issue_tracker.domain.label.service.LabelService;
@@ -29,10 +29,6 @@ public class IssueService {
     private final MemberService memberService;
     private final LabelService labelService;
     private final MilestoneService milestoneService;
-
-    public Integer getClosedIssueNum() {
-        return issueRepository.countAllByIsDeletedAndIsOpen(false, false);
-    }
 
     private Issue findIssueById(Long issueIdx) throws NoSuchElementException {
         Issue issue = issueRepository.findById(issueIdx).orElseThrow();
