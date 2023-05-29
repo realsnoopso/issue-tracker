@@ -1,6 +1,6 @@
 package com.team6.issue_tracker.domain.label.dto;
 
-import com.team6.issue_tracker.domain.label.Label;
+import com.team6.issue_tracker.domain.label.domain.Label;
 import lombok.Data;
 
 @Data
@@ -17,7 +17,7 @@ public class LabelDto {
         this.textColor = textColor;
     }
 
-    public static LabelDto of(Label l) {
-        return new LabelDto(l.getLabelIdx(), l.getTitle(), l.getBackgroundColor(), l.getTextColor());
+    public static LabelDto of(Label label) {
+        return new LabelDto(label.getLabelIdx(), label.getTitle(), label.getBackgroundColor(), label.getTextColor());
     }
 }
