@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.domain.issue;
+package com.team6.issue_tracker.domain.issue.repository;
 
 import com.team6.issue_tracker.domain.issue.domain.Issue;
 import com.team6.issue_tracker.domain.issue.domain.Labeling;
@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 

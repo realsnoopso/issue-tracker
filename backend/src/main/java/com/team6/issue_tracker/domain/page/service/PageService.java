@@ -2,8 +2,9 @@ package com.team6.issue_tracker.domain.page.service;
 
 import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.model.Status;
 import com.team6.issue_tracker.domain.page.dto.IssueDto;
-import com.team6.issue_tracker.domain.issue.domain.IssueFilter;
+import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.label.service.LabelService;
 import com.team6.issue_tracker.domain.label.dto.LabelDto;
 import com.team6.issue_tracker.domain.member.service.MemberService;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service    // application Service
+@Service
 @RequiredArgsConstructor
 public class PageService {
 

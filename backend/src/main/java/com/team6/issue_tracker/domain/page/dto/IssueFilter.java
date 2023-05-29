@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.domain.issue.domain;
+package com.team6.issue_tracker.domain.page.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
