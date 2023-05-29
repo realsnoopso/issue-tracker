@@ -14,13 +14,10 @@ import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
 import com.team6.issue_tracker.domain.milestone.service.MilestoneService;
-import com.team6.issue_tracker.domain.model.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -32,10 +29,6 @@ public class IssueService {
     private final MemberService memberService;
     private final LabelService labelService;
     private final MilestoneService milestoneService;
-
-    public Integer getOpenIssueNum() {
-        return issueRepository.countAllByIsDeletedAndIsOpen(false, true);
-    }
 
     public Integer getClosedIssueNum() {
         return issueRepository.countAllByIsDeletedAndIsOpen(false, false);
@@ -67,14 +60,12 @@ public class IssueService {
         Issue issue = findIssueById(issueIdx);
 
         List<Comment> comments = commentService.getCommentsOnIssue(issueIdx);
+        Map<Long, Member> members = memberService.findMembers(issue.getWriter(), issue.getAssignee());
 
-        Member writer = memberService.findById(issue.getWriter().getId());
-        Member assignee = memberService.findById(issue.getAssignee().getId());  //TODO 조회하는 거 합치기
+        Member writer = members.get(issue.getWriter().getId());
+        Member assignee = members.get(issue.getAssignee().getId());
 
-        Milestone milestone = null;
-        if (issue.getMilestoneIdx() != null) {
-            milestone =milestoneService.findById(issue.getMilestoneIdx().getId());
-        }
+        Milestone milestone = getMilestone(issue);
 
         List<LabelDto> labelDtoList = new ArrayList<>();
         labelService.findAllById(issue.getLabelOnIssue().values())
@@ -90,15 +81,15 @@ public class IssueService {
         return IssueDetail.toDetails(issue, MemberDto.from(writer), MemberDto.from(assignee), labelDtoList, milestone, commentDtos);
     }
 
-    public void saveNewIssue(Issue toIssue) {
+    private Milestone getMilestone(Issue issue) {
+        Milestone milestone = null;
+        if (issue.getMilestoneIdx() != null) {
+            milestone =milestoneService.findById(issue.getMilestoneIdx().getId());
+        }
+        return milestone;
+    }
+
+    public void saveIssue(Issue toIssue) {
         issueRepository.save(toIssue);
-    }
-
-    public void updateIssue(Issue updatedIssue) {
-        issueRepository.save(updatedIssue);
-    }
-
-    public boolean updateIssuesStatus(List<Long> issueIdx, Status status) {
-        return issueRepository.updateIssuesIsOpen(status==Status.OPEN, issueIdx);
     }
 }
