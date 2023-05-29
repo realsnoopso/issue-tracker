@@ -20,7 +20,7 @@ public class LabelService {
 
     public Map<Long, LabelDto> getAllLabels() {
         Map<Long, LabelDto> labels = new HashMap<>();
-        labelRepository.findAllNotDeleted().forEach(l -> labels.put(l.getLabelIdx(), LabelDto.of(l)));
+        labelRepository.findAllByIsDeletedFalse().forEach(l -> labels.put(l.getLabelIdx(), LabelDto.of(l)));
         return labels;
     }
 
