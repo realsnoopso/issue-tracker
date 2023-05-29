@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class NewIssueRequest {
+public class CreateIssueRequest {
     private String title;
     private String contents;
     private MemberDto writer;
