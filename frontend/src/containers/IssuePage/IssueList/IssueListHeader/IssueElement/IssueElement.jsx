@@ -2,6 +2,7 @@ import styles from './IssueElement.module.css';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { Icon, InformationTag, Profile, ElapsedTime } from '@components/index';
+import { useEffect, useState } from 'react';
 
 export const IssueElement = ({
   iconName,
@@ -12,13 +13,28 @@ export const IssueElement = ({
   writer,
   milesStone,
   profile,
+  isChecked,
 }) => {
   const cx = classNames.bind(styles);
+
+  const [isElementChecked, setIsElementChecked] = useState(isChecked);
+
+  useEffect(() => {
+    setIsElementChecked(isChecked);
+  }, [isChecked]);
+
+  const handleChange = () => {
+    setIsElementChecked(!isElementChecked);
+  };
 
   return (
     <div className={cx(`issue-element`)}>
       <div className={cx(`check-box`)}>
-        <input type="checkbox"></input>
+        <input
+          type="checkbox"
+          checked={isElementChecked}
+          onChange={handleChange}
+        ></input>
       </div>
       <div className={cx(`issue-contents`)}>
         <div className={cx(`issue-contents_column`)}>

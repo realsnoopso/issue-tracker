@@ -14,8 +14,14 @@ export const IssueListHeader = ({
   assigneeList,
   issueCount,
   labelList,
+  isChecked,
+  handleHeaderChange,
 }) => {
   const cx = classNames.bind(styles);
+
+  // const handleChange = () => {
+  //   onChange();
+  // };
 
   const [filters, setFilters] = useContext(filterContext);
 
@@ -89,7 +95,11 @@ export const IssueListHeader = ({
     <>
       <div className={cx(`header`)}>
         <div className={cx(`check-box`)}>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleHeaderChange}
+          ></input>
         </div>
         <div className={cx(`header-contents`)}>
           <Tab

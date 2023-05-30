@@ -1,6 +1,7 @@
 import styles from './IssueList.module.css';
 import classNames from 'classnames/bind';
 import { IssueElement, IssueListHeader } from '@containers/index';
+import { useState } from 'react';
 
 export const IssueList = ({
   issueData,
@@ -15,6 +16,12 @@ export const IssueList = ({
   const contentsClassNames = cx('contents');
   const emptyClassNames = cx('empty');
 
+  const [isHeaderChecked, setIsHeaderChecked] = useState(false);
+
+  const handleHeaderChange = () => {
+    setIsHeaderChecked(!isHeaderChecked);
+  };
+
   return (
     <div className={containerClassNames}>
       {issueData && (
@@ -24,6 +31,8 @@ export const IssueList = ({
           milestoneList={milestoneList}
           issueCount={issueCount}
           labelList={labelList}
+          isChecked={isHeaderChecked}
+          handleHeaderChange={handleHeaderChange}
         ></IssueListHeader>
       )}
       <ul className={contentsClassNames}>
@@ -50,6 +59,7 @@ export const IssueList = ({
                   writer={writer}
                   milesStone={milesStone}
                   profile={profile}
+                  isChecked={isHeaderChecked}
                 ></IssueElement>
               </li>
             );
