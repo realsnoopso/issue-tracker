@@ -19,13 +19,19 @@ public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndS
 
     Page<Issue> findAllByIsOpenAndIsDeleted(boolean isOpen, boolean isDeleted, Pageable pageable);
 
-    @Query(value = "SELECT i.issue_idx, i.title, i.contents, i.is_open, i.created_at, i.edited_at," +
+    @Query(value = "SELECT DISTINCT i.issue_idx, i.title, i.contents, i.is_open, i.created_at, i.edited_at," +
             "i.milestone_idx, i.writer, i.assignee, i.is_deleted " +
             "FROM issue i " +
+            "LEFT OUTER JOIN labeling il ON i.issue_idx = il.issue_idx " +
             "WHERE (:isOpen IS NULL OR i.is_open = :isOpen) " +
             "AND (:milestoneIdx IS NULL OR i.milestone_idx = :milestoneIdx) " +
+            "AND (:milestoneEmptyFlag IS NULL OR i.milestone_idx is null ) " +
             "AND (:writer IS NULL OR i.writer = :writer) " +
             "AND (:assignee IS NULL OR i.assignee = :assignee) " +
+            "AND (:assigneeEmptyFlag IS NULL OR i.assignee is null ) " +
+            "AND (:labelIdx IS NULL OR il.label_idx in (:labelIdx)) " +
+            "AND (:labelEmptyFlag IS NULL OR il.label_idx is null ) " +
+            "AND i.is_deleted = false " +
             "ORDER BY i.issue_idx DESC " +
             "LIMIT :pageSize OFFSET :offset")
     List<Issue> findAllBy(@Param("isOpen") boolean isOpen,
