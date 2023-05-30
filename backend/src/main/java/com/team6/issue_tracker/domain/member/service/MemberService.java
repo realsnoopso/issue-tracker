@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class MemberService {
@@ -33,9 +34,9 @@ public class MemberService {
         return memberDtos;
     }
 
-    public Map<Long, Member> findMembers(AggregateReference<Member, Long> writer, AggregateReference<Member, Long> assignee) {
+    public Map<Long, Member> findMembers(Set<Long> members) {
         Map<Long, Member> memberMap = new HashMap<>();
-        memberRepository.findAllById(new ArrayIterator<>(new Long[]{writer.getId(), assignee.getId()}))
+        memberRepository.findAllById(members)
                 .forEach(member -> memberMap.put(member.getMemberIdx(), member));
         return memberMap;
     }
