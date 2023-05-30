@@ -53,16 +53,19 @@ export const IssuePage = () => {
         ...filters,
       };
       const response = await getIssueList(queries);
+
       const {
-        issueList,
+        issuesList,
         labelList,
         userList,
         milestoneList,
         openIssueCount,
         closedIssueCount,
+        openIssueMaxPage,
+        closeIssueMaxPage,
       } = response;
 
-      setIssueData(issueList);
+      setIssueData(issuesList);
       setLabelList([noneLabel, ...labelList]);
       setUserList(userList);
       setMilestoneList([noneMilestone, ...milestoneList]);

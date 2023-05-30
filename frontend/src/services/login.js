@@ -23,7 +23,7 @@ export const getToken = () => {
 export const getLoginToken = async (queryCode) => {
   try {
     const data = await customFetch({
-      path: '/login/github',
+      path: '/oauth/result',
       method: 'GET',
       queries: { code: queryCode },
     });

@@ -1,6 +1,7 @@
 export const removeEmptyKeyValues = (object) => {
   Object.entries(object).forEach((set) => {
     const [key, value] = set;
+    if (value === 0) return;
     if (!value) delete object[key];
   });
   return object;
