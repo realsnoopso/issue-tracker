@@ -3,7 +3,7 @@ import {
   AuthPage,
   IssuePage,
   ErrorPage,
-  IssueDetail,
+  IssueDetailPage,
   WritePage,
 } from '@containers/index';
 
@@ -19,7 +19,7 @@ export const routes = [
   { path: '*', element: <ErrorPage /> },
   {
     path: '/detail/:issueId',
-    element: <IssueDetail />,
+    element: <IssueDetailPage />,
     auth: true,
   },
   { path: '/write', element: <WritePage /> },
