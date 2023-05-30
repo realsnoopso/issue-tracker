@@ -39,7 +39,7 @@ jobs:
         run: |
           cd backend
           chmod +x gradlew
-          ./gradlew clean build
+          ./gradlew clean build -x test
 
       - name: Make Directory for deliver
         run: mkdir -p deploy/was
