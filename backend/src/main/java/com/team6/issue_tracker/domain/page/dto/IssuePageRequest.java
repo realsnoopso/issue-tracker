@@ -18,13 +18,35 @@ public class IssuePageRequest {
     private List<Long> label;
 
     public IssueFilter toFilter() {
+        Boolean milestoneFlag = null;
+        Boolean assigneeFlag = null;
+        Boolean labelFlag = null;
+
+        if (milestone != null && milestone < 0) {
+            milestoneFlag = true;
+            milestone = null;
+        }
+
+        if (assignee != null && assignee < 0) {
+            assigneeFlag = true;
+            assignee = null;
+        }
+
+        if (label != null && label.get(0) < 0) {
+            labelFlag = true;
+            label = null;
+        }
+
         return IssueFilter.builder()
                 .isOpen(status==Status.OPEN)
                 .page(page)
                 .writer(writer)
                 .assignee(assignee)
+                .assigneeEmptyFlag(assigneeFlag)
                 .mailestone(milestone)
+                .milestoneEmptyFlag(milestoneFlag)
                 .label(label)
+                .labelEmptyFlag(labelFlag)
                 .commentBy(commentBy)
                 .build();
     }
