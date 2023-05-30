@@ -1,6 +1,5 @@
-package com.team6.issue_tracker.auth.dto;
+package com.team6.issue_tracker.global.auth.dto;
 
-import com.team6.issue_tracker.auth.config.AuthConst;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -8,7 +7,7 @@ public class GithubUserResourceRequest {
     private final String HEADER = "Authorization";
     private final String KEY = "token";
 
-    private GithubAccessToken token;
+    private final GithubAccessToken token;
 
     public GithubUserResourceRequest(GithubAccessToken token) {
         this.token = token;

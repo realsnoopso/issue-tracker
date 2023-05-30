@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.auth.dto;
+package com.team6.issue_tracker.global.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

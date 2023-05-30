@@ -15,7 +15,7 @@ public enum Status {
     }
 
     public static Status of(boolean isOpen) {
-        if(isOpen) {
+        if (isOpen) {
             return OPEN;
         }
         return CLOSE;

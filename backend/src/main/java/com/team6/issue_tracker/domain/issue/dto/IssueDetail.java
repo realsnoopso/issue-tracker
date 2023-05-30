@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 
-@Data @Builder
+@Data
+@Builder
 @AllArgsConstructor
 public class IssueDetail {
 
@@ -39,7 +40,7 @@ public class IssueDetail {
 
     public static IssueDetail toDetails(Issue issue, MemberDto writer, MemberDto assignee,
                                         List<LabelDto> labels, Milestone milestone,
-                                        List<CommentDto> coments){
+                                        List<CommentDto> coments) {
         return IssueDetail.builder()
                 .index(issue.getIssueIdx())
                 .title(issue.getTitle())
@@ -61,7 +62,7 @@ public class IssueDetail {
                 .contents(dto.getContents())
                 .writer(AggregateReference.to(dto.getWriter().getMemberIdx()))
                 .assignee(nullableMember(dto.getAssignee()))
-                .isOpen(dto.getStatus()==Status.OPEN)
+                .isOpen(dto.getStatus() == Status.OPEN)
                 .createdAt(dto.getCreatedAt())
                 .labelOnIssue(getLabelOnIssue(dto.getLabelList()))
                 .milestoneIdx(nullableMilestone(dto.getMilestone()))
@@ -84,7 +85,7 @@ public class IssueDetail {
     }
 
     private AggregateReference<Member, @NotNull Long> nullableMember(MemberDto m) {
-        if (m!=null) {
+        if (m != null) {
             return AggregateReference.to(m.getMemberIdx());
         }
         return null;

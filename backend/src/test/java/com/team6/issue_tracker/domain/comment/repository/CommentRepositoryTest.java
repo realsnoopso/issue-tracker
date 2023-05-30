@@ -21,7 +21,7 @@ class CommentRepositoryTest {
 
     @Test
     @DisplayName("Comment Id로 comment를 찾을 수 있다.")
-    void findById() throws Exception{
+    void findById() throws Exception {
         //given
         Comment comment = commentRepository.findById(1L).orElseThrow();
 
@@ -31,10 +31,10 @@ class CommentRepositoryTest {
         //then
         assertThat(comment.getContents().getContents()).isEqualTo("test comment");
     }
-    
+
     @Test
     @DisplayName("Comment 를 Repository에 저장할 수 있다.")
-    void saveComment() throws Exception{
+    void saveComment() throws Exception {
         //given
         Comment testComment = Comment.newComment("testComment", 1L, 2L);
 
@@ -47,7 +47,7 @@ class CommentRepositoryTest {
 
     @Test
     @DisplayName("Comment 를 Repository에 저장하면, Repository Count가 1 증가한다.")
-    void saveAtRepository() throws Exception{
+    void saveAtRepository() throws Exception {
         //given
         long count = commentRepository.count();
 

@@ -2,7 +2,9 @@ package com.team6.issue_tracker.domain.comment.domain;
 
 import com.team6.issue_tracker.domain.issue.domain.Issue;
 import com.team6.issue_tracker.domain.member.domain.Member;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.annotation.*;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Embedded;
@@ -12,7 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
 
-@Getter @Builder
+@Getter
+@Builder
 @ToString
 @Table("comment")
 public class Comment {

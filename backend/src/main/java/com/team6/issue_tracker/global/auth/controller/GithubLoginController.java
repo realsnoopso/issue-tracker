@@ -1,10 +1,9 @@
 package com.team6.issue_tracker.global.auth.controller;
 
-import com.team6.issue_tracker.auth.config.GithubOAuthProperties;
-import com.team6.issue_tracker.auth.domain.GithubUser;
-import com.team6.issue_tracker.auth.dto.GithubAccessToken;
-import com.team6.issue_tracker.auth.dto.GithubAccessTokenRequest;
-import com.team6.issue_tracker.domain.member.service.MemberService;
+import com.team6.issue_tracker.global.auth.config.GithubOAuthProperties;
+import com.team6.issue_tracker.global.auth.domain.GithubUser;
+import com.team6.issue_tracker.global.auth.dto.GithubAccessToken;
+import com.team6.issue_tracker.global.auth.dto.GithubAccessTokenRequest;
 import com.team6.issue_tracker.global.auth.service.GithubOAuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

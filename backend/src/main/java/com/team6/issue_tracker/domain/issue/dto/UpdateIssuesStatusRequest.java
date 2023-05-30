@@ -7,7 +7,8 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data @Builder
+@Data
+@Builder
 @AllArgsConstructor
 public class UpdateIssuesStatusRequest {
     List<Long> issueIdx;

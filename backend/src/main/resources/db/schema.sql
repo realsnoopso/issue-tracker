@@ -50,15 +50,17 @@ CREATE TABLE `issue_tracker_schema`.`label`
 -- Table `issue_tracker_schema`.`milestone`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `milestone`;
-CREATE TABLE `issue_tracker_schema`.`milestone` (
-      `milestone_idx` BIGINT NOT NULL AUTO_INCREMENT,
-      `title` VARCHAR(1000) NOT NULL,
-      `is_open` boolean NOT NULL,
-      `ended_at` DATETIME NULL DEFAULT NULL,
-      `contents` VARCHAR(1000) NULL DEFAULT NULL,
-      `is_deleted` boolean NOT NULL,
-      PRIMARY KEY (`milestone_idx`))
-ENGINE = InnoDB;
+CREATE TABLE `issue_tracker_schema`.`milestone`
+(
+    `milestone_idx` BIGINT        NOT NULL AUTO_INCREMENT,
+    `title`         VARCHAR(1000) NOT NULL,
+    `is_open`       boolean       NOT NULL,
+    `ended_at`      DATETIME      NULL DEFAULT NULL,
+    `contents`      VARCHAR(1000) NULL DEFAULT NULL,
+    `is_deleted`    boolean       NOT NULL,
+    PRIMARY KEY (`milestone_idx`)
+)
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -102,7 +104,7 @@ CREATE TABLE `issue_tracker_schema`.`comment`
     `contents`    TEXT(10000) NOT NULL,
     `created_at`  DATETIME    NOT NULL,
     edited_at     DATETIME,
-    is_deleted       boolean     NOT NULL default true,
+    is_deleted    boolean     NOT NULL default true,
     issue_idx     BIGINT      NOT NULL,
     created_by    BIGINT      NOT NULL,
     PRIMARY KEY (`comment_idx`, issue_idx, created_by),

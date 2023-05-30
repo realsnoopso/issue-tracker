@@ -1,4 +1,4 @@
-package com.team6.issue_tracker.auth.config;
+package com.team6.issue_tracker.global.auth.config;
 
 public class AuthConst {
 

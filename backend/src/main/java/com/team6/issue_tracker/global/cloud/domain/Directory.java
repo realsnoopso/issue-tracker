@@ -7,7 +7,7 @@ public enum Directory {
     ISSUE("image/"),
     MEMBER("profile/");
 
-    private String prefix;
+    private final String prefix;
 
     Directory(String prefix) {
         this.prefix = prefix;

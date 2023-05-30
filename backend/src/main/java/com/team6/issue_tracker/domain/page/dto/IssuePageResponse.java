@@ -8,7 +8,8 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data @Builder
+@Data
+@Builder
 public class IssuePageResponse {
 
     private Long openIssueCount;

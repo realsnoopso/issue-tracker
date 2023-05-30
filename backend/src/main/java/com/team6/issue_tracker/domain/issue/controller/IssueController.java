@@ -1,10 +1,10 @@
 package com.team6.issue_tracker.domain.issue.controller;
 
 import com.team6.issue_tracker.domain.issue.domain.Issue;
-import com.team6.issue_tracker.domain.issue.service.IssueService;
+import com.team6.issue_tracker.domain.issue.dto.CreateIssueRequest;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.dto.UpdateIssuesStatusRequest;
-import com.team6.issue_tracker.domain.issue.dto.CreateIssueRequest;
+import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.issue.service.IssueUpdateService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

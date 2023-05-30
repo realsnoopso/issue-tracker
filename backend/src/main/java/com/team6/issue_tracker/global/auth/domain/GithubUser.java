@@ -1,6 +1,5 @@
-package com.team6.issue_tracker.auth.domain;
+package com.team6.issue_tracker.global.auth.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;

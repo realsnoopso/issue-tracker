@@ -19,6 +19,6 @@ public class IssueUpdateService {
     }
 
     public boolean updateIssuesStatus(List<Long> issueIdx, Status status) {
-        return issueRepository.updateIssuesIsOpen(status==Status.OPEN, issueIdx);
+        return issueRepository.updateIssuesIsOpen(status == Status.OPEN, issueIdx);
     }
 }
