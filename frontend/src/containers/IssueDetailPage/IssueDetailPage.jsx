@@ -1,11 +1,11 @@
-import styles from './IssueDetail.module.css';
+import styles from './IssueDetailPage.module.css';
 import classNames from 'classnames/bind';
 import { DetailHeader, DetailBody } from '@containers/index';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getIssueDetail } from '@src/services/issue';
 
-export const IssueDetail = () => {
+export const IssueDetailPage = () => {
   const params = useParams();
 
   const cx = classNames.bind(styles);
@@ -14,22 +14,22 @@ export const IssueDetail = () => {
 
   const [issueObject, setIssueObject] = useState({});
 
-  useEffect(() => {
-    (async () => {
-      const issueId = params.issueId;
-      const response = await getIssueDetail({ issueId });
+  // useEffect(() => {
+  //   (async () => {
+  //     const issueId = params.issueId;
+  //     const response = await getIssueDetail({ issueId });
 
-      setIssueObject(response);
-    })();
-  }, []);
+  //     setIssueObject(response);
+  //   })();
+  // }, [params]);
 
   return (
     <div className={issueDetailClassNames}>
       <div>
-        <DetailHeader issueObject={issueObject}></DetailHeader>
+        <DetailHeader></DetailHeader>
       </div>
       <div className={detailBodyClassNames}>
-        <DetailBody issueObject={issueObject}></DetailBody>
+        <DetailBody></DetailBody>
       </div>
     </div>
   );

@@ -3,9 +3,25 @@ import classNames from 'classnames/bind';
 import { InformationTag, ElapsedTime, Button } from '@components/index';
 import { useEffect, useState } from 'react';
 import { patchIssueTitle, patchIssueStatus } from '@src/services/issue';
-import { DetailUpdateTitle } from './DetailUpdateTitle/DetailUpdateTitle';
+import { DetailUpdateTitle, DetailTitle } from '@containers/index';
 
-export const DetailHeader = ({ issueObject }) => {
+import { useParams } from 'react-router-dom';
+import { getIssueDetail } from '@src/services/issue';
+
+export const DetailHeader = ({}) => {
+  const params = useParams();
+
+  const [issueObject, setIssueObject] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const issueId = params.issueId;
+      const response = await getIssueDetail({ issueId });
+
+      setIssueObject(response);
+    })();
+  }, []);
+
   const cx = classNames.bind(styles);
   const headerClassNames = `${cx('header')}`;
   const issueElClassNames = `${cx('issue-element')}`;
@@ -15,19 +31,13 @@ export const DetailHeader = ({ issueObject }) => {
   const issueAmendClassNames = `${cx('issue-amend')}`;
   const infoClassNames = `${cx('info')}`;
 
-  const issueId = issueObject.index;
-  const timeStamp = issueObject.createdAt;
-  const writer = issueObject.writer?.name;
-  const commentLegnth = issueObject.comment?.length;
-
-  useEffect(() => {
-    setIssueStatus(issueObject.status);
-    setIssueTitle(issueObject.title);
-    setInputValue(issueObject.title);
-  }, [issueObject]);
+  const issueId = issueObject?.index;
+  const timeStamp = issueObject?.createdAt;
+  const writer = issueObject?.writer?.name;
+  const commentLegnth = issueObject?.comment?.length;
 
   const [issueStatus, setIssueStatus] = useState(null);
-  const [onUpdateTitle, setOnUpdateTitle] = useState(false);
+  const [onClickEditTitle, setOnClickEditTitle] = useState(false);
   const [issueTitle, setIssueTitle] = useState(null);
   const [inputValue, setInputValue] = useState('');
 
@@ -41,32 +51,49 @@ export const DetailHeader = ({ issueObject }) => {
   const tagText = issueStatus === 'open' ? OPENED_ISSUE : CLOSED_ISSUE;
   const btnText = issueStatus === 'open' ? ISSUE_CLOSE : ISSUE_OPEN;
 
-  const handleEditStatusBtnOnClick = () => {
-    setIssueStatus((prevStatus) => (prevStatus === 'open' ? 'close' : 'open'));
-    patchIssueStatus(issueId, issueStatus);
-  };
+  useEffect(() => {
+    if (issueObject.status !== undefined) {
+      setIssueStatus(issueObject.status);
+    }
+    if (issueObject.title !== undefined) {
+      setIssueTitle(issueObject.title);
+    }
+    setInputValue(issueObject.title);
+  }, [issueObject]);
 
   const onEditTitleBtn = () => {
-    setOnUpdateTitle(true);
+    setOnClickEditTitle(true);
   };
 
   const offEditTitleBtn = () => {
-    setOnUpdateTitle(false);
+    setOnClickEditTitle(false);
   };
 
-  const updateTitle = () => {
-    patchIssueTitle(issueId, issueTitle);
-    setOnUpdateTitle(false);
+  const handleEditStatusBtnOnClick = () => {
+    const newStatus = issueStatus === 'open' ? 'close' : 'open';
+    setIssueStatus(newStatus);
   };
+
+  useEffect(() => {
+    if (issueStatus !== null) {
+      patchIssueStatus(issueId, issueStatus);
+    }
+  }, [issueStatus]);
 
   const handleEditTitleBtnOnClick = () => {
     setIssueTitle(inputValue);
-    updateTitle();
+    setOnClickEditTitle(false);
   };
+
+  useEffect(() => {
+    if (issueTitle !== null) {
+      patchIssueTitle(issueId, issueTitle);
+    }
+  }, [issueTitle]);
 
   return (
     <div className={headerClassNames}>
-      {onUpdateTitle ? (
+      {onClickEditTitle ? (
         <DetailUpdateTitle
           issueElClassNames={issueElClassNames}
           titleClassNames={titleClassNames}
@@ -111,52 +138,5 @@ export const DetailHeader = ({ issueObject }) => {
         </div>
       </div>
     </div>
-  );
-};
-
-const DetailTitle = ({
-  issueElClassNames,
-  titleClassNames,
-  idClassNames,
-  issueTitle,
-  issueId,
-  issueAmendClassNames,
-  onEditTitleBtn,
-  btnText,
-  handleEditStatusBtnOnClick,
-}) => {
-  return (
-    <>
-      <div className={issueElClassNames}>
-        <div className={titleClassNames}>
-          <span className={titleClassNames}>{issueTitle}</span>
-          <span className={idClassNames}>#{issueId}</span>
-        </div>
-        <div className={issueAmendClassNames}>
-          <div>
-            <Button
-              iconName={'edit'}
-              text={'제목 편집'}
-              type={'outline'}
-              color={'blue'}
-              width={'120px'}
-              btnSize={'m'}
-              _onClick={onEditTitleBtn}
-            ></Button>
-          </div>
-          <div>
-            <Button
-              iconName={'edit'}
-              text={btnText}
-              type={'outline'}
-              color={'blue'}
-              width={'120px'}
-              btnSize={'m'}
-              _onClick={handleEditStatusBtnOnClick}
-            ></Button>
-          </div>
-        </div>
-      </div>
-    </>
   );
 };
