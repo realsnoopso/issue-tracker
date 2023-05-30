@@ -20,7 +20,7 @@ public class LabelController {
             tags = "label",
             description = "사용자는 레이블 목록을 볼 수 있다."
     )
-    @GetMapping("/labels")
+    @GetMapping("/label")
     public List<LabelDetail> readLabelList() {
         return labelService.getAllLabelDetails();
     }
