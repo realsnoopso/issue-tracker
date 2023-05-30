@@ -12,12 +12,6 @@ export const TextInputNormal = ({
   onChange,
   value,
 }) => {
-  // const [inputValue, setInputValue] = useState('');
-
-  // const handleInputChange = (event) => {
-  //   setInputValue(event.target.value);
-  // };
-
   const cx = classNames.bind(styles);
 
   const textInputMode = size === 'l' ? cx('size-l') : cx('size-s');

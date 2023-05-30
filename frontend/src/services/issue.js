@@ -83,7 +83,7 @@ export const getIssueList = async ({
 }) => {
   try {
     const response = await customFetch({
-      path: '/issues',
+      path: '/issue',
       method: 'GET',
       queries: {
         status,

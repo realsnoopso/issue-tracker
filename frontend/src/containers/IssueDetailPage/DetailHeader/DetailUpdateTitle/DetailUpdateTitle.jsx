@@ -1,18 +1,15 @@
 import { Button, TextInputNormal } from '@components/index';
-import { useState } from 'react';
 
 export const DetailUpdateTitle = ({
   issueElClassNames,
   titleClassNames,
   issueTitle,
-  setIssueTitle,
   issueAmendClassNames,
-  updateTitle,
-  amendCancel,
+  offEditTitleBtn,
   valueState,
-  _onClick,
+  handleEditTitleBtnOnClick,
 }) => {
-  const [value, setValue] = valueState;
+  const [inputValue, setInputValue] = valueState;
 
   return (
     <>
@@ -27,9 +24,9 @@ export const DetailUpdateTitle = ({
             states="initial"
             placeholder={issueTitle}
             type="text"
-            value={value}
+            value={inputValue}
             onChange={(e) => {
-              setValue(e.target.value);
+              setInputValue(e.target.value);
             }}
           ></TextInputNormal>
         </div>
@@ -42,7 +39,7 @@ export const DetailUpdateTitle = ({
               color={'blue'}
               width={'120px'}
               btnSize={'m'}
-              _onClick={amendCancel}
+              _onClick={offEditTitleBtn}
             ></Button>
           </div>
           <div>
@@ -53,7 +50,7 @@ export const DetailUpdateTitle = ({
               color={'blue'}
               width={'120px'}
               btnSize={'m'}
-              _onClick={_onClick}
+              _onClick={handleEditTitleBtnOnClick}
             ></Button>
           </div>
         </div>
