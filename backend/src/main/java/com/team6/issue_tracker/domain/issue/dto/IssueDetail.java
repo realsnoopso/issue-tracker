@@ -3,7 +3,7 @@ package com.team6.issue_tracker.domain.issue.dto;
 import com.team6.issue_tracker.domain.comment.dto.CommentDto;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
 import com.team6.issue_tracker.domain.issue.domain.Labeling;
-import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.label.dto.LabelSummary;
 import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
@@ -35,11 +35,11 @@ public class IssueDetail {
     private Instant createdAt;
     private Instant editedAt;
     private MilestoneDetail milestone;
-    private List<LabelDto> labelList;
+    private List<LabelSummary> labelList;
     private List<CommentDto> commentList;
 
     public static IssueDetail toDetails(Issue issue, MemberDto writer, MemberDto assignee,
-                                        List<LabelDto> labels, MilestoneDetail milestone,
+                                        List<LabelSummary> labels, MilestoneDetail milestone,
                                         List<CommentDto> coments) {
         return IssueDetail.builder()
                 .index(issue.getIssueIdx())
@@ -78,7 +78,7 @@ public class IssueDetail {
         return null;
     }
 
-    private Map<Long, Labeling> getLabelOnIssue(List<LabelDto> labelList) {
+    private Map<Long, Labeling> getLabelOnIssue(List<LabelSummary> labelList) {
         Map<Long, Labeling> labelingMap = new HashMap<>();
         labelList.forEach(l -> labelingMap.put(l.getLabelIdx(), new Labeling(l.getLabelIdx())));
         return labelingMap;

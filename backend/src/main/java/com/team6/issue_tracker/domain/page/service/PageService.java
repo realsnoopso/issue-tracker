@@ -6,7 +6,7 @@ import com.team6.issue_tracker.domain.model.Status;
 import com.team6.issue_tracker.domain.page.dto.IssueDto;
 import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.label.service.LabelService;
-import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.label.dto.LabelSummary;
 import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
@@ -35,7 +35,7 @@ public class PageService {
 
         Map<Long, MemberDto> members = memberService.getAllMembers();
         Map<Long, Milestone> milestones = milestoneService.getAllMilestones();
-        Map<Long, LabelDto> labels = labelService.getAllLabels();
+        Map<Long, LabelSummary> labels = labelService.getAllLabelSummaries();
 
         List<Issue> issueList = issueService.findByfilterWithPage(page*PAGE_SIZE, PAGE_SIZE, filter);
         long openIssueNum = issueService.getIssueNum(Status.OPEN);
@@ -47,7 +47,7 @@ public class PageService {
             MemberDto writer = getWriter(members, issue);
             MemberDto assignee = getAssignee(members, issue);
             Milestone milestone = getMilestone(milestones, issue);
-            List<LabelDto> labelList = getLabelList(labels, issue);
+            List<LabelSummary> labelList = getLabelList(labels, issue);
 
             IssueDto issueDto = IssueDto.toDto(issue, writer, assignee, labelList, milestone);
             issueDtos.add(issueDto);
@@ -66,7 +66,7 @@ public class PageService {
                 .build();
     }
 
-    private List<LabelDto> getLabelList(Map<Long, LabelDto> labels, Issue issue) {
+    private List<LabelSummary> getLabelList(Map<Long, LabelSummary> labels, Issue issue) {
         return issue.getLabelOnIssue().values()
                         .stream()
                         .map(e -> labels.get(e.getLabelIdx()))
