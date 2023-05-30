@@ -45,11 +45,11 @@ public class GithubLoginController {
         //TODO 로그인 처리
 //        member = loginService.login(member);
 
-        //TODO 토큰 jwt 처리
+        // 토큰 jwt 처리
         String jwtToken = jwtService.createToken(githubUser);
 //        String jwtAccessToken = jwtTokenProvider.issueAccessToken(member);
 
-        //TODO header, body에 토큰 넣고 반환
+        //header, body에 토큰 넣고 반환
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + jwtToken);
 
