@@ -37,11 +37,14 @@ public class GithubLoginController {
         this.jwtService = jwtService;
     }
 
-    @GetMapping("/oauth/result")
+    @GetMapping("/oauth/result") // 500 에러
     public ResponseEntity<?> loginViaGithub(String code) {
         GithubAccessTokenRequest githubAccessTokenRequest = new GithubAccessTokenRequest(githubOAuthProperties, code);
+        log.debug("githubAccessTokenRequest = {}", githubAccessTokenRequest);
         GithubAccessToken githubAccessToken = oAuthServices.requestAccessToken(githubAccessTokenRequest);
+        log.debug("githubAccessToken = {}", githubAccessToken);
         GithubUser githubUser = oAuthServices.requestUserInfo(githubAccessToken);
+        log.debug("githubUser = {}", githubUser);
         //TODO 로그인 처리
 //        member = loginService.login(member);
 
