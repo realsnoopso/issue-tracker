@@ -31,14 +31,13 @@ public class PageService {
     private final LabelService labelService;
     private final MilestoneService milestoneService;
 
-    public IssuePageResponse getAPage(int offset, IssueFilter filter) {
-        //
+    public IssuePageResponse getAPage(int page, IssueFilter filter) {
 
         Map<Long, MemberDto> members = memberService.getAllMembers();
         Map<Long, Milestone> milestones = milestoneService.getAllMilestones();
         Map<Long, LabelDto> labels = labelService.getAllLabels();
 
-        List<Issue> issueList = issueService.findByfilterWithPage(offset, PAGE_SIZE, filter);
+        List<Issue> issueList = issueService.findByfilterWithPage(page*PAGE_SIZE, PAGE_SIZE, filter);
         long openIssueNum = issueService.getIssueNum(Status.OPEN);
         long closedIssueNum = issueService.getIssueNum(Status.CLOSE);
 
@@ -58,7 +57,7 @@ public class PageService {
                 .issuesList(issueDtos)
                 .openIssueCount(openIssueNum)
                 .closedIssueCount(closedIssueNum)
-                .page(offset)
+                .page(page)
                 .openIssueMaxPage(getIssueMaxPage(openIssueNum))
                 .closeIssueMaxPage(getIssueMaxPage(closedIssueNum))
                 .userList(new ArrayList<>(members.values()))
