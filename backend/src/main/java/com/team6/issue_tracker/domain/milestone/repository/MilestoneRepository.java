@@ -23,4 +23,14 @@ public interface MilestoneRepository extends CrudRepository<Milestone, @NotNull 
             "and i.is_deleted = false " +
             "GROUP BY m.milestone_idx")
     List<MilestoneDetail> findAllMilestonesWithIssueCount();
+
+    @Query("SELECT m.milestone_idx, m.title, m.contents, m.ended_at as end_date, m.is_open, " +
+            "count(i.issue_idx) as total_issue_num, " +
+            "count(CASE WHEN i.is_open = FALSE THEN i.issue_idx END) as closed_issue_num " +
+            "FROM milestone m LEFT JOIN issue i on m.milestone_idx = i.milestone " +
+            "where m.is_deleted = false " +
+            "and i.is_deleted = false " +
+            "and m.milestone_idx = :milestoneIdx ")
+    MilestoneDetail findMilestoneWithIssueCount(@Param("milestoneIdx") long milestoneIdx);
+
 }
