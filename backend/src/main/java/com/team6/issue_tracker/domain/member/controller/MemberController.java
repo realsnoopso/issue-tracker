@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +23,8 @@ public class MemberController {
             description = "사용자는 회원 목록을 볼 수 있다."
     )
     @GetMapping("/members")
-    public List<MemberDto> findAll(int page) {
-        return memberService.getAllMemberPage(page).stream()
-                        .map(MemberDto::from)
-                        .collect(Collectors.toList());
+    public List<MemberDto> findAll() {
+        return new ArrayList<>(memberService.getAllMembers().values());
     }
 
 }
