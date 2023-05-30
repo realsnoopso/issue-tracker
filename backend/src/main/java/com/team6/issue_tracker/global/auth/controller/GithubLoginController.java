@@ -1,5 +1,7 @@
 package com.team6.issue_tracker.global.auth.controller;
 
+import com.team6.issue_tracker.domain.member.domain.Member;
+import com.team6.issue_tracker.domain.member.service.MemberProvider;
 import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.global.auth.config.GithubOAuthProperties;
 import com.team6.issue_tracker.global.auth.domain.GithubUser;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,39 +30,34 @@ public class GithubLoginController {
 
     private final GithubOAuthProperties githubOAuthProperties;
     private final MemberService memberService;
+    private final MemberProvider memberProvider;
     private final GithubOAuthService oAuthServices;
     private final JwtService jwtService;
 
-    public GithubLoginController(GithubOAuthProperties githubOAuthProperties, MemberService memberService, GithubOAuthService oAuthServices, JwtService jwtService) {
+    public GithubLoginController(GithubOAuthProperties githubOAuthProperties, MemberService memberService, MemberProvider memberProvider, GithubOAuthService oAuthServices, JwtService jwtService) {
         this.githubOAuthProperties = githubOAuthProperties;
         this.memberService = memberService;
+        this.memberProvider = memberProvider;
         this.oAuthServices = oAuthServices;
         this.jwtService = jwtService;
     }
 
-    @GetMapping("/oauth/result") // 500 에러
+    @GetMapping("/oauth/result")
     public ResponseEntity<?> loginViaGithub(String code) {
-        log.info("코드 수신 확인" + code);
         GithubAccessTokenRequest githubAccessTokenRequest = new GithubAccessTokenRequest(githubOAuthProperties, code);
-        log.debug("githubAccessTokenRequest = {}", githubAccessTokenRequest);
         GithubAccessToken githubAccessToken = oAuthServices.requestAccessToken(githubAccessTokenRequest);
-        log.debug("githubAccessToken = {}", githubAccessToken);
         GithubUser githubUser = oAuthServices.requestUserInfo(githubAccessToken);
-        log.debug("githubUser = {}", githubUser);
+
+        //TODO 맴버 등록 및 업데이트
+        Member createdMember = memberProvider.createAndMember(githubUser, githubAccessToken);
+        memberService.join(createdMember);
+
         //TODO 로그인 처리
 //        member = loginService.login(member);
 
-        //토큰 jwt 처리
+//        토큰 jwt 처리
         String jwtToken = jwtService.createToken(githubUser);
-//        String jwtAccessToken = jwtTokenProvider.issueAccessToken(member);
-
-        //header, body에 토큰 넣고 반환
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + jwtToken);
-
-        Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("message", "login success");
-        responseBody.put("token", jwtToken);
-        return new ResponseEntity<>(responseBody, headers, HttpStatus.OK);
+//        header, body에 토큰 넣고 반환
+        return jwtService.createResponse(jwtToken);
     }
 }

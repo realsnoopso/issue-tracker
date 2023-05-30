@@ -3,12 +3,14 @@ package com.team6.issue_tracker.domain.member.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import java.time.Instant;
 
 @Getter
 @Builder
@@ -18,27 +20,16 @@ public class Member {
 
     @Id
     private Long memberIdx;
-
     @NotNull
     private String id;
-
     @NotNull
-    private String password;
-
+    private String name;
     private String profileImageUrl;
+    private String accessToken;
+    @NotNull
+    @CreatedDate
+    @PastOrPresent
+    private Instant createdAt;
 
-    @Column("github_join")
-    private Boolean githubState;
 
-    @PersistenceCreator
-    private Member(String id, String password, String profileImageUrl, Boolean githubState) {
-        this.id = id;
-        this.password = password;
-        this.profileImageUrl = profileImageUrl;
-        this.githubState = githubState;
-    }
-
-    public static Member newMember(String id, String password, String profileImageUrl) {
-        return new Member(id, password, profileImageUrl, false);
-    }
 }
