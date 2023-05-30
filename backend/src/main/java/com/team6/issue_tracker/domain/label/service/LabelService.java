@@ -30,4 +30,10 @@ public class LabelService {
                 .map(Labeling::getLabelIdx)
                 .collect(Collectors.toList()), false);
     }
+
+    public List<LabelDetail> getAllLabelDetails() {
+        List<LabelDetail> list = new ArrayList<>();
+        labelRepository.findAllByIsDeletedFalse().forEach(label -> list.add(LabelDetail.of(label)));
+        return list;
+    }
 }
