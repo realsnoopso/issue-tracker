@@ -3,10 +3,12 @@ package com.team6.issue_tracker.global.auth.dto;
 import com.team6.issue_tracker.global.auth.config.AuthConst;
 import com.team6.issue_tracker.global.auth.config.GithubOAuthProperties;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 @Getter
+@ToString
 public class GithubAccessTokenRequest {
 
     private final String code;
