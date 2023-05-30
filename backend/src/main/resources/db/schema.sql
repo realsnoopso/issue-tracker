@@ -52,14 +52,15 @@ CREATE TABLE `issue_tracker_schema`.`label`
 DROP TABLE IF EXISTS `milestone`;
 CREATE TABLE `issue_tracker_schema`.`milestone`
 (
-    `milestone_idx`      BIGINT        NOT NULL AUTO_INCREMENT,
-    `milestone_title`    VARCHAR(1000) NOT NULL,
-    `milestone_status`   boolean       NOT NULL,
-    `milestone_ended_at` DATETIME      NULL DEFAULT NULL,
-    `milestone_contents` VARCHAR(1000) NULL DEFAULT NULL,
-    `milestone_deleted`  boolean       NOT NULL,
+    `milestone_idx` BIGINT        NOT NULL AUTO_INCREMENT,
+    `title`         VARCHAR(1000) NOT NULL,
+    `is_open`       boolean       NOT NULL,
+    `ended_at`      DATETIME      NULL DEFAULT NULL,
+    `contents`      VARCHAR(1000) NULL DEFAULT NULL,
+    `is_deleted`    boolean       NOT NULL,
     PRIMARY KEY (`milestone_idx`)
-) ENGINE = InnoDB;
+)
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -76,8 +77,8 @@ CREATE TABLE `issue_tracker_schema`.`issue`
     `edited_at`     DATETIME     NULL     DEFAULT NULL,
     `milestone_idx` BIGINT       NULL,
     writer          BIGINT       NOT NULL,
-    assignee        BIGINT       NOT NULL,
-    `is_deleted`    boolean      NOT NULL,
+    assignee        BIGINT       NULL,
+    `is_deleted`    boolean      NOT NULL DEFAULT FALSE,
     INDEX `fk_issue_milestone1_idx` (`milestone_idx` ASC) VISIBLE,
     INDEX `fk_issue_writer_idx` (writer ASC) VISIBLE,
     INDEX `fk_issue_assignee_idx` (assignee ASC) VISIBLE,
@@ -103,7 +104,7 @@ CREATE TABLE `issue_tracker_schema`.`comment`
     `contents`    TEXT(10000) NOT NULL,
     `created_at`  DATETIME    NOT NULL,
     edited_at     DATETIME,
-    is_open       boolean     NOT NULL default true,
+    is_deleted    boolean     NOT NULL default true,
     issue_idx     BIGINT      NOT NULL,
     created_by    BIGINT      NOT NULL,
     PRIMARY KEY (`comment_idx`, issue_idx, created_by),
