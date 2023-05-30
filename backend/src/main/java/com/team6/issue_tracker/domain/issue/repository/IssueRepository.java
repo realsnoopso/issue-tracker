@@ -36,9 +36,12 @@ public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndS
             "LIMIT :pageSize OFFSET :offset")
     List<Issue> findAllBy(@Param("isOpen") boolean isOpen,
                           @Param("milestoneIdx") Long milestoneIdx,
+                          @Param("milestoneEmptyFlag") Boolean milestoneEmptyFlag,
                           @Param("writer") Long writer,
                           @Param("assignee") Long assignee,
+                          @Param("assigneeEmptyFlag") Boolean assigneeEmptyFlag,
                           @Param("labelIdx") List<Long> labelIdx,
+                          @Param("labelEmptyFlag") Boolean labelEmptyFlag,
                           @Param("pageSize") int pageSize,
                           @Param("offset") int offset);
 

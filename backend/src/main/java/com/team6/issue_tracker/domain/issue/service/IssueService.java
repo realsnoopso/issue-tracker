@@ -45,9 +45,12 @@ public class IssueService {
         return issueRepository.findAllBy(
                 filter.getIsOpen(),
                 filter.getMailestone(),
+                filter.getMilestoneEmptyFlag(),
                 filter.getWriter(),
                 filter.getAssignee(),
+                filter.getAssigneeEmptyFlag(),
                 filter.getLabel(),
+                filter.getLabelEmptyFlag(),
                 pageSize,
                 offset
         );
