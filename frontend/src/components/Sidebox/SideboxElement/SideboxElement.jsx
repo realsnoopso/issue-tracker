@@ -15,11 +15,18 @@ import { convertListToOptions } from '@services/dropdown';
 
 const cx = classNames.bind(styles);
 
-export const SideboxElement = ({ style, selectedState, name, id }) => {
+export const SideboxElement = ({
+  style,
+  selectedState,
+  name,
+  id,
+  isEditable,
+}) => {
   const sideboxElementClassNames = `${cx('sidebar-element')}`;
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = selectedState;
+
   const [list, setList] = useState([]);
 
   const options = convertListToOptions(
@@ -69,7 +76,6 @@ export const SideboxElement = ({ style, selectedState, name, id }) => {
   return (
     <div className={sideboxElementClassNames} style={{ ...style }}>
       <Dropdown
-        btnText={name}
         panelPosition="left"
         isOpen={isDropdownOpen}
         toggleOpen={handleDropdown(!isDropdownOpen)}
@@ -77,14 +83,21 @@ export const SideboxElement = ({ style, selectedState, name, id }) => {
         selected={selected}
         optionOnClick={optionOnClick}
         width="100%"
+        isEditable={isEditable}
         btnComponent={
-          <div className={cx('dropdown-btn')}>
-            <div>{name}</div>
-            <Icon
-              name="chevronDown"
-              fill="var(--color-light-neutral-text-weak)"
-            ></Icon>
-          </div>
+          isEditable ? (
+            <div className={cx('dropdown-btn')}>
+              <div>{name}</div>
+              <Icon
+                name="chevronDown"
+                fill="var(--color-light-neutral-text-weak)"
+              ></Icon>
+            </div>
+          ) : (
+            <div className={cx('dropdown-btn')}>
+              <div>{name}</div>
+            </div>
+          )
         }
       ></Dropdown>
 

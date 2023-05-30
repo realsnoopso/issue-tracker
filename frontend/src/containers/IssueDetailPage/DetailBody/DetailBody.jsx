@@ -1,26 +1,13 @@
-import styles from './DetailBody.module.css';
-import classNames from 'classnames/bind';
 import { CommentElement } from '@containers/index';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getIssueDetail } from '@src/services/issue';
+import styles from './DetailBody.module.css';
+import classNames from 'classnames/bind';
 
-export const DetailBody = ({}) => {
-  const params = useParams();
+export const DetailBody = ({ writer, comment }) => {
+  const cx = classNames.bind(styles);
 
-  const [issueObject, setIssueObject] = useState({});
-
-  useEffect(() => {
-    (async () => {
-      const issueId = params.issueId;
-      const response = await getIssueDetail({ issueId });
-
-      setIssueObject(response);
-    })();
-  }, []);
-
-  const commentList = issueObject.comment;
-  const issueWriterId = issueObject.writer?.id;
+  const commentList = comment;
+  const issueWriterId = writer?.id;
 
   const addCommentElement = () => {
     return commentList?.map((comment, index) => {
@@ -45,8 +32,8 @@ export const DetailBody = ({}) => {
   };
 
   return (
-    <div className="detail-body">
-      <div className="detail-comment">
+    <div className={cx('detail-body')}>
+      <div className={cx('detail-comment')}>
         {addCommentElement()}
         <div className="add-comment"></div>
       </div>

@@ -114,7 +114,16 @@ export const handlers = [
       (list) => parseInt(issueId) === parseInt(list.index)
     );
 
-    return res(ctx.status(200), ctx.json(list));
+    const newList = {
+      ...list,
+      labelList: [list.label],
+      milestoneList: [list.milestone],
+    };
+
+    delete newList['label'];
+    delete newList['milestone'];
+
+    return res(ctx.status(200), ctx.json(newList));
   }),
 
   rest.get(`${URL}/members`, (req, res, ctx) => {

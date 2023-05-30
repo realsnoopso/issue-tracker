@@ -4,6 +4,7 @@ import { DetailHeader, DetailBody } from '@containers/index';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getIssueDetail } from '@src/services/issue';
+import { Sidebox } from '@src/components';
 
 export const IssueDetailPage = () => {
   const params = useParams();
@@ -12,25 +13,66 @@ export const IssueDetailPage = () => {
   const issueDetailClassNames = `${cx('issue-detail-page')}`;
   const detailBodyClassNames = `${cx('detail-body')}`;
 
-  const [issueObject, setIssueObject] = useState({});
+  const [issueDetail, setIssueDetail] = useState(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const issueId = params.issueId;
-  //     const response = await getIssueDetail({ issueId });
+  const [selectedAssignee, setSelectedAssignee] = useState();
+  const [selectedLabel, setSelectedLabel] = useState();
+  const [selectedMilestone, setSelectedMilstone] = useState();
 
-  //     setIssueObject(response);
-  //   })();
-  // }, [params]);
+  useEffect(() => {
+    (async () => {
+      const issueId = params.issueId;
+      const response = await getIssueDetail({ issueId });
+
+      setIssueDetail(response);
+    })();
+  }, []);
+
+  useEffect(() => {
+    setSelectedAssignee(issueDetail?.assignee);
+    setSelectedLabel(issueDetail?.labelList?.[0]);
+    setSelectedMilstone(issueDetail?.milestoneList?.[0]);
+  }, [issueDetail]);
+
+  const getDetailDatasByComponent = (issueDetail, componentName) => {
+    const { index, title, status, createdAt, writer, comment } = issueDetail;
+    if (componentName === 'header') {
+      return {
+        index,
+        title,
+        status,
+        createdAt,
+        writerName: writer.name,
+        commentLegnth: comment?.length,
+      };
+    }
+    if (componentName === 'body') {
+      return { writer, comment };
+    }
+  };
 
   return (
     <div className={issueDetailClassNames}>
-      <div>
-        <DetailHeader></DetailHeader>
-      </div>
-      <div className={detailBodyClassNames}>
-        <DetailBody></DetailBody>
-      </div>
+      {issueDetail && (
+        <>
+          <div>
+            <DetailHeader
+              {...getDetailDatasByComponent(issueDetail, 'header')}
+            ></DetailHeader>
+          </div>
+          <div className={detailBodyClassNames}>
+            <DetailBody
+              {...getDetailDatasByComponent(issueDetail, 'body')}
+            ></DetailBody>
+            <Sidebox
+              isEditable={false}
+              selectedAssigneeState={[selectedAssignee, setSelectedAssignee]}
+              selectedLabelState={[selectedLabel, setSelectedLabel]}
+              selectedMilstoneState={[selectedMilestone, setSelectedMilstone]}
+            ></Sidebox>
+          </div>
+        </>
+      )}
     </div>
   );
 };
