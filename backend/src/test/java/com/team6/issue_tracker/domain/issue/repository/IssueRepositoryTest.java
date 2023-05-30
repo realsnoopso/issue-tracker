@@ -71,7 +71,7 @@ class IssueRepositoryTest {
         PageRequest page = PageRequest.of(1,1, Sort.by(Sort.Direction.DESC, "issue_idx"));
 
         //when
-        List<Issue> allByFilter = issueRepository.findAllBy(true, null, 2L, null, null, 20, 1);
+        List<Issue> allByFilter = issueRepository.findAllBy(true, null, null, 2L, null, null, null, null, 20, 1);
 
         //then
         assertThat(allByFilter).hasSize(1);
