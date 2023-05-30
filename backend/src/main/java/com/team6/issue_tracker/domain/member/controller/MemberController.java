@@ -16,8 +16,4 @@ public class MemberController {
         this.memberRepository = memberRepository;
     }
 
-    @GetMapping("/testmember")
-    public Member tetsMember() {
-       return memberRepository.findById(1L).orElseThrow();
-    }
 }

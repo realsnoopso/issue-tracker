@@ -13,18 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class GithubLoginController {
-    // login 요청 url
-    // https://github.com/login/oauth/authorize?client_id=ded3580dcda54e46b774&redirect_uri=http://localhost:8080/oauth/result&scope=user
-    // Redirect
-    // http://localhost:8080/oauth/result?code=e2b73a0322cc4b86a685
 
     private final GithubOAuthProperties githubOAuthProperties;
-    private final MemberService memberService;
     private final GithubOAuthService oAuthServices;
 
-    public GithubLoginController(GithubOAuthProperties githubOAuthProperties, MemberService memberService, GithubOAuthService oAuthServices) {
+    public GithubLoginController(GithubOAuthProperties githubOAuthProperties, GithubOAuthService oAuthServices) {
         this.githubOAuthProperties = githubOAuthProperties;
-        this.memberService = memberService;
         this.oAuthServices = oAuthServices;
     }
 

@@ -15,7 +15,9 @@ import java.util.List;
 @Repository
 public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndSortingRepository<Issue, Long> {
 
-    Page<Issue> findAllByIsOpenAndIsDeleted(Boolean isOpen, Boolean isDeleted, Pageable pageable);
+    Integer countAllByIsDeletedFalseAndIsOpen(boolean isOpen);
+
+    Page<Issue> findAllByIsOpenAndIsDeleted(boolean isOpen, boolean isDeleted, Pageable pageable);
 
     @Query(value = "SELECT i.issue_idx, i.title, i.contents, i.is_open, i.created_at, i.edited_at," +
             "i.milestone_idx, i.writer, i.assignee, i.is_deleted " +
@@ -26,7 +28,7 @@ public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndS
             "AND (:assignee IS NULL OR i.assignee = :assignee) " +
             "ORDER BY i.issue_idx DESC " +
             "LIMIT :pageSize OFFSET :offset")
-    List<Issue> findAllBy(@Param("isOpen") Boolean isOpen,
+    List<Issue> findAllBy(@Param("isOpen") boolean isOpen,
                           @Param("milestoneIdx") Long milestoneIdx,
                           @Param("writer") Long writer,
                           @Param("assignee") Long assignee,
@@ -37,5 +39,5 @@ public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndS
     @Modifying
     @Query("UPDATE issue SET is_open = :status WHERE issue_idx IN (:issue_idx)")
     boolean updateIssuesIsOpen (@Param("status") boolean isOpen, @Param("issue_idx") List<Long> idx);
-    
+
 }
