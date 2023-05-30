@@ -4,6 +4,7 @@ import com.team6.issue_tracker.domain.comment.domain.Comment;
 import com.team6.issue_tracker.domain.comment.service.CommentService;
 import com.team6.issue_tracker.domain.comment.dto.CommentDto;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.milestone.dto.MilestoneDetail;
 import com.team6.issue_tracker.domain.model.Status;
 import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
@@ -64,7 +65,7 @@ public class IssueService {
 
         Member writer = members.get(issue.getWriter().getId());
         Member assignee = getAssignee(members, issue);
-        Milestone milestone = getMilestone(issue);
+        MilestoneDetail milestone = getMilestone(issue);
 
         List<LabelDto> labelDtoList = new ArrayList<>();
         labelService.findAllById(issue.getLabelOnIssue().values())
@@ -100,10 +101,10 @@ public class IssueService {
         return assginee;
     }
 
-    private Milestone getMilestone(Issue issue) {
-        Milestone milestone = null;
+    private MilestoneDetail getMilestone(Issue issue) {
+        MilestoneDetail milestone = null;
         if (issue.getMilestone() != null) {
-            milestone =milestoneService.findById(issue.getMilestone().getId());
+            milestone =milestoneService.findByIdWithIssueCount(issue.getMilestone().getId());
         }
         return milestone;
     }
