@@ -158,7 +158,7 @@ export const handlers = [
     );
 
     if (foundIssue) {
-      foundIssue.title = title.value;
+      foundIssue.title = title;
       return res(ctx.status(200), ctx.json(title));
     } else {
       return res(ctx.status(404));
