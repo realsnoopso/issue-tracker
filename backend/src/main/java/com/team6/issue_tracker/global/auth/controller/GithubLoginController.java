@@ -39,6 +39,7 @@ public class GithubLoginController {
 
     @GetMapping("/oauth/result")
     public ResponseEntity<?> loginViaGithub(String code) {
+        log.info("코드 수신 확인" + code);
         GithubAccessTokenRequest githubAccessTokenRequest = new GithubAccessTokenRequest(githubOAuthProperties, code);
         GithubAccessToken githubAccessToken = oAuthServices.requestAccessToken(githubAccessTokenRequest);
         GithubUser githubUser = oAuthServices.requestUserInfo(githubAccessToken);
@@ -56,7 +57,6 @@ public class GithubLoginController {
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("message", "login success");
         responseBody.put("token", jwtToken);
-
         return new ResponseEntity<>(responseBody, headers, HttpStatus.OK);
     }
 }
