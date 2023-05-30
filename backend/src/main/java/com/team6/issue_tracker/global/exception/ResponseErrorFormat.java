@@ -1,20 +1,18 @@
-package com.team6.issue_tracker.global.exception.dto;
+package com.team6.issue_tracker.global.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
-public class ResponseFormat {
+public class ResponseErrorFormat {
     private String error;
     private String message;
 
-    private ResponseFormat(Exception error, String message) {
+    private ResponseErrorFormat(Exception error, String message) {
         this.error = error.toString();
         this.message = message;
     }
 
-    public static ResponseFormat of(Exception error, String message) {
-       return new ResponseFormat(error, message);
+    public static ResponseErrorFormat of(Exception error, String message) {
+       return new ResponseErrorFormat(error, message);
    }
 }
