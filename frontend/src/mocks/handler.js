@@ -16,7 +16,7 @@ export const handlers = [
     );
   }),
 
-  rest.get(`${URL}/issues`, (req, res, ctx) => {
+  rest.get(`${URL}/issue`, (req, res, ctx) => {
     const query = req.url.searchParams;
     const status = query.get('status');
     const page = query.get('page');
@@ -96,7 +96,7 @@ export const handlers = [
     const pagenationedIssueList = filteredIssueList.slice(startCount, endCount);
 
     const responseData = {
-      issueList: pagenationedIssueList,
+      issuesList: pagenationedIssueList,
       openIssueCount,
       closedIssueCount,
       userList: members,
