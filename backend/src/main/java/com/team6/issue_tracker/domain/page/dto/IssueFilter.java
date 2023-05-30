@@ -19,4 +19,8 @@ public class IssueFilter {
     Long mailestone;
     List<Long> commentBy;
 
+    Boolean milestoneEmptyFlag;
+    Boolean assigneeEmptyFlag;
+    Boolean labelEmptyFlag;
+
 }
