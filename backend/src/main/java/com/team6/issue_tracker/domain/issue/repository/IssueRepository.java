@@ -36,6 +36,6 @@ public interface IssueRepository extends CrudRepository<Issue, Long>, PagingAndS
 
     @Modifying
     @Query("UPDATE issue SET is_open = :status WHERE issue_idx IN (:issue_idx)")
-    boolean updateIssuesIsOpen (@Param("status") boolean isOpen, @Param("issue_idx") List<Long> idx);
-    
+    boolean updateIssuesIsOpen(@Param("status") boolean isOpen, @Param("issue_idx") List<Long> idx);
+
 }

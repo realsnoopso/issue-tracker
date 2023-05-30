@@ -19,7 +19,7 @@ public class IssuePageRequest {
 
     public IssueFilter toFilter() {
         return IssueFilter.builder()
-                .isOpen(status==Status.OPEN)
+                .isOpen(status == Status.OPEN)
                 .page(page)
                 .writer(writer)
                 .assignee(assignee)

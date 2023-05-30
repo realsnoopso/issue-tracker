@@ -1,7 +1,7 @@
-package com.team6.issue_tracker.auth.dto;
+package com.team6.issue_tracker.global.auth.dto;
 
-import com.team6.issue_tracker.auth.config.AuthConst;
-import com.team6.issue_tracker.auth.config.GithubOAuthProperties;
+import com.team6.issue_tracker.global.auth.config.AuthConst;
+import com.team6.issue_tracker.global.auth.config.GithubOAuthProperties;
 import lombok.Getter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

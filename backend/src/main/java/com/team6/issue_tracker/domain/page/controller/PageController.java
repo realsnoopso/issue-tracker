@@ -1,11 +1,12 @@
 package com.team6.issue_tracker.domain.page.controller;
 
-import com.team6.issue_tracker.domain.page.service.PageService;
 import com.team6.issue_tracker.domain.page.dto.IssuePageRequest;
 import com.team6.issue_tracker.domain.page.dto.IssuePageResponse;
+import com.team6.issue_tracker.domain.page.service.PageService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor

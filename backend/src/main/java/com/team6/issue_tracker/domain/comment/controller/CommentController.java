@@ -1,8 +1,8 @@
 package com.team6.issue_tracker.domain.comment.controller;
 
-import com.team6.issue_tracker.domain.comment.service.CommentService;
 import com.team6.issue_tracker.domain.comment.domain.Comment;
 import com.team6.issue_tracker.domain.comment.dto.CreateCommentRequest;
+import com.team6.issue_tracker.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

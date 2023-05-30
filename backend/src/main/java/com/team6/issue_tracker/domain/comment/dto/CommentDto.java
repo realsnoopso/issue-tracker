@@ -6,9 +6,11 @@ import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+
 import java.time.Instant;
 
-@Data @Builder
+@Data
+@Builder
 @AllArgsConstructor
 public class CommentDto {
 

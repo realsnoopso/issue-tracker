@@ -18,7 +18,7 @@ public class ImageHostService {
     private final String bucket;
     private final AmazonS3 amazonS3;
 
-    public ImageHostService(@Value("${aws.s3.bucket}")String bucket, AmazonS3 amazonS3) {
+    public ImageHostService(@Value("${aws.s3.bucket}") String bucket, AmazonS3 amazonS3) {
         this.bucket = bucket;
         this.amazonS3 = amazonS3;
     }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MemberController {
 
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Autowired
     public MemberController(MemberRepository memberRepository) {
@@ -18,6 +18,6 @@ public class MemberController {
 
     @GetMapping("/testmember")
     public Member tetsMember() {
-       return memberRepository.findById(1L).orElseThrow();
+        return memberRepository.findById(1L).orElseThrow();
     }
 }

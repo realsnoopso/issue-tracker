@@ -1,23 +1,26 @@
 package com.team6.issue_tracker.domain.issue.service;
 
 import com.team6.issue_tracker.domain.comment.domain.Comment;
-import com.team6.issue_tracker.domain.comment.service.CommentService;
 import com.team6.issue_tracker.domain.comment.dto.CommentDto;
+import com.team6.issue_tracker.domain.comment.service.CommentService;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
-import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.repository.IssueRepository;
-import com.team6.issue_tracker.domain.label.service.LabelService;
 import com.team6.issue_tracker.domain.label.dto.LabelDto;
-import com.team6.issue_tracker.domain.member.service.MemberService;
+import com.team6.issue_tracker.domain.label.service.LabelService;
 import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
 import com.team6.issue_tracker.domain.milestone.service.MilestoneService;
+import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -52,7 +55,7 @@ public class IssueService {
         );
     }
 
-    public IssueDetail findById(Long issueIdx){
+    public IssueDetail findById(Long issueIdx) {
         Issue issue = findIssueById(issueIdx);
 
         List<Comment> comments = commentService.getCommentsOnIssue(issueIdx);
@@ -80,7 +83,7 @@ public class IssueService {
     private Milestone getMilestone(Issue issue) {
         Milestone milestone = null;
         if (issue.getMilestoneIdx() != null) {
-            milestone =milestoneService.findById(issue.getMilestoneIdx().getId());
+            milestone = milestoneService.findById(issue.getMilestoneIdx().getId());
         }
         return milestone;
     }

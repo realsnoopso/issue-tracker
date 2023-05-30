@@ -9,7 +9,7 @@ public enum GithubState {
         this.state = state;
     }
 
-    public static GithubState of (Boolean b) {
+    public static GithubState of(Boolean b) {
         if (b) {
             return SYNC;
         }

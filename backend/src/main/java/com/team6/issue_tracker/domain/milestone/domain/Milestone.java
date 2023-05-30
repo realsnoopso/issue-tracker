@@ -8,7 +8,8 @@ import org.springframework.data.annotation.PersistenceCreator;
 
 import java.time.Instant;
 
-@Getter @Builder
+@Getter
+@Builder
 public class Milestone {
     @Id
     private Long milestoneIdx;

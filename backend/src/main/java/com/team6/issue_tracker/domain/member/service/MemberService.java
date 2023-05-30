@@ -2,12 +2,13 @@ package com.team6.issue_tracker.domain.member.service;
 
 import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.team6.issue_tracker.domain.member.domain.Member;
-import com.team6.issue_tracker.domain.member.repository.MemberRepository;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.member.repository.MemberRepository;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class MemberService {

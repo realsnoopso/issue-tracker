@@ -20,7 +20,8 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter @Builder
+@Getter
+@Builder
 @AllArgsConstructor
 @Table("issue")
 public class Issue {

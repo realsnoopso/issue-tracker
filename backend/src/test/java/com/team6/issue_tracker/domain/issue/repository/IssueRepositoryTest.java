@@ -30,7 +30,7 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("전체 이슈를 조회할 수 있다.")
-    public void findAll() throws Exception{
+    public void findAll() throws Exception {
         //when
         Iterable<Issue> all = issueRepository.findAll();
 
@@ -40,9 +40,9 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("삭제되지 않고, 열린 상태인 이슈를 조회할 수 있다.")
-    public void findAllNotDeletedIsOpenIssues() throws Exception{
+    public void findAllNotDeletedIsOpenIssues() throws Exception {
         //given
-        PageRequest page = PageRequest.of(0,10, Sort.by(Sort.Direction.DESC, "issue_idx"));
+        PageRequest page = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "issue_idx"));
 
         //when
         Page<Issue> issues = issueRepository.findAllByIsOpenAndIsDeleted(false, true, page);
@@ -53,9 +53,9 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("삭제되지 않고, 열린 상태인 이슈를 페이지 크기 3인 첫번째 페이지를 조회할 수 있다.")
-    public void findAllNotDeletedIsOpenIssuesWithPage() throws Exception{
+    public void findAllNotDeletedIsOpenIssuesWithPage() throws Exception {
         //given
-        PageRequest page = PageRequest.of(0,3, Sort.Direction.DESC, "issue_idx");
+        PageRequest page = PageRequest.of(0, 3, Sort.Direction.DESC, "issue_idx");
 
         //when
         Page<Issue> issues = issueRepository.findAllByIsOpenAndIsDeleted(false, true, page);
@@ -66,9 +66,9 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("필터가 있는 경우, 조건에 맞는 issue를 조회할 수 있다.")
-    public void findWithFilter() throws Exception{
+    public void findWithFilter() throws Exception {
         //given
-        PageRequest page = PageRequest.of(1,1, Sort.by(Sort.Direction.DESC, "issue_idx"));
+        PageRequest page = PageRequest.of(1, 1, Sort.by(Sort.Direction.DESC, "issue_idx"));
 
         //when
         List<Issue> allByFilter = issueRepository.findAllBy(true, null, 2L, null, null, 20, 1);
@@ -97,13 +97,13 @@ class IssueRepositoryTest {
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(save.getIssueIdx()).isNotNull();
             softly.assertThat(save.getContents()).isEqualTo(newIssue.getContents());
-            softly.assertThat(issueRepository.count()).isEqualTo(before+1);
+            softly.assertThat(issueRepository.count()).isEqualTo(before + 1);
         });
     }
 
     @Test
     @DisplayName("이슈 내용을 수정할 수 있다.")
-    public void updateContents() throws Exception{
+    public void updateContents() throws Exception {
         //given
         Instant beforeWork = Instant.now();
         Issue issue = issueRepository.findById(1L).orElseThrow();
@@ -133,7 +133,7 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("이슈 내용을 수정하면, 업데이트 시간이 바뀌어야 한다.")
-    public void updateContentscheckUpdatedAt() throws Exception{
+    public void updateContentscheckUpdatedAt() throws Exception {
         //given
         Instant beforeWork = Instant.now();
         Issue issue = issueRepository.findById(1L).orElseThrow();
@@ -164,7 +164,7 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("한 개의 이슈를 오픈 상태로 변경할 수 있다.")
-    public void updateIssueStatus() throws Exception{
+    public void updateIssueStatus() throws Exception {
         //given
         Long id1 = 2L;
         List<Long> issueIdxList = List.of(id1);
@@ -179,7 +179,7 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("여러 개의 이슈를 오픈 상태로 변경할 수 있다.")
-    public void updateIssueListStatus() throws Exception{
+    public void updateIssueListStatus() throws Exception {
         //given
         Long id1 = 2L;
         Long id2 = 3L;
@@ -199,7 +199,7 @@ class IssueRepositoryTest {
 
     @Test
     @DisplayName("여러 개의 이슈를 오픈 상태로 변경할 수 있다.")
-    public void updateIssueListStatusToClose() throws Exception{
+    public void updateIssueListStatusToClose() throws Exception {
         //given
         Long id1 = 2L;
         Long id2 = 3L;
@@ -207,7 +207,7 @@ class IssueRepositoryTest {
         List<Long> issueIdxList = List.of(id1, id2, id3);
 
         //when
-        issueRepository.updateIssuesIsOpen( false, issueIdxList);
+        issueRepository.updateIssuesIsOpen(false, issueIdxList);
 
         //then
         SoftAssertions.assertSoftly(softly -> {

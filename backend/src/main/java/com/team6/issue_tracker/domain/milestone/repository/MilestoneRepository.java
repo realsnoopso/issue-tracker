@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MilestoneRepository extends CrudRepository<Milestone, @NotNull Long> {
 
-   List<Milestone> findAllByIsDeletedFalse();
+    List<Milestone> findAllByIsDeletedFalse();
 
 }

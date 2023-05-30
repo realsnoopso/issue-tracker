@@ -1,15 +1,15 @@
 package com.team6.issue_tracker.domain.page.service;
 
-import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
-import com.team6.issue_tracker.domain.page.dto.IssueDto;
-import com.team6.issue_tracker.domain.page.dto.IssueFilter;
-import com.team6.issue_tracker.domain.label.service.LabelService;
+import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.label.dto.LabelDto;
-import com.team6.issue_tracker.domain.member.service.MemberService;
+import com.team6.issue_tracker.domain.label.service.LabelService;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
+import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
 import com.team6.issue_tracker.domain.milestone.service.MilestoneService;
+import com.team6.issue_tracker.domain.page.dto.IssueDto;
+import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.page.dto.IssuePageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -67,9 +67,9 @@ public class PageService {
 
     private List<LabelDto> getLabelList(Map<Long, LabelDto> labels, Issue issue) {
         return issue.getLabelOnIssue().values()
-                        .stream()
-                        .map(e -> labels.get(e.getLabelIdx()))
-                        .collect(Collectors.toList());
+                .stream()
+                .map(e -> labels.get(e.getLabelIdx()))
+                .collect(Collectors.toList());
     }
 
     private MemberDto getWriter(Map<Long, MemberDto> members, Issue issue) {
@@ -93,7 +93,7 @@ public class PageService {
     }
 
     public Integer getIssueMaxPage(long allIssue) {
-        if (allIssue/PAGE_SIZE == 0) {
+        if (allIssue / PAGE_SIZE == 0) {
             return Math.toIntExact(allIssue / PAGE_SIZE);
         }
         return Math.toIntExact(allIssue / PAGE_SIZE + 1);

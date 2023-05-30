@@ -6,7 +6,9 @@ import com.team6.issue_tracker.domain.label.dto.LabelDto;
 import com.team6.issue_tracker.domain.label.repository.LabelRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service

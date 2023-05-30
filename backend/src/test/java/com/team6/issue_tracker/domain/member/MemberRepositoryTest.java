@@ -35,20 +35,20 @@ class MemberRepositoryTest {
         long beforeCount = memberRepository.count();
         Member testMember = Member.newMember("testMember", "1234", "");
         memberRepository.save(testMember);
-        assertThat(memberRepository.count()).isEqualTo(beforeCount+1);
+        assertThat(memberRepository.count()).isEqualTo(beforeCount + 1);
     }
 
     @Test
     @DisplayName("멤버를 멤버 아이디로 찾을 수 있다.")
     void findById() {
         Member member = memberRepository.findById(1L).orElseThrow();
-        log.debug("member = {}",member.getMemberIdx());
+        log.debug("member = {}", member.getMemberIdx());
         assertThat(member.getId()).isEqualTo("iirin");
     }
 
     @Test
     @DisplayName("멤버 모두를 조회할 수 있다.")
-    public void findAll() throws Exception{
+    public void findAll() throws Exception {
         Iterable<Member> all = memberRepository.findAll();
         assertThat(all).hasSizeGreaterThan(1);
     }
