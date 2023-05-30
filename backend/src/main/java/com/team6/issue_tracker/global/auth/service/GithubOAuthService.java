@@ -16,7 +16,7 @@ import static com.team6.issue_tracker.global.auth.config.AuthConst.*;
 public class GithubOAuthService {
 
     public GithubAccessToken requestAccessToken(GithubAccessTokenRequest request) {
-
+        log.debug("AccessToken request = {}", request);
         WebClient webClient = WebClient.builder()
                 .baseUrl(GITHUB_URL)
                 .build();
