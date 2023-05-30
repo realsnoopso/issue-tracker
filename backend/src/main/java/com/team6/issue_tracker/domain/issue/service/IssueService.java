@@ -1,26 +1,24 @@
 package com.team6.issue_tracker.domain.issue.service;
 
 import com.team6.issue_tracker.domain.comment.domain.Comment;
-import com.team6.issue_tracker.domain.comment.dto.CommentDto;
 import com.team6.issue_tracker.domain.comment.service.CommentService;
+import com.team6.issue_tracker.domain.comment.dto.CommentDto;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
+import com.team6.issue_tracker.domain.model.Status;
+import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.repository.IssueRepository;
-import com.team6.issue_tracker.domain.label.dto.LabelDto;
 import com.team6.issue_tracker.domain.label.service.LabelService;
+import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
-import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
 import com.team6.issue_tracker.domain.milestone.service.MilestoneService;
-import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -47,15 +45,18 @@ public class IssueService {
         return issueRepository.findAllBy(
                 filter.getIsOpen(),
                 filter.getMailestone(),
+                filter.getMilestoneEmptyFlag(),
                 filter.getWriter(),
                 filter.getAssignee(),
+                filter.getAssigneeEmptyFlag(),
                 filter.getLabel(),
+                filter.getLabelEmptyFlag(),
                 pageSize,
                 offset
         );
     }
 
-    public IssueDetail findById(Long issueIdx) {
+    public IssueDetail findById(Long issueIdx){
         Issue issue = findIssueById(issueIdx);
 
         List<Comment> comments = commentService.getCommentsOnIssue(issueIdx);
@@ -83,12 +84,19 @@ public class IssueService {
     private Milestone getMilestone(Issue issue) {
         Milestone milestone = null;
         if (issue.getMilestoneIdx() != null) {
-            milestone = milestoneService.findById(issue.getMilestoneIdx().getId());
+            milestone =milestoneService.findById(issue.getMilestoneIdx().getId());
         }
         return milestone;
     }
 
     public void saveIssue(Issue toIssue) {
         issueRepository.save(toIssue);
+    }
+
+    public long getIssueNum(Status status) {
+        if (status==Status.OPEN) {
+            return issueRepository.countAllByIsDeletedFalseAndIsOpen(true);
+        }
+        return issueRepository.countAllByIsDeletedFalseAndIsOpen(false);
     }
 }

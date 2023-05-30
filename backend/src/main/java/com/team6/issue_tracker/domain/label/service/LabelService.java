@@ -27,8 +27,8 @@ public class LabelService {
     }
 
     public Iterable<Label> findAllById(Collection<Labeling> values) {
-        return labelRepository.findAllById(values.stream()
+        return labelRepository.findAllByLabelIdxInAndAndIsDeleted(values.stream()
                 .map(Labeling::getLabelIdx)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), false);
     }
 }
