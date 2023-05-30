@@ -72,24 +72,14 @@ export const DetailHeader = ({}) => {
   const handleEditStatusBtnOnClick = () => {
     const newStatus = issueStatus === 'open' ? 'close' : 'open';
     setIssueStatus(newStatus);
+    patchIssueStatus(issueId, newStatus);
   };
-
-  useEffect(() => {
-    if (issueStatus !== null) {
-      patchIssueStatus(issueId, issueStatus);
-    }
-  }, [issueStatus]);
 
   const handleEditTitleBtnOnClick = () => {
     setIssueTitle(inputValue);
     setOnClickEditTitle(false);
+    patchIssueTitle(issueId, inputValue);
   };
-
-  useEffect(() => {
-    if (issueTitle !== null) {
-      patchIssueTitle(issueId, issueTitle);
-    }
-  }, [issueTitle]);
 
   return (
     <div className={headerClassNames}>
