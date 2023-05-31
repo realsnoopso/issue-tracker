@@ -23,21 +23,39 @@ public class CreateIssueRequest {
     private Milestone milestone;
 
     public Issue toIssue() {
-        Map<Long, Labeling> labelingMap = new HashMap<>();
-        labels.stream().map(e -> new Labeling(e.getLabelIdx()))
-                .forEach(l -> labelingMap.put(l.getLabelIdx(), l));
 
         return Issue.builder()
                 .issueIdx(null)
                 .title(title)
                 .contents(contents)
                 .writer(AggregateReference.to(writer.getMemberIdx()))
-                .assignee(AggregateReference.to(assignee.getMemberIdx()))
-                .labelOnIssue(labelingMap)
-                .milestone(AggregateReference.to(milestone.getMilestoneIdx()))
+                .assignee(getAssigneeRef())
+                .labelOnIssue(getLabelingMap(labels))
+                .milestone(getMilestoneRef())
                 .createdAt(Instant.now())
                 .isOpen(true)
                 .isDeleted(false)
                 .build();
+    }
+
+    private List<Labeling> getLabelingMap (List<LabelSummary> labels) {
+        List<Labeling> labelings= new ArrayList<>();
+        labels.stream().map(e -> new Labeling(e.getLabelIdx()))
+                .forEach(labelings::add);
+        return labelings;
+    }
+
+    private AggregateReference<Member, Long> getAssigneeRef() {
+        if (assignee != null) {
+            return AggregateReference.to(assignee.getMemberIdx());
+        }
+        return null;
+    }
+
+    private AggregateReference<Milestone, Long> getMilestoneRef() {
+        if (milestone != null) {
+            return AggregateReference.to(milestone.getMilestoneIdx());
+        }
+        return null;
     }
 }
