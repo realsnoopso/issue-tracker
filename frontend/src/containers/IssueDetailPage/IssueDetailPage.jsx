@@ -6,9 +6,8 @@ import { useState, useEffect } from 'react';
 import { getIssueDetail } from '@src/services/issue';
 import { Sidebox } from '@src/components';
 
-export const IssueDetailPage = () => {
-  const params = useParams();
 
+export const IssueDetailPage = () => {
   const cx = classNames.bind(styles);
   const issueDetailClassNames = `${cx('issue-detail-page')}`;
   const detailBodyClassNames = `${cx('detail-body')}`;
@@ -50,7 +49,6 @@ export const IssueDetailPage = () => {
       return { writer, comment };
     }
   };
-
   return (
     <div className={issueDetailClassNames}>
       {issueDetail && (

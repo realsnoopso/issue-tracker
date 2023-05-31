@@ -36,10 +36,10 @@ export const DetailHeader = ({
   const OPENED_ISSUE = '열린 이슈';
   const CLOSED_ISSUE = '닫힌 이슈';
 
-  const iconName = issueStatus === 'open' ? 'alertCircle' : 'archive';
-  const iconStyle = issueStatus === 'open' ? 'solid' : 'outline';
-  const tagText = issueStatus === 'open' ? OPENED_ISSUE : CLOSED_ISSUE;
-  const btnText = issueStatus === 'open' ? ISSUE_CLOSE : ISSUE_OPEN;
+  const iconName = issueStatus === 'OPEN' ? 'alertCircle' : 'archive';
+  const iconStyle = issueStatus === 'OPEN' ? 'solid' : 'outline';
+  const tagText = issueStatus === 'OPEN' ? OPENED_ISSUE : CLOSED_ISSUE;
+  const btnText = issueStatus === 'OPEN' ? ISSUE_CLOSE : ISSUE_OPEN;
 
   const onEditTitleBtn = () => {
     setOnClickEditTitle(true);
@@ -50,26 +50,16 @@ export const DetailHeader = ({
   };
 
   const handleEditStatusBtnOnClick = () => {
-    const newStatus = issueStatus === 'open' ? 'close' : 'open';
+    const newStatus = issueStatus === 'OPEN' ? 'CLOSE' : 'OPEN';
     setIssueStatus(newStatus);
+    patchIssueStatus(issueId, newStatus);
   };
-
-  useEffect(() => {
-    if (issueStatus !== null) {
-      patchIssueStatus(issueId, issueStatus);
-    }
-  }, [issueStatus]);
 
   const handleEditTitleBtnOnClick = () => {
     setIssueTitle(inputValue);
     setOnClickEditTitle(false);
+    patchIssueTitle(issueId, inputValue);
   };
-
-  useEffect(() => {
-    if (issueTitle !== null) {
-      patchIssueTitle(issueId, issueTitle);
-    }
-  }, [issueTitle]);
 
   return (
     <div className={headerClassNames}>
