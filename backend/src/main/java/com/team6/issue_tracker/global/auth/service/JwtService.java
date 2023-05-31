@@ -6,9 +6,14 @@ import com.team6.issue_tracker.global.auth.domain.GithubUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class JwtService {
@@ -24,6 +29,16 @@ public class JwtService {
                 .claim("userprofile", githubUser)
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
+    }
+
+    public ResponseEntity<?> createResponse(String jwtToken) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + jwtToken);
+
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "login success");
+        responseBody.put("token", jwtToken);
+        return new ResponseEntity<>(responseBody, headers, HttpStatus.OK);
     }
 
     public String getAccountNameFromToken(String token) {
