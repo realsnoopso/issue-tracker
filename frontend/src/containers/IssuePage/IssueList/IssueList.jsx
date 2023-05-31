@@ -6,8 +6,7 @@ import {
   IssueListHeader,
 } from '@containers/index';
 import { useEffect, useState } from 'react';
-import { checkContext } from '@src/services/issue';
-import { issueList } from '@src/mocks/data';
+import { checkContext, isCheckedContext } from '@src/services/issue';
 
 export const IssueList = ({
   issueData,
@@ -22,20 +21,24 @@ export const IssueList = ({
   const contentsClassNames = cx('contents');
   const emptyClassNames = cx('empty');
 
-  // issueList가 필터되면 최초 check상태로 초기화
-  const initialCheckState = issueData.reduce((acc, issue) => {
-    acc.push({ issueId: issue.index, isChecked: false });
-    return acc;
-  }, []);
+  const [isChecked, setIsChecked] = useState(false);
+  const [checkStateObject, setCheckStateObject] = useState([]);
 
-  const [checkStateObject, setCheckStateObject] = useState(initialCheckState);
-
+  // 필터된 IssueList 체크상태를 false로 초기화
+  // 체크된 IssueElement 체크 상태를 업데이트
   useEffect(() => {
+    const initialCheckState = issueData.reduce((acc, issue) => {
+      acc.push({ issueId: issue.index, isChecked: isChecked });
+      return acc;
+    }, []);
+
     setCheckStateObject(initialCheckState);
-  }, [issueData]);
+  }, [isChecked, issueData]);
+
+  console.log(checkStateObject);
 
   return (
-    <checkContext.Provider value={[checkStateObject, setCheckStateObject]}>
+    <isCheckedContext.Provider value={[isChecked, setIsChecked]}>
       <div className={containerClassNames}>
         {issueData && (
           <IssueListHeader
@@ -62,16 +65,20 @@ export const IssueList = ({
 
               return (
                 <li key={issueId}>
-                  <IssueElement
-                    iconName={iconName}
-                    title={title}
-                    label={label}
-                    issueId={issueId}
-                    timeStamp={timeStamp}
-                    writer={writer}
-                    milesStone={milesStone}
-                    profile={profile}
-                  ></IssueElement>
+                  <checkContext.Provider
+                    value={[checkStateObject, setCheckStateObject]}
+                  >
+                    <IssueElement
+                      iconName={iconName}
+                      title={title}
+                      label={label}
+                      issueId={issueId}
+                      timeStamp={timeStamp}
+                      writer={writer}
+                      milesStone={milesStone}
+                      profile={profile}
+                    ></IssueElement>
+                  </checkContext.Provider>
                 </li>
               );
             })
@@ -82,6 +89,6 @@ export const IssueList = ({
           )}
         </ul>
       </div>
-    </checkContext.Provider>
+    </isCheckedContext.Provider>
   );
 };

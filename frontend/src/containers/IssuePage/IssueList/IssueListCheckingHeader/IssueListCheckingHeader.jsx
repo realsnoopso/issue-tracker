@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { filterContext } from '@src/services/issue';
 import { Button } from '@components/index';
 
-export const IssueListCheckingHeader = ({ isChecked, handleHeaderChange }) => {
+export const IssueListCheckingHeader = ({}) => {
   const cx = classNames.bind(styles);
 
   const [filters, setFilters] = useContext(filterContext);

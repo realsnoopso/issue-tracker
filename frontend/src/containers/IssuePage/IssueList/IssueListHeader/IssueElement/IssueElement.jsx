@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { Icon, InformationTag, Profile, ElapsedTime } from '@components/index';
 import { useEffect, useState, useContext } from 'react';
-import { checkContext } from '@src/services/issue';
+import { checkContext, isCheckedContext } from '@src/services/issue';
 
 export const IssueElement = ({
   iconName,
@@ -18,23 +18,27 @@ export const IssueElement = ({
   const cx = classNames.bind(styles);
 
   const [checkStateObject, setCheckStateObject] = useContext(checkContext);
+  const [isChecked, setIsChecked] = useContext(isCheckedContext);
+  const [isElementChecked, setIsElementChecked] = useState(isChecked);
 
-  const [isElementChecked, setIsElementChecked] = useState(false);
+  useEffect(() => {
+    const updatedCheckStateObject = checkStateObject.map((item) => {
+      if (item.issueId === issueId) {
+        return { ...item, isChecked: isElementChecked };
+      }
+      return item;
+    });
+
+    setCheckStateObject(updatedCheckStateObject);
+  }, [isElementChecked]);
 
   const handleElementChange = () => {
     setIsElementChecked(!isElementChecked);
   };
 
-  const updatedCheckStateObject = checkStateObject.map((item) => {
-    if (item.issueId === issueId) {
-      return { ...item, isChecked: isElementChecked };
-    }
-    return item;
-  });
-
   useEffect(() => {
-    setCheckStateObject(updatedCheckStateObject);
-  }, [isElementChecked]);
+    setIsElementChecked(isChecked);
+  }, [isChecked]);
 
   return (
     <div className={cx(`issue-element`)}>
