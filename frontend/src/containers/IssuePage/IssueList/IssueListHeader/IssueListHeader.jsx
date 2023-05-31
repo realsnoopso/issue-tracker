@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 import { filterContext } from '@src/services/issue';
 import { isFilterApplied } from '@services/issue';
 import { convertListToOptions } from '@services/dropdown';
+import { isCheckedContext } from '@src/services/issue';
 
 export const IssueListHeader = ({
   userList,
@@ -85,11 +86,21 @@ export const IssueListHeader = ({
     setActiveTab(text);
   };
 
+  const [isChecked, setIsChecked] = useContext(isCheckedContext);
+
+  const handleHeaderCheckState = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <>
       <div className={cx(`header`)}>
         <div className={cx(`check-box`)}>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleHeaderCheckState}
+          ></input>
         </div>
         <div className={cx(`header-contents`)}>
           <Tab

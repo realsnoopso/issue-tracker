@@ -2,12 +2,14 @@ import styles from './IssueElement.module.css';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { Icon, InformationTag, Profile, ElapsedTime } from '@components/index';
+import { useEffect, useState, useContext } from 'react';
+import { checkContext, isCheckedContext } from '@src/services/issue';
 
 export const IssueElement = ({
   iconName,
   title,
   label,
-  issueNumber,
+  issueId,
   timeStamp,
   writer,
   milesStone,
@@ -15,10 +17,38 @@ export const IssueElement = ({
 }) => {
   const cx = classNames.bind(styles);
 
+  const [checkStateObject, setCheckStateObject] = useContext(checkContext);
+  const [isChecked, setIsChecked] = useContext(isCheckedContext);
+  const [isElementChecked, setIsElementChecked] = useState(isChecked);
+
+  useEffect(() => {
+    const updatedCheckStateObject = checkStateObject.map((item) => {
+      if (item.issueId === issueId) {
+        return { ...item, isChecked: isElementChecked };
+      }
+      return item;
+    });
+
+    setCheckStateObject(updatedCheckStateObject);
+  }, [isElementChecked]);
+
+  const handleElementChange = () => {
+    setIsElementChecked(!isElementChecked);
+  };
+
+  useEffect(() => {
+    setIsElementChecked(isChecked);
+  }, [isChecked]);
+
   return (
     <div className={cx(`issue-element`)}>
       <div className={cx(`check-box`)}>
-        <input type="checkbox"></input>
+        <input
+          key={issueId}
+          type="checkbox"
+          checked={isElementChecked}
+          onChange={handleElementChange}
+        ></input>
       </div>
       <div className={cx(`issue-contents`)}>
         <div className={cx(`issue-contents_column`)}>
@@ -31,7 +61,7 @@ export const IssueElement = ({
             )}
           </div>
           <div className="typo-title-medium">
-            <Link to={`/detail/${issueNumber}`}>{title}</Link>
+            <Link to={`/detail/${issueId}`}>{title}</Link>
           </div>
           {label && (
             <InformationTag
@@ -42,7 +72,7 @@ export const IssueElement = ({
           )}
         </div>
         <div className={cx(`issue-contents_column`)}>
-          <div className={cx(`issue-number`)}>#{issueNumber} 이 이슈가</div>
+          <div className={cx(`issue-number`)}>#{issueId} 이 이슈가</div>
           <div className={cx(`time-Stamp`)}>
             <ElapsedTime createdAt={timeStamp}></ElapsedTime>
           </div>
