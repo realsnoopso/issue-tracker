@@ -16,6 +16,7 @@ export const Dropdown = ({
   toggleOpen,
   panelPosition,
   width,
+  isEditable = true,
 }) => {
   const cx = classNames.bind(styles);
   const buttonClassNames = `${cx('button')} typo-m typo-bold`;
@@ -32,7 +33,7 @@ export const Dropdown = ({
   return (
     <>
       <button
-        onClick={handleBtnClick}
+        onClick={isEditable ? handleBtnClick : () => {}}
         className={buttonClassNames}
         ref={btnElement}
         style={{ width }}
