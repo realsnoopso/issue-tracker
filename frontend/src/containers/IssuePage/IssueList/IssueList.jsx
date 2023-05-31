@@ -37,19 +37,25 @@ export const IssueList = ({
 
   console.log(checkStateObject);
 
+  const isCheckedState = checkStateObject.filter(
+    (item) => item.isChecked === true
+  ).length;
+
   return (
     <isCheckedContext.Provider value={[isChecked, setIsChecked]}>
       <div className={containerClassNames}>
-        {issueData && (
-          <IssueListHeader
-            userList={userList}
-            assigneeList={assigneeList}
-            milestoneList={milestoneList}
-            issueCount={issueCount}
-            labelList={labelList}
-          ></IssueListHeader>
-        )}
-        <IssueListCheckingHeader></IssueListCheckingHeader>
+        {issueData &&
+          (isCheckedState === 0 ? (
+            <IssueListHeader
+              userList={userList}
+              assigneeList={assigneeList}
+              milestoneList={milestoneList}
+              issueCount={issueCount}
+              labelList={labelList}
+            ></IssueListHeader>
+          ) : (
+            <IssueListCheckingHeader></IssueListCheckingHeader>
+          ))}
         <ul className={contentsClassNames}>
           {issueData.length !== 0 ? (
             issueData.map((issue) => {

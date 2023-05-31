@@ -4,6 +4,7 @@ import { initialFilter } from '@constants/issue';
 import { useContext, useEffect, useState } from 'react';
 import { filterContext } from '@src/services/issue';
 import { Button } from '@components/index';
+import { isCheckedContext } from '@src/services/issue';
 
 export const IssueListCheckingHeader = ({}) => {
   const cx = classNames.bind(styles);
@@ -22,14 +23,20 @@ export const IssueListCheckingHeader = ({}) => {
     _onClick: handleFilterClearBtnClick,
   };
 
+  const [isChecked, setIsChecked] = useContext(isCheckedContext);
+
+  const handleHeaderCheckState = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <>
       <div className={cx(`header`)}>
         <div className={cx(`check-box`)}>
           <input
             type="checkbox"
-            // checked={isChecked}
-            // onChange={handleHeaderChange}
+            checked={isChecked}
+            onChange={handleHeaderCheckState}
           ></input>
         </div>
         <Button {...filterClearButtonInfo} />
