@@ -10,7 +10,7 @@ import java.time.Instant;
 @Service
 public class MemberProvider {
 
-    public Member createAndMember(GithubUser githubUser, GithubAccessToken githubAccessToken) {
+    public Member toMemberEntity(GithubUser githubUser, GithubAccessToken githubAccessToken) {
         return Member.builder()
                 .memberIdx(null)
                 .id(githubUser.getLogin())

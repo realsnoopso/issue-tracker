@@ -10,15 +10,9 @@ import com.team6.issue_tracker.global.auth.dto.GithubAccessTokenRequest;
 import com.team6.issue_tracker.global.auth.service.GithubOAuthService;
 import com.team6.issue_tracker.global.auth.service.JwtService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -48,16 +42,13 @@ public class GithubLoginController {
         GithubAccessToken githubAccessToken = oAuthServices.requestAccessToken(githubAccessTokenRequest);
         GithubUser githubUser = oAuthServices.requestUserInfo(githubAccessToken);
 
-        //TODO 맴버 등록 및 업데이트
-        Member createdMember = memberProvider.createAndMember(githubUser, githubAccessToken);
+        // 맴버 등록 및 업데이트
+        Member createdMember = memberProvider.toMemberEntity(githubUser, githubAccessToken);
         memberService.join(createdMember);
 
-        //TODO 로그인 처리
-//        member = loginService.login(member);
-
-//        토큰 jwt 처리
+        //토큰 jwt 처리
         String jwtToken = jwtService.createToken(githubUser);
-//        header, body에 토큰 넣고 반환
+        // header, body에 토큰 넣고 반환
         return jwtService.createResponse(jwtToken);
     }
 }
