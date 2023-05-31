@@ -59,3 +59,17 @@
   align-items: center;
   gap: 4px;
 }
+
+.checked-issue {
+  font-size: var(--typo-M-fontsize);
+  line-height: var(--typo-M-lineheight);
+  font-weight: var(--typo-fontweight-bold);
+  color: var(--color-light-neutral-text);
+}
+
+.header-right {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}

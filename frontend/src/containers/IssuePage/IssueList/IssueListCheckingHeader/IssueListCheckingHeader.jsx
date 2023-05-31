@@ -3,10 +3,10 @@ import classNames from 'classnames/bind';
 import { initialFilter } from '@constants/issue';
 import { useContext, useEffect, useState } from 'react';
 import { filterContext } from '@src/services/issue';
-import { Button } from '@components/index';
+import { Button, Dropdown } from '@components/index';
 import { isCheckedContext } from '@src/services/issue';
 
-export const IssueListCheckingHeader = ({}) => {
+export const IssueListCheckingHeader = ({ isCheckedStateNumber }) => {
   const cx = classNames.bind(styles);
 
   const [filters, setFilters] = useContext(filterContext);
@@ -29,6 +29,13 @@ export const IssueListCheckingHeader = ({}) => {
     setIsChecked(!isChecked);
   };
 
+  const dropdownWidth = '100px';
+  const [selected, setSelected] = useState('');
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const handleDropdownOpen = (isOpen) => {
+    return () => setDropdownOpen(isOpen);
+  };
+
   return (
     <>
       <div className={cx(`header`)}>
@@ -39,7 +46,24 @@ export const IssueListCheckingHeader = ({}) => {
             onChange={handleHeaderCheckState}
           ></input>
         </div>
-        <Button {...filterClearButtonInfo} />
+        <div className={cx('header-right')}>
+          <span className={cx('checked-issue')}>
+            {isCheckedStateNumber}개 이슈 선택
+          </span>
+          {/* <Button {...filterClearButtonInfo} /> */}
+          <Dropdown
+            width={dropdownWidth}
+            isOpen={isDropdownOpen}
+            btnText={'상태 수정'}
+            hasRadioBtn={true}
+            //   panelPosition={PANEL_POSITION.RIGHT}
+            toggleOpen={handleDropdownOpen(!isDropdownOpen)}
+            //     options={options}
+            //   header={header}
+            //   selected={selected}
+            //   optionOnClick={optionOnClick}
+          ></Dropdown>
+        </div>
       </div>
     </>
   );

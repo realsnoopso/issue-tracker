@@ -37,7 +37,7 @@ export const IssueList = ({
 
   console.log(checkStateObject);
 
-  const isCheckedState = checkStateObject.filter(
+  const isCheckedStateNumber = checkStateObject.filter(
     (item) => item.isChecked === true
   ).length;
 
@@ -45,7 +45,7 @@ export const IssueList = ({
     <isCheckedContext.Provider value={[isChecked, setIsChecked]}>
       <div className={containerClassNames}>
         {issueData &&
-          (isCheckedState === 0 ? (
+          (isCheckedStateNumber === 0 ? (
             <IssueListHeader
               userList={userList}
               assigneeList={assigneeList}
@@ -54,7 +54,9 @@ export const IssueList = ({
               labelList={labelList}
             ></IssueListHeader>
           ) : (
-            <IssueListCheckingHeader></IssueListCheckingHeader>
+            <IssueListCheckingHeader
+              isCheckedStateNumber={isCheckedStateNumber}
+            ></IssueListCheckingHeader>
           ))}
         <ul className={contentsClassNames}>
           {issueData.length !== 0 ? (
