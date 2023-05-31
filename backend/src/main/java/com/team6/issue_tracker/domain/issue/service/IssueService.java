@@ -10,11 +10,10 @@ import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.issue.dto.IssueDetail;
 import com.team6.issue_tracker.domain.issue.repository.IssueRepository;
 import com.team6.issue_tracker.domain.label.service.LabelService;
-import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.label.dto.LabelSummary;
 import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
-import com.team6.issue_tracker.domain.milestone.domain.Milestone;
 import com.team6.issue_tracker.domain.milestone.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -67,9 +66,9 @@ public class IssueService {
         Member assignee = getAssignee(members, issue);
         MilestoneDetail milestone = getMilestone(issue);
 
-        List<LabelDto> labelDtoList = new ArrayList<>();
+        List<LabelSummary> labelDtoList = new ArrayList<>();
         labelService.findAllById(issue.getLabelOnIssue().values())
-                .forEach(l -> labelDtoList.add(LabelDto.of(l)));
+                .forEach(l -> labelDtoList.add(LabelSummary.of(l)));
 
         List<CommentDto> commentDtos = new ArrayList<>();
         for (Comment comment : comments) {
