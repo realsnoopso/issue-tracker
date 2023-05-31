@@ -22,7 +22,9 @@ public class MemberService {
     }
 
     public void join(Member member) {
-        memberRepository.save(member);
+        if (!memberRepository.existsById(member.getId())) {
+            memberRepository.save(member);
+        }
     }
 
     public Member findById(Long index) {
@@ -45,7 +47,8 @@ public class MemberService {
 
     public Page<Member> getAllMemberPage(int page) {
         Pageable pageRequest = PageRequest.of(page, PAGE_SIZE);
-        return memberRepository.findAll(pageRequest);
+//        return memberRepository.findAll(pageRequest);
+        return (Page<Member>) memberRepository.findAll();
     }
 
 }
