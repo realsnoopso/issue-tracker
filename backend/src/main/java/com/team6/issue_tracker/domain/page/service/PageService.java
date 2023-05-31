@@ -54,7 +54,7 @@ public class PageService {
         }
 
         return IssuePageResponse.builder()
-                .issuesList(issueDtos)
+                .issueList(issueDtos)
                 .openIssueCount(openIssueNum)
                 .closedIssueCount(closedIssueNum)
                 .page(page)
