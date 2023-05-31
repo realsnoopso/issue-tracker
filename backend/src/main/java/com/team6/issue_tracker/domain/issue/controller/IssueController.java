@@ -52,6 +52,18 @@ public class IssueController {
     }
 
     @Operation(
+            summary = "이슈 상태 수정",
+            tags = "issue",
+            description = "사용자는 이슈 상태만 수정할 수 있다."
+    )
+    @PatchMapping("/issue/{issueIdx}/status")
+    public void updateIssuesStatus(IssueDetail request) {
+        //TODO 유저 권한 검사
+        //TODO 유효성 검사
+        issueUpdateService.updateIssueStatus(request.getIndex(), request.getStatus());
+    }
+
+    @Operation(
             summary = "이슈 내용 수정",
             tags = "issue",
             description = "사용자는 이슈 내용을  수정할 수 있다."
