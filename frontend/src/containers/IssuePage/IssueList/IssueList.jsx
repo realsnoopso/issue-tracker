@@ -1,6 +1,10 @@
 import styles from './IssueList.module.css';
 import classNames from 'classnames/bind';
-import { IssueElement, IssueListHeader } from '@containers/index';
+import {
+  IssueElement,
+  IssueListCheckingHeader,
+  IssueListHeader,
+} from '@containers/index';
 import { useState } from 'react';
 
 export const IssueList = ({
@@ -35,6 +39,10 @@ export const IssueList = ({
           handleHeaderChange={handleHeaderChange}
         ></IssueListHeader>
       )}
+      <IssueListCheckingHeader>
+        isChecked={isHeaderChecked}
+        handleHeaderChange={handleHeaderChange}
+      </IssueListCheckingHeader>
       <ul className={contentsClassNames}>
         {issueData.length !== 0 ? (
           issueData.map((issue) => {

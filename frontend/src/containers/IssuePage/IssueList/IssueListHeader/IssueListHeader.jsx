@@ -19,10 +19,6 @@ export const IssueListHeader = ({
 }) => {
   const cx = classNames.bind(styles);
 
-  // const handleChange = () => {
-  //   onChange();
-  // };
-
   const [filters, setFilters] = useContext(filterContext);
 
   const userOptions = convertListToOptions(userList, 'name');
