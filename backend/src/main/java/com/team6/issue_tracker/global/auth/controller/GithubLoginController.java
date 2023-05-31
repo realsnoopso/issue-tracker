@@ -1,12 +1,14 @@
 package com.team6.issue_tracker.global.auth.controller;
 
 import com.team6.issue_tracker.domain.member.service.MemberService;
-import com.team6.issue_tracker.global.auth.config.GithubOAuthProperties;
+import com.team6.issue_tracker.global.auth.config.GithubOAuthPropertiesProd;
+import com.team6.issue_tracker.global.auth.config.GithubOAuthPropertiesDev;
 import com.team6.issue_tracker.global.auth.domain.GithubUser;
 import com.team6.issue_tracker.global.auth.dto.GithubAccessToken;
 import com.team6.issue_tracker.global.auth.dto.GithubAccessTokenRequest;
 import com.team6.issue_tracker.global.auth.service.GithubOAuthService;
 import com.team6.issue_tracker.global.auth.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,28 +21,29 @@ import java.util.Map;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class GithubLoginController {
-    // login 요청 url
-    // https://github.com/login/oauth/authorize?client_id=ded3580dcda54e46b774&redirect_uri=http://localhost:8080/oauth/result&scope=user
-    // Redirect
-    // http://localhost:8080/oauth/result?code=e2b73a0322cc4b86a685
 
-    private final GithubOAuthProperties githubOAuthProperties;
+    private final String ENV_PROD = "prod";
+    private final String ENV_DEV = "dev";
+
+    private final GithubOAuthPropertiesProd githubOAuthPropertiesProd;
+    private final GithubOAuthPropertiesDev githubOAuthPropertiesDev;
     private final MemberService memberService;
     private final GithubOAuthService oAuthServices;
     private final JwtService jwtService;
 
-    public GithubLoginController(GithubOAuthProperties githubOAuthProperties, MemberService memberService, GithubOAuthService oAuthServices, JwtService jwtService) {
-        this.githubOAuthProperties = githubOAuthProperties;
-        this.memberService = memberService;
-        this.oAuthServices = oAuthServices;
-        this.jwtService = jwtService;
-    }
-
     @GetMapping("/oauth/result") // 500 에러
-    public ResponseEntity<?> loginViaGithub(String code) {
-        log.info("코드 수신 확인" + code);
-        GithubAccessTokenRequest githubAccessTokenRequest = new GithubAccessTokenRequest(githubOAuthProperties, code);
+    public ResponseEntity<?> loginViaGithub(String code, String env) {
+        log.info("[OAuth called]");
+        log.info("code = {} env = {}", code, env);
+        GithubAccessTokenRequest githubAccessTokenRequest = null;
+        if (env.equalsIgnoreCase(ENV_DEV)) {
+            githubAccessTokenRequest = new GithubAccessTokenRequest(githubOAuthPropertiesDev, code);
+        } else if (env.equalsIgnoreCase(ENV_PROD)) {
+            githubAccessTokenRequest = new GithubAccessTokenRequest(githubOAuthPropertiesProd, code);
+        }
+
         log.debug("githubAccessTokenRequest = {}", githubAccessTokenRequest);
         GithubAccessToken githubAccessToken = oAuthServices.requestAccessToken(githubAccessTokenRequest);
         log.debug("githubAccessToken = {}", githubAccessToken);
