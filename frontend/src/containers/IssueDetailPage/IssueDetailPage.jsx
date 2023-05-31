@@ -14,7 +14,7 @@ export const IssueDetailPage = () => {
   const detailBodyClassNames = `${cx('detail-body')}`;
 
   const [issueDetail, setIssueDetail] = useState(null);
-
+  const [issueTitle, setIssueTitle] = useState('');
   const [selectedAssignee, setSelectedAssignee] = useState();
   const [selectedLabel, setSelectedLabel] = useState();
   const [selectedMilestone, setSelectedMilstone] = useState();
@@ -25,6 +25,7 @@ export const IssueDetailPage = () => {
       const response = await getIssueDetail({ issueId });
 
       setIssueDetail(response);
+      setIssueTitle(response?.title ?? '');
     })();
   }, []);
 
@@ -39,7 +40,6 @@ export const IssueDetailPage = () => {
     if (componentName === 'header') {
       return {
         index,
-        title,
         status,
         createdAt,
         writerName: writer.name,
@@ -58,6 +58,7 @@ export const IssueDetailPage = () => {
           <div>
             <DetailHeader
               {...getDetailDatasByComponent(issueDetail, 'header')}
+              titleState={[issueTitle, setIssueTitle]}
             ></DetailHeader>
           </div>
           <div className={detailBodyClassNames}>

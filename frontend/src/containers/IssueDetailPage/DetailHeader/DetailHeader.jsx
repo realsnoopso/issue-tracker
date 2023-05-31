@@ -7,11 +7,11 @@ import { DetailUpdateTitle, DetailTitle } from '@containers/index';
 
 export const DetailHeader = ({
   index,
-  title,
   status,
   createdAt,
   writerName,
   commentLegnth,
+  titleState,
 }) => {
   const cx = classNames.bind(styles);
   const headerClassNames = `${cx('header')}`;
@@ -28,8 +28,8 @@ export const DetailHeader = ({
 
   const [issueStatus, setIssueStatus] = useState(status);
   const [onClickEditTitle, setOnClickEditTitle] = useState(false);
-  const [issueTitle, setIssueTitle] = useState(title);
-  const [inputValue, setInputValue] = useState(title);
+  const [issueTitle, setIssueTitle] = titleState;
+  const [inputValue, setInputValue] = useState(issueTitle);
 
   const ISSUE_OPEN = '이슈 열기';
   const ISSUE_CLOSE = '이슈 닫기';
