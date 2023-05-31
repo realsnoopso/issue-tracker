@@ -6,7 +6,7 @@ import com.team6.issue_tracker.domain.model.Status;
 import com.team6.issue_tracker.domain.page.dto.IssueDto;
 import com.team6.issue_tracker.domain.page.dto.IssueFilter;
 import com.team6.issue_tracker.domain.label.service.LabelService;
-import com.team6.issue_tracker.domain.label.dto.LabelDto;
+import com.team6.issue_tracker.domain.label.dto.LabelSummary;
 import com.team6.issue_tracker.domain.member.service.MemberService;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
@@ -31,13 +31,13 @@ public class PageService {
     private final LabelService labelService;
     private final MilestoneService milestoneService;
 
-    public IssuePageResponse getAPage(Integer offset, IssueFilter filter) {
+    public IssuePageResponse getAPage(int page, IssueFilter filter) {
 
         Map<Long, MemberDto> members = memberService.getAllMembers();
         Map<Long, Milestone> milestones = milestoneService.getAllMilestones();
-        Map<Long, LabelDto> labels = labelService.getAllLabels();
+        Map<Long, LabelSummary> labels = labelService.getAllLabelSummaries();
 
-        List<Issue> issueList = issueService.findByfilterWithPage(offset, PAGE_SIZE, filter);
+        List<Issue> issueList = issueService.findByfilterWithPage(page*PAGE_SIZE, PAGE_SIZE, filter);
         long openIssueNum = issueService.getIssueNum(Status.OPEN);
         long closedIssueNum = issueService.getIssueNum(Status.CLOSE);
 
@@ -47,17 +47,17 @@ public class PageService {
             MemberDto writer = getWriter(members, issue);
             MemberDto assignee = getAssignee(members, issue);
             Milestone milestone = getMilestone(milestones, issue);
-            List<LabelDto> labelList = getLabelList(labels, issue);
+            List<LabelSummary> labelList = getLabelList(labels, issue);
 
             IssueDto issueDto = IssueDto.toDto(issue, writer, assignee, labelList, milestone);
             issueDtos.add(issueDto);
         }
 
         return IssuePageResponse.builder()
-                .issuesList(issueDtos)
+                .issueList(issueDtos)
                 .openIssueCount(openIssueNum)
                 .closedIssueCount(closedIssueNum)
-                .page(offset)
+                .page(page)
                 .openIssueMaxPage(getIssueMaxPage(openIssueNum))
                 .closeIssueMaxPage(getIssueMaxPage(closedIssueNum))
                 .userList(new ArrayList<>(members.values()))
@@ -66,8 +66,8 @@ public class PageService {
                 .build();
     }
 
-    private List<LabelDto> getLabelList(Map<Long, LabelDto> labels, Issue issue) {
-        return issue.getLabelOnIssue().values()
+    private List<LabelSummary> getLabelList(Map<Long, LabelSummary> labels, Issue issue) {
+        return issue.getLabelOnIssue()
                         .stream()
                         .map(e -> labels.get(e.getLabelIdx()))
                         .collect(Collectors.toList());
@@ -79,8 +79,8 @@ public class PageService {
 
     private Milestone getMilestone(Map<Long, Milestone> milestones, Issue issue) {
         Milestone milestone = null;
-        if (issue.getMilestoneIdx() != null) {
-            milestone = milestones.get(issue.getMilestoneIdx().getId());
+        if (issue.getMilestone() != null) {
+            milestone = milestones.get(issue.getMilestone().getId());
         }
         return milestone;
     }
