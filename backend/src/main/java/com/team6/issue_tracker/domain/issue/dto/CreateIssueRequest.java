@@ -3,12 +3,14 @@ package com.team6.issue_tracker.domain.issue.dto;
 import com.team6.issue_tracker.domain.issue.domain.Issue;
 import com.team6.issue_tracker.domain.issue.domain.Labeling;
 import com.team6.issue_tracker.domain.label.dto.LabelSummary;
+import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
 import lombok.Data;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
