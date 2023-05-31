@@ -3,7 +3,6 @@ package com.team6.issue_tracker.domain.member.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -31,5 +30,16 @@ public class Member {
     @PastOrPresent
     private Instant createdAt;
 
+    private Member(String id, String name, String profileImageUrl, String accessToken, Instant createdAt) {
+        this.id = id;
+        this.name = name;
+        this.profileImageUrl = profileImageUrl;
+        this.accessToken = accessToken;
+        this.createdAt = createdAt;
+    }
+
+    public static Member newMember(String id, String name, String profileImageUrl) {
+        return new Member(id, name, profileImageUrl, "", Instant.now());
+    }
 
 }
