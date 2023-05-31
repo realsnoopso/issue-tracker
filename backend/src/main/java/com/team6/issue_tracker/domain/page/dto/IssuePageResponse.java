@@ -17,7 +17,7 @@ public class IssuePageResponse {
     private Integer page;
     private Integer openIssueMaxPage;
     private Integer closeIssueMaxPage;
-    private List<IssueDto> issuesList;
+    private List<IssueDto> issueList;
     private List<LabelSummary> labelList;
     private List<Milestone> milestoneList;
     private List<MemberDto> userList;

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,10 +34,11 @@ public class MilestoneService {
     }
 
     public List<MilestoneDetail> getAllMilestonesWithIssueNum() {
-        return milestoneRepository.findAllMilestonesWithIssueCount();
+        return milestoneRepository.findAllMilestonesWithIssueCount().stream().map(MilestoneDetail::fromMilestone)
+                .collect(Collectors.toList());
     }
 
     public MilestoneDetail findByIdWithIssueCount(Long id) {
-        return milestoneRepository.findMilestoneWithIssueCount(id);
+        return MilestoneDetail.fromMilestone(milestoneRepository.findMilestoneWithIssueCount(id));
     }
 }

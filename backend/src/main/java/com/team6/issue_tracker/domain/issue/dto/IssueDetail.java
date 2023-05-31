@@ -7,6 +7,7 @@ import com.team6.issue_tracker.domain.label.dto.LabelSummary;
 import com.team6.issue_tracker.domain.member.domain.Member;
 import com.team6.issue_tracker.domain.member.dto.MemberDto;
 import com.team6.issue_tracker.domain.milestone.domain.Milestone;
+import com.team6.issue_tracker.domain.milestone.domain.MilestoneWithIssueCount;
 import com.team6.issue_tracker.domain.milestone.dto.MilestoneDetail;
 import com.team6.issue_tracker.domain.model.Status;
 import lombok.AllArgsConstructor;
@@ -73,7 +74,7 @@ public class IssueDetail {
 
     private AggregateReference<Milestone, Long> nullableMilestone(MilestoneDetail milestone) {
         if (milestone != null) {
-            return AggregateReference.to(milestone.getMilestoneIdx());
+            return AggregateReference.to(milestone.getIndex());
         }
         return null;
     }
