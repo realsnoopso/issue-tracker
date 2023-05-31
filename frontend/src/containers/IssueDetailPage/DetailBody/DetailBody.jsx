@@ -19,13 +19,13 @@ export const DetailBody = ({}) => {
     })();
   }, []);
 
-  const commentList = issueObject.comment;
+  const commentList = issueObject.commentList;
   const issueWriterId = issueObject.writer?.id;
 
   const addCommentElement = () => {
     return commentList?.map((comment, index) => {
       const commentWriterId = comment?.writer.id;
-      const writerProfile = comment?.writer.profile;
+      const writerProfile = comment?.writer.profileImageUrl;
       const writerName = comment?.writer.name;
       const wroteTime = comment?.createdAt;
       const contents = comment?.contents;
