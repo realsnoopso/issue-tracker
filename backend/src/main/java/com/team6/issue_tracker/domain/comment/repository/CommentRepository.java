@@ -5,7 +5,6 @@ import com.team6.issue_tracker.domain.issue.domain.Issue;
 import com.team6.issue_tracker.global.util.SoftDeleteCrudRepository;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

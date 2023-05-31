@@ -9,12 +9,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 @NoRepositoryBean
-public interface SoftDeleteCrudRepository <T, Long> extends CrudRepository<T, Long> {
+public interface SoftDeleteCrudRepository <T, ID> extends CrudRepository<T, ID> {
 
     @Modifying
-    public void softDeleteById(@Param("id") Long id);
+    void softDeleteById(@Param("id") Long id);
 
     @Override
     @Query("select * from #{#entityName} e where e.is_deleted=false")
-    public List<T> findAll();
+    List<T> findAll();
 }
