@@ -35,18 +35,18 @@ export const IssueDetailPage = () => {
   }, [issueDetail]);
 
   const getDetailDatasByComponent = (issueDetail, componentName) => {
-    const { index, status, createdAt, writer, comment } = issueDetail;
+    const { index, status, createdAt, writer, commentList } = issueDetail;
     if (componentName === 'header') {
       return {
         index,
         status,
         createdAt,
         writerName: writer.name,
-        commentLegnth: comment?.length,
+        commentLegnth: commentList?.length,
       };
     }
     if (componentName === 'body') {
-      return { writer, comment };
+      return { writer, comment: commentList };
     }
   };
   return (
@@ -64,7 +64,7 @@ export const IssueDetailPage = () => {
               {...getDetailDatasByComponent(issueDetail, 'body')}
             ></DetailBody>
             <Sidebox
-              isEditable={false}
+              editable={false}
               selectedAssigneeState={[selectedAssignee, setSelectedAssignee]}
               selectedLabelState={[selectedLabel, setSelectedLabel]}
               selectedMilstoneState={[selectedMilestone, setSelectedMilstone]}
