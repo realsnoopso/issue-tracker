@@ -91,7 +91,7 @@ export const SideboxElement = ({ style, selectedState, name, id }) => {
       {id === 'assignee' && (
         <RequireSelectedData>
           <div className={cx('assignee')}>
-            <Profile size={20} url={selected?.profile} />
+            <Profile size={20} url={selected?.profileImageUrl} />
             <p className="typo-label">{selected?.name}</p>
           </div>
         </RequireSelectedData>
