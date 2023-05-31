@@ -4,6 +4,7 @@ import { createContext } from 'react';
 import { removeEmptyKeyValues, deepCopy } from '@utils/index';
 
 export const filterContext = createContext();
+export const checkContext = createContext();
 
 export const getIssueDetail = async ({ issueId }) => {
   const response = await customFetch({

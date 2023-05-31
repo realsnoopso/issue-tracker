@@ -28,8 +28,8 @@ export const IssueListCheckingHeader = ({ isChecked, handleHeaderChange }) => {
         <div className={cx(`check-box`)}>
           <input
             type="checkbox"
-            checked={isChecked}
-            onChange={handleHeaderChange}
+            // checked={isChecked}
+            // onChange={handleHeaderChange}
           ></input>
         </div>
         <Button {...filterClearButtonInfo} />
