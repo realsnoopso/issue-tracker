@@ -13,7 +13,7 @@ export const IssueElement = ({
   timeStamp,
   writer,
   milesStone,
-  profile,
+  profileImageUrl,
 }) => {
   const cx = classNames.bind(styles);
 
@@ -85,7 +85,7 @@ export const IssueElement = ({
         </div>
       </div>
       <div className={cx(`profile`)}>
-        <Profile url={profile}></Profile>
+        <Profile url={profileImageUrl}></Profile>
       </div>
     </div>
   );

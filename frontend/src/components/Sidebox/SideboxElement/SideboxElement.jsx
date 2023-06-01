@@ -20,7 +20,7 @@ export const SideboxElement = ({
   selectedState,
   name,
   id,
-  isEditable,
+  editable,
 }) => {
   const sideboxElementClassNames = `${cx('sidebar-element')}`;
 
@@ -83,28 +83,24 @@ export const SideboxElement = ({
         selected={selected}
         optionOnClick={optionOnClick}
         width="100%"
-        isEditable={isEditable}
+        editable={editable}
         btnComponent={
-          isEditable ? (
-            <div className={cx('dropdown-btn')}>
-              <div>{name}</div>
+          <div className={cx('dropdown-btn')}>
+            <div>{name}</div>
+            {editable && (
               <Icon
                 name="chevronDown"
                 fill="var(--color-light-neutral-text-weak)"
               ></Icon>
-            </div>
-          ) : (
-            <div className={cx('dropdown-btn')}>
-              <div>{name}</div>
-            </div>
-          )
+            )}
+          </div>
         }
       ></Dropdown>
 
       {id === 'assignee' && (
         <RequireSelectedData>
           <div className={cx('assignee')}>
-            <Profile size={20} url={selected?.profile} />
+            <Profile size={20} url={selected?.profileImageUrl} />
             <p className="typo-label">{selected?.name}</p>
           </div>
         </RequireSelectedData>

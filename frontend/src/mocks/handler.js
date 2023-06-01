@@ -96,7 +96,7 @@ export const handlers = [
     const pagenationedIssueList = filteredIssueList.slice(startCount, endCount);
 
     const responseData = {
-      issuesList: pagenationedIssueList,
+      issueList: pagenationedIssueList,
       openIssueCount,
       closedIssueCount,
       userList: members,
@@ -134,7 +134,7 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(labels));
   }),
 
-  rest.get(`${URL}/milestone`, (req, res, ctx) => {
+  rest.get(`${URL}/milestones`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(milestones));
   }),
 

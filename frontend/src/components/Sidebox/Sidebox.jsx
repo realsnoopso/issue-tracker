@@ -9,6 +9,7 @@ export const Sidebox = ({
   selectedAssigneeState,
   selectedLabelState,
   selectedMilstoneState,
+  editable = true,
 }) => {
   const sideboxClassNames = `${cx('sidebox')}`;
 
@@ -41,7 +42,7 @@ export const Sidebox = ({
           key={data.name}
           {...data}
           selectedState={data.selectedState}
-          isEditable={isEditable}
+          editable={editable}
         ></SideboxElement>
       ))}
     </div>

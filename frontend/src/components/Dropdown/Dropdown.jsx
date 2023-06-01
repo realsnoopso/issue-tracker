@@ -16,10 +16,12 @@ export const Dropdown = ({
   toggleOpen,
   panelPosition,
   width,
-  isEditable = true,
+  editable = true,
 }) => {
   const cx = classNames.bind(styles);
-  const buttonClassNames = `${cx('button')} typo-m typo-bold`;
+  const buttonClassNames = `${cx('button')} typo-m typo-bold ${
+    !editable ? cx('disable') : ''
+  }`;
   const btnElement = useRef(null);
   const [btnCoordinate, setBtnCoordinate] = useState();
 
@@ -33,7 +35,7 @@ export const Dropdown = ({
   return (
     <>
       <button
-        onClick={isEditable ? handleBtnClick : () => {}}
+        onClick={editable ? handleBtnClick : () => {}}
         className={buttonClassNames}
         ref={btnElement}
         style={{ width }}

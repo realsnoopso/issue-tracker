@@ -1,5 +1,5 @@
 import { CommentElement } from '@containers/index';
-import { useParams } from 'react-router-dom';
+
 import styles from './DetailBody.module.css';
 import classNames from 'classnames/bind';
 
