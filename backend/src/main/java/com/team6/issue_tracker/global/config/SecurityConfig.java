@@ -24,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/", "/login/**","/oauth/**",
                         "/issue/**",/*임시 오픈 이슈*/
                         "/error", "/swagger-ui/**",
-                        "/v3/**", "auth/**").permitAll()
+                        "/v3/**", "auth/**",
+                        "/issue?status=open&page=0&maxPageNum=10").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
