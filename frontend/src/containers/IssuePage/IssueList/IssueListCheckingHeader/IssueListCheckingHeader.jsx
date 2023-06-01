@@ -36,6 +36,16 @@ export const IssueListCheckingHeader = ({ isCheckedStateNumber }) => {
     return () => setDropdownOpen(isOpen);
   };
 
+  const options = [
+    { index: 1, contents: '선택한 이슈 열기' },
+    { index: 2, contents: '선택한 이슈 닫기' },
+  ];
+
+  const optionOnClick = ({ currentTarget }) => {
+    setSelected(currentTarget.innerText);
+    console.log(selected);
+  };
+
   return (
     <>
       <div className={cx(`header`)}>
@@ -55,13 +65,12 @@ export const IssueListCheckingHeader = ({ isCheckedStateNumber }) => {
             width={dropdownWidth}
             isOpen={isDropdownOpen}
             btnText={'상태 수정'}
-            hasRadioBtn={true}
-            //   panelPosition={PANEL_POSITION.RIGHT}
+            hasRadioBtn={false}
             toggleOpen={handleDropdownOpen(!isDropdownOpen)}
-            //     options={options}
-            //   header={header}
-            //   selected={selected}
-            //   optionOnClick={optionOnClick}
+            options={options}
+            header={'상태 변경'}
+            selected={selected}
+            optionOnClick={optionOnClick}
           ></Dropdown>
         </div>
       </div>
