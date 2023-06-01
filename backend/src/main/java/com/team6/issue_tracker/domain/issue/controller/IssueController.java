@@ -44,7 +44,7 @@ public class IssueController {
             tags = "issue",
             description = "사용자는 원하는 이슈를 다중 선택해 상태를 변경할 수 있다."
     )
-    @PutMapping("/issue")
+    @PatchMapping("/issue")
     public void updateIssuesStatus(UpdateIssueListStatusRequest request) {
         //TODO 유저 권한 검사
         //TODO 유효성 검사
