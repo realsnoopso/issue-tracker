@@ -42,10 +42,13 @@ export const customFetch = async ({
     if (!data.ok) {
       throw Error(data.statusText);
     }
+
+    if (method !== 'GET') {
+      return;
+    } // 임시로 처리. 나중에 지워야 함
+
     const result = await data.json();
-    if (!result) {
-      throw Error('No data');
-    }
+
     return result;
   } catch (error) {
     console.error(error);

@@ -33,11 +33,10 @@ export const WritePage = () => {
     const issue = {
       title: titleValue,
       contents: Boolean(contentsValue) ? contentsValue : null,
-      writer: MY_USER_DATA.memberIdx,
+      writer: MY_USER_DATA?.memberIdx,
+      assignee: assigneeValue?.memberIdx,
       label: labelValue ? [convertIndexKey(labelValue, 'label')] : [],
-      milestone: milestoneValue
-        ? convertIndexKey(milestoneValue, 'milestone')
-        : null,
+      milestone: milestoneValue ? milestoneValue : null,
     };
 
     await postIssue(issue);
