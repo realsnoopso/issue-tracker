@@ -11,8 +11,11 @@ import {
 import { IssueList } from '@containers/index';
 import { isFilterApplied } from '@services/issue';
 import { useNavigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+
 import { getToken } from '@src/services/login';
+import { storeContext } from '@stores/index';
+import { useContext, useReducer } from 'react';
+import jwtDecode from 'jwt-decode';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -32,11 +35,15 @@ export const IssuePage = () => {
   const [issueCount, setIssueCounts] = useState({ open: 0, closed: 0 });
 
   const navigate = useNavigate();
+  const [user, userDispatch] = useContext(storeContext).user;
 
   useEffect(() => {
     const token = getToken();
     const { userprofile } = jwtDecode(token);
     console.log(userprofile);
+    if (!userprofile) return;
+
+    // userDispatch({ type: 'SET_USER', payload: userprofile });
   }, []);
 
   useEffect(() => {
