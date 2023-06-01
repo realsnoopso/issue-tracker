@@ -50,7 +50,6 @@ public class IssueController {
     @PatchMapping("/issue")
     public ResponseEntity<ResponseMessage<Void>> updateIssuesStatus(UpdateIssueListStatusRequest request) {
         //TODO 유효성 검사
-        log.info(request.toString());
         issueUpdateService.updateIssueListStatus(request.getIssueIdx(), request.getStatus());
         return ResponseMessage.of(HttpStatus.OK, "Issue status updated successfully", null);
     }
