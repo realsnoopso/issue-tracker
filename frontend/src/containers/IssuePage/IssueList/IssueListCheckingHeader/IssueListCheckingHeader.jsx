@@ -4,14 +4,14 @@ import { initialFilter } from '@constants/issue';
 import { useContext, useState } from 'react';
 import { filterContext } from '@src/services/issue';
 import { Dropdown, Button } from '@components/index';
-import { getIssueList } from '@services/issue';
+import { getIssueList, patchMultipleIssuesStatus } from '@services/issue';
 
 export const IssueListCheckingHeader = ({
   isCheckedStateNumber,
   isCheckedHeader,
   handleHeaderCheckState,
-  issueData,
   setIssueData,
+  checkStateObject,
 }) => {
   const cx = classNames.bind(styles);
 
@@ -38,20 +38,26 @@ export const IssueListCheckingHeader = ({
     };
     const response = await getIssueList(queries);
     const { issuesList } = response;
+
     setIssueData(issuesList);
   };
 
   const optionOnClick = ({ currentTarget }) => {
+    // 다중 선택된 issueIds
+    const selectedIssueIds = checkStateObject
+      .filter((item) => item.isChecked === true)
+      .map((item) => item.issueId);
+
     const selectedOption = currentTarget.innerText;
     setSelected(selectedOption);
 
     switch (selectedOption) {
       case '선택한 이슈 열기':
-        console.log('OPEN');
+        patchMultipleIssuesStatus(selectedIssueIds, 'OPEN');
         newFetch();
         break;
       case '선택한 이슈 닫기':
-        console.log('CLOSE');
+        patchMultipleIssuesStatus(selectedIssueIds, 'CLOSE');
         newFetch();
         break;
       default:

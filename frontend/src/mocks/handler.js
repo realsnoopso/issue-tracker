@@ -192,4 +192,20 @@ export const handlers = [
       })
     );
   }),
+
+  rest.patch(`${URL}/issue`, (req, res, ctx) => {
+    const { issueIdx, status } = req.body;
+
+    issueIdx.forEach((issueId) => {
+      const foundIssue = issueList.find(
+        (list) => parseInt(issueId) === parseInt(list.index)
+      );
+
+      if (foundIssue) {
+        foundIssue.status = status;
+      }
+    });
+
+    return res(ctx.status(200), ctx.json(status));
+  }),
 ];

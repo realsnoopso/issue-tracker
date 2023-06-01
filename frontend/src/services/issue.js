@@ -71,6 +71,24 @@ export const patchIssueTitle = async (issueId, inputValue) => {
   }
 };
 
+export const patchMultipleIssuesStatus = async (issueIds, status) => {
+  try {
+    const response = await customFetch({
+      path: `/issue`,
+      method: 'PATCH',
+      body: {
+        issueIdx: issueIds,
+        status: status,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const getIssueList = async ({
   status = 'open',
   page = 0,

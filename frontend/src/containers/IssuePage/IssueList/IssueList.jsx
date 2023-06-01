@@ -71,8 +71,8 @@ export const IssueList = ({
               isCheckedStateNumber={isCheckedStateNumber}
               isCheckedHeader={isCheckedHeader}
               handleHeaderCheckState={handleHeaderCheckState}
-              issueData={issueData}
               setIssueData={setIssueData}
+              checkStateObject={checkStateObject}
             ></IssueListCheckingHeader>
           ))}
         <ul className={contentsClassNames}>
