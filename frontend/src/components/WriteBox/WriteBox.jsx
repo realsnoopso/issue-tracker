@@ -48,9 +48,7 @@ export const WriteBox = ({ titleState, contentsState, hasTitle }) => {
   const handleFileBtnOnChange = async ({ target }) => {
     const selectedFile = target.files[0];
     const { path, originKey } = await getFileData(selectedFile);
-    setContentsValue(
-      contentsValue + `<img alt="${originKey}" src="${path}" width="100%">`
-    );
+    setContentsValue(contentsValue + `<img alt="${originKey}" src="${path}">`);
   };
 
   const inputContainerClassNames = `${cx('input-container')}`;
