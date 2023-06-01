@@ -1,15 +1,22 @@
+import { CommentElement } from '@containers/index';
 import styles from './DetailBody.module.css';
 import classNames from 'classnames/bind';
-import { CommentElement } from '@containers/index';
+import { useEffect } from 'react';
 
-export const DetailBody = ({ issueObject }) => {
-  const commentList = issueObject.comment;
-  const issueWriterId = issueObject.writer?.id;
+export const DetailBody = ({ writer, comment }) => {
+  const cx = classNames.bind(styles);
+
+  useEffect(() => {
+    console.log(comment);
+  }, [comment]);
+
+  const commentList = comment;
+  const issueWriterId = writer?.id;
 
   const addCommentElement = () => {
     return commentList?.map((comment, index) => {
       const commentWriterId = comment?.writer.id;
-      const writerProfile = comment?.writer.profile;
+      const writerProfile = comment?.writer.profileImageUrl;
       const writerName = comment?.writer.name;
       const wroteTime = comment?.createdAt;
       const contents = comment?.contents;
@@ -29,8 +36,8 @@ export const DetailBody = ({ issueObject }) => {
   };
 
   return (
-    <div className="detail-body">
-      <div className="detail-comment">
+    <div className={cx('detail-body')}>
+      <div className={cx('detail-comment')}>
         {addCommentElement()}
         <div className="add-comment"></div>
       </div>

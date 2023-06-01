@@ -10,7 +10,9 @@ import {
 } from '@services/issue';
 import { IssueList } from '@containers/index';
 import { isFilterApplied } from '@services/issue';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import { getToken } from '@src/services/login';
 
 export const IssuePage = () => {
   const cx = classNames.bind(styles);
@@ -30,6 +32,12 @@ export const IssuePage = () => {
   const [issueCount, setIssueCounts] = useState({ open: 0, closed: 0 });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = getToken();
+    const { userprofile } = jwtDecode(token);
+    console.log(userprofile);
+  }, []);
 
   useEffect(() => {
     const noneLabel = {
@@ -53,6 +61,7 @@ export const IssuePage = () => {
         ...filters,
       };
       const response = await getIssueList(queries);
+
       const {
         issueList,
         labelList,
@@ -60,6 +69,8 @@ export const IssuePage = () => {
         milestoneList,
         openIssueCount,
         closedIssueCount,
+        openIssueMaxPage,
+        closeIssueMaxPage,
       } = response;
 
       setIssueData(issueList);

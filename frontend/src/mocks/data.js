@@ -6,19 +6,19 @@ export const members = [
   },
   {
     id: 'sarang_daddy',
-    profile: 'https://avatars.githubusercontent.com/u/109648042?v=4',
+    profileImageUrl: 'https://avatars.githubusercontent.com/u/109648042?v=4',
     name: '사랑대디',
     index: 2,
   },
   {
     id: 'lvalentine6',
-    profile: 'https://avatars.githubusercontent.com/u/77956808?v=4',
+    profileImageUrl: 'https://avatars.githubusercontent.com/u/77956808?v=4',
     name: '로이',
     index: 3,
   },
   {
     id: 'new-pow',
-    profile: 'https://avatars.githubusercontent.com/u/103120173?v=4',
+    profileImageUrl: 'https://avatars.githubusercontent.com/u/103120173?v=4',
     name: '이린',
     index: 4,
   },
@@ -58,7 +58,7 @@ export const labels = [
 export const milestones = [
   {
     index: 1,
-    title: 'Sample Title 1',
+    title: '마일스톤 1',
     endDate: '2023-06-20',
     contents: 'Sample contents 1',
     totalIssueNum: 10,
@@ -67,7 +67,7 @@ export const milestones = [
   },
   {
     index: 2,
-    title: 'Sample Title 2',
+    title: '마일스톤 2',
     endDate: '2023-07-22',
     contents: 'Sample contents 2',
     totalIssueNum: 8,
@@ -76,7 +76,7 @@ export const milestones = [
   },
   {
     index: 3,
-    title: 'Sample Title 3',
+    title: '마일스톤 3',
     endDate: '2023-09-25',
     contents: 'Sample contents 3',
     totalIssueNum: 15,

@@ -1,0 +1,30 @@
+.sidebar-element {
+  padding: 32px;
+  display: grid;
+  width: 100%;
+  justify-items: start;
+  gap: 16px;
+}
+
+.dropdown-btn {
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  width: 100%;
+  justify-items: start;
+  justify-content: start;
+  align-items: center;
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.milestone {
+  width: 100%;
+}
+
+.dropdown-btn {
+  display: grid;
+}

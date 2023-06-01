@@ -4,8 +4,8 @@ import { routes } from '@constants/routes';
 import { getToken } from '@services/login';
 
 const RequireAuth = ({ children }) => {
-  const isLogin = !!getToken();
-  if (!isLogin) {
+  const token = getToken();
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
   return children;
@@ -13,9 +13,9 @@ const RequireAuth = ({ children }) => {
 
 function App() {
   // if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
-  worker.start();
-  //}
+  //   const { worker } = require('./mocks/browser');
+  //   worker.start();
+  // }
 
   return (
     <div className="App">

@@ -7,18 +7,29 @@ import { useEffect, useState } from 'react';
 import { checkValidation } from '@services/login';
 import { DOMAIN } from '@constants/routes';
 import { OAUTH_CLIENT_ID } from '@constants/login';
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 export const LoginPage = () => {
   const LogoComponent = imagefiles['logoType'];
   const loginPageClassNames = `${cx('login-page')}`;
   const containerClassNames = `${cx('container')}`;
+  const navigate = useNavigate();
 
   const handleLoginBtnClick = () => {
     const scope = 'user';
     const redirectUri = `${DOMAIN}/auth`;
     const clientId = OAUTH_CLIENT_ID;
-    window.location.href = `https://github.com/login/oauth/authorize?response_type=code&redirect_uri=${redirectUri}&client_id=${clientId}&scope=${scope}`;
+
+    if (process.env.NODE_ENV === 'production') {
+      window.location.href = `https://github.com/login/oauth/authorize?response_type=code&redirect_uri=${redirectUri}&client_id=${clientId}&scope=${scope}`;
+    } else {
+      localStorage.setItem(
+        'loginToken',
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaXRodWJfbG9naW5fbWVtYmVyIiwiZXhwIjoxNjg1NTU2MjUzLCJ1c2VycHJvZmlsZSI6eyJsb2dpbiI6InJlYWxzbm9vcHNvIiwiYXZhdGFyX3VybCI6Imh0dHBzOi8vYXZhdGFycy5naXRodWJ1c2VyY29udGVudC5jb20vdS85NjM4MTIyMT92PTQiLCJpZCI6OTYzODEyMjF9fQ.ZYXap4sraFYLD6jp42xPEiHtXU-fc7qDcIBDnHfJvU8'
+      );
+      navigate('/');
+    }
   };
   const logoHeight = 40;
 

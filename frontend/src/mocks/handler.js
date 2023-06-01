@@ -16,7 +16,7 @@ export const handlers = [
     );
   }),
 
-  rest.get(`${URL}/issues`, (req, res, ctx) => {
+  rest.get(`${URL}/issue`, (req, res, ctx) => {
     const query = req.url.searchParams;
     const status = query.get('status');
     const page = query.get('page');
@@ -121,7 +121,15 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(members));
   }),
 
-  rest.get(`${URL}/login/github`, (req, res, ctx) => {
+  rest.get(`${URL}/label`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(labels));
+  }),
+
+  rest.get(`${URL}/milestones`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(milestones));
+  }),
+
+  rest.get(`${URL}/oauth/result`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(loginToken));
   }),
 
@@ -141,11 +149,38 @@ export const handlers = [
     }
   }),
 
+  rest.patch(`${URL}/issue/:issueId/title`, (req, res, ctx) => {
+    const { issueId } = req.params;
+    const { title } = req.body;
+
+    const foundIssue = issueList.find(
+      (list) => parseInt(issueId) === parseInt(list.index)
+    );
+
+    if (foundIssue) {
+      foundIssue.title = title;
+      return res(ctx.status(200), ctx.json(title));
+    } else {
+      return res(ctx.status(404));
+    }
+  }),
+
   rest.get(`${URL}/test-auth`, (req, res, ctx) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res(ctx.status(401), ctx.json({ message: 'Unauthorized' }));
     }
     return res(ctx.status(200), ctx.json({ message: 'Success' }));
+  }),
+
+  rest.post(`${URL}/issue`, (req, res, ctx) => {
+    const newIssue = req.body;
+    return res(
+      ctx.status(201),
+      ctx.json({
+        message: 'User created successfully',
+        issue: newIssue,
+      })
+    );
   }),
 ];
