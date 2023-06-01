@@ -10,6 +10,7 @@ import { checkContext } from '@src/services/issue';
 
 export const IssueList = ({
   issueData,
+  setIssueData,
   userList,
   assigneeList,
   milestoneList,
@@ -70,6 +71,8 @@ export const IssueList = ({
               isCheckedStateNumber={isCheckedStateNumber}
               isCheckedHeader={isCheckedHeader}
               handleHeaderCheckState={handleHeaderCheckState}
+              issueData={issueData}
+              setIssueData={setIssueData}
             ></IssueListCheckingHeader>
           ))}
         <ul className={contentsClassNames}>
