@@ -90,7 +90,7 @@ public class IssueController {
     @Operation(
             summary = "이슈 내용 수정",
             tags = "issue",
-            description = "사용자는 이슈 내용을  수정할 수 있다."
+            description = "사용자는 이슈를 수정할 수 있다."
     )
     @PutMapping("/issue/{issueId}")
     public void updateIssueContents(IssueDetail issueDetail) {
