@@ -50,7 +50,4 @@ public class ImageHostService {
         return String.format("%s%s-%s", prefix, UUID.randomUUID(), file.getName());
     }
 
-    public FileUploadResult remove(FileUploadResult info) {
-        return null;
-    }
 }
