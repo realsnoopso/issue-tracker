@@ -34,22 +34,21 @@ export const customFetch = async ({
   }
 
   try {
-    const data = await fetch(url, {
+    const res = await fetch(url, {
       method,
       headers,
       body: JSON.stringify(body),
     });
-    if (!data.ok) {
-      throw Error(data.statusText);
+
+    const result = await res.json();
+
+    if (!result.status) {
+      console.log(result.message);
     }
 
-    if (method !== 'GET') {
-      return;
-    } // 임시로 처리. 나중에 지워야 함
+    const data = result.data;
 
-    const result = await data.json();
-
-    return result;
+    return data;
   } catch (error) {
     console.error(error);
     throw error;

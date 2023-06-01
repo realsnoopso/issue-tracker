@@ -45,16 +45,12 @@ export const IssuePage = () => {
     const loginUserProfile = {
       memberIdx: userprofile.memberIdx,
       id: userprofile.id,
-      profileImageUrl: userprofile.avatar_url,
+      profileImageUrl: userprofile.profileImageUrl,
       name: userprofile.login,
     };
 
     userDispatch({ type: 'SET_USER', payload: loginUserProfile });
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   useEffect(() => {
     setLoginUserData();

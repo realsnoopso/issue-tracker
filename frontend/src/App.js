@@ -4,23 +4,21 @@ import {
   Route,
   Navigate,
   BrowserRouter,
-  RouterProvider,
+  useNavigate,
 } from 'react-router-dom';
 import { routes } from '@constants/routes';
 import { getToken } from '@services/login';
-import { storeContext } from '@stores/index';
-import { initialState, reducer } from '@stores/user';
-import { StoreProvider } from '@stores/StoreProvider';
-import { useContext, useReducer, useState } from 'react';
-import jwtDecode from 'jwt-decode';
+import { removeToken } from '@services/login';
+import { StoreProvider } from './stores/StoreProvider';
 
 const RequireAuth = ({ children }) => {
+  const navigate = useNavigate();
   const token = getToken();
-
   if (!token) {
+    removeToken();
+
     return <Navigate to="/login" replace />;
   }
-
   return children;
 };
 

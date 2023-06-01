@@ -6,7 +6,7 @@ export const initialState = {
 };
 
 const setUser = (state, payload) => {
-  Object.assign(state, payload);
+  return { ...payload };
 };
 
 export const reducer = (state, { type, payload }) => {
