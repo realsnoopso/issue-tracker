@@ -69,6 +69,25 @@ export const patchIssueTitle = async (issueId, inputValue) => {
   }
 };
 
+export const uploadFile = async (formData) => {
+  try {
+    const response = await fetch(`${URL}/resource`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const result = response.json();
+
+    return result;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+
 export const getIssueList = async ({
   status = 'open',
   page = 0,
@@ -132,3 +151,21 @@ export const updateCountsToTabInfo = (
 
 export const isFilterApplied = (filters, initialFilter) =>
   JSON.stringify(filters) !== JSON.stringify(initialFilter);
+
+export const getFileData = async (selectedFile) => {
+  if (!selectedFile) {
+    alert('파일이 선택되지 않았습니다.');
+    return;
+  }
+
+  const MAX_FILE_SIZE = 104857600;
+  const isFileSizeExceed = selectedFile.size >= MAX_FILE_SIZE;
+
+  if (isFileSizeExceed) return alert('파일 크기 초과!');
+
+  const formData = new FormData();
+  formData.append('files', selectedFile, selectedFile.name);
+
+  const res = await uploadFile(formData);
+  return res.data;
+};

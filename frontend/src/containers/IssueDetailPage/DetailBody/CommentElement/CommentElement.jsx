@@ -49,9 +49,10 @@ export const CommentElement = ({
           <Icon></Icon>
         </div>
       </div>
-      <div className={bodyClassNames}>
-        <span>{contents}</span>
-      </div>
+      <div
+        className={bodyClassNames}
+        dangerouslySetInnerHTML={{ __html: contents }}
+      ></div>
     </div>
   );
 };
