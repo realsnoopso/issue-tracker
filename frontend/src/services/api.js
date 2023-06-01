@@ -42,6 +42,10 @@ export const customFetch = async ({
     if (!data.ok) {
       throw Error(data.statusText);
     }
+
+    if (method !== 'GET') {
+      return;
+    }
     const result = await data.json();
     if (!result) {
       throw Error('No data');

@@ -35,8 +35,8 @@ export const IssuePage = () => {
 
   useEffect(() => {
     const token = getToken();
-    const { userprofile } = jwtDecode(token);
-    console.log(userprofile);
+    // const { userprofile } = jwtDecode(token);
+    // console.log(userprofile);
   }, []);
 
   useEffect(() => {

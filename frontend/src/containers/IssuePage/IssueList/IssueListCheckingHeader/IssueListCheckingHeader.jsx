@@ -37,9 +37,7 @@ export const IssueListCheckingHeader = ({
       ...filters,
     };
     const response = await getIssueList(queries);
-    const { issuesList } = response;
-
-    setIssueData(issuesList);
+    setIssueData(response.issueList);
   };
 
   const optionOnClick = ({ currentTarget }) => {

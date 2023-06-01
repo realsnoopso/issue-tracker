@@ -25,7 +25,7 @@ export const IssueList = ({
   const [checkStateObject, setCheckStateObject] = useState([]);
 
   useEffect(() => {
-    const initialCheckState = issueData.reduce((acc, issue) => {
+    const initialCheckState = issueData?.reduce((acc, issue) => {
       acc.push({ issueId: issue.index, isChecked: false });
       return acc;
     }, []);
@@ -33,7 +33,7 @@ export const IssueList = ({
     setCheckStateObject(initialCheckState);
   }, [issueData]);
 
-  const isCheckedStateNumber = checkStateObject.filter(
+  const isCheckedStateNumber = checkStateObject?.filter(
     (item) => item.isChecked === true
   ).length;
 
@@ -76,8 +76,8 @@ export const IssueList = ({
             ></IssueListCheckingHeader>
           ))}
         <ul className={contentsClassNames}>
-          {issueData.length !== 0 ? (
-            issueData.map((issue) => {
+          {issueData?.length !== 0 ? (
+            issueData?.map((issue) => {
               const title = issue.title;
               const label = issue.label;
               const issueId = issue.index;
