@@ -30,6 +30,7 @@ export const getLoginToken = async (queryCode) => {
       path: '/oauth/result',
       method: 'GET',
       queries: { code: queryCode, env },
+      hasAuth: false,
     });
     return data;
   } catch (error) {
