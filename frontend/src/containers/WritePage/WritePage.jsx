@@ -24,7 +24,7 @@ export const WritePage = () => {
   const [isCTADisabled, setIsCTADisabled] = useState(true);
 
   const convertIndexKey = (data, key) => {
-    const copiedData = { ...data, [`${key}Idx`]: data.index };
+    const copiedData = { ...data, [`${key}Idx`]: data?.index };
     delete copiedData['index'];
     return copiedData;
   };
@@ -33,10 +33,11 @@ export const WritePage = () => {
     const issue = {
       title: titleValue,
       contents: Boolean(contentsValue) ? contentsValue : null,
-      writer: MY_USER_DATA, // TODO
-      assignee: convertIndexKey(assigneeValue, 'member'),
+      writer: MY_USER_DATA.memberIdx,
       label: labelValue ? [convertIndexKey(labelValue, 'label')] : [],
-      milestone: convertIndexKey(milestoneValue, 'milestone'),
+      milestone: milestoneValue
+        ? convertIndexKey(milestoneValue, 'milestone')
+        : null,
     };
 
     await postIssue(issue);
