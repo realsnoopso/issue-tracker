@@ -1,14 +1,18 @@
 import styles from './IssueListCheckingHeader.module.css';
 import classNames from 'classnames/bind';
 import { initialFilter } from '@constants/issue';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { filterContext } from '@src/services/issue';
-import { Button, Dropdown } from '@components/index';
-import { isCheckedContext } from '@src/services/issue';
+import { Dropdown } from '@components/index';
 
-export const IssueListCheckingHeader = ({ isCheckedStateNumber }) => {
+export const IssueListCheckingHeader = ({
+  isCheckedStateNumber,
+  isCheckedHeader,
+  handleHeaderCheckState,
+}) => {
   const cx = classNames.bind(styles);
 
+  // 필터
   const [filters, setFilters] = useContext(filterContext);
 
   const handleFilterClearBtnClick = () => setFilters(initialFilter);
@@ -23,12 +27,7 @@ export const IssueListCheckingHeader = ({ isCheckedStateNumber }) => {
     _onClick: handleFilterClearBtnClick,
   };
 
-  const [isChecked, setIsChecked] = useContext(isCheckedContext);
-
-  const handleHeaderCheckState = () => {
-    setIsChecked(!isChecked);
-  };
-
+  // 드롭다운
   const dropdownWidth = '100px';
   const [selected, setSelected] = useState('');
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -52,7 +51,7 @@ export const IssueListCheckingHeader = ({ isCheckedStateNumber }) => {
         <div className={cx(`check-box`)}>
           <input
             type="checkbox"
-            checked={isChecked}
+            checked={isCheckedHeader}
             onChange={handleHeaderCheckState}
           ></input>
         </div>

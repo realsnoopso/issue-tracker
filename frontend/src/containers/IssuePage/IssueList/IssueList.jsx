@@ -6,7 +6,7 @@ import {
   IssueListHeader,
 } from '@containers/index';
 import { useEffect, useState } from 'react';
-import { checkContext, isCheckedContext } from '@src/services/issue';
+import { checkContext } from '@src/services/issue';
 
 export const IssueList = ({
   issueData,
@@ -21,28 +21,38 @@ export const IssueList = ({
   const contentsClassNames = cx('contents');
   const emptyClassNames = cx('empty');
 
-  const [isChecked, setIsChecked] = useState(false);
   const [checkStateObject, setCheckStateObject] = useState([]);
 
-  // 필터된 IssueList 체크상태를 false로 초기화
-  // 체크된 IssueElement 체크 상태를 업데이트
   useEffect(() => {
     const initialCheckState = issueData.reduce((acc, issue) => {
-      acc.push({ issueId: issue.index, isChecked: isChecked });
+      acc.push({ issueId: issue.index, isChecked: false });
       return acc;
     }, []);
 
     setCheckStateObject(initialCheckState);
-  }, [isChecked, issueData]);
-
-  console.log(checkStateObject);
+  }, [issueData]);
 
   const isCheckedStateNumber = checkStateObject.filter(
     (item) => item.isChecked === true
   ).length;
 
+  const [isCheckedHeader, setIsCheckHeader] = useState(false);
+
+  const handleHeaderCheckState = () => {
+    const updatedCheckStateObject = checkStateObject.map((item) => {
+      return { ...item, isChecked: !isCheckedHeader };
+    });
+
+    setCheckStateObject(updatedCheckStateObject);
+    setIsCheckHeader(!isCheckedHeader);
+  };
+
+  useEffect(() => {
+    setIsCheckHeader(false);
+  }, [issueData]);
+
   return (
-    <isCheckedContext.Provider value={[isChecked, setIsChecked]}>
+    <checkContext.Provider value={[checkStateObject, setCheckStateObject]}>
       <div className={containerClassNames}>
         {issueData &&
           (isCheckedStateNumber === 0 ? (
@@ -52,10 +62,14 @@ export const IssueList = ({
               milestoneList={milestoneList}
               issueCount={issueCount}
               labelList={labelList}
+              isCheckedHeader={isCheckedHeader}
+              handleHeaderCheckState={handleHeaderCheckState}
             ></IssueListHeader>
           ) : (
             <IssueListCheckingHeader
               isCheckedStateNumber={isCheckedStateNumber}
+              isCheckedHeader={isCheckedHeader}
+              handleHeaderCheckState={handleHeaderCheckState}
             ></IssueListCheckingHeader>
           ))}
         <ul className={contentsClassNames}>
@@ -73,20 +87,16 @@ export const IssueList = ({
 
               return (
                 <li key={issueId}>
-                  <checkContext.Provider
-                    value={[checkStateObject, setCheckStateObject]}
-                  >
-                    <IssueElement
-                      iconName={iconName}
-                      title={title}
-                      label={label}
-                      issueId={issueId}
-                      timeStamp={timeStamp}
-                      writer={writer}
-                      milesStone={milesStone}
-                      profile={profile}
-                    ></IssueElement>
-                  </checkContext.Provider>
+                  <IssueElement
+                    iconName={iconName}
+                    title={title}
+                    label={label}
+                    issueId={issueId}
+                    timeStamp={timeStamp}
+                    writer={writer}
+                    milesStone={milesStone}
+                    profile={profile}
+                  ></IssueElement>
                 </li>
               );
             })
@@ -97,6 +107,6 @@ export const IssueList = ({
           )}
         </ul>
       </div>
-    </isCheckedContext.Provider>
+    </checkContext.Provider>
   );
 };
