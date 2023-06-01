@@ -73,7 +73,6 @@ export const IssueListCheckingHeader = ({
             onChange={handleHeaderCheckState}
           ></input>
         </div>
-        {/* <Button {...filterClearButtonInfo} /> */}
         <div className={cx('header-right')}>
           <span className={cx('checked-issue')}>
             {isCheckedStateNumber}개 이슈 선택

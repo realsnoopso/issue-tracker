@@ -81,11 +81,20 @@ export const IssueListHeader = ({
     const targetData = statusTabDatas.find(
       (data) => currentTarget.id === data.text
     );
+
     const filterValue = targetData.filterValue;
     const text = targetData.text;
     setFilters({ ...filters, status: filterValue });
     setActiveTab(text);
   };
+
+  useEffect(() => {
+    const currentStatus =
+      filters.status === 'open'
+        ? statusTabDatas[0].text
+        : statusTabDatas[1].text;
+    setActiveTab(currentStatus);
+  }, [isCheckedHeader]);
 
   return (
     <>
