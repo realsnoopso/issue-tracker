@@ -27,6 +27,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ResponseError handGlobalException(Exception e) {
+        log.error(e.getMessage());
         return ResponseError.of(e, e.getMessage());
     }
 }
