@@ -23,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login/**","/oauth/**",
                         "/issue/**",
                         "/error", "/swagger-ui/**",
-                        "/v3/**", "auth/**").permitAll()
+                        "/v3/**", "auth/**",
+                        "/issue?status=open&page=0&maxPageNum=10").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
