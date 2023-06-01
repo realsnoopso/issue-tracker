@@ -7,17 +7,17 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MultifileInfo {
+public class FileUploadResult {
     private String originKey;
     private String uploadKey;
     private String path;
     private Result result;
 
-    public static MultifileInfo success(String originKey, String uploadKey, String path) {
-        return new MultifileInfo(originKey, uploadKey, path, Result.SUCCESS);
+    public static FileUploadResult success(String originKey, String uploadKey, String path) {
+        return new FileUploadResult(originKey, uploadKey, path, Result.SUCCESS);
     }
 
-    public static MultifileInfo fail(String originKey) {
-        return new MultifileInfo(originKey, null , null, Result.FAIL);
+    public static FileUploadResult fail(String originKey) {
+        return new FileUploadResult(originKey, null , null, Result.FAIL);
     }
 }
