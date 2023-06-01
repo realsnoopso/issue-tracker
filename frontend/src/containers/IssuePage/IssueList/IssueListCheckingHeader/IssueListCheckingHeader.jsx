@@ -40,7 +40,7 @@ export const IssueListCheckingHeader = ({
     setIssueData(response.issueList);
   };
 
-  const optionOnClick = ({ currentTarget }) => {
+  const optionOnClick = async ({ currentTarget }) => {
     // 다중 선택된 issueIds
     const selectedIssueIds = checkStateObject
       .filter((item) => item.isChecked === true)
@@ -51,11 +51,11 @@ export const IssueListCheckingHeader = ({
 
     switch (selectedOption) {
       case '선택한 이슈 열기':
-        patchMultipleIssuesStatus(selectedIssueIds, 'OPEN');
+        await patchMultipleIssuesStatus(selectedIssueIds, 'OPEN');
         newFetch();
         break;
       case '선택한 이슈 닫기':
-        patchMultipleIssuesStatus(selectedIssueIds, 'CLOSE');
+        await patchMultipleIssuesStatus(selectedIssueIds, 'CLOSE');
         newFetch();
         break;
       default:

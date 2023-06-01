@@ -84,9 +84,9 @@ export const IssueList = ({
               const timeStamp = issue.createdAt;
               const writer = issue.writer.name;
               const milesStone = issue.milestone;
-              const profile = issue.writer.profile;
+              const profile = issue.writer.profileImageUrl;
               const iconName =
-                issue.status === 'open' ? 'alertCircle' : 'archive';
+                issue.status === 'OPEN' ? 'alertCircle' : 'archive';
 
               return (
                 <li key={issueId}>
