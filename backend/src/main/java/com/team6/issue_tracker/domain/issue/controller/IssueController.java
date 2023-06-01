@@ -48,7 +48,7 @@ public class IssueController {
             description = "사용자는 원하는 이슈를 다중 선택해 상태를 변경할 수 있다."
     )
     @PatchMapping("/issue")
-    public ResponseEntity<ResponseMessage<Void>> updateIssuesStatus(UpdateIssueListStatusRequest request) {
+    public ResponseEntity<ResponseMessage<Void>> updateIssuesStatus(@RequestBody UpdateIssueListStatusRequest request) {
         //TODO 유효성 검사
         issueUpdateService.updateIssueListStatus(request.getIssueIdx(), request.getStatus());
         return ResponseMessage.of(HttpStatus.OK, "Issue status updated successfully", null);
