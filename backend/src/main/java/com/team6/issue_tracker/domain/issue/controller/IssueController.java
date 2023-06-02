@@ -104,8 +104,15 @@ public class IssueController {
     )
     @PatchMapping("/issue/{issueIdx}/title")
     public ResponseEntity<ResponseMessage<Void>> updateIssuesTitle(@RequestBody UpdateIssueTitleRequest request, @PathVariable("issueIdx") long issueIdx) {
-        //TODO 유효성 검사
-        issueUpdateService.updateIssueTitle(issueIdx, request.getTitle());
+        if (!StringUtils.hasLength(request.getTitle())) {
+            throw new UpdateDomainFailed("제목을 입력해 주세요.");
+        }
+
+        boolean result = issueUpdateService.updateIssueTitle(issueIdx, request.getTitle());
+
+        if (!result) {
+            throw new UpdateDomainFailed("Issue title update Failed : "+ issueIdx);
+        }
         return ResponseMessage.of(HttpStatus.OK, "Issue title updated successfully", null);
     }
 
