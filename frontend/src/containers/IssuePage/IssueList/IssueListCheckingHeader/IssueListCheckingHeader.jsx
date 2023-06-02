@@ -32,7 +32,7 @@ export const IssueListCheckingHeader = ({
   ];
 
   // FETCH 함수
-  const newFetch = async () => {
+  const resetIssueListAfterPatch = async () => {
     const queries = {
       ...filters,
     };
@@ -40,7 +40,8 @@ export const IssueListCheckingHeader = ({
     setIssueData(response.issueList);
   };
 
-  const optionOnClick = async ({ currentTarget }) => {
+  // PATCH 함수
+  const requestPatchStatus = async ({ currentTarget }) => {
     // 다중 선택된 issueIds
     const selectedIssueIds = checkStateObject
       .filter((item) => item.isChecked === true)
@@ -52,11 +53,11 @@ export const IssueListCheckingHeader = ({
     switch (selectedOption) {
       case '선택한 이슈 열기':
         await patchMultipleIssuesStatus(selectedIssueIds, 'OPEN');
-        newFetch();
+        resetIssueListAfterPatch();
         break;
       case '선택한 이슈 닫기':
         await patchMultipleIssuesStatus(selectedIssueIds, 'CLOSE');
-        newFetch();
+        resetIssueListAfterPatch();
         break;
       default:
         break;
@@ -86,7 +87,7 @@ export const IssueListCheckingHeader = ({
             options={options}
             header={'상태 변경'}
             selected={selected}
-            optionOnClick={optionOnClick}
+            optionOnClick={requestPatchStatus}
           ></Dropdown>
         </div>
       </div>

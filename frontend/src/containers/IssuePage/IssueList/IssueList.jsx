@@ -37,7 +37,7 @@ export const IssueList = ({
     (item) => item.isChecked === true
   ).length;
 
-  const [isCheckedHeader, setIsCheckHeader] = useState(false);
+  const [isCheckedHeader, setIsCheckedHeader] = useState(false);
 
   const handleHeaderCheckState = () => {
     const updatedCheckStateObject = checkStateObject.map((item) => {
@@ -45,11 +45,11 @@ export const IssueList = ({
     });
 
     setCheckStateObject(updatedCheckStateObject);
-    setIsCheckHeader(!isCheckedHeader);
+    setIsCheckedHeader(!isCheckedHeader);
   };
 
   useEffect(() => {
-    setIsCheckHeader(false);
+    setIsCheckedHeader(false);
   }, [issueData]);
 
   return (
