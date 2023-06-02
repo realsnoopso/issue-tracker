@@ -30,7 +30,7 @@ export const IssueList = ({
         {issueData.length !== 0 ? (
           issueData.map((issue) => {
             const title = issue.title;
-            const label = issue.label;
+            const label = issue.labelList[0];
             const issueNumber = issue.index;
             const timeStamp = issue.createdAt;
             const writer = issue.writer.name;

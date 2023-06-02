@@ -15,6 +15,8 @@ export const IssueElement = ({
 }) => {
   const cx = classNames.bind(styles);
 
+  console.log(label);
+
   return (
     <div className={cx(`issue-element`)}>
       <div className={cx(`check-box`)}>

@@ -39,7 +39,7 @@ export const WritePage = () => {
       contents: Boolean(contentsValue) ? contentsValue : null,
       writer: user?.memberIdx,
       assignee: assigneeValue?.memberIdx,
-      label: labelValue ? [convertIndexKey(labelValue, 'label')] : [],
+      labels: labelValue ? [convertIndexKey(labelValue, 'label')] : [],
       milestone: milestoneValue ? milestoneValue : null,
     };
 
