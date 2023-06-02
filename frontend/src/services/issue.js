@@ -4,6 +4,8 @@ import { createContext } from 'react';
 import { removeEmptyKeyValues, deepCopy } from '@utils/index';
 
 export const filterContext = createContext();
+export const checkContext = createContext();
+export const isCheckedContext = createContext();
 
 export const getIssueDetail = async ({ issueId }) => {
   const response = await customFetch({
@@ -84,6 +86,23 @@ export const uploadFile = async (formData) => {
     return result;
   } catch (error) {
     console.error('Error:', error);
+  }
+};
+
+export const patchMultipleIssuesStatus = async (issueIds, status) => {
+  try {
+    const response = await customFetch({
+      path: '/issue',
+      method: 'PATCH',
+      body: {
+        issueIdx: issueIds,
+        status: status,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 };
