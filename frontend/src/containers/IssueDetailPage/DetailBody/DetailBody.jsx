@@ -1,7 +1,7 @@
 import { CommentElement } from '@containers/index';
+
 import styles from './DetailBody.module.css';
 import classNames from 'classnames/bind';
-import { useEffect } from 'react';
 
 export const DetailBody = ({ writer, comment }) => {
   const cx = classNames.bind(styles);

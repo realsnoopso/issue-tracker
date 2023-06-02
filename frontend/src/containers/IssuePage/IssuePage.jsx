@@ -150,6 +150,7 @@ export const IssuePage = () => {
         <div>
           <IssueList
             issueData={issueData}
+            setIssueData={setIssueData}
             userList={userList}
             assigneeList={assigneeList}
             milestoneList={milestoneList}
