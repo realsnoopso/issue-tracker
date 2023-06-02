@@ -13,6 +13,7 @@ import { StoreProvider } from './stores/StoreProvider';
 
 const RequireAuth = ({ children }) => {
   const navigate = useNavigate();
+
   const token = getToken();
   if (!token) {
     removeToken();
@@ -23,11 +24,6 @@ const RequireAuth = ({ children }) => {
 };
 
 function App() {
-  // if (process.env.NODE_ENV === 'development') {
-  //   const { worker } = require('./mocks/browser');
-  //   worker.start();
-  // }
-
   return (
     <div className="App">
       <StoreProvider>
