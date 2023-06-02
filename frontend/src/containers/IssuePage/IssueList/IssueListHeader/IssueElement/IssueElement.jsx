@@ -23,7 +23,7 @@ export const IssueElement = ({
     checkStateObject.find((item) => item.issueId === issueId)?.isChecked ||
     false;
 
-  const handleElementChange = () => {
+  const handleElementChecked = () => {
     const updatedCheckStateObject = checkStateObject.map((item) => {
       if (item.issueId === issueId) {
         return { ...item, isChecked: !item.isChecked };
@@ -41,7 +41,7 @@ export const IssueElement = ({
           key={issueId}
           type="checkbox"
           checked={isCheckedValue}
-          onChange={handleElementChange}
+          onChange={handleElementChecked}
         ></input>
       </div>
       <div className={cx(`issue-contents`)}>
