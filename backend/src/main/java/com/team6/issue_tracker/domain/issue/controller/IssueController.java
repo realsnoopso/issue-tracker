@@ -55,9 +55,15 @@ public class IssueController {
             description = "사용자는 새로운 이슈를 작성할 수 있다."
     )
     @PostMapping("/issue")
-    public ResponseEntity<ResponseMessage<Void>> postNewIssue(@RequestBody CreateIssueRequest request) {
-        issueService.saveIssue(request.toIssue());
-        return ResponseMessage.of(HttpStatus.CREATED, "New issue created successfully", null);
+    public ResponseEntity<ResponseMessage<Object>> postNewIssue(@Validated @RequestBody CreateIssueRequest request,
+                                                                    BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new IllegalArgumentException("New issue created failed");
+        }
+
+        Issue saveIssue = issueService.saveIssue(request.toIssue());
+        return ResponseMessage.of(HttpStatus.CREATED, "New issue created successfully", saveIssue);
     }
 
     @Operation(
