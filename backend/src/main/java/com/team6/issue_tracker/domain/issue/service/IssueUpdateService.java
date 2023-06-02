@@ -36,4 +36,8 @@ public class IssueUpdateService {
     public boolean updateIssueAssignee(long issueIdx, Long assigneeIdx) {
         return issueRepository.updateIssueAssignee(assigneeIdx, issueIdx);
     }
+
+    public boolean updateIssueMilestone(long issueIdx, Long milestoneIdx) {
+        return issueRepository.updateIssueMilestone(milestoneIdx, issueIdx);
+    }
 }
