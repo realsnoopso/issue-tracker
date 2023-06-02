@@ -4,13 +4,25 @@ import com.team6.issue_tracker.domain.issue.domain.Issue;
 import com.team6.issue_tracker.domain.issue.dto.*;
 import com.team6.issue_tracker.domain.issue.service.IssueService;
 import com.team6.issue_tracker.domain.issue.service.IssueUpdateService;
+import com.team6.issue_tracker.domain.issue.service.IssueValidator;
+import com.team6.issue_tracker.domain.member.dto.MemberDetail;
+import com.team6.issue_tracker.global.exception.UpdateDomainFailed;
 import com.team6.issue_tracker.global.util.ResponseMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Arrays;
 
 @Slf4j
 @RestController
@@ -19,6 +31,12 @@ public class IssueController {
 
     private final IssueService issueService;
     private final IssueUpdateService issueUpdateService;
+    private final IssueValidator validator;
+
+    @InitBinder
+    public void init(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(validator);
+    }
 
     @Operation(
             summary = "이슈 상세 보기",
