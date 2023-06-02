@@ -79,26 +79,26 @@ export const IssueList = ({
           {issueData?.length !== 0 ? (
             issueData?.map((issue) => {
               const title = issue.title;
-              const label = issue.label;
-              const issueId = issue.index;
+              const label = issue.labelList[0];
+              const issueNumber = issue.index;
               const timeStamp = issue.createdAt;
               const writer = issue.writer.name;
               const milesStone = issue.milestone;
-              const profile = issue.writer.profileImageUrl;
+              const profileImageUrl = issue.writer.profileImageUrl;
               const iconName =
                 issue.status === 'OPEN' ? 'alertCircle' : 'archive';
 
               return (
-                <li key={issueId}>
+                <li key={issueNumber}>
                   <IssueElement
                     iconName={iconName}
                     title={title}
                     label={label}
-                    issueId={issueId}
+                    issueId={issueNumber}
                     timeStamp={timeStamp}
                     writer={writer}
                     milesStone={milesStone}
-                    profile={profile}
+                    profileImageUrl={profileImageUrl}
                   ></IssueElement>
                 </li>
               );

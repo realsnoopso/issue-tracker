@@ -26,7 +26,6 @@ export const SideboxElement = ({
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = selectedState;
-
   const [list, setList] = useState([]);
 
   const options = convertListToOptions(

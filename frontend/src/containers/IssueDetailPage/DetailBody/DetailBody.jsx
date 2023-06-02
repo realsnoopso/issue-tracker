@@ -1,5 +1,4 @@
 import { CommentElement } from '@containers/index';
-
 import styles from './DetailBody.module.css';
 import classNames from 'classnames/bind';
 
