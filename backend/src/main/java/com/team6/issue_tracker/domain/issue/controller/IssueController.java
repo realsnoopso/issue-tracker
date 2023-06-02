@@ -49,8 +49,12 @@ public class IssueController {
     )
     @PatchMapping("/issue")
     public ResponseEntity<ResponseMessage<Void>> updateIssuesStatus(@RequestBody UpdateIssueListStatusRequest request) {
-        //TODO 유효성 검사
-        issueUpdateService.updateIssueListStatus(request.getIssueIdx(), request.getStatus());
+
+        boolean result = issueUpdateService.updateIssueListStatus(request.getIssueIdx(), request.getStatus());
+
+        if (!result) {
+            throw new UpdateDomainFailed("Issue status update Failed : "+ request.getIssueIdx());
+        }
         return ResponseMessage.of(HttpStatus.OK, "Issue status updated successfully", null);
     }
 
@@ -61,8 +65,11 @@ public class IssueController {
     )
     @PatchMapping("/issue/{issueIdx}/status")
     public ResponseEntity<ResponseMessage<Void>> updateIssuesStatus(@RequestBody UpdateIssueStatusRequest request, @PathVariable("issueIdx") long issueIdx) {
-        //TODO 유효성 검사
-        issueUpdateService.updateIssueStatus(issueIdx, request.getStatus());
+        boolean result = issueUpdateService.updateIssueStatus(issueIdx, request.getStatus());
+
+        if (!result) {
+            throw new UpdateDomainFailed("Issue status update Failed : "+ issueIdx);
+        }
         return ResponseMessage.of(HttpStatus.OK, "Issue status updated successfully", null);
     }
 
@@ -84,10 +91,30 @@ public class IssueController {
             description = "사용자는 이슈 담당자만 수정할 수 있다."
     )
     @PatchMapping("/issue/{issueIdx}/assignee")
-    public ResponseEntity<ResponseMessage<Void>> updateIssuesAssignee(@RequestBody UpdateIssueAssigneeRequest request, @PathVariable("issueIdx") long issueIdx) {
-        //TODO 유효성 검사
-        issueUpdateService.updateIssueAssignee(issueIdx, request.getAssigneeIdx());
+    public ResponseEntity<ResponseMessage<Void>> updateIssuesAssignee(@RequestBody UpdateIssueAssigneeRequest request,
+                                                                      @PathVariable("issueIdx") long issueIdx) {
+        boolean result = issueUpdateService.updateIssueAssignee(issueIdx, request.getAssigneeIdx());
+
+        if (!result) {
+            throw new UpdateDomainFailed("Issue assignee update Failed : "+ issueIdx);
+        }
         return ResponseMessage.of(HttpStatus.OK, "Issue assignee updated successfully", null);
+    }
+
+    @Operation(
+            summary = "이슈 마일스톤 수정",
+            tags = "issue",
+            description = "사용자는 이슈 마일스톤만 수정할 수 있다."
+    )
+    @PatchMapping("/issue/{issueIdx}/milestone")
+    public ResponseEntity<ResponseMessage<Void>> updateIssuesMilestone(@RequestBody UpdateIssueMilestoneRequest request,
+                                                                      @PathVariable("issueIdx") long issueIdx) {
+        boolean result = issueUpdateService.updateIssueMilestone(issueIdx, request.getMilestoneIdx());
+
+        if (!result) {
+            throw new UpdateDomainFailed("Issue milestone update Failed : "+ issueIdx);
+        }
+        return ResponseMessage.of(HttpStatus.OK, "Issue milestone updated successfully", null);
     }
 
     @Operation(
@@ -96,9 +123,14 @@ public class IssueController {
             description = "사용자는 이슈를 수정할 수 있다."
     )
     @PutMapping("/issue/{issueId}")
-    public ResponseEntity<ResponseMessage<Void>> updateIssueContents(IssueDetail issueDetail) {
-        //TODO 유효성 검사
+    public ResponseEntity<ResponseMessage<Void>> updateIssueContents(IssueDetail issueDetail,
+                                                                     @AuthenticationPrincipal MemberDetail loginMember) {
         Issue updatedIssue = issueDetail.fromDto(issueDetail);
+
+        if (!loginMember.getMemberIdx().equals(updatedIssue.getWriter().getId())) {
+            throw new AuthenticationServiceException("작성자만 수정할 수 있습니다.");
+        }
+
         issueUpdateService.updateIssue(updatedIssue);
         return ResponseMessage.of(HttpStatus.OK, "Issue content updated successfully", null);
     }
