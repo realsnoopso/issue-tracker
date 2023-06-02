@@ -26,6 +26,7 @@ export const SideboxElement = ({
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = selectedState;
+
   const [list, setList] = useState([]);
 
   const options = convertListToOptions(
@@ -75,7 +76,6 @@ export const SideboxElement = ({
   return (
     <div className={sideboxElementClassNames} style={{ ...style }}>
       <Dropdown
-        btnText={name}
         panelPosition="left"
         isOpen={isDropdownOpen}
         toggleOpen={handleDropdown(!isDropdownOpen)}

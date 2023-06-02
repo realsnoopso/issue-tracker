@@ -5,12 +5,14 @@ import { SideboxElement } from './SideboxElement/SideboxElement';
 const cx = classNames.bind(styles);
 
 export const Sidebox = ({
+  isEditable = true,
   selectedAssigneeState,
   selectedLabelState,
   selectedMilstoneState,
   editable = true,
 }) => {
   const sideboxClassNames = `${cx('sidebox')}`;
+
   const dropdownDatas = [
     {
       name: '담당자',
